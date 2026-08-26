@@ -208,7 +208,64 @@
   .l-note{font-family:"IBM Plex Mono",monospace;font-size:9.5px;fill:var(--ink-3)}
   .l-row:hover .l-name{fill:var(--accent);font-weight:600}
 
+  /* ---- reading modes ---- */
+  .hlt{display:none}
+  html.brief .det{display:none}
+  html.brief .hlt{display:block}
+
+  .modebar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule);
+    margin:0 0 32px;padding:12px 0 11px;display:flex;gap:8px 16px;align-items:center;flex-wrap:wrap;
+    box-shadow:0 8px 12px -10px rgba(0,0,0,.3)}
+  .modebar .lab{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--ink-3)}
+  .seg{display:inline-flex;border:1px solid var(--rule);background:var(--surface)}
+  .seg button{font-family:Archivo,sans-serif;font-size:13px;font-weight:600;color:var(--ink-2);
+    background:none;border:0;padding:7px 15px;cursor:pointer;letter-spacing:-.005em}
+  .seg button + button{border-left:1px solid var(--rule)}
+  .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+  :root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#12161D}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#12161D}
+  }
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  #modenote{font-family:"IBM Plex Mono",monospace;font-size:10.5px;line-height:1.5;color:var(--ink-3);flex:1 1 230px}
+  section, .toc, .slide{scroll-margin-top:66px}
+
+  /* ---- slides ---- */
+  .slide{background:var(--surface);border:1px solid var(--rule);box-shadow:var(--shadow);
+    padding:32px 30px 26px;margin:0 0 20px}
+  .slide .sn{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 13px}
+  .slide h2{display:block;font-family:Archivo,sans-serif;font-weight:800;
+    font-size:clamp(1.3rem,3.7vw,1.85rem);line-height:1.13;letter-spacing:-.024em;
+    text-wrap:balance;margin:0 0 14px;color:var(--ink)}
+  .slide p{font-size:1.02rem;line-height:1.55;color:var(--ink-2);margin:0 0 13px}
+  .slide p:last-of-type{margin-bottom:0}
+  .slide .foot{font-family:"IBM Plex Mono",monospace;font-size:10px;line-height:1.7;color:var(--ink-3);
+    letter-spacing:.04em;border-top:1px solid var(--rule-soft);margin-top:20px;padding-top:12px}
+  .slide-fig{overflow-x:auto;margin:20px 0 4px}
+  .slide-fig svg{display:block;width:100%;min-width:520px;height:auto}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:2px;
+    background:var(--rule-soft);margin:20px 0 16px;border:1px solid var(--rule-soft)}
+  .stat{background:var(--surface);padding:15px 14px 14px}
+  .stat .v{font-family:Archivo,sans-serif;font-weight:800;letter-spacing:-.03em;line-height:1;
+    font-size:clamp(1.45rem,4.4vw,2rem);color:var(--ink)}
+  .stat .v.hot{color:var(--then)}
+  .stat .v.acc{color:var(--accent)}
+  .stat .k{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);margin-top:9px;line-height:1.55}
+
+  .qlist{counter-reset:q;margin:4px 0 0;padding:0;list-style:none;display:grid;gap:0}
+  .qlist li{position:relative;padding:15px 0 15px 46px;border-top:1px solid var(--rule-soft);
+    font-size:1.01rem;line-height:1.5;color:var(--ink)}
+  .qlist li::before{counter-increment:q;content:counter(q,decimal-leading-zero);position:absolute;left:0;top:16px;
+    font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.06em}
+  .qlist li b{font-weight:600}
+
   @media print{
+    .modebar,.hlt{display:none !important}
+    .det{display:block !important}
     body{background:#fff;color:#000;font-size:10pt;padding:0;line-height:1.4}
     .wrap{max-width:100%} header{padding:0} .toc{display:none}
     h1{font-size:17pt} h2{font-size:12pt} section{margin-bottom:18px}
@@ -228,6 +285,56 @@
 <a class="skip" href="#s1">Skip to contents</a>
 <div class="wrap">
 
+<script>
+(function(){
+  var KEY = "rangeland-reading-mode", root = document.documentElement, saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  var mode = (saved === "full") ? "full" : "brief";
+  if (mode === "brief") root.classList.add("brief");
+
+  function apply(m){
+    root.classList.toggle("brief", m === "brief");
+    var b = document.querySelectorAll(".seg button"), i;
+    for (i = 0; i < b.length; i++){
+      b[i].setAttribute("aria-pressed", b[i].getAttribute("data-mode") === m ? "true" : "false");
+    }
+    var n = document.getElementById("modenote");
+    if (n) n.textContent = (m === "brief")
+      ? "The seven things worth knowing, then the questions to ask."
+      : "The whole guide \u2014 workings, definitions, caveats and sources.";
+    try { localStorage.setItem(KEY, m); } catch (e) {}
+    if (m === "brief" && window.scrollY > 400) window.scrollTo(0, 0);
+  }
+
+  function fillFigures(){
+    var slots = document.querySelectorAll("[data-viz]"), i;
+    for (i = 0; i < slots.length; i++){
+      var src = document.querySelector(slots[i].getAttribute("data-viz"));
+      if (!src) continue;
+      var c = src.cloneNode(true), k, ids = c.querySelectorAll("[id]"), refs;
+      for (k = 0; k < ids.length; k++){ ids[k].id = ids[k].id + "-sl"; }
+      refs = c.querySelectorAll("[marker-end]");
+      for (k = 0; k < refs.length; k++){
+        refs[k].setAttribute("marker-end", refs[k].getAttribute("marker-end").replace(")", "-sl)"));
+      }
+      slots[i].appendChild(c);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    fillFigures();
+    apply(mode);
+    var seg = document.querySelector(".seg");
+    if (!seg) return;
+    seg.addEventListener("click", function(e){
+      var t = e.target;
+      while (t && t !== seg && t.tagName !== "BUTTON") t = t.parentNode;
+      if (t && t.tagName === "BUTTON") apply(t.getAttribute("data-mode"));
+    });
+  });
+})();
+</script>
+
 <header>
   <p class="eyebrow">A guide for Bexley neighbors · Updated August 26, 2026</p>
   <h1>What Bexley Residents Need to Know About the Rangeland Boulevard Study
@@ -242,6 +349,109 @@
   <p class="w">Starkey Ranch Theatre Library Cultural Center<br>12118 Lake Blanche Drive, Odessa, FL 33556</p>
   <p class="dl"><strong>Written comments are due Thursday, October 8, 2026.</strong> Details in section 9.</p>
 </div>
+
+<div class="modebar">
+  <span class="lab">Reading mode</span>
+  <div class="seg" role="group" aria-label="How much detail to show">
+    <button type="button" data-mode="brief" aria-pressed="true">Highlights</button>
+    <button type="button" data-mode="full" aria-pressed="false">Full detail</button>
+  </div>
+  <span id="modenote">The seven things worth knowing, then the questions to ask.</span>
+</div>
+
+<div class="hlt" id="deck">
+
+<div class="slide">
+  <p class="sn">01 &nbsp;·&nbsp; What is proposed</p>
+  <h2>A new four-lane divided road, 3.4 miles, with an overpass across the Suncoast Parkway</h2>
+  <div class="stats">
+    <div class="stat"><div class="v">3.4</div><div class="k">Miles, Cattle Gap Trl to Bexley Village Dr</div></div>
+    <div class="stat"><div class="v">4</div><div class="k">Lanes, divided</div></div>
+    <div class="stat"><div class="v">2029</div><div class="k">Construction funded in the county plan</div></div>
+  </div>
+  <p>Three alternatives remain &#8212; A, D and E. All three are four-lane divided roadways. They differ only in median width and, for E, one extra pedestrian underpass.</p>
+  <div class="slide-fig" data-viz="#s2 figure svg"></div>
+  <p class="foot">Pasco County Workshop #3 mailer &#183; drawn to scale</p>
+</div>
+
+<div class="slide">
+  <p class="sn">02 &nbsp;·&nbsp; The bigger picture</p>
+  <h2>This is the first segment of a 10-mile route, not a standalone neighborhood road</h2>
+  <div class="slide-fig" data-viz="#s4 figure svg"></div>
+  <p>The adopted 2050 plan continues it east as Bud Bexley Parkway to US 41, then as Caliente Boulevard to Ehren Cutoff. All three segments are new four-lane roads on the county's <strong>Freight Priority Network</strong>, beside a Suncoast Parkway widened to six lanes.</p>
+  <p class="foot">Pasco MPO 2050 LRTP &#183; projects 114.2, 114.3, 114.4, 118.1</p>
+</div>
+
+<div class="slide">
+  <p class="sn">03 &nbsp;·&nbsp; Traffic</p>
+  <h2>Ten of eleven intersections get worse by 2050. None improves.</h2>
+  <div class="stats">
+    <div class="stat"><div class="v hot">10<span style="font-size:.55em"> / 11</span></div><div class="k">Intersections that get worse</div></div>
+    <div class="stat"><div class="v hot">+686%</div><div class="k">More traffic on Bud Bexley Pkwy by 2050 &#8212; from 2,100 to 16,500 vehicles a day</div></div>
+    <div class="stat"><div class="v hot">3</div><div class="k">Intersections that fall to grade F</div></div>
+  </div>
+  <div class="slide-fig" data-viz="#s5 figure svg"></div>
+  <p>Traffic on SR 54 itself falls slightly. That is redistribution, not relief &#8212; off the state road and onto the local network.</p>
+  <p class="foot">County traffic boards, Public Workshop #2, 30 April 2025 &#183; evening peak &#183; Alternative A</p>
+</div>
+
+<div class="slide">
+  <p class="sn">04 &nbsp;·&nbsp; Noise</p>
+  <h2>The county has already rated the noise impact High &#8212; and the workshop materials do not mention it</h2>
+  <p>It is a screening rating, not a measurement &#8212; Low, Medium or High rather than decibels at particular houses. No truck forecast has been published either, and heavy trucks drive road noise more than total vehicle count does.</p>
+  <p class="foot">Rangeland Blvd alternatives evaluation matrix, 18 January 2025</p>
+</div>
+
+<div class="slide">
+  <p class="sn">05 &nbsp;·&nbsp; Cost</p>
+  <h2>At $44 million a mile it costs about three times the segment next to it</h2>
+  <div class="stats">
+    <div class="stat"><div class="v">$111.8M</div><div class="k">Route study estimate, today's dollars</div></div>
+    <div class="stat"><div class="v">83%</div><div class="k">Of it is construction. Land is under 10%</div></div>
+    <div class="stat"><div class="v hot">3.0&#215;</div><div class="k">Per mile vs Bud Bexley Pkwy</div></div>
+  </div>
+  <div class="slide-fig" data-viz="#s7 figure svg"></div>
+  <p>The Suncoast overpass and drainage in wet ground are the likely reasons, but nothing published itemises them.</p>
+  <p class="foot">Alternatives matrix &#183; Pasco MPO 2050 LRTP prioritization table &#183; per-mile figures are my own arithmetic</p>
+</div>
+
+<div class="slide">
+  <p class="sn">06 &nbsp;·&nbsp; Process</p>
+  <h2>The step where noise gets measured is not in the funding request</h2>
+  <div class="slide-fig" data-viz="#s3 figure svg"></div>
+  <p>A PD&amp;E study normally sits between the route study and design. It is where noise is modelled properly, environmental documents are prepared, and a formal public hearing is held. Pasco's request for Rangeland covers right-of-way, engineering and construction. The project listed right after it, Sunlake Boulevard, does request a PD&amp;E.</p>
+  <p class="foot">MPO TIP FY 2027&#8211;2031, priority list items 10 and 11</p>
+</div>
+
+<div class="slide">
+  <p class="sn">07 &nbsp;·&nbsp; What to do</p>
+  <h2>Nine questions worth asking at the workshop</h2>
+  <p>A question that names a document or a number has to be answered on the record. A statement of opposition gets logged as a statement of opposition.</p>
+  <ol class="qlist">
+    <li><b>Show me the no-build board.</b> What does 2050 look like if the road is not built?</li>
+    <li><b>Will there be a PD&amp;E study?</b> If not, at what point does the detailed noise analysis happen?</li>
+    <li><b>What does a "High" noise rating mean</b> for the homes nearest the road, and does it differ between A, D and E?</li>
+    <li><b>What truck percentage</b> is assumed in the traffic forecast?</li>
+    <li><b>How were the alternatives compared on safety and evacuation?</b> Neither appears in the evaluation matrix, though both are stated project goals.</li>
+    <li><b>Which other projects are in the modelled 2050 network</b> behind these traffic numbers?</li>
+    <li><b>Why does this segment cost roughly three times per mile</b> what the adjoining segment costs?</li>
+    <li><b>Why does the adopted plan fund only a study in 2041&#8211;2050</b> while the county plans to build in 2029 &#8212; and has the state TRIP grant been awarded?</li>
+    <li><b>How likely is the six-lane version,</b> and how much wider would the corridor be?</li>
+  </ol>
+  <p class="foot">Comments due Thursday 8 October 2026 &#183; pkontses@mypasco.net &#183; pasco.rja.revize.com/forms/11000</p>
+</div>
+
+<div class="slide">
+  <p class="sn">08 &nbsp;·&nbsp; Context</p>
+  <h2>Traffic gets worse either way. The question is where it goes.</h2>
+  <p>Pasco's population is forecast to roughly <strong>double</strong> between 2019 and 2050, from about 562,000 to over a million. Under any projection, low or high, traffic in our area gets substantially worse over the next 25 years whether or not Rangeland Boulevard is built.</p>
+  <p>So the choice is not between more traffic and today's traffic. It is about which streets carry the additional traffic, and what gets built to move it. That is what the no-build comparison at Workshop #3 should show.</p>
+  <p class="foot">Want the workings &#8212; sources, methodology, definitions and caveats? Switch to <strong>Full detail</strong> at the top.</p>
+</div>
+
+</div><!-- /#deck -->
+
+<div id="doc" class="det">
 
 <div class="toc">
   <p>What's in here</p>
@@ -791,6 +1001,8 @@
     <a href="https://tdaappsprod.dot.state.fl.us/fto/">FDOT Florida Traffic Online</a> — published traffic counts
   </p>
 </section>
+
+</div><!-- /#doc -->
 
 <footer>
   Corrections welcome — if a number or a reading here is wrong, message me on FB and I'll do my best to address it.
