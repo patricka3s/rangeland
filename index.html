@@ -243,12 +243,52 @@
   .slide p:last-of-type{margin-bottom:0}
   .slide .foot{font-family:"IBM Plex Mono",monospace;font-size:10px;line-height:1.7;color:var(--ink-3);
     letter-spacing:.04em;border-top:1px solid var(--rule-soft);margin-top:20px;padding-top:12px}
-  .slide-fig{overflow-x:auto;margin:20px 0 4px}
-  .slide-fig svg{display:block;width:100%;min-width:520px;height:auto}
+  /* responsive deck visuals (no fixed-width SVG) */
+  .viz{margin:20px 0 14px}
+  .vrow{padding:11px 0;border-top:1px solid var(--rule-soft)}
+  .vrow:first-child{border-top:0;padding-top:2px}
+  .vhead{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:7px}
+  .vnm{font-family:Archivo,sans-serif;font-weight:600;font-size:.95rem;color:var(--ink);line-height:1.3}
+  .vval{font-family:Archivo,sans-serif;font-weight:800;font-size:1rem;white-space:nowrap;color:var(--ink)}
+  .vtrack{height:14px;background:var(--rule-soft)}
+  .vfill{height:100%;background:#6E7684}
+  :root[data-theme="dark"] .vfill{background:#7C8695}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .vfill{background:#7C8695}}
+  .vfill.me{background:var(--accent)}
+  :root[data-theme="dark"] .vfill.me{background:#9B7CF0}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .vfill.me{background:#9B7CF0}}
+  .vsub{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-3);margin-top:6px}
 
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:2px;
-    background:var(--rule-soft);margin:20px 0 16px;border:1px solid var(--rule-soft)}
-  .stat{background:var(--surface);padding:15px 14px 14px}
+  .lrow{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;justify-content:space-between;
+    padding:9px 0;border-top:1px solid var(--rule-soft)}
+  .lrow:first-child{border-top:0}
+  .lnm{font-size:.95rem;color:var(--ink);flex:1 1 165px;line-height:1.35}
+  .grades{display:flex;align-items:center;gap:7px;flex:0 0 auto}
+  .g{font-family:Archivo,sans-serif;font-weight:700;font-size:12px;color:#fff;width:26px;height:26px;
+    display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
+  .g.now{background:var(--now)} .g.then{background:var(--then)}
+  .g.same{background:var(--rule);color:var(--ink-2)}
+  .arw{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3)}
+  .lkey{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-3);margin-top:14px;display:flex;gap:8px 18px;flex-wrap:wrap;align-items:center}
+  .lkey span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .dot.now{background:var(--now)} .dot.then{background:var(--then)}
+
+  .steps{margin:20px 0 14px;display:grid;gap:2px;background:var(--rule-soft);border:1px solid var(--rule-soft)}
+  .step{background:var(--surface);padding:12px 14px;display:flex;gap:10px 14px;align-items:baseline;flex-wrap:wrap}
+  .step .st{font-family:Archivo,sans-serif;font-weight:700;font-size:.95rem;color:var(--ink);flex:1 1 130px}
+  .step .sm{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-3);flex:0 0 auto}
+  .step.now{background:var(--wash);box-shadow:inset 3px 0 0 var(--accent)}
+  .step.now .st,.step.now .sm{color:var(--accent)}
+  .step.gap{outline:1px dashed var(--ink-3);outline-offset:-5px}
+  .step.gap .st{color:var(--ink-3)}
+  .step.gap .sm{color:var(--then);font-weight:600}
+
+  .stats{display:flex;flex-wrap:wrap;gap:2px;margin:20px 0 16px}
+  .stat{flex:1 1 132px;background:var(--surface);border:1px solid var(--rule-soft);padding:15px 14px 14px}
   .stat .v{font-family:Archivo,sans-serif;font-weight:800;letter-spacing:-.03em;line-height:1;
     font-size:clamp(1.45rem,4.4vw,2rem);color:var(--ink)}
   .stat .v.hot{color:var(--then)}
@@ -306,23 +346,7 @@
     if (m === "brief" && window.scrollY > 400) window.scrollTo(0, 0);
   }
 
-  function fillFigures(){
-    var slots = document.querySelectorAll("[data-viz]"), i;
-    for (i = 0; i < slots.length; i++){
-      var src = document.querySelector(slots[i].getAttribute("data-viz"));
-      if (!src) continue;
-      var c = src.cloneNode(true), k, ids = c.querySelectorAll("[id]"), refs;
-      for (k = 0; k < ids.length; k++){ ids[k].id = ids[k].id + "-sl"; }
-      refs = c.querySelectorAll("[marker-end]");
-      for (k = 0; k < refs.length; k++){
-        refs[k].setAttribute("marker-end", refs[k].getAttribute("marker-end").replace(")", "-sl)"));
-      }
-      slots[i].appendChild(c);
-    }
-  }
-
   document.addEventListener("DOMContentLoaded", function(){
-    fillFigures();
     apply(mode);
     var seg = document.querySelector(".seg");
     if (!seg) return;
@@ -370,14 +394,29 @@
     <div class="stat"><div class="v">2029</div><div class="k">Construction funded in the county plan</div></div>
   </div>
   <p>Three alternatives remain &#8212; A, D and E. All three are four-lane divided roadways. They differ only in median width and, for E, one extra pedestrian underpass.</p>
-  <div class="slide-fig" data-viz="#s2 figure svg"></div>
-  <p class="foot">Pasco County Workshop #3 mailer &#183; drawn to scale</p>
+  <p class="foot">Pasco County Workshop #3 mailer</p>
 </div>
 
 <div class="slide">
   <p class="sn">02 &nbsp;·&nbsp; The bigger picture</p>
   <h2>This is the first segment of a 10-mile route, not a standalone neighborhood road</h2>
-  <div class="slide-fig" data-viz="#s4 figure svg"></div>
+  <div class="viz">
+    <div class="vrow">
+      <div class="vhead"><span class="vnm">114.2 Rangeland Blvd</span><span class="vval">3.41 mi</span></div>
+      <div class="vtrack"><div class="vfill me" style="width:62.8%"></div></div>
+      <div class="vsub">This study &#183; Cattle Gap Trl to Bexley Village Dr</div>
+    </div>
+    <div class="vrow">
+      <div class="vhead"><span class="vnm">114.3 Bud Bexley Pkwy</span><span class="vval">5.43 mi</span></div>
+      <div class="vtrack"><div class="vfill" style="width:100%"></div></div>
+      <div class="vsub">Bexley Village Dr to US 41</div>
+    </div>
+    <div class="vrow">
+      <div class="vhead"><span class="vnm">114.4 Caliente Blvd</span><span class="vval">1.47 mi</span></div>
+      <div class="vtrack"><div class="vfill" style="width:27.1%"></div></div>
+      <div class="vsub">US 41 to Ehren Cutoff</div>
+    </div>
+  </div>
   <p>The adopted 2050 plan continues it east as Bud Bexley Parkway to US 41, then as Caliente Boulevard to Ehren Cutoff. All three segments are new four-lane roads on the county's <strong>Freight Priority Network</strong>, beside a Suncoast Parkway widened to six lanes.</p>
   <p class="foot">Pasco MPO 2050 LRTP &#183; projects 114.2, 114.3, 114.4, 118.1</p>
 </div>
@@ -390,14 +429,27 @@
     <div class="stat"><div class="v hot">+686%</div><div class="k">More traffic on Bud Bexley Pkwy by 2050 &#8212; from 2,100 to 16,500 vehicles a day</div></div>
     <div class="stat"><div class="v hot">3</div><div class="k">Intersections that fall to grade F</div></div>
   </div>
-  <div class="slide-fig" data-viz="#s5 figure svg"></div>
+  <div class="viz">
+    <div class="lrow"><span class="lnm">Bexley Village Dr roundabout</span><span class="grades"><span class="g now">A</span><span class="arw">&#8594;</span><span class="g then">D</span></span></div>
+    <div class="lrow"><span class="lnm">SR 54 at Gunn Hwy</span><span class="grades"><span class="g now">D</span><span class="arw">&#8594;</span><span class="g then">F</span></span></div>
+    <div class="lrow"><span class="lnm">SR 54 at Bexley Village Dr</span><span class="grades"><span class="g now">D</span><span class="arw">&#8594;</span><span class="g then">F</span></span></div>
+    <div class="lrow"><span class="lnm">SR 54 at Sunlake Blvd</span><span class="grades"><span class="g now">D</span><span class="arw">&#8594;</span><span class="g then">F</span></span></div>
+    <div class="lrow"><span class="lnm">SR 54 at Suncoast ramps (west)</span><span class="grades"><span class="g now">B</span><span class="arw">&#8594;</span><span class="g then">D</span></span></div>
+    <div class="lrow"><span class="lnm">Rangeland Blvd at Gunn Hwy</span><span class="grades"><span class="g now">A</span><span class="arw">&#8594;</span><span class="g then">C</span></span></div>
+    <div class="lrow"><span class="lnm">SR 54 at S Branch Blvd</span><span class="grades"><span class="g now">C</span><span class="arw">&#8594;</span><span class="g then">D</span></span></div>
+    <div class="lrow"><span class="lnm">SR 54 at Suncoast ramps (east)</span><span class="grades"><span class="g now">C</span><span class="arw">&#8594;</span><span class="g then">D</span></span></div>
+    <div class="lrow"><span class="lnm">SR 54 at Ballantrae Blvd</span><span class="grades"><span class="g now">C</span><span class="arw">&#8594;</span><span class="g then">D</span></span></div>
+    <div class="lrow"><span class="lnm">Bud Bexley Pkwy at Ballantrae Blvd</span><span class="grades"><span class="g now">C</span><span class="arw">&#8594;</span><span class="g then">D</span></span></div>
+    <div class="lrow"><span class="lnm">Rangeland Blvd at Cattle Gap Trl</span><span class="grades"><span class="g now">A</span><span class="arw">&#8594;</span><span class="g same">A</span></span></div>
+    <div class="lkey"><span><i class="dot now"></i>Today (2023)</span><span><i class="dot then"></i>Forecast 2050, Alternative A</span><span>A is free-flowing &#183; F cannot clear the queue</span></div>
+  </div>
   <p>Traffic on SR 54 itself falls slightly. That is redistribution, not relief &#8212; off the state road and onto the local network.</p>
   <p class="foot">County traffic boards, Public Workshop #2, 30 April 2025 &#183; evening peak &#183; Alternative A</p>
 </div>
 
 <div class="slide">
   <p class="sn">04 &nbsp;·&nbsp; Noise</p>
-  <h2>The county has already rated the noise impact as High</h2>
+  <h2>The county has already rated the noise impact High &#8212; and the workshop materials do not mention it</h2>
   <p>It is a screening rating, not a measurement &#8212; Low, Medium or High rather than decibels at particular houses. No truck forecast has been published either, and heavy trucks drive road noise more than total vehicle count does.</p>
   <p class="foot">Rangeland Blvd alternatives evaluation matrix, 18 January 2025</p>
 </div>
@@ -410,7 +462,23 @@
     <div class="stat"><div class="v">83%</div><div class="k">Of it is construction. Land is under 10%</div></div>
     <div class="stat"><div class="v hot">3.0&#215;</div><div class="k">Per mile vs Bud Bexley Pkwy</div></div>
   </div>
-  <div class="slide-fig" data-viz="#s7 figure svg"></div>
+  <div class="viz">
+    <div class="vrow">
+      <div class="vhead"><span class="vnm">114.2 Rangeland Blvd</span><span class="vval">$44.0M</span></div>
+      <div class="vtrack"><div class="vfill me" style="width:100%"></div></div>
+      <div class="vsub">This study &#183; per mile</div>
+    </div>
+    <div class="vrow">
+      <div class="vhead"><span class="vnm">114.3 Bud Bexley Pkwy</span><span class="vval">$14.8M</span></div>
+      <div class="vtrack"><div class="vfill" style="width:33.6%"></div></div>
+      <div class="vsub">Next segment east &#183; per mile</div>
+    </div>
+    <div class="vrow">
+      <div class="vhead"><span class="vnm">Median road project</span><span class="vval">$10.1M</span></div>
+      <div class="vtrack"><div class="vfill" style="width:23%"></div></div>
+      <div class="vsub">All 39 road projects in the plan &#183; per mile</div>
+    </div>
+  </div>
   <p>The Suncoast overpass and drainage in wet ground are the likely reasons, but nothing published itemises them.</p>
   <p class="foot">Alternatives matrix &#183; Pasco MPO 2050 LRTP prioritization table &#183; per-mile figures are my own arithmetic</p>
 </div>
@@ -418,7 +486,14 @@
 <div class="slide">
   <p class="sn">06 &nbsp;·&nbsp; Process</p>
   <h2>The step where noise gets measured is not in the funding request</h2>
-  <div class="slide-fig" data-viz="#s3 figure svg"></div>
+  <div class="steps">
+    <div class="step"><span class="st">Long range plan</span><span class="sm">Adopted Dec 2024</span></div>
+    <div class="step now"><span class="st">Route study</span><span class="sm">Now &#183; Workshop #3</span></div>
+    <div class="step gap"><span class="st">PD&amp;E study</span><span class="sm">Not in the request</span></div>
+    <div class="step"><span class="st">Design</span><span class="sm">Funded FY 2026</span></div>
+    <div class="step"><span class="st">Right of way</span><span class="sm">Funded FY 2027</span></div>
+    <div class="step"><span class="st">Construction</span><span class="sm">Funded FY 2029</span></div>
+  </div>
   <p>A PD&amp;E study normally sits between the route study and design. It is where noise is modelled properly, environmental documents are prepared, and a formal public hearing is held. Pasco's request for Rangeland covers right-of-way, engineering and construction. The project listed right after it, Sunlake Boulevard, does request a PD&amp;E.</p>
   <p class="foot">MPO TIP FY 2027&#8211;2031, priority list items 10 and 11</p>
 </div>
