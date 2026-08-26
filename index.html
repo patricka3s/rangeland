@@ -5,17 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>A Neighbor's Guide to the Rangeland Boulevard Route Study</title>
 <meta name="description" content="A plain-language guide to the Rangeland Boulevard Route Study for Bexley neighbors: what is proposed, how it fits Pasco County's larger plan, what the traffic forecasts show, and what has not been answered. Public Workshop #3 is Thursday 24 September 2026.">
-<meta name="author" content="A Bexley resident">
+<meta name="author" content="Patrick">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://patricka3s.github.io/rangeland/">
 
-<!-- Social preview. Replace EXAMPLE.github.io/rangeland-guide with your real URL
-     in BOTH og:url and og:image, or the card will not render when shared. -->
+<!-- Social preview -->
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Rangeland Boulevard Guide">
 <meta property="og:title" content="Rangeland Boulevard: what's proposed and what's still unanswered">
 <meta property="og:description" content="A plain-language guide to the Rangeland Boulevard Route Study for Bexley neighbors: what is proposed, how it fits Pasco County's larger plan, what the traffic forecasts show, and what has not been answered. Public Workshop #3 is Thursday 24 September 2026.">
-<meta property="og:url" content=https://patricka3s.github.io/rangeland/">
+<meta property="og:url" content="https://patricka3s.github.io/rangeland/">
 <meta property="og:image" content="https://patricka3s.github.io/rangeland/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -30,7 +29,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap">
 
 <style>
   :root{
@@ -179,6 +178,22 @@
   .x-rw{stroke:var(--ink-3);stroke-width:1;fill:none}
   .x-key{font-family:"IBM Plex Mono",monospace;font-size:10px;fill:var(--ink-2)}
 
+  /* cost bars */
+  .c-me{fill:#5636C9} .c-other{fill:#6E7684}
+  :root[data-theme="dark"] .c-me{fill:#9B7CF0}
+  :root[data-theme="dark"] .c-other{fill:#7C8695}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .c-me{fill:#9B7CF0}
+    :root:not([data-theme="light"]) .c-other{fill:#7C8695}
+  }
+  .c-lab{font-family:"Source Serif 4",serif;font-size:12.5px;fill:var(--ink)}
+  .c-sub{font-family:"IBM Plex Mono",monospace;font-size:9.5px;fill:var(--ink-3);letter-spacing:.04em}
+  .c-val{font-family:Archivo,sans-serif;font-weight:700;font-size:12.5px;fill:var(--ink)}
+  .c-grid{stroke:var(--rule-soft);stroke-width:1}
+  .c-ax{font-family:Archivo,sans-serif;font-weight:700;font-size:11px;fill:var(--ink-3)}
+  .c-note{font-family:"IBM Plex Mono",monospace;font-size:9.5px;fill:var(--ink-3);letter-spacing:.04em}
+  .c-row:hover .c-lab{fill:var(--accent);font-weight:600}
+
   /* LOS dumbbell */
   .l-name{font-family:"Source Serif 4",serif;font-size:12.5px;fill:var(--ink)}
   .l-grid{stroke:var(--rule-soft);stroke-width:1}
@@ -223,7 +238,7 @@
   <p class="k">Public Workshop #3 is your next chance to weigh in</p>
   <p class="d">Thursday, September 24<br>5:00 – 7:00 p.m.</p>
   <p class="w">Starkey Ranch Theatre Library Cultural Center<br>12118 Lake Blanche Drive, Odessa, FL 33556</p>
-  <p class="dl"><strong>Written comments are due Thursday, October 8, 2026.</strong> Details in section 8.</p>
+  <p class="dl"><strong>Written comments are due Thursday, October 8, 2026.</strong> Details in section 10.</p>
 </div>
 
 <div class="toc">
@@ -234,9 +249,12 @@
     <li><a href="#s3">Where it is in the process</a></li>
     <li><a href="#s4">How the Rangeland study fits into the larger Pasco plan</a></li>
     <li><a href="#s5">The forecast is traffic, and lots of it</a></li>
-    <li><a href="#s6">How these numbers are generated</a></li>
-    <li><a href="#s7">What we still don't know</a></li>
-    <li><a href="#s8">How to get involved</a></li>
+    <li><a href="#s6">Trucks and noise</a></li>
+    <li><a href="#s7">What it costs</a></li>
+    <li><a href="#s8">How these numbers are generated</a></li>
+    <li><a href="#s9">What we still don't know</a></li>
+    <li><a href="#s10">How to get involved</a></li>
+    <li><a href="#s11">Where this comes from</a></li>
   </ol>
 </div>
 
@@ -245,16 +263,16 @@
   <ul>
      <li>Pasco county is growing. A lot. Traffic in our area is going to get worse, no matter what.</li>
     <li>Pasco County is planning to extend <strong>Rangeland Boulevard</strong> 3.4 miles from Cattle Gap Trail to Bexley Village Drive, as a <strong>four-lane divided road</strong> with bike lanes, a sidewalk, a multi-use trail, and a new overpass across the Suncoast Parkway.</li>
-    <li>It is the first segment of a roughly 10-mile <strong>freight corridor</strong> in <a href="https://www.pascocountyfl.gov/services/mpo/plans.php#Doc2212">Pasco County's 2050 plan</a>, continuing east as Bud Bexley Parkway to US 41 and then as Caliente Boulevard to Ehren Cutoff.</li>
+    <li>It is the first segment of a roughly 10-mile route on the county's <strong>Freight Priority Network</strong> in <a href="https://www.pascocountyfl.gov/services/mpo/plans.php#Doc2212">Pasco County's 2050 plan</a>, continuing east as Bud Bexley Parkway to US 41 and then as Caliente Boulevard to Ehren Cutoff.</li>
     <li>The county's own 2050 forecast has <strong>Bud Bexley Parkway going from 2,100 vehicles a day to 16,500</strong>, and Bexley Village Drive rising sharply along every stretch.</li>
-    <li>Three build alternatives remain — <strong>A, D and E</strong> — all are based on a four lane divided freight corridor. (Alternatives B and C were dropped after strong public pushback.)</li>
+    <li>Three build alternatives remain — <strong>A, D and E</strong> — all four-lane divided roadways. (Alternatives B and C were dropped after strong public pushback.)</li>
     <li>Design, right-of-way and <strong>construction money are already programmed</strong> in the county's capital plan for 2026, 2027 and 2029.</li>
   </ul>
 
   <div class="callout">
     <h3>What is a Freight Priority Network?</h3>
-    <p style="margin-bottom:10px">Pasco's long range transportation plan designates a <strong>Freight Priority Network</strong>, the roads the county plans for the movement of goods. Rangeland Boulevard, Bud Bexley Parkway and Caliente Boulevard are all part of that plan, and the plan draws its freight goals from the state's <strong>Florida Mobility and Trade Plan</strong>.</p>
-    <p style="margin-bottom:0">Being on that network doesn't limit what type of traffic can go on that road, but it does mean the road is intended to carry truck traffic. In turn, it is designed with trucks in mind, and the designation earns the project points in the 2050 plan's project scoring. Unfortunately, I am unalbe to find a truck volume forecast for this corridor.</p>
+    <p style="margin-bottom:10px">Pasco's long range transportation plan designates a <strong>Freight Priority Network</strong>, the roads the county plans for the movement of goods. Rangeland Boulevard, Bud Bexley Parkway and Caliente Boulevard are all part of that plan, and the plan draws its freight goals from the state's <strong>Florida Mobility and Trade Plan</strong>. The county notes it has no freight plan of its own yet.</p>
+    <p style="margin-bottom:0">Being on that network doesn't limit what type of traffic can go on that road, but it does mean the road is intended to carry truck traffic. In turn, it is designed with trucks in mind, and the designation earns the project a point in the 2050 plan's project scoring — the rule reads "project falls along the freight priority network — 1 point." Unfortunately, I am unable to find a truck volume forecast for this corridor.</p>
   </div>
 </section>
 
@@ -306,47 +324,87 @@
   </figure>
 
   <p>For a sense of width: 124 to 170 feet is the land a six- to eight-lane highway corridor typically occupies once you count medians, paths and drainage. The driving surface is a smaller part of it than most people expect.</p>
+
+  <h3>What it takes: land, water and wetlands</h3>
+  <p>The route study's own evaluation matrix quantifies this. For the build alternative it assessed:</p>
+  <div class="tw"><table>
+    <thead><tr><th>What the project needs</th><th class="n">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Right-of-way for the roadway</td><td class="n">25.26 acres</td></tr>
+      <tr><td><strong>Right-of-way for stormwater ponds</strong></td><td class="n">46.34 acres</td></tr>
+      <tr><td>Parcels affected</td><td class="n">19</td></tr>
+      <tr><td>Homes or businesses relocated</td><td class="n">0</td></tr>
+      <tr><td>Wetlands affected</td><td class="n">24.11 acres</td></tr>
+      <tr><td>Surface waters affected</td><td class="n">0 acres</td></tr>
+    </tbody>
+  </table></div>
+  <p>Two things stand out. <strong>The drainage ponds need almost twice as much land as the road does</strong> — 46 acres against 25 — which is a big part of why a 3.4-mile road takes 72 acres. And <strong>nobody is relocated</strong>: 19 parcels are affected, but the matrix records no displacements.</p>
 </section>
 
 <section id="s3">
   <h2><span class="num">03</span><span>Where it is in the process</span></h2>
-  <p>The project entered the county's adopted long range plan in December 2024. It is now in the route study stage, which is choosing between Alternatives A, D and E. After that come design, right-of-way purchase, and construction. Money for all three is already set aside in the county's capital plan.</p>
+  <p>The project entered the county's adopted long range plan in December 2024. It is now in the route study stage, which is choosing between Alternatives A, D and E. After that come design, right-of-way purchase and construction — and money for all three is already set aside in the county's capital plan.</p>
+  <p>Different studies happen at different stages, which matters if you want to know when a particular concern gets examined. Here is where each one lands.</p>
 
   <figure>
-    <svg viewBox="0 0 920 176" role="img" aria-label="Timeline of the project's stages. The 2050 Long Range Plan was adopted in December 2024. The Route Study, with workshops in January 2025, May 2025 and September 2026, is where the project is now. Design is funded for fiscal year 2026, right of way for 2027, and construction for 2029.">
+    <svg viewBox="0 0 920 262" role="img" aria-label="Timeline of the project's five stages showing which studies happen at each. The long range plan, adopted December 2024, used crash history, evacuation routes and congestion scoring. The route study, happening now, covers traffic forecasts, a screening-level noise rating, wetlands and species, parcels and right-of-way, and a preliminary cost estimate. Design and PD and E, funded for fiscal year 2026, is where the detailed noise study, barrier evaluation, environmental permits and final geometry happen. Right of way, funded 2027, covers appraisals and acquisition. Construction is funded for 2029.">
       <defs><marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><polygon class="ah" points="0,0 10,5 0,10"/></marker></defs>
-      <rect class="p-box" x="10" y="46" width="150" height="56"/>
-      <text class="p-t" x="85" y="70" text-anchor="middle">Long range plan</text>
-      <text class="p-d" x="85" y="88" text-anchor="middle">ADOPTED DEC 2024</text>
-      <line class="p-arrow" x1="162" y1="74" x2="188" y2="74" marker-end="url(#pa)"/>
-      <rect class="p-box-now" x="192" y="40" width="176" height="68"/>
-      <text class="p-t" x="280" y="66" text-anchor="middle">Route study</text>
-      <text class="p-d" x="280" y="84" text-anchor="middle">WORKSHOP #3 · SEP 2026</text>
-      <text class="p-d" x="280" y="99" text-anchor="middle">CHOOSING A, D OR E</text>
-      <text class="p-here" x="280" y="26" text-anchor="middle">WE ARE HERE</text>
-      <line class="s-brace" x1="280" y1="30" x2="280" y2="38"/>
-      <line class="p-arrow" x1="370" y1="74" x2="396" y2="74" marker-end="url(#pa)"/>
-      <rect class="p-box" x="400" y="46" width="140" height="56"/>
-      <text class="p-t" x="470" y="70" text-anchor="middle">Design</text>
-      <text class="p-d" x="470" y="88" text-anchor="middle">FUNDED FY 2026</text>
-      <line class="p-arrow" x1="542" y1="74" x2="568" y2="74" marker-end="url(#pa)"/>
-      <rect class="p-box" x="572" y="46" width="140" height="56"/>
-      <text class="p-t" x="642" y="70" text-anchor="middle">Right of way</text>
-      <text class="p-d" x="642" y="88" text-anchor="middle">FUNDED FY 2027</text>
-      <line class="p-arrow" x1="714" y1="74" x2="740" y2="74" marker-end="url(#pa)"/>
-      <rect class="p-box" x="744" y="46" width="166" height="56"/>
-      <text class="p-t" x="827" y="70" text-anchor="middle">Construction</text>
-      <text class="p-d" x="827" y="88" text-anchor="middle">FUNDED FY 2029</text>
-      <text class="s-mark" x="10" y="140">Study began March 2023 · Workshop #1 Jan 2025 · Workshop #2 May 2025 · Workshop #3 Sep 2026 · study complete Fall 2026 (anticipated)</text>
-      <text class="s-mark" x="10" y="160">"Funded" means money is set aside in the county's Capital Improvement Plan, not that the work has started.</text>
+
+      <rect class="p-box" x="6" y="44" width="156" height="54"/>
+      <text class="p-t" x="84" y="67" text-anchor="middle">Long range plan</text>
+      <text class="p-d" x="84" y="85" text-anchor="middle">ADOPTED DEC 2024</text>
+      <text class="p-d" x="10" y="126">&#183; crash history</text>
+      <text class="p-d" x="10" y="141">&#183; evacuation routes</text>
+      <text class="p-d" x="10" y="156">&#183; congestion scoring</text>
+
+      <line class="p-arrow" x1="166" y1="71" x2="188" y2="71" marker-end="url(#pa)"/>
+
+      <rect class="p-box-now" x="194" y="38" width="156" height="66"/>
+      <text class="p-t" x="272" y="64" text-anchor="middle">Route study</text>
+      <text class="p-d" x="272" y="82" text-anchor="middle">NOW &#8212; WORKSHOP #3</text>
+      <text class="p-d" x="272" y="96" text-anchor="middle">CHOOSING A, D OR E</text>
+      <text class="p-here" x="272" y="24" text-anchor="middle">WE ARE HERE</text>
+      <line class="s-brace" x1="272" y1="28" x2="272" y2="36"/>
+      <text class="p-d" x="198" y="126">&#183; traffic forecasts</text>
+      <text class="p-d" x="198" y="141">&#183; noise screening</text>
+      <text class="p-d" x="198" y="156">&#183; wetlands, species</text>
+      <text class="p-d" x="198" y="171">&#183; parcels &amp; right-of-way</text>
+      <text class="p-d" x="198" y="186">&#183; preliminary cost</text>
+
+      <line class="p-arrow" x1="354" y1="71" x2="376" y2="71" marker-end="url(#pa)"/>
+
+      <rect class="p-box" x="382" y="44" width="156" height="54"/>
+      <text class="p-t" x="460" y="67" text-anchor="middle">Design &amp; PD&amp;E</text>
+      <text class="p-d" x="460" y="85" text-anchor="middle">FUNDED FY 2026</text>
+      <text class="p-d" x="386" y="126">&#183; detailed noise study</text>
+      <text class="p-d" x="386" y="141">&#183; barrier evaluation</text>
+      <text class="p-d" x="386" y="156">&#183; environmental permits</text>
+      <text class="p-d" x="386" y="171">&#183; final geometry</text>
+
+      <line class="p-arrow" x1="542" y1="71" x2="564" y2="71" marker-end="url(#pa)"/>
+
+      <rect class="p-box" x="570" y="44" width="156" height="54"/>
+      <text class="p-t" x="648" y="67" text-anchor="middle">Right of way</text>
+      <text class="p-d" x="648" y="85" text-anchor="middle">FUNDED FY 2027</text>
+      <text class="p-d" x="574" y="126">&#183; appraisals</text>
+      <text class="p-d" x="574" y="141">&#183; land acquisition</text>
+
+      <line class="p-arrow" x1="730" y1="71" x2="752" y2="71" marker-end="url(#pa)"/>
+
+      <rect class="p-box" x="758" y="44" width="156" height="54"/>
+      <text class="p-t" x="836" y="67" text-anchor="middle">Construction</text>
+      <text class="p-d" x="836" y="85" text-anchor="middle">FUNDED FY 2029</text>
+
+      <text class="s-mark" x="6" y="222">Study began March 2023 &#183; Workshop #1 Jan 2025 &#183; Workshop #2 May 2025 &#183; Workshop #3 Sep 2026 &#183; study complete Fall 2026 (anticipated)</text>
+      <text class="s-mark" x="6" y="242">"Funded" means money is set aside in the county's Capital Improvement Plan, not that the work has started.</text>
     </svg>
-    <figcaption>The step still open is which alternative gets chosen and how it is designed. That a road is planned along this corridor, and that it is four lanes, was settled in the long range plan adopted in December 2024.</figcaption>
+    <figcaption>The route study screens environmental effects at a coarse level &#8212; noise is rated Low, Medium or High rather than modelled in decibels &#8212; and produces a preliminary cost and right-of-way estimate. Detailed noise modelling, barrier evaluation and environmental permitting come at the design and PD&amp;E stage, after an alternative is selected. What is still open is which alternative gets chosen and how it is designed; that a four-lane road is planned along this corridor was settled in the long range plan adopted in December 2024.</figcaption>
   </figure>
 </section>
 
 <section id="s4">
   <h2><span class="num">04</span><span>How the Rangeland study fits into the larger Pasco plan</span></h2>
-  <p>While most of the Bexley discussion has been about a specific 3.4 mile segment, the adopted long range plan contains two more segments that continue straight on from it, all with four lanes and the same freight network designation, connecting Rangeland to 41 and Erin Cutoff.</p>
+  <p>While most of the Bexley discussion has been about a specific 3.4 mile segment, the adopted long range plan contains two more segments that continue straight on from it, all with four lanes and the same freight network designation, connecting Rangeland to US 41 and Ehren Cutoff.</p>
 
   <figure>
     <svg viewBox="0 0 920 210" role="img" aria-label="Diagram of the corridor. Project 114.2, Rangeland Boulevard, runs 3.41 miles from Cattle Gap Trail to Bexley Village Drive, crossing South Branch Boulevard and the Suncoast Parkway, and is the segment covered by this study. Project 114.3, Bud Bexley Parkway, continues 5.43 miles to US 41. Project 114.4, Caliente Boulevard, continues 1.47 miles to County Road 583. Total roughly 10.3 miles.">
@@ -395,7 +453,7 @@
     </div>
   </div>
 
-  <p>None of this information is secret, but it isn't really spelled out in the workshop mailer either, and it changes how we should interpret the study. A road that continues as a four-lane route to US 41 and Erin Cutoff, beside a Suncoast Parkway widened to six lanes, will carry different-in-kind traffic compared to one that only serves neighborhoods.</p>
+  <p>None of this information is secret, but it isn't really spelled out in the workshop mailer either, and it changes how we should interpret the study. A road that continues as a four-lane route to US 41 and Ehren Cutoff, beside a Suncoast Parkway widened to six lanes, will carry different-in-kind traffic compared to one that only serves neighborhoods.</p>
 </section>
 
 <section id="s5">
@@ -525,8 +583,95 @@
 </section>
 
 <section id="s6">
-  <h2><span class="num">06</span><span>How these numbers are generated</span></h2>
-  <p>Forecasts like these come from a computer model — the Tampa Bay Regional Planning Model. It works in four steps, and knowing them helps you read what the numbers can and can't tell you.</p>
+  <h2><span class="num">06</span><span>Trucks and noise</span></h2>
+  <p>These two belong together. Heavy trucks dominate road noise even when they are a small share of the traffic, so how a road sounds depends more on the truck percentage than on the total number of vehicles.</p>
+
+  <h3>Nobody has published a truck forecast</h3>
+  <p>The corridor is on the county's Freight Priority Network &#8212; it is planned around goods movement. But the boards report total vehicles per day without breaking out the number of trucks. Truck percentage is a routine output of traffic analysis, so the number probably exists somewhere; it just has not been published for this corridor.</p>
+
+  <h3>Noise has been assessed, and the rating is High</h3>
+  <p>This surprised me, because the workshop materials do not mention it. The route study's alternatives evaluation matrix scores "potential impacts to noise conditions" as <strong>None</strong> for the no-build option and <strong>High</strong> for both build alternatives it compared. That is the county's own screening judgement, published in January 2025.</p>
+  <p>It is a coarse rating rather than a measurement &#8212; Low, Medium or High, not decibels at particular houses. The detailed work, modelling future sound levels at nearby homes and testing whether barriers are warranted, comes later, at the design and environmental stage after an alternative has been chosen. Section 3 shows where in the sequence each of those studies falls.</p>
+  <p>One caveat on that rating: the matrix compared No-Build against Build A and Build B. Build B has since been dropped, and the alternatives now on the table are A, D and E. Whether the noise rating differs between those three has not been published &#8212; and it might, because D and E use a 44-foot median rather than 22, which changes the width of the corridor and where the travel lanes sit inside it.</p>
+
+  <div class="callout">
+    <h3>Worth asking at the workshop</h3>
+    <p style="margin-bottom:0">What does a rating of "High" mean in practice for the homes nearest the road? Does the rating differ between A, D and E? What truck percentage is assumed in the traffic forecast? And will residents see the detailed noise modelling before an alternative is locked in?</p>
+  </div>
+</section>
+
+<section id="s7">
+  <h2><span class="num">07</span><span>What it costs</span></h2>
+  <p>The route study publishes a cost breakdown, which answers a question the long range plan on its own leaves open. For the build alternative it assessed:</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Where the money goes</th><th class="n">Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Construction</td><td class="n">$93.18M</td></tr>
+      <tr><td>Design and construction inspection</td><td class="n">$18.64M</td></tr>
+      <tr><td>Wetland mitigation</td><td class="n">$6.61M</td></tr>
+      <tr><td>Land for stormwater ponds</td><td class="n">$7.69M</td></tr>
+      <tr><td>Land for the roadway</td><td class="n">$3.41M</td></tr>
+      <tr><td><strong>Total</strong></td><td class="n"><strong>$111.82M</strong></td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Buying land is under a tenth of the total. Nearly everything is construction &#8212; $93 million over 3.4 miles, which works out to about <strong>$27 million a mile</strong>, roughly twice what FDOT's own standard cost-per-mile model gives for a new four-lane urban road. The overpass across the Suncoast Parkway and the drainage work in wet ground are the obvious candidates, but the matrix does not itemise them, so that is a guess.</p>
+
+  <h3>How it compares to the rest of the plan</h3>
+  <p>The long range plan lists a total cost and a length for every project, so you can work out a cost per mile for each one. Doing that for all 39 road projects in the plan puts this segment eighth from the top &#8212; and well above the segment that continues straight on from it.</p>
+
+  <figure>
+    <svg viewBox="0 0 920 214" role="img" aria-label="Bar chart of cost per mile for three items from the Pasco 2050 plan. Project 114.2, Rangeland Boulevard, this study, 3.41 miles, costs 44.0 million dollars per mile. Project 114.3, Bud Bexley Parkway, the next segment east, 5.43 miles, costs 14.8 million dollars per mile. The median road project across all 39 in the plan costs 10.1 million dollars per mile.">
+      <g class="c-grid">
+        <line x1="320" y1="44" x2="320" y2="182"/><line x1="434" y1="44" x2="434" y2="182"/>
+        <line x1="548" y1="44" x2="548" y2="182"/><line x1="662" y1="44" x2="662" y2="182"/>
+        <line x1="776" y1="44" x2="776" y2="182"/><line x1="890" y1="44" x2="890" y2="182"/>
+      </g>
+      <text class="c-ax" x="320" y="36" text-anchor="middle">0</text>
+      <text class="c-ax" x="434" y="36" text-anchor="middle">10</text>
+      <text class="c-ax" x="548" y="36" text-anchor="middle">20</text>
+      <text class="c-ax" x="662" y="36" text-anchor="middle">30</text>
+      <text class="c-ax" x="776" y="36" text-anchor="middle">40</text>
+      <text class="c-ax" x="890" y="36" text-anchor="middle">$50M</text>
+
+      <g class="c-row"><title>Project 114.2 Rangeland Blvd, this study: $44.0 million per mile</title>
+        <text class="c-lab" x="300" y="66" text-anchor="end">114.2 Rangeland Blvd</text>
+        <text class="c-sub" x="300" y="80" text-anchor="end">THIS STUDY &#183; 3.41 MI</text>
+        <path class="c-me" d="M 320 57 H 817.9 A 4 4 0 0 1 821.9 61 V 79 A 4 4 0 0 1 817.9 83 H 320 Z"/>
+        <text class="c-val" x="831" y="75">$44.0M</text></g>
+
+      <g class="c-row"><title>Project 114.3 Bud Bexley Pkwy, the next segment east: $14.8 million per mile</title>
+        <text class="c-lab" x="300" y="112" text-anchor="end">114.3 Bud Bexley Pkwy</text>
+        <text class="c-sub" x="300" y="126" text-anchor="end">NEXT SEGMENT EAST &#183; 5.43 MI</text>
+        <path class="c-other" d="M 320 103 H 485.1 A 4 4 0 0 1 489.1 107 V 125 A 4 4 0 0 1 485.1 129 H 320 Z"/>
+        <text class="c-val" x="498" y="121">$14.8M</text></g>
+
+      <g class="c-row"><title>The median road project in the 2050 plan: $10.1 million per mile</title>
+        <text class="c-lab" x="300" y="158" text-anchor="end">Median road project</text>
+        <text class="c-sub" x="300" y="172" text-anchor="end">39 PROJECTS IN THE PLAN</text>
+        <path class="c-other" d="M 320 149 H 431.1 A 4 4 0 0 1 435.1 153 V 171 A 4 4 0 0 1 431.1 175 H 320 Z"/>
+        <text class="c-val" x="444" y="167">$10.1M</text></g>
+
+      <text class="c-note" x="320" y="204">MILLIONS OF DOLLARS PER MILE &#183; 2050 PLAN TOTALS, YEAR-OF-EXPENDITURE DOLLARS</text>
+    </svg>
+    <figcaption>My own arithmetic: the plan publishes a total cost and a length for each project, not a cost per mile. 114.3 Bud Bexley Parkway is the useful comparison &#8212; it is the next segment of the same corridor, the same new four-lane road on the same freight network, priced in the same plan, and it comes to a third as much per mile.</figcaption>
+  </figure>
+
+  <p>A gap that size is not automatically a problem. This segment carries the Suncoast Parkway overpass, and a grade separation is expensive in a way that plain roadway is not. But the plan does not say that anywhere, so a resident reading it has no way to tell whether the number reflects the overpass, the wetlands, or something else entirely.</p>
+
+  <h3>Why you will see two different totals</h3>
+  <p>The route study says <strong>$111.8 million</strong>. The long range plan says <strong>$150.1 million</strong> for the same project. The gap is almost certainly inflation rather than a change in scope: the plan states its figures are in "year of expenditure" dollars &#8212; what the work is expected to cost in the year it actually gets built &#8212; and $150.1M is about 34% above $111.8M, which fits the plan's own inflation factors. Worth confirming rather than assuming.</p>
+
+  <div class="callout">
+    <h3>Worth asking at the workshop</h3>
+    <p style="margin-bottom:0">How much of the $93 million construction cost is the Suncoast Parkway overpass? Why does this segment cost roughly three times per mile what the adjoining segment costs? And does the $150.1 million in the long range plan represent the same scope as the $111.8 million in the route study, just in later-year dollars?</p>
+  </div>
+</section>
+
+<section id="s8">
+  <h2><span class="num">08</span><span>How these numbers are generated</span></h2>
+  <p>The traffic forecasts in section 5 come from a computer model — the Tampa Bay Regional Planning Model. It works in four steps, and knowing them helps you read what the numbers can and can't tell you.</p>
   <ul>
     <li><strong>How many trips?</strong> The county divides itself into zones and estimates how many households and jobs each will hold in 2050. Households generate trips.</li>
     <li><strong>Where do they go?</strong> Trips get matched to destinations, with closer and easier ones more likely.</li>
@@ -544,9 +689,9 @@
   </div>
 </section>
 
-<section id="s7">
-  <h2><span class="num">07</span><span>What we still don't know</span></h2>
-  <p>I was unable to answer the following question using the public information; perhaps they will be answered on September 24.</p>
+<section id="s9">
+  <h2><span class="num">09</span><span>What we still don't know</span></h2>
+  <p>These are the questions I could not answer from the public documents. Several may well be answered on September 24.</p>
 
   <div class="q">
     <h3>What does 2050 look like if the road isn't built?</h3>
@@ -557,16 +702,7 @@
   <div class="q">
     <h3>Is the Bud Bexley extension already in the Rangeland traffic model?</h3>
     <p>If project 114.3 — Bud Bexley Parkway as a four-lane road to US 41 — is coded into traffic estimates on these boards, then a large share of the 16,500 vehicles shown on our street comes from <em>that</em> project, not this one.</p>
-    <p class="why"><b>Why it matters</b> &nbsp;We'd be commenting on one project while looking at the combined effect of three.</p>
-  </div>
-
-  <div class="q">
-    <h3>How many trucks and how much noise?</h3>
-    <p><strong>Trucks.</strong> The corridor is on the county's Freight Priority Network — it is planned around goods movement. But the boards report total vehicles per day without breaking out the number of trucks. I would hope that truck percentage is a routine output of traffic analysis, so perhaps the number exists somewhere.</p>
-    <p><strong>Noise.</strong> Heavy trucks dominate road noise even when they are a small share of the traffic, which is why the truck percentage matters more to how a road sounds than total vehicle count. A proper noise analysis — modelling future sound levels at nearby homes and testing whether barriers are warranted — is normally done at the design and environmental stage, <em>after</em> an alignment has been selected.</p>
-    <p>That sequence something to ask about. The alignment (basically, the path and size of the road) is being chosen now, at this workshop. The study of what it will sound like comes afterwards.</p>
-    <p>Median width matters here too. Alternatives D and E use a 44-foot median instead of 22, which changes the overall width of the corridor and where the travel lanes sit relative to its edge, which is the kind of difference a noise analysis would quantify. No comparison of the alternatives on noise has been published.</p>
-    <p class="why"><b>Worth asking</b> &nbsp;What truck percentage is assumed in the forecast, when will a noise analysis be carried out, and will residents see it before an alignment is locked in?</p>
+    <p class="why"><b>Why it matters</b> &nbsp;We'd be commenting on one project while looking at the combined effect of the whole corridor.</p>
   </div>
 
   <div class="q">
@@ -580,18 +716,14 @@
   </div>
 
   <div class="q">
-    <h3>Why does this segment cost three times what the next one does?</h3>
-    <p>The long range plan puts project 114.2 at $150.1 million over 3.41 miles — about $44 million a mile. The identical type of project immediately east of it, Bud Bexley Parkway, is costed at $14.8 million a mile in the same plan. I'm guessing the difference is due to the Suncoast overpass, but no breakdown has been published detailing which structures cost what.</p>
-  </div>
-
-  <div class="q">
     <h3>Where are the other studies that support the stated project goals?</h3>
-    <p>The project lists five goals: regional connectivity, easing congestion, evacuation and emergency response, secondary access, and safety. Only traffic has been shown publicly. Evacuation is measured with clearance times, safety with crash data, connectivity with detour distances. I cannot find any studies on these impacts. Why?</p>
+    <p>The project lists five goals: regional connectivity, easing congestion, evacuation and emergency response, secondary access, and safety. Traffic has been analysed and published, and environmental effects &#8212; noise, wetlands, species, contamination, historic sites &#8212; are screened in the alternatives matrix. But <strong>safety, evacuation and connectivity have no row in that matrix and no published analysis</strong>, even though safety is one of the five stated goals. Evacuation is normally measured with clearance times, safety with crash data, connectivity with detour distances. None of that has appeared.</p>
+    <p class="why"><b>Worth asking</b> &nbsp;How were the three alternatives compared on safety and on evacuation, and can that comparison be published?</p>
   </div>
 </section>
 
-<section id="s8">
-  <h2><span class="num">08</span><span>How to get involved</span></h2>
+<section id="s10">
+  <h2><span class="num">10</span><span>How to get involved</span></h2>
   <p>The workshop is open-house format with a video on loop — arrive any time between 5 and 7, look at the boards, and talk to the project team directly. Materials also go online that day at <strong>mypas.co/TED</strong>.</p>
 
   <h3>Comments — due Thursday, October 8, 2026</h3>
@@ -610,12 +742,13 @@
   </div>
 </section>
 
-<section>
-  <h2><span class="num">09</span><span>Where this comes from</span></h2>
+<section id="s11">
+  <h2><span class="num">11</span><span>Where this comes from</span></h2>
   <p class="src">
     <a href="https://www.pascocountyfl.gov/services/engineering/rangeland_blvd.php">Rangeland Blvd Extension Route Study — Pasco County</a><br>
     Public Workshop #3 mailer, Pasco County, September 2026<br>
     Workshop boards, Public Workshop #2, 30 April 2025<br>
+    <a href="https://cms1files.revize.com/pasco/Documents/Services/Transportation%20and%20Engineering/Rangeland/01.18.2025%20Rangeland%20Blvd%20Matrix.pdf">Rangeland Blvd alternatives evaluation matrix</a>, 18 January 2025<br>
     <a href="https://www.pascocountyfl.gov/services/mpo/plans.php">Pasco MPO 2050 Long Range Transportation Plan</a> — projects 114.1–114.4, 118.1, 124.1, 126.1, 127.1, 131.1; Appendix B project sheets; Appendix F socioeconomic forecast<br>
     <a href="https://www.pascocountyfl.gov/services/mpo/plans.php">MPO Transportation Improvement Program FY 2027–2031</a> — item 10, project 454569-1<br>
     <a href="https://tdaappsprod.dot.state.fl.us/fto/">FDOT Florida Traffic Online</a> — published traffic counts
