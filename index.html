@@ -162,6 +162,8 @@
   .p-box-now{fill:var(--wash);stroke:var(--accent);stroke-width:1.8}
   .p-t{font-family:Archivo,sans-serif;font-weight:600;font-size:12px;fill:var(--ink)}
   .p-d{font-family:"IBM Plex Mono",monospace;font-size:9.5px;fill:var(--ink-3);letter-spacing:.04em}
+  .p-box-gap{fill:none;stroke:var(--ink-3);stroke-width:1.2;stroke-dasharray:5 4}
+  .p-gap-t{font-family:Archivo,sans-serif;font-weight:600;font-size:12px;fill:var(--ink-3)}
   .p-arrow{stroke:var(--ink-3);stroke-width:1.3;fill:none}
   .p-here{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;fill:var(--accent);letter-spacing:.1em}
   .ah{fill:var(--ink-3)}
@@ -356,63 +358,74 @@
   <p>Different studies happen at different stages, which matters if you want to know when a particular concern gets examined. Here is where each one lands.</p>
 
   <figure>
-    <svg viewBox="0 0 920 262" role="img" aria-label="Timeline of the project's five stages showing which studies happen at each. The long range plan, adopted December 2024, used crash history, evacuation routes and congestion scoring. The route study, happening now, covers traffic forecasts, a screening-level noise rating, wetlands and species, parcels and right-of-way, and a preliminary cost estimate. Design and PD and E, funded for fiscal year 2026, is where the detailed noise study, barrier evaluation, environmental permits and final geometry happen. Right of way, funded 2027, covers appraisals and acquisition. Construction is funded for 2029.">
+    <svg viewBox="0 0 920 268" role="img" aria-label="Timeline of the project's stages showing which studies happen at each. The long range plan, adopted December 2024, used crash history, evacuation routes and congestion scoring. The route study, happening now, covers traffic forecasts, a screening-level noise rating, wetlands and species, right-of-way and preliminary cost. A Project Development and Environment study would normally come next, containing the detailed noise study, barrier evaluation, permits and a public hearing, but it is drawn as a dashed box because it is not in the county's funding request. Design is funded for fiscal year 2026, right of way for 2027, and construction for 2029.">
       <defs><marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><polygon class="ah" points="0,0 10,5 0,10"/></marker></defs>
 
-      <rect class="p-box" x="6" y="44" width="156" height="54"/>
-      <text class="p-t" x="84" y="67" text-anchor="middle">Long range plan</text>
-      <text class="p-d" x="84" y="85" text-anchor="middle">ADOPTED DEC 2024</text>
-      <text class="p-d" x="10" y="126">&#183; crash history</text>
-      <text class="p-d" x="10" y="141">&#183; evacuation routes</text>
-      <text class="p-d" x="10" y="156">&#183; congestion scoring</text>
+      <rect class="p-box" x="6" y="44" width="130" height="54"/>
+      <text class="p-t" x="71" y="67" text-anchor="middle">Long range plan</text>
+      <text class="p-d" x="71" y="85" text-anchor="middle">ADOPTED DEC 2024</text>
+      <text class="p-d" x="8" y="126">&#183; crash history</text>
+      <text class="p-d" x="8" y="141">&#183; evacuation routes</text>
+      <text class="p-d" x="8" y="156">&#183; congestion scoring</text>
 
-      <line class="p-arrow" x1="166" y1="71" x2="188" y2="71" marker-end="url(#pa)"/>
+      <line class="p-arrow" x1="138" y1="71" x2="156" y2="71" marker-end="url(#pa)"/>
 
-      <rect class="p-box-now" x="194" y="38" width="156" height="66"/>
-      <text class="p-t" x="272" y="64" text-anchor="middle">Route study</text>
-      <text class="p-d" x="272" y="82" text-anchor="middle">NOW &#8212; WORKSHOP #3</text>
-      <text class="p-d" x="272" y="96" text-anchor="middle">CHOOSING A, D OR E</text>
-      <text class="p-here" x="272" y="24" text-anchor="middle">WE ARE HERE</text>
-      <line class="s-brace" x1="272" y1="28" x2="272" y2="36"/>
-      <text class="p-d" x="198" y="126">&#183; traffic forecasts</text>
-      <text class="p-d" x="198" y="141">&#183; noise screening</text>
-      <text class="p-d" x="198" y="156">&#183; wetlands, species</text>
-      <text class="p-d" x="198" y="171">&#183; parcels &amp; right-of-way</text>
-      <text class="p-d" x="198" y="186">&#183; preliminary cost</text>
+      <rect class="p-box-now" x="158" y="38" width="130" height="66"/>
+      <text class="p-t" x="223" y="64" text-anchor="middle">Route study</text>
+      <text class="p-d" x="223" y="82" text-anchor="middle">NOW &#8212; WORKSHOP #3</text>
+      <text class="p-d" x="223" y="96" text-anchor="middle">CHOOSING A, D OR E</text>
+      <text class="p-here" x="223" y="24" text-anchor="middle">WE ARE HERE</text>
+      <line class="s-brace" x1="223" y1="28" x2="223" y2="36"/>
+      <text class="p-d" x="160" y="126">&#183; traffic forecasts</text>
+      <text class="p-d" x="160" y="141">&#183; noise screening</text>
+      <text class="p-d" x="160" y="156">&#183; wetlands, species</text>
+      <text class="p-d" x="160" y="171">&#183; right-of-way</text>
+      <text class="p-d" x="160" y="186">&#183; preliminary cost</text>
 
-      <line class="p-arrow" x1="354" y1="71" x2="376" y2="71" marker-end="url(#pa)"/>
+      <line class="p-arrow" x1="290" y1="71" x2="308" y2="71" marker-end="url(#pa)"/>
 
-      <rect class="p-box" x="382" y="44" width="156" height="54"/>
-      <text class="p-t" x="460" y="67" text-anchor="middle">Design &amp; PD&amp;E</text>
-      <text class="p-d" x="460" y="85" text-anchor="middle">FUNDED FY 2026</text>
-      <text class="p-d" x="386" y="126">&#183; detailed noise study</text>
-      <text class="p-d" x="386" y="141">&#183; barrier evaluation</text>
-      <text class="p-d" x="386" y="156">&#183; environmental permits</text>
-      <text class="p-d" x="386" y="171">&#183; final geometry</text>
+      <rect class="p-box-gap" x="310" y="44" width="130" height="54"/>
+      <text class="p-gap-t" x="375" y="67" text-anchor="middle">PD&amp;E study</text>
+      <text class="p-d" x="375" y="85" text-anchor="middle">NOT IN THE REQUEST</text>
+      <text class="p-d" x="312" y="126">&#183; detailed noise study</text>
+      <text class="p-d" x="312" y="141">&#183; barrier evaluation</text>
+      <text class="p-d" x="312" y="156">&#183; environmental permits</text>
+      <text class="p-d" x="312" y="171">&#183; public hearing</text>
 
-      <line class="p-arrow" x1="542" y1="71" x2="564" y2="71" marker-end="url(#pa)"/>
+      <line class="p-arrow" x1="442" y1="71" x2="460" y2="71" marker-end="url(#pa)"/>
 
-      <rect class="p-box" x="570" y="44" width="156" height="54"/>
-      <text class="p-t" x="648" y="67" text-anchor="middle">Right of way</text>
-      <text class="p-d" x="648" y="85" text-anchor="middle">FUNDED FY 2027</text>
-      <text class="p-d" x="574" y="126">&#183; appraisals</text>
-      <text class="p-d" x="574" y="141">&#183; land acquisition</text>
+      <rect class="p-box" x="462" y="44" width="130" height="54"/>
+      <text class="p-t" x="527" y="67" text-anchor="middle">Design</text>
+      <text class="p-d" x="527" y="85" text-anchor="middle">FUNDED FY 2026</text>
+      <text class="p-d" x="464" y="126">&#183; final geometry</text>
+      <text class="p-d" x="464" y="141">&#183; construction plans</text>
 
-      <line class="p-arrow" x1="730" y1="71" x2="752" y2="71" marker-end="url(#pa)"/>
+      <line class="p-arrow" x1="594" y1="71" x2="612" y2="71" marker-end="url(#pa)"/>
 
-      <rect class="p-box" x="758" y="44" width="156" height="54"/>
-      <text class="p-t" x="836" y="67" text-anchor="middle">Construction</text>
-      <text class="p-d" x="836" y="85" text-anchor="middle">FUNDED FY 2029</text>
+      <rect class="p-box" x="614" y="44" width="130" height="54"/>
+      <text class="p-t" x="679" y="67" text-anchor="middle">Right of way</text>
+      <text class="p-d" x="679" y="85" text-anchor="middle">FUNDED FY 2027</text>
+      <text class="p-d" x="616" y="126">&#183; appraisals</text>
+      <text class="p-d" x="616" y="141">&#183; acquisition</text>
 
-      <text class="s-mark" x="6" y="222">Study began March 2023 &#183; Workshop #1 Jan 2025 &#183; Workshop #2 May 2025 &#183; Workshop #3 Sep 2026 &#183; study complete Fall 2026 (anticipated)</text>
-      <text class="s-mark" x="6" y="242">"Funded" means money is set aside in the county's Capital Improvement Plan, not that the work has started.</text>
+      <line class="p-arrow" x1="746" y1="71" x2="764" y2="71" marker-end="url(#pa)"/>
+
+      <rect class="p-box" x="766" y="44" width="130" height="54"/>
+      <text class="p-t" x="831" y="67" text-anchor="middle">Construction</text>
+      <text class="p-d" x="831" y="85" text-anchor="middle">FUNDED FY 2029</text>
+
+      <text class="s-mark" x="6" y="228">Study began March 2023 &#183; Workshop #1 Jan 2025 &#183; Workshop #2 May 2025 &#183; Workshop #3 Sep 2026 &#183; study complete Fall 2026 (anticipated)</text>
+      <text class="s-mark" x="6" y="248">"Funded" means money is set aside in the county's Capital Improvement Plan, not that the work has started.</text>
     </svg>
-    <figcaption>The route study screens environmental effects at a coarse level &#8212; noise is rated Low, Medium or High rather than modelled in decibels &#8212; and produces a preliminary cost and right-of-way estimate. Detailed noise modelling, barrier evaluation and environmental permitting come at the design and PD&amp;E stage, after an alternative is selected. What is still open is which alternative gets chosen and how it is designed; that a four-lane road is planned along this corridor was settled in the long range plan adopted in December 2024.</figcaption>
+    <figcaption>The route study screens environmental effects at a coarse level &#8212; noise is rated Low, Medium or High rather than modelled in decibels. The dashed box is the step where that coarse rating would normally become a real measurement. It is drawn dashed because the county's funding request does not include one.</figcaption>
   </figure>
+  <p><strong>One step appears to be missing.</strong> A Project Development and Environment study &#8212; a PD&amp;E &#8212; normally sits between a route study and design. It is where noise gets modelled properly, where environmental documentation is prepared, and where a formal public hearing is held. Pasco's funding request for Rangeland covers right-of-way, engineering and construction, and does not include a PD&amp;E. The project listed immediately after it, Sunlake Boulevard, does request one. I don't know whether that is deliberate, or whether the route study is meant to serve the same purpose. It is worth asking, because a PD&amp;E is where the noise question in section 6 would otherwise be answered.</p>
+
   <div class="callout">
     <h3>Worth asking at the workshop</h3>
     <p style="margin-bottom:10px">The project lists five goals: regional connectivity, easing congestion, evacuation and emergency response, secondary access, and safety. Traffic has been analysed and published, and environmental effects &#8212; noise, wetlands, species, contamination, historic sites &#8212; are screened in the alternatives matrix. But <strong>safety, evacuation and connectivity have no row in that matrix and no published analysis</strong>, even though safety is one of the five stated goals.</p>
     <p style="margin-bottom:0">Evacuation is normally measured with clearance times, safety with crash data, connectivity with detour distances. How were the three alternatives compared on those, and can that comparison be published?</p>
+    <p style="margin-bottom:0;margin-top:10px">And will there be a PD&amp;E study? If not, at what point does the detailed noise analysis happen, and will residents see it before an alternative is locked in?</p>
   </div>
 </section>
 
@@ -639,7 +652,7 @@
     </tbody>
   </table></div>
 
-  <h3>Three cost-per-mile numbers--confused yet?</h3>
+  <h3>Three cost-per-mile numbers &#8212; confused yet?</h3>
   <p>This is where it gets confusing, and it is worth getting straight before anyone quotes a number at you. Depending on which document you read and what it counts, this same 3.41-mile road costs $27 million, $33 million or $44 million a mile.</p>
  
   <div class="tw"><table>
@@ -691,23 +704,27 @@
 
       <text class="c-note" x="320" y="204">MILLIONS OF DOLLARS PER MILE &#183; 2050 PLAN TOTALS, YEAR-OF-EXPENDITURE DOLLARS</text>
     </svg>
-    <figcaption>My own arithmetic: the plan publishes a total cost and a length for each project, not a cost per mile. 114.3 Bud Bexley Parkway is the useful comparison &#8212; it is the next segment of the same corridor, the same new four-lane road on the same freight network, priced in the same plan, and it comes to a third as much per mile.</figcaption>
+    <figcaption>Third row of the table above &#8212; long range plan totals in year-of-expenditure dollars, divided by length. The per-mile figures are my own arithmetic: the plan publishes a total cost and a length for each project, never a cost per mile. 114.3 Bud Bexley Parkway is the useful comparison &#8212; it is the next segment of the same corridor, the same new four-lane road on the same freight network, priced in the same plan, and it comes to a third as much per mile.</figcaption>
   </figure>
 
   <p>A gap that size is not automatically a problem. This segment carries the Suncoast Parkway overpass, and a grade separation is expensive. But the plan does not say that anywhere, so a resident reading it has no way to tell whether the number reflects the overpass, the wetlands, or something else entirely.</p>
 
-  <h3>Why you will see two different totals</h3>
-  <p>The route study says <strong>$111.8 million</strong>. The long range plan says <strong>$150.1 million</strong> for the same project. The gap is almost certainly inflation rather than a change in scope: the plan states its figures are in "year of expenditure" dollars &#8212; what the work is expected to cost in the year it actually gets built &#8212; and $150.1M is about 34% above $111.8M, which fits the plan's own inflation factors. Worth confirming rather than assuming.</p>
+  <h3>What is actually funded, and by whom</h3>
+  <p>Two documents describe the money for this road, and they do not describe the same project.</p>
+  <p><strong>The regional plan funds a study, in the 2040s.</strong> In the 2050 plan's cost-feasible table &#8212; the list of what the region expects to be able to afford &#8212; project 114.2 receives <strong>$2,788,496</strong>, all of it for a PD&amp;E study, in the <strong>2041&#8211;2050</strong> band. The design, right-of-way and construction columns are blank. The $150.1 million above comes from a different table, the needs list, which prices projects whether or not the money exists.</p>
+  <p><strong>The county is moving two decades sooner, with its own money.</strong> The county's capital plan funds design in 2026, right-of-way in 2027 and construction in 2029. The MPO's priority list has Rangeland at number 10 under "construction unfunded," with the funding request marked <strong>TRIP</strong> &#8212; the state's Transportation Regional Incentive Program, which the plan's own fund-code table describes as 100% state money, and which requires the county to match it dollar for dollar.</p>
+  <p>Which means <strong>no federal highway money is committed to this road.</strong> It is county capital plus a state grant request that has not yet been awarded. That is worth knowing for two reasons: federal funding normally brings a federal environmental review, and a project whose construction money depends on a pending state grant is less settled than the capital plan makes it look.</p>
 
   <div class="callout">
     <h3>Worth asking at the workshop</h3>
     <p style="margin-bottom:0">How much of the $93 million construction cost is the Suncoast Parkway overpass? Why does this segment cost roughly three times per mile what the adjoining segment costs? And does the $150.1 million in the long range plan represent the same scope as the $111.8 million in the route study, just in later-year dollars?</p>
+    <p style="margin-bottom:0;margin-top:10px">Then the bigger one: why does the adopted regional plan fund only a study in 2041&#8211;2050 while the county plans to build in 2029, and has the TRIP grant actually been awarded?</p>
   </div>
 </section>
 
 <section id="s8">
   <h2><span class="num">08</span><span>How the county comes up with its numbers</span></h2>
-  <p>The traffic forecasts in section 5 come from a computer model — the Tampa Bay Regional Planning Model. It works in four steps, and knowing them helps you undersatnd what the data can and can't tell you.</p>
+  <p>The traffic forecasts in section 5 come from a computer model — the Tampa Bay Regional Planning Model. It works in four steps, and knowing them helps you understand what the data can and can't tell you.</p>
   <ul>
     <li><strong>How many trips?</strong> The county divides itself into zones and estimates how many households and jobs each will hold in 2050. Households generate trips.</li>
     <li><strong>Where do they go?</strong> Trips get matched to destinations, with closer and easier ones more likely.</li>
@@ -723,7 +740,7 @@
     <li><strong>Whether new capacity generates new driving.</strong> How many trips a household makes is set by what kind of household it is, not by how easy driving has become. Add a road and the model will move trips onto it and shift where some of them go &#8212; but the total number of trips does not change. That is exactly the mechanism the induced-demand research argues is real, and the model has no way to represent it.</li>
     <li><strong>How long the rush hour lasts.</strong> The output is a daily total, converted to a peak-hour grade using standard factors. It says nothing about whether the one bad hour becomes two or three bad hours, which is how congestion is usually experienced.</li>
     <li><strong>Anything about crashes.</strong> A travel demand model produces volumes. Predicting safety outcomes takes different methods and actual crash data, done as separate work. Safety is one of the five goals.</li>
-    <li><strong>Anything about noise or air quality.</strong> Those take traffic volumes as an input and run them through separate models. The noise rating in section 6 came from a screening checklist, not from an analysis</li>
+    <li><strong>Anything about noise or air quality.</strong> Those take traffic volumes as an input and run them through separate models. The noise rating in section 6 came from a screening checklist, not from a detailed analysis.</li>
     <li><strong>Evacuation performance.</strong> Clearance times assume a hurricane &#8212; it again requires a different model entirely. Evacuation is also one of the five goals.</li>
     <li><strong>What happens on the smallest streets.</strong> A regional model codes arterials and collectors. Streets below that size are often not in the network at all, so cut-through routing inside a neighborhood is finer than the tool can resolve.</li>
     <li><strong>How uncertain a 2050 number is.</strong> Every figure is published as a single number, as if it were absolute. Any projection 25 years out will have a wide margin of error.</li>
@@ -770,7 +787,7 @@
     Workshop boards, Public Workshop #2, 30 April 2025<br>
     <a href="https://cms1files.revize.com/pasco/Documents/Services/Transportation%20and%20Engineering/Rangeland/01.18.2025%20Rangeland%20Blvd%20Matrix.pdf">Rangeland Blvd alternatives evaluation matrix</a>, 18 January 2025<br>
     <a href="https://www.pascocountyfl.gov/services/mpo/plans.php">Pasco MPO 2050 Long Range Transportation Plan</a> — projects 114.1–114.4, 118.1, 124.1, 126.1, 127.1, 131.1; Appendix B project sheets; Appendix F socioeconomic forecast<br>
-    <a href="https://www.pascocountyfl.gov/services/mpo/plans.php">MPO Transportation Improvement Program FY 2027–2031</a> — item 10, project 454569-1<br>
+    <a href="https://www.pascocountyfl.gov/services/mpo/plans.php">MPO Transportation Improvement Program FY 2027–2031</a> — priority list item 10, project 454569-1; state and federal fund code table<br>
     <a href="https://tdaappsprod.dot.state.fl.us/fto/">FDOT Florida Traffic Online</a> — published traffic counts
   </p>
 </section>
