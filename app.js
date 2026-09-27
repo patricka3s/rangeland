@@ -25,6 +25,19 @@
 
   document.addEventListener("DOMContentLoaded", function(){
     apply(mode);
+
+    // The corrections list is collapsed by default. Anything that links to
+    // #notes should open it, or the reader lands on a closed box.
+    function openNotes(){
+      if (location.hash !== "#notes") return;
+      try {
+        var d = document.querySelector("#notes details");
+        if (d) d.open = true;
+      } catch (e) {}
+    }
+    openNotes();
+    window.addEventListener("hashchange", openNotes);
+
     // Workshop #3 ended 24 Sep 2026, 7pm Eastern (23:00 UTC). After that the
     // meeting box switches to the comment deadline. Without JS it stays on the
     // workshop, which is the state that matters most before the night.
@@ -39,5 +52,174 @@
       while (t && t !== seg && t.tagName !== "BUTTON") t = t.parentNode;
       if (t && t.tagName === "BUTTON") apply(t.getAttribute("data-mode"));
     });
+  });
+})();
+
+/* ==========================================================================
+   NETWORK MAP
+   The figures below are read from the county's three traffic boards shown at
+   Public Workshop #3 on 24 September 2026. aadt and open are [2023, 2050 not
+   built, 2050 built]; aadt null means no figure for that year; open 0 means the
+   road is not open to traffic then; out:1 means this study never numbers the
+   street at all, so it is drawn grey in every view.
+   ========================================================================== */
+(function(){
+  var SEG = {
+    "ridge-w":        {out:1, aadt:[null,null,null],    open:[1,1,1]},
+    "ridge-p2":       {out:1, aadt:[null,null,null],    open:[0,1,1]},
+    "rangeland-w":    {out:1, aadt:[null,null,null],    open:[1,1,1]},
+    "rangeland-new":  {aadt:[null,null,18000],   open:[0,0,1]},
+    "budbexley-main": {aadt:[2100,6900,16500],   open:[1,1,1]},
+    "budbexley-gap":  {aadt:[null,6900,16500],   open:[0,1,1]},
+    "tower":          {out:1, aadt:[null,null,null],    open:[1,1,1]},
+    "caliente":       {out:1, aadt:[null,null,null],    open:[1,1,1]},
+    "sr54":           {aadt:[64800,69000,62500], open:[1,1,1],
+                       disp:["58,700–64,800","63,500–69,000","56,500–62,500"],
+                       dlt:[null,"+6 to +8%","−9 to −11%"]},
+    "gunn":           {aadt:[18400,23500,23500], open:[1,1,1]},
+    "cattlegap":      {out:1, aadt:[null,1500,null],    open:[1,1,1], disp:[null,"1,200–1,700",null]},
+    "sbranch":        {aadt:[null,22000,15500],  open:[1,1,1]},
+    "suncoast-n":     {out:1, aadt:[null,75500,null],   open:[1,1,1]},
+    "suncoast-m":     {out:1, aadt:[null,75500,null],   open:[1,1,1]},
+    "suncoast-s":     {out:1, aadt:[null,93000,null],   open:[1,1,1]},
+    "bvd-sr54":       {aadt:[14300,32500,22500], open:[1,1,1]},
+    "bvd-rndbt":      {aadt:[6100,23500,21500],  open:[1,1,1]},
+    "bvd-ne-lo":      {aadt:[2500,15500,14500],  open:[1,1,1]},
+    "bvd-ne-hi":      {aadt:[null,null,null],    open:[0,0,0]},
+    "broadporch":     {aadt:[3500,5000,7000],    open:[1,1,1]},
+    "ballantrae-s":   {aadt:[10700,18000,11000], open:[1,1,1]},
+    "ballantrae-n":   {aadt:[4100,7100,8600],    open:[1,1,1]},
+    "sunlake-s":      {out:1, aadt:[null,null,null],    open:[1,1,1]},
+    "sunlake-n":      {out:1, aadt:[null,null,null],    open:[0,0,0]},
+    "us41":           {out:1, aadt:[54500,null,null],  open:[1,1,1]}
+  };
+
+  var INT = {
+    "rg-gunn":    {name:"Rangeland Blvd at Gunn Hwy",       g:["A","F","C"], on:["rangeland","gunn"]},
+    "rg-cattle":  {name:"Rangeland Blvd at Cattle Gap Trl", g:["A","A","A"], on:["rangeland","cattlegap"]},
+    "bvd-rndbt":  {name:"Bexley Village Dr roundabout",     g:["A","F","D"], on:["rangeland","budbexley","bexleyvillage"]},
+    "bb-ballan":  {name:"Bud Bexley Pkwy at Ballantrae",    g:["C","D","D"], on:["budbexley","ballantrae"]},
+    "sr-gunn":    {name:"SR 54 at Gunn Hwy",                g:["D","F","F"], on:["sr54","gunn"]},
+    "sr-sbranch": {name:"SR 54 at S Branch Blvd",           g:["C","E","D"], on:["sr54","sbranch"]},
+    "sr-sunc-w":  {name:"SR 54 at Suncoast ramps, west",    g:["B","E","D"], on:["sr54","suncoast"]},
+    "sr-sunc-e":  {name:"SR 54 at Suncoast ramps, east",    g:["C","F","D"], on:["sr54","suncoast"]},
+    "sr-bvd":     {name:"SR 54 at Bexley Village Dr",       g:["D","F","F"], on:["sr54","bexleyvillage"]},
+    "sr-ballan":  {name:"SR 54 at Ballantrae Blvd",         g:["C","E","D"], on:["sr54","ballantrae"], flag:1},
+    "sr-sunlake": {name:"SR 54 at Sunlake Blvd",            g:["D","F","F"], on:["sr54","sunlake"]}
+  };
+
+  var VIEWS = [
+    {k:"today", label:"Today",
+     cap:"The county's existing-traffic board, base year 2023, read off the board itself rather than taken from a summary. Three of the four corridor roads already exist; the 3.41 miles being decided do not."},
+    {k:"notbuilt", label:"2050, not built",
+     cap:"The county calls this the no-build. It is not a future in which nothing is built — the model includes every project in the long range plan, Bud Bexley Parkway among them, so the corridor still joins up. Only the Rangeland extension is missing."},
+    {k:"built", label:"2050, built",
+     cap:"The county's build board, which covers Alternatives A, D and E on one sheet. Note what it says about SR 54: 56,500 west and 62,500 east, both lower than the same county's 2023 counts of 58,700 and 64,800."}
+  ];
+
+  document.addEventListener("DOMContentLoaded", function(){
+    var svg = document.getElementById("nm-map");
+    var tabs = document.getElementById("nm-views");
+    var cap = document.getElementById("nm-cap");
+    if (!svg || !tabs || !cap) return;
+    var vi = 0;
+
+    function band(v){
+      if (v == null) return 0;
+      if (v < 5000) return 1;
+      if (v < 15000) return 2;
+      if (v < 25000) return 3;
+      if (v < 40000) return 4;
+      return 5;
+    }
+    function gc(g){
+      return g === "F" ? "g-crit" : g === "E" ? "g-serious" : g === "D" ? "g-warn" : "g-good";
+    }
+    function setCls(el, v){ el.setAttribute("class", v); }
+
+    /* change against the view immediately to the left; null when there is
+       nothing honest to say */
+    function delta(d){
+      if (vi === 0) return null;
+      var a = d.aadt[vi - 1], b = d.aadt[vi];
+      if (a == null || b == null || !a || !d.open[vi] || !d.open[vi - 1]) return null;
+      var pct = Math.round((b - a) / a * 100), diff = b - a;
+      var txt = (d.dlt && d.dlt[vi]) ? d.dlt[vi]
+              : (pct === 0 ? "no change" : (pct > 0 ? "+" : "\u2212") + Math.abs(pct) + "%");
+      return {txt:txt, dir: pct > 0 ? "up" : pct < 0 ? "dn" : "flat",
+              big: Math.abs(pct) >= 10 || Math.abs(diff) >= 2000};
+    }
+
+    function paint(){
+      var i;
+      var segs = svg.querySelectorAll(".nmseg");
+      for (i = 0; i < segs.length; i++){
+        var g = segs[i], d = SEG[g.getAttribute("data-seg")];
+        if (!d) continue;
+        var c = "nmseg";
+        if (!d.open[vi]) c += " s-absent";
+        else if (d.out) c += " s-out";
+        else { var b = band(d.aadt[vi]); c += b ? " b" + b : " s-hollow"; }
+        setCls(g, c);
+      }
+      var ds = svg.querySelectorAll("#nm-deltas text");
+      for (i = 0; i < ds.length; i++){
+        var t = ds[i], sd = SEG[t.getAttribute("data-seg")], x = sd ? delta(sd) : null;
+        if (!x || !x.big || sd.out){ t.textContent = ""; setCls(t, "delta lbl"); }
+        else { t.textContent = x.txt; setCls(t, "delta lbl " + x.dir); }
+      }
+      var gl = svg.querySelectorAll("#nm-grades text");
+      for (i = 0; i < gl.length; i++){
+        var gd = INT[gl[i].getAttribute("data-int")];
+        gl[i].textContent = gd ? gd.g[vi] : "";
+      }
+      var cs = svg.querySelectorAll("#nm-stations circle");
+      for (i = 0; i < cs.length; i++){
+        var k = cs[i].getAttribute("data-int"), id = k ? INT[k] : null;
+        setCls(cs[i], "stn" + (id ? " " + gc(id.g[vi]) : ""));
+      }
+      var u = document.getElementById("nm-stn-us41ridge");
+      if (u) setCls(u, "stn" + (vi === 0 ? " absent" : ""));
+      cap.textContent = VIEWS[vi].cap;
+    }
+
+    /* hover isolates one street; there is no detail panel on this page */
+    function streetOf(t){
+      while (t && t !== svg){
+        if (t.getAttribute && t.getAttribute("data-street")) return t.getAttribute("data-street");
+        t = t.parentNode;
+      }
+      return null;
+    }
+    function highlight(s){
+      var all = svg.querySelectorAll(".nmseg,.lbl"), i;
+      if (!s){
+        svg.classList.remove("dim");
+        for (i = 0; i < all.length; i++) all[i].classList.remove("on");
+        return;
+      }
+      svg.classList.add("dim");
+      for (i = 0; i < all.length; i++){
+        if (all[i].getAttribute("data-street") === s) all[i].classList.add("on");
+        else all[i].classList.remove("on");
+      }
+    }
+    svg.addEventListener("mouseover", function(e){ var s = streetOf(e.target); if (s) highlight(s); });
+    svg.addEventListener("mouseleave", function(){ highlight(null); });
+
+    tabs.addEventListener("click", function(e){
+      var b = e.target;
+      while (b && b !== this && b.tagName !== "BUTTON") b = b.parentNode;
+      if (!b || b === this) return;
+      var want = b.getAttribute("data-view"), idx = -1, i;
+      for (i = 0; i < VIEWS.length; i++) if (VIEWS[i].k === want) idx = i;
+      if (idx < 0) return;
+      vi = idx;
+      var bs = this.querySelectorAll("button");
+      for (i = 0; i < bs.length; i++) bs[i].setAttribute("aria-pressed", bs[i] === b ? "true" : "false");
+      paint();
+    });
+
+    paint();
   });
 })();
