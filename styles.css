@@ -111,6 +111,10 @@
   .meeting .post{display:none}
   .meeting[data-phase="post"] .pre{display:none}
   .meeting[data-phase="post"] .post{display:block}
+  .meeting a{color:#fff;text-decoration:underline;text-underline-offset:2px}
+  .meeting a:hover{text-decoration-thickness:2px}
+  :root[data-theme="dark"] .meeting a{color:#12161D}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .meeting a{color:#12161D}}
   :root[data-theme="dark"] .meeting{color:#12161D}
   :root[data-theme="dark"] .meeting .dl{border-top-color:rgba(18,22,29,.3)}
   @media (prefers-color-scheme: dark){
@@ -409,3 +413,123 @@
 /* Skip link, for keyboard and screen-reader users. */
   .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:#fff;padding:10px 16px;z-index:10}
   .skip:focus{left:12px;top:12px}
+
+
+/* ==========================================================================
+   NETWORK MAP
+   Everything the schematic needs, scoped to .netmap so it cannot collide with
+   the rest of the guide. Markup is in index.html; data and behaviour are in
+   app.js. The colour ramp is a single-hue ordinal scale checked for monotone
+   lightness, step separation and contrast in both themes - do not hand-tweak
+   the five --v steps without re-checking them.
+   ========================================================================== */
+  .netmap{
+    --context:#8A929E;
+    --v1:#86b6ef; --v2:#5598e7; --v3:#2a78d6; --v4:#1c5cab; --v5:#0d366b;
+    --g-good:#0ca30c; --g-warn:#fab219; --g-serious:#ec835a; --g-crit:#d03b3b;
+  }
+  :root[data-theme="dark"] .netmap{
+    --context:#79828F;
+    --v1:#184f95; --v2:#256abf; --v3:#3987e5; --v4:#6da7ec; --v5:#b7d3f6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .netmap{
+      --context:#79828F;
+      --v1:#184f95; --v2:#256abf; --v3:#3987e5; --v4:#6da7ec; --v5:#b7d3f6;
+    }
+  }
+
+  /* --- the three-way toggle --- */
+  .netmap .nmviews{display:flex;flex-wrap:wrap;margin:0 0 14px;border:1px solid var(--rule);
+    background:var(--surface);box-shadow:var(--shadow)}
+  .netmap .nmviews button{flex:1 1 210px;min-width:0;text-align:left;background:none;border:0;
+    border-right:1px solid var(--rule-soft);padding:12px 16px;cursor:pointer;font-family:inherit;
+    transition:background .12s}
+  .netmap .nmviews button:last-child{border-right:0}
+  .netmap .nmviews button:hover{background:var(--band)}
+  .netmap .nmviews .t{display:block;font-family:Archivo,"Helvetica Neue",sans-serif;font-weight:700;
+    font-size:.97rem;letter-spacing:-.012em;color:var(--ink)}
+  .netmap .nmviews .s{display:block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:9px;
+    letter-spacing:.05em;color:var(--ink-3);margin-top:4px;line-height:1.5}
+  .netmap .nmviews button[aria-pressed="true"]{background:var(--accent)}
+  .netmap .nmviews button[aria-pressed="true"] .t,
+  .netmap .nmviews button[aria-pressed="true"] .s{color:#fff}
+  :root[data-theme="dark"] .netmap .nmviews button[aria-pressed="true"] .t,
+  :root[data-theme="dark"] .netmap .nmviews button[aria-pressed="true"] .s{color:#12161D}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .netmap .nmviews button[aria-pressed="true"] .t,
+    :root:not([data-theme="light"]) .netmap .nmviews button[aria-pressed="true"] .s{color:#12161D}
+  }
+
+  /* --- the figure. On a wide screen it breaks out of the 720px column,
+         because a map you have to scroll sideways is not a map. --- */
+  .netmap figure{margin:0;background:var(--surface);border:1px solid var(--rule);
+    padding:14px 12px 8px;box-shadow:var(--shadow);overflow-x:auto}
+  .netmap figure svg{display:block;width:100%;min-width:780px;height:auto}
+  @media (min-width:920px){
+    .netmap figure,.netmap .nmviews{width:calc(100vw - 48px);max-width:1060px;margin-left:50%;
+      transform:translateX(-50%)}
+  }
+  .netmap figcaption{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+    line-height:1.65;color:var(--ink-3);border-top:1px solid var(--rule-soft);margin-top:12px;
+    padding:11px 4px 6px}
+  .netmap .src{margin-top:14px}
+
+  /* --- map marks --- */
+  .netmap .nmseg line{fill:none;stroke-linecap:round}
+  .netmap .nmseg .base,.netmap .nmseg .top{
+    transition:opacity .13s,stroke-width .5s cubic-bezier(.4,0,.2,1),stroke .5s}
+  @media (prefers-reduced-motion:reduce){
+    .netmap .nmseg .base,.netmap .nmseg .top{transition:opacity .13s}
+  }
+  .netmap .nmseg .base{stroke:none;stroke-width:7}
+  .netmap .nmseg .top{stroke:none;stroke-width:7}
+  .netmap .nmseg.s-hollow .base{stroke:var(--rule);stroke-width:7}
+  .netmap .nmseg.s-hollow .top{stroke:var(--surface);stroke-width:3.5}
+  .netmap .nmseg.s-absent .top{stroke:var(--context);stroke-width:5;stroke-dasharray:2 7;opacity:.5}
+  .netmap .nmseg.s-out .top{stroke:var(--context);stroke-width:7}
+  /* volume is carried twice over: hue step and stroke width */
+  .netmap .nmseg.b1 .top{stroke:var(--v1);stroke-width:4}
+  .netmap .nmseg.b2 .top{stroke:var(--v2);stroke-width:7}
+  .netmap .nmseg.b3 .top{stroke:var(--v3);stroke-width:10.5}
+  .netmap .nmseg.b4 .top{stroke:var(--v4);stroke-width:14}
+  .netmap .nmseg.b5 .top{stroke:var(--v5);stroke-width:18}
+  .netmap .hit{stroke-width:26;stroke:transparent;fill:none}
+  .netmap .dim .nmseg:not(.on) .base,.netmap .dim .nmseg:not(.on) .top{opacity:.18}
+  .netmap .dim .lbl:not(.on){opacity:.28}
+
+  .netmap .stn{fill:var(--surface);stroke:var(--ink-2);stroke-width:2.4}
+  .netmap .stn.g-good{stroke:var(--g-good)} .netmap .stn.g-warn{stroke:var(--g-warn)}
+  .netmap .stn.g-serious{stroke:var(--g-serious)} .netmap .stn.g-crit{stroke:var(--g-crit)}
+  .netmap .stn.absent{stroke:var(--ink-3);stroke-dasharray:2.5 2.5}
+  .netmap .grade{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;font-weight:700;
+    fill:var(--ink);letter-spacing:.02em}
+  .netmap .delta{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:9.5px;font-weight:700;
+    letter-spacing:.03em}
+  .netmap .delta.up{fill:var(--g-serious)} .netmap .delta.dn{fill:var(--g-good)}
+  .netmap .rd-lbl{font-family:Archivo,"Helvetica Neue",sans-serif;font-size:13.5px;font-weight:700;
+    fill:var(--ink)}
+  .netmap .rd-sub{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:9px;fill:var(--ink-3);
+    letter-spacing:.07em}
+  .netmap .arw-head{fill:var(--context)}
+
+  /* --- legend --- */
+  .netmap .nmlegend{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;margin:14px 0 0;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:9.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-3)}
+  .netmap .nmlegend span{display:inline-flex;align-items:center;gap:6px}
+  .netmap .nmkey{width:22px;border-radius:4px;display:inline-block}
+  .netmap .nmkey.k1{background:var(--v1);height:3px} .netmap .nmkey.k2{background:var(--v2);height:5px}
+  .netmap .nmkey.k3{background:var(--v3);height:7px} .netmap .nmkey.k4{background:var(--v4);height:9px}
+  .netmap .nmkey.k5{background:var(--v5);height:12px}
+  .netmap .nmkey.kh{background:var(--surface);border:2px solid var(--rule);height:7px}
+  .netmap .nmkey.ko{background:var(--context);height:7px}
+  .netmap .nmkey.kd{background:repeating-linear-gradient(90deg,var(--context) 0 3px,transparent 3px 8px);
+    height:5px}
+  .netmap .nmsep{width:1px;height:14px;background:var(--rule-soft);display:inline-block}
+
+  @media print{
+    .netmap figure{width:auto;max-width:none;margin-left:0;transform:none;
+      border:1px solid #999;box-shadow:none;overflow:visible}
+    .netmap .nmviews{display:none}
+  }

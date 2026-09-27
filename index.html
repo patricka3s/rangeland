@@ -84,6 +84,265 @@
 </div>
 
 <!-- ==========================================================================
+     NETWORK MAP
+     Markup only. Styling is the ".netmap" block in styles.css; the traffic
+     figures and the tab behaviour are the "NETWORK MAP" block in app.js.
+     To change a number, edit app.js - not this file.
+     ========================================================================== -->
+<section class="netmap" id="netmap">
+  <h3>Every street, three futures</h3>
+  <p>The county published three traffic boards for this study: what these streets carry now, what they carry in 2050 if the Rangeland extension is not built, and what they carry if it is. Switch between them below. Colour and thickness are daily traffic; the letters are intersection grades; the percentages compare each view with the one to its left.</p>
+
+  <div class="nmviews" id="nm-views" role="group" aria-label="Which future to show">
+    <button type="button" data-view="today" aria-pressed="true">
+      <span class="t">Today</span>
+      <span class="s">county&#8217;s existing-traffic board &#183; 2023 counts</span>
+    </button>
+    <button type="button" data-view="notbuilt" aria-pressed="false">
+      <span class="t">2050 &#183; Rangeland extension not built</span>
+      <span class="s">county&#8217;s &#8220;no-build&#8221; &#183; everything else in the plan is built</span>
+    </button>
+    <button type="button" data-view="built" aria-pressed="false">
+      <span class="t">2050 &#183; Rangeland extension built</span>
+      <span class="s">county&#8217;s alternative A &#183; D and E forecast the same</span>
+    </button>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 1080 660" role="img" id="nm-map" aria-label="Schematic map of the Bexley street network. Four named roads form one intended corridor running diagonally from south-west to north-east: Rangeland Boulevard, Bud Bexley Parkway, Tower Road and Caliente Boulevard, from Gunn Highway and Cattle Gap Trail up to Ehren Cutoff. State Road 54 runs horizontally below the corridor and Ridge Road horizontally above it. Cross streets, from west to east, are Gunn Highway, Cattle Gap Trail, South Branch Boulevard, the Suncoast Parkway, Bexley Village Drive, Ballantrae Boulevard, Sunlake Boulevard and US 41. Each street is shaded by its published daily traffic in the selected view, left hollow where no figure has been published, and drawn as a faint dashed line where the road is not open to traffic in that view. Eleven intersections carry their level-of-service grade as a letter. The same figures are in the tables below the map.">
+
+      <!-- ===== RIDGE ROAD ===== -->
+      <g class="nmseg" data-street="ridge" data-seg="ridge-w">
+        <path class="arw-head" d="M138 90 L156 82.5 L156 97.5 Z"/>
+        <line class="base" x1="154" y1="90" x2="780" y2="90"/>
+        <line class="top"  x1="154" y1="90" x2="780" y2="90"/>
+        <line class="hit"  x1="154" y1="90" x2="780" y2="90"/>
+      </g>
+      <g class="nmseg" data-street="ridge" data-seg="ridge-p2">
+        <line class="base" x1="780" y1="90" x2="940" y2="90"/>
+        <line class="top"  x1="780" y1="90" x2="940" y2="90"/>
+        <line class="hit"  x1="780" y1="90" x2="940" y2="90"/>
+      </g>
+      <text class="rd-lbl lbl" data-street="ridge" x="166" y="74">Ridge Road</text>
+
+      <!-- ===== THE CORRIDOR, south-west to north-east ===== -->
+      <g class="nmseg" data-street="rangeland" data-seg="rangeland-w">
+        <line class="base" x1="80" y1="470" x2="130" y2="453"/>
+        <line class="top"  x1="80" y1="470" x2="130" y2="453"/>
+        <line class="hit"  x1="80" y1="470" x2="130" y2="453"/>
+      </g>
+      <g class="nmseg" data-street="rangeland" data-seg="rangeland-new">
+        <line class="base" x1="130" y1="453" x2="540" y2="313.4"/>
+        <line class="top"  x1="130" y1="453" x2="540" y2="313.4"/>
+        <line class="hit"  x1="130" y1="453" x2="540" y2="313.4"/>
+      </g>
+      <text class="rd-lbl lbl" data-street="rangeland" x="196" y="422" transform="rotate(-18.8 196 422)">Rangeland Blvd</text>
+
+      <g class="nmseg" data-street="budbexley" data-seg="budbexley-main">
+        <line class="base" x1="540" y1="313.4" x2="820" y2="218.4"/>
+        <line class="top"  x1="540" y1="313.4" x2="820" y2="218.4"/>
+        <line class="hit"  x1="540" y1="313.4" x2="820" y2="218.4"/>
+      </g>
+      <g class="nmseg" data-street="budbexley" data-seg="budbexley-gap">
+        <line class="base" x1="820" y1="218.4" x2="880" y2="198"/>
+        <line class="top"  x1="820" y1="218.4" x2="880" y2="198"/>
+        <line class="hit"  x1="820" y1="218.4" x2="880" y2="198"/>
+      </g>
+      <text class="rd-lbl lbl" data-street="budbexley" x="590" y="318" transform="rotate(-18.8 590 318)">Bud Bexley Pkwy</text>
+
+      <g class="nmseg" data-street="tower" data-seg="tower">
+        <line class="base" x1="880" y1="198" x2="940" y2="177.6"/>
+        <line class="top"  x1="880" y1="198" x2="940" y2="177.6"/>
+        <line class="hit"  x1="880" y1="198" x2="940" y2="177.6"/>
+      </g>
+      <text class="rd-sub lbl" data-street="tower" x="884" y="182" transform="rotate(-18.8 884 182)">Tower Rd</text>
+
+      <g class="nmseg" data-street="caliente" data-seg="caliente">
+        <line class="base" x1="940" y1="177.6" x2="1020" y2="150.4"/>
+        <line class="top"  x1="940" y1="177.6" x2="1020" y2="150.4"/>
+        <line class="hit"  x1="940" y1="177.6" x2="1020" y2="150.4"/>
+      </g>
+      <text class="rd-sub lbl" data-street="caliente" x="948" y="194" transform="rotate(-18.8 948 194)">Caliente Blvd</text>
+
+      <!-- ===== SR 54 ===== -->
+      <g class="nmseg" data-street="sr54" data-seg="sr54">
+        <line class="base" x1="60" y1="545" x2="1000" y2="545"/>
+        <line class="top"  x1="60" y1="545" x2="1000" y2="545"/>
+        <line class="hit"  x1="60" y1="545" x2="1000" y2="545"/>
+      </g>
+      <text class="rd-lbl lbl" data-street="sr54" x="120" y="604">State Road 54</text>
+
+      <!-- ===== CROSS STREETS, west to east ===== -->
+      <g class="nmseg" data-street="gunn" data-seg="gunn">
+        <line class="base" x1="80" y1="470" x2="80" y2="545"/>
+        <line class="top"  x1="80" y1="470" x2="80" y2="545"/>
+        <line class="hit"  x1="80" y1="470" x2="80" y2="545"/>
+      </g>
+      <text class="rd-sub lbl" data-street="gunn" x="64" y="486" text-anchor="end" transform="rotate(-90 64 486)">Gunn Hwy</text>
+
+      <g class="nmseg" data-street="cattlegap" data-seg="cattlegap">
+        <line class="base" x1="130" y1="418" x2="130" y2="490"/>
+        <line class="top"  x1="130" y1="418" x2="130" y2="490"/>
+        <line class="hit"  x1="130" y1="418" x2="130" y2="490"/>
+      </g>
+      <text class="rd-sub lbl" data-street="cattlegap" x="130" y="508" text-anchor="middle">Cattle Gap Trl</text>
+
+      <g class="nmseg" data-street="sbranch" data-seg="sbranch">
+        <line class="base" x1="320" y1="388.4" x2="320" y2="545"/>
+        <line class="top"  x1="320" y1="388.4" x2="320" y2="545"/>
+        <line class="hit"  x1="320" y1="388.4" x2="320" y2="545"/>
+      </g>
+      <text class="rd-sub lbl" data-street="sbranch" x="304" y="400" text-anchor="end" transform="rotate(-90 304 400)">S Branch Blvd</text>
+
+      <g class="nmseg" data-street="suncoast" data-seg="suncoast-n">
+        <line class="base" x1="400" y1="50" x2="400" y2="348"/>
+        <line class="top"  x1="400" y1="50" x2="400" y2="348"/>
+        <line class="hit"  x1="400" y1="50" x2="400" y2="348"/>
+      </g>
+      <g class="nmseg" data-street="suncoast" data-seg="suncoast-m">
+        <line class="base" x1="400" y1="374" x2="400" y2="545"/>
+        <line class="top"  x1="400" y1="374" x2="400" y2="545"/>
+        <line class="hit"  x1="400" y1="374" x2="400" y2="545"/>
+      </g>
+      <g class="nmseg" data-street="suncoast" data-seg="suncoast-s">
+        <line class="base" x1="400" y1="545" x2="400" y2="616"/>
+        <line class="top"  x1="400" y1="545" x2="400" y2="616"/>
+        <line class="hit"  x1="400" y1="545" x2="400" y2="616"/>
+      </g>
+      <text class="rd-sub lbl" data-street="suncoast" x="384" y="112" text-anchor="end" transform="rotate(-90 384 112)">Suncoast Pkwy</text>
+
+      <g class="nmseg" data-street="bexleyvillage" data-seg="bvd-sr54">
+        <line class="base" x1="540" y1="430" x2="540" y2="545"/>
+        <line class="top"  x1="540" y1="430" x2="540" y2="545"/>
+        <line class="hit"  x1="540" y1="430" x2="540" y2="545"/>
+      </g>
+      <g class="nmseg" data-street="bexleyvillage" data-seg="bvd-rndbt">
+        <line class="base" x1="540" y1="313.4" x2="540" y2="430"/>
+        <line class="top"  x1="540" y1="313.4" x2="540" y2="430"/>
+        <line class="hit"  x1="540" y1="313.4" x2="540" y2="430"/>
+      </g>
+      <g class="nmseg" data-street="bexleyvillage" data-seg="bvd-ne-lo">
+        <line class="base" x1="540" y1="313.4" x2="590" y2="201.7"/>
+        <line class="top"  x1="540" y1="313.4" x2="590" y2="201.7"/>
+        <line class="hit"  x1="540" y1="313.4" x2="590" y2="201.7"/>
+      </g>
+      <g class="nmseg" data-street="bexleyvillage" data-seg="bvd-ne-hi">
+        <line class="base" x1="590" y1="201.7" x2="640" y2="90"/>
+        <line class="top"  x1="590" y1="201.7" x2="640" y2="90"/>
+        <line class="hit"  x1="590" y1="201.7" x2="640" y2="90"/>
+      </g>
+      <text class="rd-sub lbl" data-street="bexleyvillage" x="524" y="372" text-anchor="end" transform="rotate(-90 524 372)">Bexley Village Dr</text>
+
+      <g class="nmseg" data-street="broadporch" data-seg="broadporch">
+        <line class="base" x1="540" y1="313.4" x2="455" y2="250"/>
+        <line class="top"  x1="540" y1="313.4" x2="455" y2="250"/>
+        <line class="hit"  x1="540" y1="313.4" x2="455" y2="250"/>
+      </g>
+      <text class="rd-sub lbl" data-street="broadporch" x="458" y="236">Broad Porch Run</text>
+
+      <g class="nmseg" data-street="ballantrae" data-seg="ballantrae-s">
+        <line class="base" x1="680" y1="265.6" x2="680" y2="545"/>
+        <line class="top"  x1="680" y1="265.6" x2="680" y2="545"/>
+        <line class="hit"  x1="680" y1="265.6" x2="680" y2="545"/>
+      </g>
+      <g class="nmseg" data-street="ballantrae" data-seg="ballantrae-n">
+        <line class="base" x1="680" y1="195" x2="680" y2="265.6"/>
+        <line class="top"  x1="680" y1="195" x2="680" y2="265.6"/>
+        <line class="hit"  x1="680" y1="195" x2="680" y2="265.6"/>
+      </g>
+      <text class="rd-sub lbl" data-street="ballantrae" x="664" y="344" text-anchor="end" transform="rotate(-90 664 344)">Ballantrae Blvd</text>
+
+      <g class="nmseg" data-street="sunlake" data-seg="sunlake-s">
+        <line class="base" x1="780" y1="232" x2="780" y2="545"/>
+        <line class="top"  x1="780" y1="232" x2="780" y2="545"/>
+        <line class="hit"  x1="780" y1="232" x2="780" y2="545"/>
+      </g>
+      <g class="nmseg" data-street="sunlake" data-seg="sunlake-n">
+        <line class="base" x1="780" y1="90" x2="780" y2="232"/>
+        <line class="top"  x1="780" y1="90" x2="780" y2="232"/>
+        <line class="hit"  x1="780" y1="90" x2="780" y2="232"/>
+      </g>
+      <text class="rd-sub lbl" data-street="sunlake" x="764" y="256" text-anchor="end" transform="rotate(-90 764 256)">Sunlake Blvd</text>
+
+      <g class="nmseg" data-street="us41" data-seg="us41">
+        <line class="base" x1="940" y1="90" x2="940" y2="545"/>
+        <line class="top"  x1="940" y1="90" x2="940" y2="545"/>
+        <line class="hit"  x1="940" y1="90" x2="940" y2="545"/>
+      </g>
+      <text class="rd-sub lbl" data-street="us41" x="924" y="268" text-anchor="end" transform="rotate(-90 924 268)">US 41</text>
+
+      <!-- ===== STATIONS + GRADES (letters written by script) ===== -->
+      <g id="nm-stations">
+        <circle class="stn" data-int="rg-gunn"    cx="80"   cy="470"   r="6"/>
+        <circle class="stn" data-int="rg-cattle"  cx="130"  cy="453"   r="10"/>
+        <circle class="stn"                       cx="130"  cy="453"   r="4.5"/>
+        <circle class="stn"                       cx="320"  cy="388.4" r="6"/>
+        <circle class="stn"                       cx="400"  cy="90"    r="6"/>
+        <circle class="stn"                       cx="400"  cy="545"   r="6"/>
+        <circle class="stn" data-int="bvd-rndbt"  cx="540"  cy="313.4" r="10"/>
+        <circle class="stn"                       cx="540"  cy="313.4" r="4.5"/>
+        <circle class="stn" data-int="bb-ballan"  cx="680"  cy="265.6" r="6"/>
+        <circle class="stn"                       cx="780"  cy="232"   r="6"/>
+        <circle class="stn"                       cx="780"  cy="90"    r="6"/>
+        <circle class="stn" id="nm-stn-us41ridge"    cx="940"  cy="90"    r="6"/>
+        <circle class="stn"                       cx="940"  cy="177.6" r="6"/>
+        <circle class="stn"                       cx="1020" cy="150.4" r="6"/>
+        <circle class="stn" data-int="sr-gunn"    cx="80"   cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-sbranch" cx="320"  cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-sunc-w"  cx="378"  cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-sunc-e"  cx="422"  cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-bvd"     cx="540"  cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-ballan"  cx="680"  cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-sunlake" cx="780"  cy="545"   r="6"/>
+        <circle class="stn"                       cx="940"  cy="545"   r="6"/>
+      </g>
+      <g id="nm-deltas">
+        <text class="delta lbl" data-street="sr54"          data-seg="sr54"            x="905" y="528" text-anchor="end"></text>
+        <text class="delta lbl" data-street="gunn"          data-seg="gunn"            x="96"  y="530"></text>
+        <text class="delta lbl" data-street="sbranch"       data-seg="sbranch"         x="336" y="470"></text>
+        <text class="delta lbl" data-street="bexleyvillage" data-seg="bvd-sr54"        x="556" y="500"></text>
+        <text class="delta lbl" data-street="bexleyvillage" data-seg="bvd-rndbt"       x="556" y="400"></text>
+        <text class="delta lbl" data-street="bexleyvillage" data-seg="bvd-ne-lo"       x="600" y="250"></text>
+        <text class="delta lbl" data-street="broadporch"    data-seg="broadporch"      x="458" y="222"></text>
+        <text class="delta lbl" data-street="budbexley"     data-seg="budbexley-main"  x="716" y="232"></text>
+        <text class="delta lbl" data-street="ballantrae"    data-seg="ballantrae-n"    x="696" y="210"></text>
+        <text class="delta lbl" data-street="ballantrae"    data-seg="ballantrae-s"    x="696" y="420"></text>
+      </g>
+      <g id="nm-grades">
+        <text class="grade" data-int="rg-gunn"    x="80"  y="450" text-anchor="middle"></text>
+        <text class="grade" data-int="rg-cattle"  x="152" y="434"></text>
+        <text class="grade" data-int="bvd-rndbt"  x="524" y="338" text-anchor="end"></text>
+        <text class="grade" data-int="bb-ballan"  x="698" y="250"></text>
+        <text class="grade" data-int="sr-gunn"    x="80"  y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-sbranch" x="320" y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-sunc-w"  x="378" y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-sunc-e"  x="422" y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-bvd"     x="540" y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-ballan"  x="680" y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-sunlake" x="780" y="574" text-anchor="middle"></text>
+      </g>
+    </svg>
+
+    <div class="nmlegend">
+      <span><i class="nmkey k1"></i>under 5k</span>
+      <span><i class="nmkey k2"></i>5&#8211;15k</span>
+      <span><i class="nmkey k3"></i>15&#8211;25k</span>
+      <span><i class="nmkey k4"></i>25&#8211;40k</span>
+      <span><i class="nmkey k5"></i>40k+ a day</span>
+      <i class="nmsep"></i>
+      <span><i class="nmkey kh"></i>no figure for this year</span>
+      <span><i class="nmkey ko"></i>not numbered, any year</span>
+      <span><i class="nmkey kd"></i>not open in this view</span>
+      <i class="nmsep"></i>
+      <span>&#177;% vs the view to the left, where it moves 10% or 2,000 a day</span>
+    </div>
+
+    <figcaption id="nm-cap"></figcaption>
+  </figure>
+  <p class="src">County traffic boards shown at Public Workshop #3, 24 September 2026, read from the boards themselves. Seven streets are drawn in grey because the study never puts a number on them; their figures, where any exist, are in section 5.</p>
+</section>
+
+<!-- ==========================================================================
      CORRECTIONS NOTICE
      The red-edged box near the top.
      ========================================================================== -->
@@ -199,7 +458,7 @@
   <p class="sn">05 &nbsp;·&nbsp; Traffic</p>
   <h2>Population growth drives more traffic; the question is where it goes.</h2>
   <div class="stats">
-    <div class="stat"><div class="v hot">10<span style="font-size:.55em"> / 11</span></div><div class="k">Intersections worse in 2050 than today if nothing is built. Nine of eleven with the road</div></div>
+    <div class="stat"><div class="v hot">10<span style="font-size:.55em"> / 11</span></div><div class="k">Intersections worse in 2050 than today &#8212; the same ten whether or not the road is built</div></div>
     <div class="stat"><div class="v good">&#8722;10,000</div><div class="k">Fewer vehicles on Bexley Village Dr toward SR 54 compared to the no-build option</div></div>
     <div class="stat"><div class="v acc">6 &#8594; 3</div><div class="k">Intersections at grade F: six without the road, three with it</div></div>
   </div>
@@ -213,7 +472,7 @@
     <div class="lrow"><span class="lnm">SR 54 at Suncoast ramps (east)</span><span class="grades"><span class="g now">C</span><span class="g nob">F</span><span class="g bld">D</span></span></div>
     <div class="lrow"><span class="lnm">SR 54 at Suncoast ramps (west)</span><span class="grades"><span class="g now">B</span><span class="g nob">E</span><span class="g bld">D</span></span></div>
     <div class="lrow"><span class="lnm">SR 54 at S Branch Blvd</span><span class="grades"><span class="g now">C</span><span class="g nob">E</span><span class="g bld">D</span></span></div>
-    <div class="lrow"><span class="lnm">SR 54 at Ballantrae Blvd</span><span class="grades"><span class="g now">D</span><span class="g nob">E</span><span class="g bld">D</span></span></div>
+    <div class="lrow"><span class="lnm">SR 54 at Ballantrae Blvd</span><span class="grades"><span class="g now">C</span><span class="g nob">E</span><span class="g bld">D</span></span></div>
     <div class="lrow"><span class="lnm">Bud Bexley Pkwy at Ballantrae Blvd</span><span class="grades"><span class="g now">C</span><span class="g nob">D</span><span class="g bld">D</span></span></div>
     <div class="lrow"><span class="lnm">SR 54 at Bexley Village Dr</span><span class="grades"><span class="g now">D</span><span class="g nob">F</span><span class="g bld">F</span></span></div>
     <div class="lrow"><span class="lnm">SR 54 at Gunn Hwy</span><span class="grades"><span class="g now">D</span><span class="g nob">F</span><span class="g bld">F</span></span></div>
@@ -223,7 +482,7 @@
     </div>
   </details>
   <p>What the project changes is <em>where</em> the traffic goes. It pulls about ten thousand vehicles a day off Bexley Village Drive toward SR 54 but adds 18,000 onto the new road.</p>
-  <p class="foot">County traffic boards, Workshop #2, 30 April 2025 &#183; no-build from the Project Traffic Analysis Report, supplied September 2026 &#183; evening peak</p>
+  <p class="foot">County traffic boards shown at Public Workshop #3, 24 September 2026 &#8212; existing (2023 counts), 2050 no-build and 2050 build &#183; evening peak</p>
 </div>
 
 <div class="slide">
@@ -568,7 +827,7 @@
       <tr><td>Rangeland Blvd (the new road)</td><td class="n now">—</td><td class="n nob">—</td><td class="n bld">18,000</td><td class="n dif up">new road</td></tr>
     </tbody>
   </table></div>
-  <p class="src" style="margin:0 0 20px">Today and 2050 Alternative A: county traffic boards, Public Workshop #2, 30 April 2025. 2050 no-build: Project Traffic Analysis Report, figure 4.1, supplied by the county September 2026. In the no-build there is no new road &#8212; the existing stub east of Gunn Highway carries about 2,000 a day. A, D and E have the same traffic forecasts.</p>
+  <p class="src" style="margin:0 0 20px">All three columns are read from the county's traffic boards shown at Public Workshop #3 on 24 September 2026: existing traffic (2023 counts), 2050 no-build, and 2050 build covering Alternatives A, D and E together. In the no-build there is no new road &#8212; the existing stub east of Gunn Highway carries about 2,000 a day.</p>
 
   <p><strong>Traffic roughly triples on these streets either way.</strong> Bexley Village Drive by the roundabout goes from 6,100 today to 23,500 in 2050 <em>with no project at all</em>. Nearly all of the increase this page has been describing happens whether or not Rangeland Boulevard is extended. The county said as much.</p>
   <p>Bexley Village Drive toward SR 54 carries 32,500 a day in the no-build and 22,500 with the road built &#8212; ten thousand fewer vehicles. Ballantrae drops seven thousand. What the project does is move that traffic onto the new road. That is essentially the case the county is making for building it.</p>
@@ -581,12 +840,12 @@
     <p style="margin-bottom:0">The county grades each intersection twice, once for the morning peak and once for the evening, and usually writes them together as one letter with the other in parentheses — so "D (F)" means D in the morning and F in the evening.</p>
   </div>
 
-  <p>Every intersection in the study area is graded with a Level of Service. Eleven appear in all three cases. Of those, <strong>ten are worse in 2050 than they are today if nothing is built, and nine are worse with the road.</strong> The Cattle Gap Trail roundabout holds its grade either way; SR 54 at Ballantrae holds its grade only in the build case.</p>
+  <p>Every intersection in the study area is graded with a Level of Service. Eleven appear in all three cases. Of those, <strong>ten are worse in 2050 than they are today, whether or not the road is built.</strong> Only the Cattle Gap Trail roundabout holds its grade, and it holds either way.</p>
   <p>Set the two 2050 cases against each other and it reads differently again. <strong>Alternative A is better than the no-build at six of the eleven, the same at five, and worse at none.</strong> Two of those six are large: Rangeland Boulevard at Gunn Highway is F in the evening peak if nothing is built and C if this is, and the Bexley Village Drive roundabout is F without the project and D with it.</p>
 
   <figure>
     <!-- chart: SVG below, skip unless a value changed -->
-    <svg viewBox="0 0 920 414" role="img" aria-label="Chart comparing evening peak level of service at eleven intersections in three cases: today, the 2050 no-build forecast, and the 2050 Alternative A forecast. Ten of the eleven are worse in 2050 than today if nothing is built, and nine are worse with the road. Alternative A is better than the no-build at six intersections and worse at none. The largest differences are Rangeland Boulevard at Gunn Highway, F in the no-build and C with the project, and the Bexley Village Drive roundabout, F in the no-build and D with the project.">
+    <svg viewBox="0 0 920 414" role="img" aria-label="Chart comparing evening peak level of service at eleven intersections in three cases: today, the 2050 no-build forecast, and the 2050 Alternative A forecast. Ten of the eleven are worse in 2050 than today, whether or not the road is built. Alternative A is better than the no-build at six intersections and worse at none. The largest differences are Rangeland Boulevard at Gunn Highway, F in the no-build and C with the project, and the Bexley Village Drive roundabout, F in the no-build and D with the project.">
       <g class="l-grid">
 <line x1="400" y1="52" x2="400" y2="368"/>
 <line x1="495" y1="52" x2="495" y2="368"/>
@@ -638,12 +897,12 @@
         <circle class="l-nob" cx="780.0" cy="184" r="10"/><text class="l-letter" x="780.0" y="188" text-anchor="middle">E</text>
         <circle class="l-bld" cx="685.0" cy="184" r="10"/><text class="l-letter" x="685.0" y="188" text-anchor="middle">D</text>
         </g>
-      <g class="l-row"><title>SR 54 at Ballantrae Blvd: D today, E in 2050 with no project, D in 2050 with Alternative A</title>
+      <g class="l-row"><title>SR 54 at Ballantrae Blvd: C today, E in 2050 with no project, D in 2050 with Alternative A</title>
         <text class="l-name" x="380" y="216" text-anchor="end">SR 54 at Ballantrae Blvd</text>
-        <line class="l-conn" x1="674.5" y1="212" x2="780.0" y2="212"/>
-        <circle class="l-now" cx="674.5" cy="212" r="10"/><text class="l-letter" x="674.5" y="216" text-anchor="middle">D</text>
+        <line class="l-conn" x1="590.0" y1="212" x2="780.0" y2="212"/>
+        <circle class="l-now" cx="590.0" cy="212" r="10"/><text class="l-letter" x="590.0" y="216" text-anchor="middle">C</text>
         <circle class="l-nob" cx="780.0" cy="212" r="10"/><text class="l-letter" x="780.0" y="216" text-anchor="middle">E</text>
-        <circle class="l-bld" cx="695.5" cy="212" r="10"/><text class="l-letter" x="695.5" y="216" text-anchor="middle">D</text>
+        <circle class="l-bld" cx="685.0" cy="212" r="10"/><text class="l-letter" x="685.0" y="216" text-anchor="middle">D</text>
         </g>
       <g class="l-row"><title>Bud Bexley Pkwy at Ballantrae Blvd: C today, D in 2050 with no project, D in 2050 with Alternative A</title>
         <text class="l-name" x="380" y="244" text-anchor="end">Bud Bexley Pkwy at Ballantrae Blvd</text>
@@ -687,7 +946,7 @@
       </g>
     </svg>
     <!-- end chart -->
-    <figcaption>Evening peak level of service. Alternative A now follows the county&#8217;s 24 September 2026 workshop board, which supersedes the April 2025 boards. No-build from figure 5.1 of the Project Traffic Analysis Report. The county publishes each grade as a morning and evening pair; only the evening is shown here, and corrections 2 and 3 explain where that caused an error. The grade letter is printed inside each marker, so the chart reads without relying on colour.</figcaption>
+    <figcaption>Evening peak level of service. All three columns now follow the county&#8217;s 24 September 2026 workshop boards, read from the boards themselves; they supersede the April 2025 boards and, where they differ, the county&#8217;s 18 September letter. The county publishes each grade as a morning and evening pair; only the evening is shown here, and corrections 2 and 3 explain where that caused an error. The grade letter is printed inside each marker, so the chart reads without relying on colour.</figcaption>
   </figure>
 
   <p>Three intersections sit at grade F with the project. <strong>Six sit at F without it.</strong> Grade F means the intersection cannot clear the vehicles arriving during the peak &#8212; the queue builds faster than it empties &#8212; this detail is important.</p>
@@ -951,8 +1210,8 @@
     <div class="note">
       <h4>Level of service at SR 54 and Ballantrae Boulevard</h4>
       <p><span class="lab">Was</span>C in 2023 to D in 2050. On 18 September I changed it to <strong>D to E</strong>, because the county wrote that "the SR 54 at Ballantrae LOS should go from LOS D to LOS E."</p>
-      <p><span class="lab">Correct</span>The 2023 value is <strong>D</strong>, as the county said. The 2050 value is back to <strong>D</strong>, because the county's own workshop board of 24 September shows <strong>D (D)</strong> &#8212; D in the morning and D in the evening. Unlike the ramps above, this one is not a morning-versus-evening mix-up: neither peak on their board is E.</p>
-      <p><span class="lab">Unresolved</span>So the county's letter of 18 September and the county's board dated 24 September disagree about this intersection. The page follows the board, because it is the more recent document and the one that will be on display at the workshop. I have asked which is right and will publish the answer here.</p>
+      <p><span class="lab">Correct</span>Back to <strong>C in 2023 and D in 2050</strong>, which is where it started. I have now read all three of the county's workshop boards directly: the existing-traffic board gives <strong>C (C)</strong> and the build board gives <strong>D (D)</strong>. Neither peak on either board is E.</p>
+      <p><span class="lab">Unresolved</span>So the county's letter of 18 September and the county's boards dated 24 September disagree about this intersection at <em>both</em> ends, not just one. The page follows the boards, because they are the more recent documents and the ones that were on display at the workshop. I have asked which is right and will publish the answer here.</p>
     </div>
 
     <div class="note">
