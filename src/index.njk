@@ -73,13 +73,18 @@ trafficRows:
 <!-- ==========================================================================
      EDITING THIS PAGE
 
-     All the wording is in this file. Styling is in styles.css; behaviour is in
-     app.js. You should not need to open either one to change what the page says.
+     All the wording is in this file (src/index.njk). Figures taken from the
+     county's documents are not: they live in data/facts/rangeland.yaml and are
+     pulled in by "fact" tags when the site is built, so a figure changed
+     there changes everywhere it appears. Styling is in src/styles.css;
+     behaviour is in src/app.js.njk. The README explains the whole layout.
 
      The page has two reading modes, and some wording exists twice:
        - the DECK  - div class "hlt", id "deck"  - is the Highlights view
        - the GUIDE - div id "doc", class "det"   - is the Full detail view
-     If you change a figure in one, check whether the other repeats it.
+     If you reword something in one, check whether the other repeats it.
+     Numbers written out in words ("ten thousand", "six of the eleven") are
+     not linked to the facts file - check those by hand when a figure changes.
 
      Regions below are fenced with banner comments like this one. The charts are
      SVG and are fenced separately - skip past them unless a number changed.
@@ -118,9 +123,10 @@ trafficRows:
 
 <!-- ==========================================================================
      NETWORK MAP
-     Markup only. Styling is the ".netmap" block in styles.css; the traffic
-     figures and the tab behaviour are the "NETWORK MAP" block in app.js.
-     To change a number, edit app.js - not this file.
+     Markup only. Styling is the ".netmap" block in src/styles.css; the tab
+     behaviour is the "NETWORK MAP" block in src/app.js.njk. The traffic
+     figures and grades come from data/facts/rangeland.yaml - to change a
+     number, edit it there, not here or in app.js.
      ========================================================================== -->
 <section class="netmap" id="netmap">
   <p>The county published several traffic boards for this study: what these streets carry now, what they carry in 2050 if the Rangeland extension is not built, and what they carry if it is. Switch between them below. Colour and thickness are daily traffic; the letters are intersection grades; the percentages compare each view with the one to its left.</p>
@@ -382,10 +388,6 @@ trafficRows:
 </section>
 
 <!-- ==========================================================================
-     CORRECTIONS NOTICE
-     The red-edged box near the top.
-     ========================================================================== -->
-<!-- ==========================================================================
      UPDATES - "What's happened lately"
      Two lists: "Still ahead" then "Already happened" (newest first).
      ========================================================================== -->
@@ -425,7 +427,7 @@ trafficRows:
 
 <!-- ==========================================================================
      DECK - the Highlights view
-     Nine slides. Each opens with <p class="sn">NN - Title</p>.
+     Eight slides. Each opens with <p class="sn">NN - Title</p>.
      ========================================================================== -->
 <div class="hlt" id="deck">
 
@@ -863,7 +865,10 @@ trafficRows:
   <p>Set the two 2050 cases against each other and it reads differently again. <strong>Alternative A is better than the no-build at six of the eleven, the same at five, and worse at none.</strong> Two of those six are large: Rangeland Boulevard at Gunn Highway is F in the evening peak if nothing is built and C if this is, and the Bexley Village Drive roundabout is F without the project and D with it.</p>
 
   <figure>
-    <!-- chart: SVG below, skip unless a value changed -->
+    <!-- chart: SVG below. The eleven rows are drawn from the grades in
+         data/facts/rangeland.yaml (the "losChartRow" tag); their order and
+         names are at the top of this file. The aria-label below describes the
+         chart in words and does not update itself - check it if a grade changes. -->
     <svg viewBox="0 0 920 414" role="img" aria-label="Chart comparing evening peak level of service at eleven intersections in three cases: today, the 2050 no-build forecast, and the 2050 Alternative A forecast. Ten of the eleven are worse in 2050 than today, whether or not the road is built. Alternative A is better than the no-build at six intersections and worse at none. The largest differences are Rangeland Boulevard at Gunn Highway, F in the no-build and C with the project, and the Bexley Village Drive roundabout, F in the no-build and D with the project.">
       <g class="l-grid">
 <line x1="400" y1="52" x2="400" y2="368"/>
