@@ -39,7 +39,9 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   project; every fact id starts with `<project-id>.`
 - `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms (not yet
   shown on the site). `data/site.yaml` — the error-report form's address.
-- `src/index.njk` — the Rangeland guide. `src/facts.njk` — Figures and sources page
+- `src/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
+  card (a short card until more is published). `src/_includes/project-bar.njk` — the
+  project links at the top of every page. `src/facts.njk` — Figures and sources page
   (all projects, built entirely from data). `src/app.js.njk`, `src/styles.css`.
 - `eleventy.config.js` — loads and validates the data; defines the shortcodes.
 
@@ -70,7 +72,8 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
   (a newer document repeating the same value isn't listed there). Keep change styling neutral: no
   red/green for up/down — a figure rising is not good or bad.
 - Units in use: `vehicles per day`, `grade`, `rating` (the matrix's None / Low / Medium /
-  High), `USD million`, `USD per acre`, `acres`, `parcels`, `miles`, `date`.
+  High), `USD million`, `USD per acre`, `acres`, `parcels`, `miles`, `date`, `feet`, `lanes`,
+  `mph`, `classification` and `phase` (both shown as plain text).
   Ranges are `value: {low: …, high: …}`.
 - Level-of-service grades are the **evening peak**. The county publishes "AM (PM)"
   pairs — never drop a bare letter from a letter or email into a PM field (see

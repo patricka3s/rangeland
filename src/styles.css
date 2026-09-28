@@ -674,3 +674,19 @@
     .fsearch,.frep{display:none !important}
     .fitem{page-break-inside:avoid}
   }
+
+/* ==========================================================================
+   PROJECT BAR - links every project page, at the top of each page.
+   ========================================================================== */
+  .projbar{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding:12px 0;border-bottom:1px solid var(--rule);
+    font-family:Archivo,sans-serif;font-size:.9rem}
+  .projbar .pb-lab{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-3)}
+  .projbar a{color:var(--ink-2);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:1px}
+  .projbar a:hover{color:var(--accent)}
+  .projbar a[aria-current="page"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+  .projbar + header{padding-top:28px}
+  .cardtag{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+  .notyet{color:var(--ink-2);font-style:italic}
+  @media print{ .projbar{display:none} }

@@ -185,3 +185,24 @@
   publisher: Pasco County
   date: '2026-09-09'
   url: https://pascocofl.portal.civicclerk.com/event/1935/agenda
+
+# ---- Sunlake Blvd corridor
+
+- id: mpo-lopp-2026
+  title: Pasco MPO 2026 Multimodal Transportation List of Project Priorities (LOPP)
+  publisher: Pasco MPO
+  date: '2026-06-11'
+  url: https://www.pascocountyfl.gov/Documents/Services/MPO/Plans/Update/LOPP/Pasco%20MPO%202026%20List%20of%20Project%20Priorities_%20ADA.pdf
+
+- id: pasco-bcc-2026-06-02
+  title: Board of County Commissioners meeting, 2 June 2026 - consent item C18 (PU26-0018), its agenda memorandum and the annotated minutes
+  publisher: Pasco County
+  date: '2026-06-02'
+  url: https://pascocofl.portal.civicclerk.com/event/1896/agenda
+
+- id: pasco-rsq-bw-26-019
+  title: 'Request for Statement of Qualifications RSQ-BW-26-019: Design of Sunlake Boulevard from Center Village Drive to South of Appenzeller Boulevard'
+  publisher: Pasco County Purchasing Department
+  date: '2025-12-18'
+  url: https://pascocofl.portal.civicclerk.com/event/1896/agenda
+  note: Attached to consent item C18 on the 2 June 2026 Commission agenda (attachment "PU26-0018 - RSQ-BW-26-019 Solicitation").

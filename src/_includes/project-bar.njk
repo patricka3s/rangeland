@@ -1,0 +1,8 @@
+{#- The bar of projects at the top of every page. Set "root" ("" on the home
+    page, "../" one folder down) and "current" (the page's id) before including. -#}
+<nav class="projbar" aria-label="Projects">
+  <span class="pb-lab">Projects</span>
+  <a href="{{ root or './' }}"{% if current == "rangeland" %} aria-current="page"{% endif %}>Rangeland Blvd corridor</a>
+  <a href="{{ root }}sunlake/"{% if current == "sunlake" %} aria-current="page"{% endif %}>Sunlake Blvd corridor</a>
+  <a href="{{ root }}facts/"{% if current == "facts" %} aria-current="page"{% endif %}>All figures and sources</a>
+</nav>

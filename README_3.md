@@ -18,6 +18,8 @@ figure on it is stored once, cites the document it came from, and can be checked
 | `data/site.yaml` | Site settings: the error-report form's address. |
 | `data/definitions.yaml` | Plain-language definitions of the terms the site uses. Not yet shown as a glossary. |
 | `src/index.njk` | The page. All the wording lives here; figures are pulled in from the facts file. |
+| `src/sunlake/index.njk` | The **Sunlake Blvd corridor** card at `/sunlake/`: the three pieces of the corridor, the planned road, the process and funding, with a plain "not yet published" wherever nothing is. |
+| `src/_includes/project-bar.njk` | The project links at the top of every page. Add a line here when a project gets a page. |
 | `src/facts.njk` | The **Figures and sources** page (`/facts/`): every fact, grouped, with its source and a report link. Built entirely from the data files. |
 | `src/_includes/shared-head.njk` | Head tags both pages share: icon, fonts, stylesheet. |
 | `src/app.js.njk` | Page behaviour: the reading-mode toggle, the meeting box, and the network map (whose figures also come from the facts file). |

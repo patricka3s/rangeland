@@ -24,6 +24,8 @@ const TOPICS = {
   matrix: "Alternatives matrix",
   "length-miles": "The project",
   funding: "Funding (county capital improvement plan)",
+  design: "Road design",
+  schedule: "Schedule and process",
   related: "Related studies",
 };
 
@@ -179,7 +181,7 @@ export default function (eleventyConfig) {
     if (f.unit.startsWith("USD ")) return d + f.unit.slice(3);
     if (f.unit === "grade") return "Grade " + d;
     if (f.unit === "rating") return d + " (rating)";
-    if (f.unit === "date") return d;
+    if (f.unit === "date" || f.unit === "classification" || f.unit === "phase") return d;
     return d + " " + f.unit;
   }
 
@@ -254,7 +256,9 @@ export default function (eleventyConfig) {
 
   // {% factData %} writes every fact, with its source, into the page as JSON,
   // so the details box can show them without another download.
-  eleventyConfig.addShortcode("factData", () => {
+  eleventyConfig.addShortcode("factData", function () {
+    // how far this page sits below the site root, so links to facts/ work from any folder
+    const depth = Math.max(0, ((this.page && this.page.url) || "/").split("/").length - 2);
     const out = {};
     for (const f of data.facts) {
       const src = data.sourceById[f.source];
@@ -266,7 +270,7 @@ export default function (eleventyConfig) {
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
       };
     }
-    const json = JSON.stringify({ facts: out }).replace(/</g, "\\u003c");
+    const json = JSON.stringify({ root: "../".repeat(depth), facts: out }).replace(/</g, "\\u003c");
     return `<script type="application/json" id="fact-data">${json}</script>`;
   });
 
