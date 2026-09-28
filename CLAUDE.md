@@ -78,18 +78,20 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
 
 ## Adding a project
 
-1. Read the project's documents first (county project page, workshop boards,
-   matrix, LRTP entry). Add each to `data/sources.yaml`.
-2. Add the project to `data/projects.yaml` and create `data/facts/<id>.yaml` using
-   the same kinds and scenarios as Rangeland wherever the documents support them.
-3. Run `npm run build`; the facts appear on the Figures and sources page
-   automatically.
-4. **The first time a second project gets its own guide page, stop and propose
-   the site structure to Patrick before building it** — the Rangeland guide
-   currently lives at the site root, so a landing page and per-project URLs
-   (e.g. `/rangeland/`, `/bud-bexley/`) need deciding, along with keeping old links
-   working. Don't choose this alone.
-5. Present a project's page with the same sections and questions as the others.
+**Use the `new-project` skill** (`.claude/skills/new-project/SKILL.md`), which has
+the full step-by-step process, where to search, and the two checkpoints where
+Patrick decides. In short:
+
+1. Read the project's documents first and report to Patrick what exists before
+   writing anything (checkpoint 1).
+2. Register sources, add the project and its facts using the same kinds and
+   scenarios as Rangeland; Patrick spot-checks the facts (checkpoint 2).
+3. Build the page at `/<project-id>/` with the standard sections, in the standard
+   order - sections with nothing published say so rather than disappearing.
+4. Site structure (decided with Patrick, 28 Sep 2026): new projects at
+   `/<project-id>/` with a project bar on every page; after 8 Oct 2026 the
+   Rangeland guide moves to `/rangeland/`, the home page becomes a projects page,
+   and old `/#section` links are forwarded.
 
 ## Workflow
 
