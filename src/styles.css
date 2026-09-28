@@ -664,7 +664,6 @@
   .cfrom{color:var(--ink-3)} .carrow{color:var(--accent);margin:0 2px}
   .cwas,.cnote{display:block;font-size:.8rem;color:var(--ink-3)}
   .cnote{color:var(--ink-2);border-left:3px solid var(--rule);padding-left:8px;margin-top:4px}
-  .clist li.csame .cmove{color:var(--ink-2)}
   .factpop .fall{display:inline-block;margin-left:14px;font-size:.85rem;color:var(--ink-3)}
 
   @media (max-width:560px){

@@ -29,23 +29,17 @@ eleventyExcludeFromCollections: true
 {% if changeGroups.length %}
 <section class="fchanges" id="changes">
   <h2><span>What&#8217;s changed</span></h2>
-  <p>When a newer document gives a figure for something an earlier one already covered, both are kept. The newer figure is listed below with its history; the older one isn&#8217;t deleted. Newest first.</p>
+  <p>When a newer document gives a different figure for something an earlier one already covered, both are kept. The newer figure is listed below with its history; the older one isn&#8217;t deleted. Newest first.</p>
   {% for g in changeGroups %}
   <h3>{{ g.when }} &#183; {% if g.src.url %}<a href="{{ g.src.url }}" rel="noopener" target="_blank">{{ g.src.title }}</a>{% else %}{{ g.src.title }}{% endif %}</h3>
   <ul class="clist">
-    {% for c in g.items %}{% if not c.same %}
+    {% for c in g.items %}
     <li><a href="#{{ c.id }}">{{ c.statement }}</a>
       <span class="cmove"><span class="cfrom">{{ c.from }}</span> <span class="carrow" aria-label="became">&#8594;</span> <strong>{{ c.to }}</strong></span>
       <span class="cwas">earlier figure from {{ c.fromAsOf }}</span>
       {% if c.note %}<span class="cnote">{{ c.note }}</span>{% endif %}
     </li>
-    {% endif %}{% endfor %}
-    {% for c in g.items %}{% if c.same %}
-    <li class="csame"><a href="#{{ c.id }}">{{ c.statement }}</a>
-      <span class="cmove">unchanged at <strong>{{ c.to }}</strong></span>
-      <span class="cwas">same as {{ c.fromAsOf }}</span>
-    </li>
-    {% endif %}{% endfor %}
+    {% endfor %}
   </ul>
   {% endfor %}
 </section>

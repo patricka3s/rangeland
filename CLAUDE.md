@@ -64,7 +64,8 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
   one's `status: superseded` — the build checks both. Never edit the old value.
   Add a `change_note` if the two aren't measured the same way. The Figures and
   sources page then shows the newer figure with a "Revised" (or "Reconfirmed")
-  history and lists it under "What's changed". Keep change styling neutral: no
+  history, and lists it under "What's changed" if the value actually changed
+  (a newer document repeating the same value isn't listed there). Keep change styling neutral: no
   red/green for up/down — a figure rising is not good or bad.
 - Units in use: `vehicles per day`, `grade`, `rating` (the matrix's None / Low / Medium /
   High), `USD million`, `USD per acre`, `acres`, `parcels`, `miles`.
