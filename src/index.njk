@@ -1,3 +1,36 @@
+---
+# Page layout data. The FIGURES live in data/facts/rangeland.yaml; this only
+# sets the order rows appear in and the name each row is shown under.
+#   [fact key, name on the page]
+losRows:
+  - [rg-gunn,    Rangeland Blvd at Gunn Hwy]
+  - [bvd-rndbt,  Bexley Village Dr roundabout]
+  - [sr-sunc-e,  SR 54 at Suncoast ramps (east)]
+  - [sr-sunc-w,  SR 54 at Suncoast ramps (west)]
+  - [sr-sbranch, SR 54 at S Branch Blvd]
+  - [sr-ballan,  SR 54 at Ballantrae Blvd]
+  - [bb-ballan,  Bud Bexley Pkwy at Ballantrae Blvd]
+  - [sr-bvd,     SR 54 at Bexley Village Dr]
+  - [sr-gunn,    SR 54 at Gunn Hwy]
+  - [sr-sunlake, SR 54 at Sunlake Blvd]
+  - [rg-cattle,  Rangeland Blvd at Cattle Gap Trl]
+trafficRows:
+  - [bvd-sr54,     "Bexley Village Dr — toward SR 54"]
+  - [ballantrae-s, "Ballantrae Blvd — toward SR 54"]
+  - [bvd-rndbt,    "Bexley Village Dr — by the roundabout"]
+  - [bvd-north,    "Bexley Village Dr — north leg"]
+  - [broadporch,   Broad Porch Run]
+  - [budbexley,    Bud Bexley Pkwy]
+---
+{#- TEMPLATE NOTE (not copied into the built page)
+    Wording is written here as before. FIGURES that come from the county's
+    documents are pulled in from data/facts/rangeland.yaml with tags like
+        {% fact "rangeland.aadt.gunn.2023" %}
+    To change such a number, edit it in the facts file - every place on the
+    page that uses it updates together. The build stops with an error if a
+    tag names a fact that doesn't exist.
+    Other tags: {% diff a, b %} is b minus a; {% perMile cost, length %} is a
+    cost per mile. Both are worked out from the facts when the site is built. -#}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -441,7 +474,7 @@
   </div>
   <p>Florida law sorts roads by how they behave rather than how big they are. A <strong>collector</strong> carries "relatively moderate" volume, trip length and speed. An <strong>arterial</strong> is "relatively continuous," higher volume, longer trips. A <strong>principal</strong> arterial serves "the highest traffic volume corridors" &#8212; here that is SR 54 and the Suncoast Parkway.</p>
   <p>The label is not cosmetic. It decides which design standards apply, and under Pasco's access management code, how far apart driveways and median openings have to be and where turn lanes are required.</p>
-  <p>The county describes this corridor as a collector; however, a new four-lane road carrying <strong>18,000 vehicles a day</strong>, bridging the Suncoast Parkway and completing a continuous ten-mile route sounds a lot more like a minor arterial. I don't know if the designation can change after it is built, but that is something I'd like to ask.</p>
+  <p>The county describes this corridor as a collector; however, a new four-lane road carrying <strong>{% fact "rangeland.aadt.rangeland-new.2050-build" %} vehicles a day</strong>, bridging the Suncoast Parkway and completing a continuous ten-mile route sounds a lot more like a minor arterial. I don't know if the designation can change after it is built, but that is something I'd like to ask.</p>
   <p class="foot">Fla. Stat. 334.03 &#183; FHWA functional classification guidelines &#183; more in section 4</p>
 </div>
 
@@ -465,7 +498,7 @@
   <h2>Population growth creates more traffic; this road seems designed to absorb it.</h2>
   <div class="stats">
     <div class="stat"><div class="v hot">10<span style="font-size:.55em"> / 11</span></div><div class="k">Intersections worse in 2050 than today &#8212; the same ten whether or not the road is built</div></div>
-    <div class="stat"><div class="v good">&#8722;10,000</div><div class="k">Fewer vehicles on Bexley Village Dr toward SR 54 compared to the no-build option</div></div>
+    <div class="stat"><div class="v good">{% diff "rangeland.aadt.bvd-sr54.2050-nobuild", "rangeland.aadt.bvd-sr54.2050-build" %}</div><div class="k">Fewer vehicles on Bexley Village Dr toward SR 54 compared to the no-build option</div></div>
     <div class="stat"><div class="v acc">6 &#8594; 3</div><div class="k">Intersections at grade F: six without the road, three with it</div></div>
   </div>
   <p>As Pasco's population grows and Bexley expands north to Ridge road, traffic inside and outside our neighborhood is only going to get worse. The expanded road will relieve congestion at the expense of routing traffic through Bexley.</p>
@@ -473,21 +506,13 @@
     <summary>See all eleven intersections</summary>
     <p style="margin:12px 0 0;font-size:.98rem">The following table shows how Pasco grades intersections on an A to F scale. The three columns show today, 2050 with nothing built, and 2050 with Alternative A. Alternative A is better than doing nothing at six of the eleven, the same at five, and worse at none.</p>
     <div class="viz">
-    <div class="lrow"><span class="lnm">Rangeland Blvd at Gunn Hwy</span><span class="grades"><span class="g now">A</span><span class="g nob">F</span><span class="g bld">C</span></span></div>
-    <div class="lrow"><span class="lnm">Bexley Village Dr roundabout</span><span class="grades"><span class="g now">A</span><span class="g nob">F</span><span class="g bld">D</span></span></div>
-    <div class="lrow"><span class="lnm">SR 54 at Suncoast ramps (east)</span><span class="grades"><span class="g now">C</span><span class="g nob">F</span><span class="g bld">D</span></span></div>
-    <div class="lrow"><span class="lnm">SR 54 at Suncoast ramps (west)</span><span class="grades"><span class="g now">B</span><span class="g nob">E</span><span class="g bld">D</span></span></div>
-    <div class="lrow"><span class="lnm">SR 54 at S Branch Blvd</span><span class="grades"><span class="g now">C</span><span class="g nob">E</span><span class="g bld">D</span></span></div>
-    <div class="lrow"><span class="lnm">SR 54 at Ballantrae Blvd</span><span class="grades"><span class="g now">C</span><span class="g nob">E</span><span class="g bld">D</span></span></div>
-    <div class="lrow"><span class="lnm">Bud Bexley Pkwy at Ballantrae Blvd</span><span class="grades"><span class="g now">C</span><span class="g nob">D</span><span class="g bld">D</span></span></div>
-    <div class="lrow"><span class="lnm">SR 54 at Bexley Village Dr</span><span class="grades"><span class="g now">D</span><span class="g nob">F</span><span class="g bld">F</span></span></div>
-    <div class="lrow"><span class="lnm">SR 54 at Gunn Hwy</span><span class="grades"><span class="g now">D</span><span class="g nob">F</span><span class="g bld">F</span></span></div>
-    <div class="lrow"><span class="lnm">SR 54 at Sunlake Blvd</span><span class="grades"><span class="g now">D</span><span class="g nob">F</span><span class="g bld">F</span></span></div>
-    <div class="lrow"><span class="lnm">Rangeland Blvd at Cattle Gap Trl</span><span class="grades"><span class="g now">A</span><span class="g nob">A</span><span class="g bld">A</span></span></div>
+{%- for r in losRows %}
+    <div class="lrow"><span class="lnm">{{ r[1] }}</span><span class="grades"><span class="g now">{% fact "rangeland.los." + r[0] + ".2023" %}</span><span class="g nob">{% fact "rangeland.los." + r[0] + ".2050-nobuild" %}</span><span class="g bld">{% fact "rangeland.los." + r[0] + ".2050-build" %}</span></span></div>
+{%- endfor %}
     <div class="lkey"><span><i class="dot now"></i>Today (2023)</span><span><i class="dot nob"></i>2050 no-build</span><span><i class="dot bld"></i>2050 Alternative A</span><span>A is free-flowing &#183; F cannot clear the queue</span></div>
     </div>
   </details>
-  <p>What the project changes is <em>where</em> the traffic goes. It pulls about ten thousand vehicles a day off Bexley Village Drive toward SR 54 but adds 18,000 onto the new road.</p>
+  <p>What the project changes is <em>where</em> the traffic goes. It pulls about ten thousand vehicles a day off Bexley Village Drive toward SR 54 but adds {% fact "rangeland.aadt.rangeland-new.2050-build" %} onto the new road.</p>
   <p class="foot">County traffic boards shown at Public Workshop #3, 24 September 2026 &#8212; existing (2023 counts), 2050 no-build and 2050 build &#183; evening peak</p>
 </div>
 
@@ -552,7 +577,7 @@
      <li>Pasco county is growing. A lot. Traffic in our area is going to get worse, no matter what happens with the Rangeland study.</li>
     <li>Pasco County is planning to extend <strong>Rangeland Boulevard</strong> 3.4 miles from Cattle Gap Trail to Bexley Village Drive, as a <strong>four-lane divided road</strong> with bike lanes, a sidewalk, a multi-use trail, and a new overpass across the Suncoast Parkway.</li>
     <li>It is one segment of a roughly 10-mile route on the county's <strong>Freight Priority Network</strong> in <a href="https://www.pascocountyfl.gov/services/mpo/plans.php#Doc2212">Pasco County's 2050 plan</a>, continuing east as Bud Bexley Parkway to US 41 and then as Caliente Boulevard to Ehren Cutoff.</li>
-    <li><strong>Traffic here roughly triples by 2050 whether or not this road is built.</strong> Bexley Village Drive by the roundabout goes from 6,100 vehicles a day to 23,500 in the county's <em>no-build</em> forecast, primarily due to Bexley expanding north to Ridge Road. Growth, not the project, is doing most of that.</li>
+    <li><strong>Traffic here roughly triples by 2050 whether or not this road is built.</strong> Bexley Village Drive by the roundabout goes from {% fact "rangeland.aadt.bvd-rndbt.2023" %} vehicles a day to {% fact "rangeland.aadt.bvd-rndbt.2050-nobuild" %} in the county's <em>no-build</em> forecast, primarily due to Bexley expanding north to Ridge Road. Growth, not the project, is doing most of that.</li>
     <li>Three build alternatives remain — <strong>A, D and E</strong> — all are four-lane divided roadways. (Alternatives B and C were dropped after strong public pushback.)</li>
     <li>Design, right-of-way and <strong>construction money are already programmed</strong> in the county's capital plan for 2026, 2027 and 2029.</li>
   </ul>
@@ -787,8 +812,8 @@
   </ul>
   <p>Those don't seem like particularly useful definitions, but the federal system uses the same ladder, splitting collectors into major and minor.</p>
   <p>A road's classification decides which design standards apply to it and &#8212; under Pasco's own access management code &#8212; how far apart driveways and median openings have to be and where turn lanes are required. It is one of the more consequential labels a road can carry.</p>
-  <p>All of that to say, it is worth asking why this project is designated as a collector and not arterial. A collector is supposed to be moderate in volume, trip length and speed. What section 5 describes is 3.4 miles of new four-lane road carrying <strong>18,000 vehicles a day</strong>, bridging the Suncoast Parkway, completing a continuous ten-mile route out to US 41 and Ehren Cutoff, and listed on the freight priority network. That sounds more like the arterial definition than the collector one.</p>
-  <p>Though if it is an arterial, it is a minor one. Florida separates a <strong>principal</strong> arterial &#8212; one serving "the major centers of activity of an urban area, the highest traffic volume corridors, and the longest trip purpose" &#8212; from a <strong>minor</strong> arterial that "interconnects with and augments" one of those and carries shorter trips. At 18,000 vehicles a day this is nowhere near the highest-volume corridors here. SR 54 runs 63,500 to 93,000 and the Suncoast Parkway 75,500 to 93,000. This road would feed them, not be one of them.</p>
+  <p>All of that to say, it is worth asking why this project is designated as a collector and not arterial. A collector is supposed to be moderate in volume, trip length and speed. What section 5 describes is 3.4 miles of new four-lane road carrying <strong>{% fact "rangeland.aadt.rangeland-new.2050-build" %} vehicles a day</strong>, bridging the Suncoast Parkway, completing a continuous ten-mile route out to US 41 and Ehren Cutoff, and listed on the freight priority network. That sounds more like the arterial definition than the collector one.</p>
+  <p>Though if it is an arterial, it is a minor one. Florida separates a <strong>principal</strong> arterial &#8212; one serving "the major centers of activity of an urban area, the highest traffic volume corridors, and the longest trip purpose" &#8212; from a <strong>minor</strong> arterial that "interconnects with and augments" one of those and carries shorter trips. At {% fact "rangeland.aadt.rangeland-new.2050-build" %} vehicles a day this is nowhere near the highest-volume corridors here. SR 54 runs 63,500 to 93,000 and the Suncoast Parkway 75,500 to 93,000. This road would feed them, not be one of them.</p>
   <p>But I don't think the choice is arbitrary. I imagine functional classification is assigned through a formal process, not by whoever writes the project description. I may well be wrong about it. But it seems a fair thing to ask: what classification will Rangeland Boulevard carry once it is built, who decides that, and has it been decided already?</p>
   <p>What it would not change is the money. In an urban area collectors are already eligible for federal highway funds, so moving up a rung unlocks nothing, and it triggers no environmental review either, because that attaches to federal decisions and there are none here. Nor can anyone force a change: reclassification goes through FDOT with the county and the MPO both signing on and the Federal Highway Administration approving, which makes the county one of the parties whose agreement is needed to reclassify its own road. What the label does carry is intent. Classification is meant to record what a road actually does &#8212; so if the county expects an arterial, that is a statement about the road it expects to have in 2050.</p>
 
@@ -814,20 +839,17 @@
   <div class="tw wide"><table>
     <thead><tr><th>Street</th><th class="n">Today</th><th class="n">2050<br>no-build</th><th class="n">2050<br>Alt A</th><th class="n">Build vs<br>no-build</th></tr></thead>
     <tbody>
-      <tr><td>Bexley Village Dr — toward SR 54</td><td class="n now">14,300</td><td class="n nob">32,500</td><td class="n bld">22,500</td><td class="n dif down">−10,000</td></tr>
-      <tr><td>Ballantrae Blvd — toward SR 54</td><td class="n now">10,700</td><td class="n nob">18,000</td><td class="n bld">11,000</td><td class="n dif down">−7,000</td></tr>
-      <tr><td>Bexley Village Dr — by the roundabout</td><td class="n now">6,100</td><td class="n nob">23,500</td><td class="n bld">21,500</td><td class="n dif down">−2,000</td></tr>
-      <tr><td>Bexley Village Dr — north leg</td><td class="n now">2,500</td><td class="n nob">15,500</td><td class="n bld">14,500</td><td class="n dif down">−1,000</td></tr>
-      <tr><td>Broad Porch Run</td><td class="n now">3,500</td><td class="n nob">5,000</td><td class="n bld">7,000</td><td class="n dif up">+2,000</td></tr>
-      <tr><td>Bud Bexley Pkwy</td><td class="n now">2,100</td><td class="n nob">6,900</td><td class="n bld">16,500</td><td class="n dif up">+9,600</td></tr>
-      <tr><td>Rangeland Blvd (the new road)</td><td class="n now">—</td><td class="n nob">—</td><td class="n bld">18,000</td><td class="n dif up">new road</td></tr>
+{%- for r in trafficRows %}{% set k = "rangeland.aadt." + r[0] %}
+      <tr><td>{{ r[1] }}</td><td class="n now">{% fact k + ".2023" %}</td><td class="n nob">{% fact k + ".2050-nobuild" %}</td><td class="n bld">{% fact k + ".2050-build" %}</td><td class="n dif {% diffClass k + ".2050-nobuild", k + ".2050-build" %}">{% diff k + ".2050-nobuild", k + ".2050-build" %}</td></tr>
+{%- endfor %}
+      <tr><td>Rangeland Blvd (the new road)</td><td class="n now">—</td><td class="n nob">—</td><td class="n bld">{% fact "rangeland.aadt.rangeland-new.2050-build" %}</td><td class="n dif up">new road</td></tr>
     </tbody>
   </table></div>
   <p class="src" style="margin:0 0 20px">All three columns are read from the county's traffic boards shown at Public Workshop #3 on 24 September 2026: existing traffic (2023 counts), 2050 no-build, and 2050 build covering Alternatives A, D and E together. In the no-build there is no new road &#8212; the existing stub east of Gunn Highway carries about 2,000 a day.</p>
 
-  <p><strong>Traffic roughly triples on these streets either way.</strong> Bexley Village Drive by the roundabout goes from 6,100 today to 23,500 in 2050 <em>with no project at all</em>. Nearly all of the increase this page has been describing happens whether or not Rangeland Boulevard is extended. The county said as much.</p>
-  <p>Bexley Village Drive toward SR 54 carries 32,500 a day in the no-build and 22,500 with the road built &#8212; ten thousand fewer vehicles. Ballantrae drops seven thousand. What the project does is move that traffic onto the new road. That is essentially the case the county is making for building it.</p>
-  <p>The trade is visible in the same data. Rangeland Boulevard carries 18,000 vehicles a day that are not there today, and Bud Bexley Parkway goes from 6,900 in the no-build to 16,500. So this is redistribution plus growth &#8212; not traffic conjured out of nothing, but not relief either. The question is not whether there will be more traffic. It is <em>which streets carry it</em>.</p>
+  <p><strong>Traffic roughly triples on these streets either way.</strong> Bexley Village Drive by the roundabout goes from {% fact "rangeland.aadt.bvd-rndbt.2023" %} today to {% fact "rangeland.aadt.bvd-rndbt.2050-nobuild" %} in 2050 <em>with no project at all</em>. Nearly all of the increase this page has been describing happens whether or not Rangeland Boulevard is extended. The county said as much.</p>
+  <p>Bexley Village Drive toward SR 54 carries {% fact "rangeland.aadt.bvd-sr54.2050-nobuild" %} a day in the no-build and {% fact "rangeland.aadt.bvd-sr54.2050-build" %} with the road built &#8212; ten thousand fewer vehicles. Ballantrae drops seven thousand. What the project does is move that traffic onto the new road. That is essentially the case the county is making for building it.</p>
+  <p>The trade is visible in the same data. Rangeland Boulevard carries {% fact "rangeland.aadt.rangeland-new.2050-build" %} vehicles a day that are not there today, and Bud Bexley Parkway goes from {% fact "rangeland.aadt.budbexley.2050-nobuild" %} in the no-build to {% fact "rangeland.aadt.budbexley.2050-build" %}. So this is redistribution plus growth &#8212; not traffic conjured out of nothing, but not relief either. The question is not whether there will be more traffic. It is <em>which streets carry it</em>.</p>
 
   <h3>Ten of eleven intersections get worse — with or without the road</h3>
   <div class="callout">
@@ -858,83 +880,9 @@
       <text class="l-axis" x="875" y="42" text-anchor="middle">F</text>
       <text class="l-note" x="400" y="22">BETTER</text>
       <text class="l-note" x="875" y="22" text-anchor="end">WORSE</text>
-      <g class="l-row"><title>Rangeland Blvd at Gunn Hwy: A today, F in 2050 with no project, C in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="76" text-anchor="end">Rangeland Blvd at Gunn Hwy</text>
-        <line class="l-conn" x1="400.0" y1="72" x2="875.0" y2="72"/>
-        <circle class="l-now" cx="400.0" cy="72" r="10"/><text class="l-letter" x="400.0" y="76" text-anchor="middle">A</text>
-        <circle class="l-nob" cx="875.0" cy="72" r="10"/><text class="l-letter" x="875.0" y="76" text-anchor="middle">F</text>
-        <circle class="l-bld" cx="590.0" cy="72" r="10"/><text class="l-letter" x="590.0" y="76" text-anchor="middle">C</text>
-        </g>
-      <g class="l-row"><title>Bexley Village Dr roundabout: A today, F in 2050 with no project, D in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="104" text-anchor="end">Bexley Village Dr roundabout</text>
-        <line class="l-conn" x1="400.0" y1="100" x2="875.0" y2="100"/>
-        <circle class="l-now" cx="400.0" cy="100" r="10"/><text class="l-letter" x="400.0" y="104" text-anchor="middle">A</text>
-        <circle class="l-nob" cx="875.0" cy="100" r="10"/><text class="l-letter" x="875.0" y="104" text-anchor="middle">F</text>
-        <circle class="l-bld" cx="685.0" cy="100" r="10"/><text class="l-letter" x="685.0" y="104" text-anchor="middle">D</text>
-        </g>
-      <g class="l-row"><title>SR 54 at Suncoast ramps (east): C today, F in 2050 with no project, D in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="132" text-anchor="end">SR 54 at Suncoast ramps (east)</text>
-        <line class="l-conn" x1="590.0" y1="128" x2="875.0" y2="128"/>
-        <circle class="l-now" cx="590.0" cy="128" r="10"/><text class="l-letter" x="590.0" y="132" text-anchor="middle">C</text>
-        <circle class="l-nob" cx="875.0" cy="128" r="10"/><text class="l-letter" x="875.0" y="132" text-anchor="middle">F</text>
-        <circle class="l-bld" cx="685.0" cy="128" r="10"/><text class="l-letter" x="685.0" y="132" text-anchor="middle">D</text>
-        </g>
-      <g class="l-row"><title>SR 54 at Suncoast ramps (west): B today, E in 2050 with no project, D in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="160" text-anchor="end">SR 54 at Suncoast ramps (west)</text>
-        <line class="l-conn" x1="495.0" y1="156" x2="780.0" y2="156"/>
-        <circle class="l-now" cx="495.0" cy="156" r="10"/><text class="l-letter" x="495.0" y="160" text-anchor="middle">B</text>
-        <circle class="l-nob" cx="780.0" cy="156" r="10"/><text class="l-letter" x="780.0" y="160" text-anchor="middle">E</text>
-        <circle class="l-bld" cx="685.0" cy="156" r="10"/><text class="l-letter" x="685.0" y="160" text-anchor="middle">D</text>
-        </g>
-      <g class="l-row"><title>SR 54 at S Branch Blvd: C today, E in 2050 with no project, D in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="188" text-anchor="end">SR 54 at S Branch Blvd</text>
-        <line class="l-conn" x1="590.0" y1="184" x2="780.0" y2="184"/>
-        <circle class="l-now" cx="590.0" cy="184" r="10"/><text class="l-letter" x="590.0" y="188" text-anchor="middle">C</text>
-        <circle class="l-nob" cx="780.0" cy="184" r="10"/><text class="l-letter" x="780.0" y="188" text-anchor="middle">E</text>
-        <circle class="l-bld" cx="685.0" cy="184" r="10"/><text class="l-letter" x="685.0" y="188" text-anchor="middle">D</text>
-        </g>
-      <g class="l-row"><title>SR 54 at Ballantrae Blvd: C today, E in 2050 with no project, D in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="216" text-anchor="end">SR 54 at Ballantrae Blvd</text>
-        <line class="l-conn" x1="590.0" y1="212" x2="780.0" y2="212"/>
-        <circle class="l-now" cx="590.0" cy="212" r="10"/><text class="l-letter" x="590.0" y="216" text-anchor="middle">C</text>
-        <circle class="l-nob" cx="780.0" cy="212" r="10"/><text class="l-letter" x="780.0" y="216" text-anchor="middle">E</text>
-        <circle class="l-bld" cx="685.0" cy="212" r="10"/><text class="l-letter" x="685.0" y="216" text-anchor="middle">D</text>
-        </g>
-      <g class="l-row"><title>Bud Bexley Pkwy at Ballantrae Blvd: C today, D in 2050 with no project, D in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="244" text-anchor="end">Bud Bexley Pkwy at Ballantrae Blvd</text>
-        <line class="l-conn" x1="590.0" y1="240" x2="695.5" y2="240"/>
-        <circle class="l-now" cx="590.0" cy="240" r="10"/><text class="l-letter" x="590.0" y="244" text-anchor="middle">C</text>
-        <circle class="l-nob" cx="674.5" cy="240" r="10"/><text class="l-letter" x="674.5" y="244" text-anchor="middle">D</text>
-        <circle class="l-bld" cx="695.5" cy="240" r="10"/><text class="l-letter" x="695.5" y="244" text-anchor="middle">D</text>
-        </g>
-      <g class="l-row"><title>SR 54 at Bexley Village Dr: D today, F in 2050 with no project, F in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="272" text-anchor="end">SR 54 at Bexley Village Dr</text>
-        <line class="l-conn" x1="685.0" y1="268" x2="885.5" y2="268"/>
-        <circle class="l-now" cx="685.0" cy="268" r="10"/><text class="l-letter" x="685.0" y="272" text-anchor="middle">D</text>
-        <circle class="l-nob" cx="864.5" cy="268" r="10"/><text class="l-letter" x="864.5" y="272" text-anchor="middle">F</text>
-        <circle class="l-bld" cx="885.5" cy="268" r="10"/><text class="l-letter" x="885.5" y="272" text-anchor="middle">F</text>
-        </g>
-      <g class="l-row"><title>SR 54 at Gunn Hwy: D today, F in 2050 with no project, F in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="300" text-anchor="end">SR 54 at Gunn Hwy</text>
-        <line class="l-conn" x1="685.0" y1="296" x2="885.5" y2="296"/>
-        <circle class="l-now" cx="685.0" cy="296" r="10"/><text class="l-letter" x="685.0" y="300" text-anchor="middle">D</text>
-        <circle class="l-nob" cx="864.5" cy="296" r="10"/><text class="l-letter" x="864.5" y="300" text-anchor="middle">F</text>
-        <circle class="l-bld" cx="885.5" cy="296" r="10"/><text class="l-letter" x="885.5" y="300" text-anchor="middle">F</text>
-        </g>
-      <g class="l-row"><title>SR 54 at Sunlake Blvd: D today, F in 2050 with no project, F in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="328" text-anchor="end">SR 54 at Sunlake Blvd</text>
-        <line class="l-conn" x1="685.0" y1="324" x2="885.5" y2="324"/>
-        <circle class="l-now" cx="685.0" cy="324" r="10"/><text class="l-letter" x="685.0" y="328" text-anchor="middle">D</text>
-        <circle class="l-nob" cx="864.5" cy="324" r="10"/><text class="l-letter" x="864.5" y="328" text-anchor="middle">F</text>
-        <circle class="l-bld" cx="885.5" cy="324" r="10"/><text class="l-letter" x="885.5" y="328" text-anchor="middle">F</text>
-        </g>
-      <g class="l-row"><title>Rangeland Blvd at Cattle Gap Trl: A today, A in 2050 with no project, A in 2050 with Alternative A</title>
-        <text class="l-name" x="380" y="356" text-anchor="end">Rangeland Blvd at Cattle Gap Trl</text>
-        <line class="l-conn" x1="400.0" y1="352" x2="442.0" y2="352"/>
-        <circle class="l-now" cx="400.0" cy="352" r="10"/><text class="l-letter" x="400.0" y="356" text-anchor="middle">A</text>
-        <circle class="l-nob" cx="421.0" cy="352" r="10"/><text class="l-letter" x="421.0" y="356" text-anchor="middle">A</text>
-        <circle class="l-bld" cx="442.0" cy="352" r="10"/><text class="l-letter" x="442.0" y="356" text-anchor="middle">A</text>
-        </g>
+{%- for r in losRows %}
+      {% losChartRow r[0], loop.index0, r[1] %}
+{%- endfor %}
       <g>
         <circle class="l-now" cx="404" cy="394" r="8"/><text class="l-leg" x="418" y="398">TODAY (2023)</text>
         <circle class="l-nob" cx="524" cy="394" r="8"/><text class="l-leg" x="538" y="398">2050 NO-BUILD</text>
@@ -980,9 +928,9 @@
   <div class="tw wide"><table>
     <thead><tr><th>September 2026 estimate</th><th class="n">Construction</th><th class="n">Total</th><th class="n">Per mile</th></tr></thead>
     <tbody>
-      <tr><td><strong>Alternative A</strong></td><td class="n">$100.1M</td><td class="n">$150.0M</td><td class="n">$44.0M</td></tr>
-      <tr><td>Alternative D</td><td class="n">$101.4M</td><td class="n">$151.5M</td><td class="n">$44.4M</td></tr>
-      <tr><td>Alternative E</td><td class="n">$106.7M</td><td class="n">$157.8M</td><td class="n">$46.3M</td></tr>
+      <tr><td><strong>Alternative A</strong></td><td class="n">{% fact "rangeland.cost.a.construction" %}</td><td class="n">{% fact "rangeland.cost.a.total" %}</td><td class="n">{% perMile "rangeland.cost.a.total", "rangeland.length-miles" %}</td></tr>
+      <tr><td>Alternative D</td><td class="n">{% fact "rangeland.cost.d.construction" %}</td><td class="n">{% fact "rangeland.cost.d.total" %}</td><td class="n">{% perMile "rangeland.cost.d.total", "rangeland.length-miles" %}</td></tr>
+      <tr><td>Alternative E</td><td class="n">{% fact "rangeland.cost.e.construction" %}</td><td class="n">{% fact "rangeland.cost.e.total" %}</td><td class="n">{% perMile "rangeland.cost.e.total", "rangeland.length-miles" %}</td></tr>
     </tbody>
   </table></div>
 
@@ -992,35 +940,35 @@
   <div class="tw"><table>
     <thead><tr><th>Alternative A, September 2026</th><th class="n">Cost</th></tr></thead>
     <tbody>
-      <tr><td>Construction</td><td class="n">$100.1M</td></tr>
-      <tr><td>Design (10&#37;)</td><td class="n">$10.0M</td></tr>
-      <tr><td>Construction engineering and inspection (8&#37;)</td><td class="n">$8.0M</td></tr>
-      <tr><td>Land for the roadway</td><td class="n">$11.3M</td></tr>
-      <tr><td>Land for stormwater ponds</td><td class="n">$6.2M</td></tr>
-      <tr><td>Land for floodplain compensation</td><td class="n">$5.8M</td></tr>
-      <tr><td>Wetland mitigation</td><td class="n">$8.6M</td></tr>
-      <tr><td><strong>Total</strong></td><td class="n"><strong>$150.0M</strong></td></tr>
+      <tr><td>Construction</td><td class="n">{% fact "rangeland.cost.a.construction" %}</td></tr>
+      <tr><td>Design (10&#37;)</td><td class="n">{% fact "rangeland.cost.a.design" %}</td></tr>
+      <tr><td>Construction engineering and inspection (8&#37;)</td><td class="n">{% fact "rangeland.cost.a.cei" %}</td></tr>
+      <tr><td>Land for the roadway</td><td class="n">{% fact "rangeland.cost.a.row-road" %}</td></tr>
+      <tr><td>Land for stormwater ponds</td><td class="n">{% fact "rangeland.cost.a.row-ponds" %}</td></tr>
+      <tr><td>Land for floodplain compensation</td><td class="n">{% fact "rangeland.cost.a.row-flood" %}</td></tr>
+      <tr><td>Wetland mitigation</td><td class="n">{% fact "rangeland.cost.a.wetland-mitigation" %}</td></tr>
+      <tr><td><strong>Total</strong></td><td class="n"><strong>{% fact "rangeland.cost.a.total" %}</strong></td></tr>
     </tbody>
   </table></div>
   <p>Land now comes to <strong>$23.3 million</strong>, about 16&#37; of the total, up from roughly 10&#37; in January. The board notes right-of-way costs were re-estimated in September 2026.</p>
 
   <h3>Comparing this to January is harder than it looks</h3>
-  <p>The January 2025 matrix put Build A at <strong>$111.82 million</strong>. It would be easy to say the estimate has risen by a third, and I am not going to say that, because the two totals may not be counting the same things.</p>
+  <p>The January 2025 matrix put Build A at <strong>{% fact "rangeland.cost.build-a.2025-01.total", "words" %}</strong>. It would be easy to say the estimate has risen by a third, and I am not going to say that, because the two totals may not be counting the same things.</p>
   <p>January's printed total is exactly equal to its construction, design and inspection lines added together. Add its other listed components &#8212; land acquisition and wetland mitigation &#8212; and you get $129.53 million. September's total includes all of those and adds up exactly. So either January's "Total" left the land out, or one of the two boards has an arithmetic problem. Measured like for like the rise is nearer <strong>16&#37;</strong>; taking the printed totals at face value it is <strong>34&#37;</strong>.</p>
 
   <h3>A lot changed in the matrix between January 2025 and Public Workshop 3</h3>
   <p>Two of the matrix's qualitative ratings were lowered between January and September. Noise went from <strong>High to Medium</strong>, and contamination from <strong>High to Low</strong>. At the workshop I was told the noise change followed from mitigation being warranted at only two short sections, and that the qualitative rating is ultimately the county's to set. No explanation for the contamination change has been published.</p>
   <p>Every figure in the same matrix that can be counted moved the other way:</p>
   <ul>
-    <li><strong>Wetlands: 24.11 &#8594; 33.93 acres</strong></li>
-    <li><strong>Surface waters: 0.00 &#8594; 9.57 acres</strong>, having previously been recorded as none</li>
-    <li><strong>Parcels impacted: 19 &#8594; 27</strong></li>
-    <li><strong>Construction: $93.18M &#8594; $100.1M</strong></li>
+    <li><strong>Wetlands: {% fact "rangeland.matrix.wetlands.2025-01" %} &#8594; {% fact "rangeland.matrix.wetlands.2026-09" %} acres</strong></li>
+    <li><strong>Surface waters: {% fact "rangeland.matrix.surface-waters.2025-01" %} &#8594; {% fact "rangeland.matrix.surface-waters.2026-09" %} acres</strong>, having previously been recorded as none</li>
+    <li><strong>Parcels impacted: {% fact "rangeland.matrix.parcels.2025-01" %} &#8594; {% fact "rangeland.matrix.parcels.2026-09" %}</strong></li>
+    <li><strong>Construction: {% fact "rangeland.cost.build-a.2025-01.construction" %} &#8594; {% fact "rangeland.cost.a.construction" %}</strong></li>
   </ul>
   <p>The wetlands figure matters beyond the cost. A Section 404 permit from the Army Corps of Engineers is the one step in this project that is genuinely federal, and it turns on the acreage of wetland impact. That acreage is now <strong>41&#37; larger</strong> than the number this page has been carrying. Potential relocations are still zero.</p>
 
   <h3>How it compares to the rest of the plan</h3>
-  <p>$150.0 million over 3.41 miles is <strong>$44.0 million a mile</strong>. That is worth a second look, because it is the same figure I had already worked out from the long range plan's year-of-expenditure total. The route study has now arrived at it independently, from a different direction.</p>
+  <p>{% fact "rangeland.cost.a.total", "words" %} over {% fact "rangeland.length-miles" %} miles is <strong>{% perMile "rangeland.cost.a.total", "rangeland.length-miles", "words" %} a mile</strong>. That is worth a second look, because it is the same figure I had already worked out from the long range plan's year-of-expenditure total. The route study has now arrived at it independently, from a different direction.</p>
   <p>Set against the other road projects in the same plan, that puts this segment <strong>eighth of forty</strong>, where the median is $10.38 million a mile. The next segment of the same corridor, Bud Bexley Parkway, comes to $14.83 million a mile in the same document. The county says the comparison is unfair:</p>
   <div class="quote">The per mile cost comparison to the area-wide averages are misleading because this project includes an entirely new roadway with new bridges spanning the Suncoast Parkway and the Anclote River (along with one alternative that also includes an additional pedestrian underpass).<span class="attr">Pasco County Transportation Engineering Department, September 2026</span></div>
   <p>That is a disagreement about what the number means rather than a claim that the arithmetic is wrong, so the figure stays and their objection sits beside it. It is a fair point as far as it goes: structures are expensive, and a road carrying two of them should cost more per mile than one carrying none. What would settle it is knowing how many of the other thirty-nine projects carry structures of their own, and several of them cross water or rail. <strong>I have not done that count</strong>, and I am not going to promise it before the comment deadline. Until somebody does, treat the ranking as a question rather than an answer.</p>

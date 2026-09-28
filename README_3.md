@@ -5,71 +5,104 @@ built from Pasco County, Pasco MPO and FDOT public documents.
 
 Live at **https://patricka3s.github.io/rangeland/**.
 
-Static site: no build step and no dependencies beyond a Google Fonts stylesheet
-and the GoatCounter visit counter.
+The page is built from **data files** — sources, facts and definitions — so every
+figure on it is stored once, cites the document it came from, and can be checked.
 
-## Files
+## What's where
 
-| File | Purpose |
+| Path | What it holds |
 |---|---|
-| `index.html` | All the wording. Regions are fenced with banner comments. |
-| `styles.css` | Layout, light/dark themes, the network map and the print stylesheet. |
-| `app.js` | Behaviour: the Highlights / Full detail toggle, the meeting box switch after the workshop, opening the corrections list from `#notes`, and the network map's traffic figures. |
-| `og-image.png` | 1200×630 social preview card, used by the Open Graph tags. |
+| `data/sources.yaml` | Every document a fact can cite: title, publisher, date, link. |
+| `data/facts/rangeland.yaml` | Every figure the page shows from the county's documents — traffic, intersection grades, costs, matrix quantities — each with its source. |
+| `data/definitions.yaml` | Plain-language definitions of the terms the site uses. Not yet shown as a glossary. |
+| `src/index.njk` | The page. All the wording lives here; figures are pulled in from the facts file. |
+| `src/app.js.njk` | Page behaviour: the reading-mode toggle, the meeting box, and the network map (whose figures also come from the facts file). |
+| `src/styles.css`, `src/og-image.png` | Styling and the social preview card. |
+| `eleventy.config.js` | The build: loads and checks the data, and defines the tags the page uses. |
+| `.github/workflows/site.yml` | Builds the site on every pull request and publishes it on every merge to `main`. |
 
-## Editing
+## Changing a figure
 
-**Wording** lives in `index.html`. You should not need to open the other two
-files to change what the page says.
+Edit it in `data/facts/rangeland.yaml`, not in the page. Each fact looks like this:
 
-**The page has two reading modes, and some figures appear in both.** The
-Highlights view is the deck (`#deck`, eight slides); Full detail is the guide
-(`#doc`, sections 01–10). If you change a number in one, check the other.
+```yaml
+- id: rangeland.aadt.bvd-rndbt.2050-nobuild
+  statement: Daily traffic (AADT), Bexley Village Dr, by the roundabout, 2050 no-build
+  value: 23500
+  unit: vehicles per day
+  source: pasco-2026-09-traffic-nobuild
+  as_of: '2026-09-24'
+  status: current
+```
 
-**Network map numbers live in `app.js`**, not the HTML. The `SEG` table holds
-daily traffic per street segment and the `INT` table holds intersection grades,
-each as `[2023, 2050 not built, 2050 built]`. Tab labels and captions are in
-`index.html`. The same grades also appear in the slide 05 table and the section 5
-chart, so a changed grade means three edits.
+Every place that uses it — the map, the tables, the charts, the paragraphs —
+updates together. If a newer document replaces a figure, set the old one's
+`status` to `superseded` and add the new one rather than overwriting, so the
+history stays visible.
 
-**Corrections** at the foot of the page are numbered automatically by CSS, so they
-can be reordered freely — but the body text refers to some of them by number
-("see correction 10"), so check those references if you insert one.
+Figures that are **worked out** from facts — the build-vs-no-build differences, the
+cost per mile — are calculated when the site is built, so they can't drift from
+the facts they come from.
+
+**Not yet linked:** numbers written out in words ("ten thousand fewer vehicles",
+"six of the eleven"), the stat tiles on slide 05 other than the −10,000 one, and
+the figures inside the correction notes (which record what the page said at the
+time, on purpose). Check those by hand when a related fact changes.
+
+## Changing the wording
+
+Edit `src/index.njk` as before. The page has two reading modes: the Highlights
+view (`#deck`, eight slides) and Full detail (`#doc`, sections 01–10). If you
+reword something in one, check whether the other repeats it.
+
+## Safety checks
+
+The build stops with a plain-English error, and nothing is published, if:
+
+- the page asks for a fact that doesn't exist (usually a typo in the id);
+- a fact names a source that isn't in `sources.yaml`;
+- a fact is missing a required field, is listed twice, or has a status other than
+  `current`, `disputed` or `superseded`.
+
+On a pull request this shows as a red ✗ next to the build check. Fix it before merging.
 
 ## Publishing
 
-The site deploys from `main` via GitHub Pages (**Settings → Pages**, *Deploy
-from a branch*, `main`, `/ (root)`). Changes appear a minute or two after a push.
+Changes reach the live site through a pull request: merge it, and the workflow
+builds and publishes the site a minute or two later. `main` is protected, so
+nothing can reach it without a merge.
 
-The canonical, `og:url`, `og:image` and `twitter:image` tags already point at the
-live address. If the site moves, update all four.
+GitHub setting this depends on: **Settings → Pages → Source: GitHub Actions**.
+
+## Previewing on your own computer (optional)
+
+With [Node.js](https://nodejs.org) installed: `npm install` once, then
+`npm run serve` and open the address it prints. `npm run build` writes the
+finished site to `_site/`.
 
 ## Checking the preview card
 
 After changing the preview image or description, paste the URL into Facebook's
-[Sharing Debugger](https://developers.facebook.com/tools/debug/). It shows what the
-card will look like and lets you force a re-scrape — platforms cache aggressively,
-so a fix without a re-scrape looks like no fix.
+[Sharing Debugger](https://developers.facebook.com/tools/debug/) to see the card
+and force a re-scrape — platforms cache aggressively.
 
 ## Printing
 
 The page carries a print stylesheet: colour is stripped, the meeting box gets a
-black border, and figures avoid page breaks. Ctrl/Cmd-P produces a handout suitable
-for a noticeboard or a doorstep.
+black border, and figures avoid page breaks.
 
 ## Keeping it honest
 
-Every factual claim traces to a document listed in section 10. If something turns
-out to be wrong, fix it visibly rather than quietly — the value of the page is that
-people can check it, and a page that corrects itself in public is more trustworthy
-than one that never appears to err.
+Every figure traces to a source in `data/sources.yaml`, and every factual claim in
+the text to a document listed in section 10. If something turns out to be wrong,
+fix it visibly rather than quietly — a page that corrects itself in public is more
+trustworthy than one that never appears to err.
 
 ## Dates that will go stale
 
-- **Workshop #3, 24 September 2026** — has happened. `app.js` switches the meeting
-  box to its post-workshop copy automatically, but some prose in sections 4, 5, 8
-  and 9 is still written in the future tense.
+- **Workshop #3, 24 September 2026** — has happened. The meeting box switches to
+  its post-workshop copy automatically, but some prose in sections 4, 5, 8 and 9
+  is still written in the future tense.
 - **Comment deadline, 8 October 2026** — after it passes, update the meeting box,
-  the "Still ahead" list, and section 9, or add a note at the top saying what
-  happened.
+  the "Still ahead" list and section 9, or add a note at the top.
 - **"Updated" date** in the page header — bump it with each substantive change.
