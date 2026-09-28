@@ -92,7 +92,11 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
   phone widths, light and dark.
 - The site publishes itself when a pull request is merged
   (`.github/workflows/site.yml`). The version line at the foot of each page shows
-  which commit is live.
+  which commit is live and, for a merge, the pull request number.
+- **Every pull request description ends with a "When it's live" line** giving what
+  the version line will read once merged: "the foot of the page will show
+  *pull request #N*". Patrick uses it to confirm a merge has gone live. When
+  adding commits to an open pull request, keep that line in its description.
 - `src/app.js.njk` uses Windows (CRLF) line endings; keep them, or every line shows
   as changed.
 - Don't add third-party scripts, trackers or cookies. The footer promises GoatCounter

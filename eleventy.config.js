@@ -113,18 +113,27 @@ export default function (eleventyConfig) {
 
   // Which version of the site this is, shown in small print at the foot of the
   // page so it is easy to tell whether a change has gone live. On GitHub the
-  // commit comes from the workflow; on your own computer, from git.
+  // commit comes from the workflow; on your own computer, from git. When the
+  // commit is a pull request being merged, its number is shown too - that is
+  // known before merging, so a pull request can say what the page will show.
   let sha = process.env.GITHUB_SHA || "";
   if (!sha) {
     try { sha = execSync("git rev-parse HEAD", { encoding: "utf8" }).trim(); } catch (e) { sha = ""; }
   }
+  let pr = "";
+  try {
+    const subject = execSync("git log -1 --format=%s", { encoding: "utf8" }).trim();
+    pr = (/^Merge pull request #(\d+)/.exec(subject) || /\(#(\d+)\)$/.exec(subject) || [])[1] || "";
+  } catch (e) { pr = ""; }
+  const repo = process.env.GITHUB_REPOSITORY || "patricka3s/rangeland";
   const built = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York", month: "long", day: "numeric", year: "numeric",
     hour: "numeric", minute: "2-digit", timeZoneName: "short",
   }).format(new Date());
   eleventyConfig.addGlobalData("build", {
     version: sha ? sha.slice(0, 7) : "local",
-    url: sha && process.env.GITHUB_REPOSITORY ? `https://github.com/${process.env.GITHUB_REPOSITORY}/commit/${sha}` : "",
+    url: sha && process.env.GITHUB_REPOSITORY ? `https://github.com/${repo}/commit/${sha}` : "",
+    pr, prUrl: pr ? `https://github.com/${repo}/pull/${pr}` : "",
     when: built,
   });
 

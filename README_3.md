@@ -102,7 +102,8 @@ nothing can reach it without a merge.
 GitHub setting this depends on: **Settings → Pages → Source: GitHub Actions**.
 
 **Is my change live?** The last line of the page reads e.g.
-*Version 0c08780 · published September 28, 2026 at 10:26 AM EDT*. The version is
+*Version 0c08780 · pull request #3 · published September 28, 2026 at 10:26 AM EDT*.
+Every pull request says which number to look for. The version is
 the start of the commit's code. Compare it with the latest commit on `main` —
 shown on the repository's front page, or in the **Actions** tab next to the
 newest "Build and publish site" run. If they match, the change is live. If the
