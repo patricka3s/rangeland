@@ -11,6 +11,8 @@
 #   as_of      date of that document
 #   status     current | disputed | superseded
 #   note       optional - anything a reader checking it should know
+#   checked    optional - date the value, description and location were last
+#              checked against the source document itself
 #   decimals   optional - how many decimal places to print (default 1 for money)
 #
 # Level-of-service grades are the EVENING peak. The county publishes AM (PM)
@@ -19,253 +21,313 @@
 # ---- Daily traffic
 
 - id: rangeland.aadt.rangeland-new.2050-build
-  statement: Daily traffic (AADT), Rangeland Blvd, the new segment, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), Rangeland Blvd, the new segment, 2050 build, Alternatives A, D and E'
   value: 18000
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, purple figure on Rangeland Blvd (printed three times: east of Cattle Gap Trl, and either side of S Branch Blvd)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.budbexley.2023
-  statement: Daily traffic (AADT), Bud Bexley Pkwy, today (2023 counts)
+  statement: 'Daily traffic (AADT), Bud Bexley Pkwy, Bexley Village Dr roundabout to Ballantrae Blvd, today (2023 counts)'
   value: 2100
   unit: vehicles per day
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, purple figure on Bud Bexley Pkwy between the roundabout and Ballantrae Blvd'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.budbexley.2050-nobuild
-  statement: Daily traffic (AADT), Bud Bexley Pkwy, 2050 no-build
+  statement: 'Daily traffic (AADT), Bud Bexley Pkwy, Bexley Village Dr roundabout to Ballantrae Blvd, 2050 no-build'
   value: 6900
   unit: vehicles per day
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, purple figure on Bud Bexley Pkwy between the roundabout and Ballantrae Blvd'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.budbexley.2050-build
-  statement: Daily traffic (AADT), Bud Bexley Pkwy, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), Bud Bexley Pkwy, Bexley Village Dr roundabout to Ballantrae Blvd, 2050 build, Alternatives A, D and E'
   value: 16500
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, purple figure on Bud Bexley Pkwy between the roundabout and Ballantrae Blvd'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.gunn.2023
-  statement: Daily traffic (AADT), Gunn Hwy, Rangeland Blvd to SR 54, today (2023 counts)
+  statement: 'Daily traffic (AADT), Gunn Hwy, south of SR 54, today (2023 counts)'
   value: 18400
   unit: vehicles per day
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, purple figure on Gunn Hwy, below (south of) its SR 54 signal'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.gunn.2050-nobuild
-  statement: Daily traffic (AADT), Gunn Hwy, Rangeland Blvd to SR 54, 2050 no-build
+  statement: 'Daily traffic (AADT), Gunn Hwy, south of SR 54, 2050 no-build'
   value: 23500
   unit: vehicles per day
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, purple figure on Gunn Hwy, below (south of) its SR 54 signal'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.gunn.2050-build
-  statement: Daily traffic (AADT), Gunn Hwy, Rangeland Blvd to SR 54, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), Gunn Hwy, south of SR 54, 2050 build, Alternatives A, D and E'
   value: 23500
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, purple figure on Gunn Hwy, below (south of) its SR 54 signal'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.sbranch.2050-nobuild
-  statement: Daily traffic (AADT), S Branch Blvd, north of SR 54, 2050 no-build
+  statement: 'Daily traffic (AADT), S Branch Blvd, between Rangeland Blvd and SR 54, 2050 no-build'
   value: 22000
   unit: vehicles per day
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, purple figure on S Branch Blvd just north of SR 54'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.sbranch.2050-build
-  statement: Daily traffic (AADT), S Branch Blvd, north of SR 54, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), S Branch Blvd, between Rangeland Blvd and SR 54, 2050 build, Alternatives A, D and E'
   value: 15500
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, purple figure on S Branch Blvd just north of SR 54'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-sr54.2023
-  statement: Daily traffic (AADT), Bexley Village Dr, toward SR 54, today (2023 counts)
+  statement: 'Daily traffic (AADT), Bexley Village Dr, toward SR 54, today (2023 counts)'
   value: 14300
   unit: vehicles per day
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, purple figure on Bexley Village Dr just north of SR 54'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-sr54.2050-nobuild
-  statement: Daily traffic (AADT), Bexley Village Dr, toward SR 54, 2050 no-build
+  statement: 'Daily traffic (AADT), Bexley Village Dr, toward SR 54, 2050 no-build'
   value: 32500
   unit: vehicles per day
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, purple figure on Bexley Village Dr just north of SR 54'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-sr54.2050-build
-  statement: Daily traffic (AADT), Bexley Village Dr, toward SR 54, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), Bexley Village Dr, toward SR 54, 2050 build, Alternatives A, D and E'
   value: 22500
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, purple figure on Bexley Village Dr just north of SR 54'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-rndbt.2023
-  statement: Daily traffic (AADT), Bexley Village Dr, by the roundabout, today (2023 counts)
+  statement: 'Daily traffic (AADT), Bexley Village Dr, by the roundabout, today (2023 counts)'
   value: 6100
   unit: vehicles per day
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, purple figure on Bexley Village Dr just south of the roundabout'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-rndbt.2050-nobuild
-  statement: Daily traffic (AADT), Bexley Village Dr, by the roundabout, 2050 no-build
+  statement: 'Daily traffic (AADT), Bexley Village Dr, by the roundabout, 2050 no-build'
   value: 23500
   unit: vehicles per day
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, purple figure on Bexley Village Dr just south of the roundabout'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-rndbt.2050-build
-  statement: Daily traffic (AADT), Bexley Village Dr, by the roundabout, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), Bexley Village Dr, by the roundabout, 2050 build, Alternatives A, D and E'
   value: 21500
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, purple figure on Bexley Village Dr just south of the roundabout'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-north.2023
-  statement: Daily traffic (AADT), Bexley Village Dr, north leg, today (2023 counts)
+  statement: 'Daily traffic (AADT), Bexley Village Dr, north leg, today (2023 counts)'
   value: 2500
   unit: vehicles per day
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, purple figure on Bexley Village Dr north-east of the roundabout'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-north.2050-nobuild
-  statement: Daily traffic (AADT), Bexley Village Dr, north leg, 2050 no-build
+  statement: 'Daily traffic (AADT), Bexley Village Dr, north leg, 2050 no-build'
   value: 15500
   unit: vehicles per day
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, purple figure on Bexley Village Dr north-east of the roundabout'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-north.2050-build
-  statement: Daily traffic (AADT), Bexley Village Dr, north leg, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), Bexley Village Dr, north leg, 2050 build, Alternatives A, D and E'
   value: 14500
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, purple figure on Bexley Village Dr north-east of the roundabout'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.broadporch.2023
-  statement: Daily traffic (AADT), Broad Porch Run, today (2023 counts)
+  statement: 'Daily traffic (AADT), Broad Porch Run, today (2023 counts)'
   value: 3500
   unit: vehicles per day
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, purple figure on Broad Porch Run next to the roundabout'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.broadporch.2050-nobuild
-  statement: Daily traffic (AADT), Broad Porch Run, 2050 no-build
+  statement: 'Daily traffic (AADT), Broad Porch Run, 2050 no-build'
   value: 5000
   unit: vehicles per day
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, purple figure on Broad Porch Run next to the roundabout'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.broadporch.2050-build
-  statement: Daily traffic (AADT), Broad Porch Run, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), Broad Porch Run, 2050 build, Alternatives A, D and E'
   value: 7000
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, purple figure on Broad Porch Run next to the roundabout'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-s.2023
-  statement: Daily traffic (AADT), Ballantrae Blvd, toward SR 54, today (2023 counts)
+  statement: 'Daily traffic (AADT), Ballantrae Blvd, toward SR 54, today (2023 counts)'
   value: 10700
   unit: vehicles per day
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, purple figure on Ballantrae Blvd just north of SR 54'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-s.2050-nobuild
-  statement: Daily traffic (AADT), Ballantrae Blvd, toward SR 54, 2050 no-build
+  statement: 'Daily traffic (AADT), Ballantrae Blvd, toward SR 54, 2050 no-build'
   value: 18000
   unit: vehicles per day
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, purple figure on Ballantrae Blvd just north of SR 54'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-s.2050-build
-  statement: Daily traffic (AADT), Ballantrae Blvd, toward SR 54, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), Ballantrae Blvd, toward SR 54, 2050 build, Alternatives A, D and E'
   value: 11000
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, purple figure on Ballantrae Blvd just north of SR 54'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-n.2023
-  statement: Daily traffic (AADT), Ballantrae Blvd, north of Bud Bexley Pkwy, today (2023 counts)
+  statement: 'Daily traffic (AADT), Ballantrae Blvd, just south of Bud Bexley Pkwy, today (2023 counts)'
   value: 4100
   unit: vehicles per day
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, purple figure on Ballantrae Blvd just south of Bud Bexley Pkwy'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-n.2050-nobuild
-  statement: Daily traffic (AADT), Ballantrae Blvd, north of Bud Bexley Pkwy, 2050 no-build
+  statement: 'Daily traffic (AADT), Ballantrae Blvd, just south of Bud Bexley Pkwy, 2050 no-build'
   value: 7100
   unit: vehicles per day
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, purple figure on Ballantrae Blvd just south of Bud Bexley Pkwy'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-n.2050-build
-  statement: Daily traffic (AADT), Ballantrae Blvd, north of Bud Bexley Pkwy, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), Ballantrae Blvd, just south of Bud Bexley Pkwy, 2050 build, Alternatives A, D and E'
   value: 8600
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, purple figure on Ballantrae Blvd just south of Bud Bexley Pkwy'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.aadt.sr54.2023
-  statement: Daily traffic (AADT), SR 54 between Gunn Hwy and Sunlake Blvd, today (2023 counts)
+  statement: 'Daily traffic (AADT), SR 54, the two segments the board labels, today (2023 counts)'
   value:
     low: 58700
     high: 64800
   unit: vehicles per day
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, the two purple figures on SR 54'
   as_of: '2026-09-24'
   status: current
-  note: A range across the SR 54 segments on the board.
+  checked: '2026-09-28'
+  note: 'The board gives SR 54 a figure on two segments: 58,700 west of S Branch Blvd; 64,800 between Ballantrae Blvd and Sunlake Blvd. The eastern segment is not the same on every board, so compare years with care.'
 
 - id: rangeland.aadt.sr54.2050-nobuild
-  statement: Daily traffic (AADT), SR 54 between Gunn Hwy and Sunlake Blvd, 2050 no-build
+  statement: 'Daily traffic (AADT), SR 54, the two segments the board labels, 2050 no-build'
   value:
     low: 63500
     high: 69000
   unit: vehicles per day
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, the two purple figures on SR 54'
   as_of: '2026-09-24'
   status: current
-  note: A range across the SR 54 segments on the board.
+  checked: '2026-09-28'
+  note: 'The board gives SR 54 a figure on two segments: 63,500 west of S Branch Blvd; 69,000 between Bexley Village Dr and Ballantrae Blvd. The eastern segment is not the same on every board, so compare years with care.'
 
 - id: rangeland.aadt.sr54.2050-build
-  statement: Daily traffic (AADT), SR 54 between Gunn Hwy and Sunlake Blvd, 2050 build, Alternatives A, D and E
+  statement: 'Daily traffic (AADT), SR 54, the two segments the board labels, 2050 build, Alternatives A, D and E'
   value:
     low: 56500
     high: 62500
   unit: vehicles per day
   source: pasco-2026-09-traffic-build
+  location: 'page 1, the two purple figures on SR 54'
   as_of: '2026-09-24'
   status: current
-  note: A range across the SR 54 segments on the board.
+  checked: '2026-09-28'
+  note: 'The board gives SR 54 a figure on two segments: 56,500 west of S Branch Blvd; 62,500 between Bexley Village Dr and Ballantrae Blvd. The eastern segment is not the same on every board, so compare years with care.'
 
 
 # ---- Level of service, evening peak
@@ -275,168 +337,210 @@
   value: A
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the Rangeland Blvd / Gunn Hwy junction (top of the Gunn Hwy inset); printed as A (A), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.rg-gunn.2050-nobuild
   statement: Level of service, evening peak, Rangeland Blvd at Gunn Hwy, 2050 no-build
   value: F
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the Rangeland Blvd / Gunn Hwy junction (top of the Gunn Hwy inset); printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.rg-gunn.2050-build
   statement: Level of service, evening peak, Rangeland Blvd at Gunn Hwy, 2050 build, Alternatives A, D and E
   value: C
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the Rangeland Blvd / Gunn Hwy junction (top of the Gunn Hwy inset); printed as C (C), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.rg-cattle.2023
   statement: Level of service, evening peak, Rangeland Blvd at Cattle Gap Trl, today (2023 counts)
   value: A
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the Cattle Gap Trl roundabout (Gunn Hwy inset); printed as A (A), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.rg-cattle.2050-nobuild
   statement: Level of service, evening peak, Rangeland Blvd at Cattle Gap Trl, 2050 no-build
   value: A
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the Cattle Gap Trl roundabout (Gunn Hwy inset); printed as A (A), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.rg-cattle.2050-build
   statement: Level of service, evening peak, Rangeland Blvd at Cattle Gap Trl, 2050 build, Alternatives A, D and E
   value: A
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the Cattle Gap Trl roundabout (Gunn Hwy inset); printed as A (A), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.bvd-rndbt.2023
   statement: Level of service, evening peak, Bexley Village Dr roundabout, today (2023 counts)
   value: A
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the Bexley Village Dr roundabout; printed as A (A), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.bvd-rndbt.2050-nobuild
   statement: Level of service, evening peak, Bexley Village Dr roundabout, 2050 no-build
   value: F
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the Bexley Village Dr roundabout; printed as E (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.bvd-rndbt.2050-build
   statement: Level of service, evening peak, Bexley Village Dr roundabout, 2050 build, Alternatives A, D and E
   value: D
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the Bexley Village Dr roundabout; printed as C (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.bb-ballan.2023
   statement: Level of service, evening peak, Bud Bexley Pkwy at Ballantrae Blvd, today (2023 counts)
   value: C
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the Bud Bexley Pkwy / Ballantrae Blvd junction; printed as A (C), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.bb-ballan.2050-nobuild
   statement: Level of service, evening peak, Bud Bexley Pkwy at Ballantrae Blvd, 2050 no-build
   value: D
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the Bud Bexley Pkwy / Ballantrae Blvd junction; printed as E (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.bb-ballan.2050-build
   statement: Level of service, evening peak, Bud Bexley Pkwy at Ballantrae Blvd, 2050 build, Alternatives A, D and E
   value: D
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the Bud Bexley Pkwy / Ballantrae Blvd junction; printed as D (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-gunn.2023
   statement: Level of service, evening peak, SR 54 at Gunn Hwy, today (2023 counts)
   value: D
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the SR 54 / Gunn Hwy signal (bottom of the Gunn Hwy inset); printed as D (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-gunn.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Gunn Hwy, 2050 no-build
   value: F
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the SR 54 / Gunn Hwy signal (bottom of the Gunn Hwy inset); printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-gunn.2050-build
   statement: Level of service, evening peak, SR 54 at Gunn Hwy, 2050 build, Alternatives A, D and E
   value: F
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the SR 54 / Gunn Hwy signal (bottom of the Gunn Hwy inset); printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-sbranch.2023
   statement: Level of service, evening peak, SR 54 at S Branch Blvd, today (2023 counts)
   value: C
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the SR 54 / S Branch Blvd signal; printed as B (C), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-sbranch.2050-nobuild
   statement: Level of service, evening peak, SR 54 at S Branch Blvd, 2050 no-build
   value: E
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the SR 54 / S Branch Blvd signal; printed as D (E), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-sbranch.2050-build
   statement: Level of service, evening peak, SR 54 at S Branch Blvd, 2050 build, Alternatives A, D and E
   value: D
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the SR 54 / S Branch Blvd signal; printed as C (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunc-w.2023
   statement: Level of service, evening peak, SR 54 at Suncoast Pkwy ramps, west, today (2023 counts)
   value: B
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the west ramp signal (Suncoast Pkwy inset); printed as C (B), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunc-w.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Suncoast Pkwy ramps, west, 2050 no-build
   value: E
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the west ramp signal (Suncoast Pkwy inset); printed as F (E), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunc-w.2050-build
   statement: Level of service, evening peak, SR 54 at Suncoast Pkwy ramps, west, 2050 build, Alternatives A, D and E
   value: D
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the west ramp signal (Suncoast Pkwy inset); printed as E (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
   note: 'Board gives E (D): E in the morning peak, D in the evening. See correction 2.'
 
 - id: rangeland.los.sr-sunc-e.2023
@@ -444,24 +548,30 @@
   value: C
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the east ramp signal (Suncoast Pkwy inset); printed as B (C), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunc-e.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Suncoast Pkwy ramps, east, 2050 no-build
   value: F
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the east ramp signal (Suncoast Pkwy inset); printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunc-e.2050-build
   statement: Level of service, evening peak, SR 54 at Suncoast Pkwy ramps, east, 2050 build, Alternatives A, D and E
   value: D
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the east ramp signal (Suncoast Pkwy inset); printed as E (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
   note: 'Board gives E (D): E in the morning peak, D in the evening. See correction 2.'
 
 - id: rangeland.los.sr-bvd.2023
@@ -469,32 +579,40 @@
   value: D
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the Bexley Village Dr signal (Suncoast Pkwy inset, right); printed as C (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-bvd.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Bexley Village Dr, 2050 no-build
   value: F
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the Bexley Village Dr signal (Suncoast Pkwy inset, right); printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-bvd.2050-build
   statement: Level of service, evening peak, SR 54 at Bexley Village Dr, 2050 build, Alternatives A, D and E
   value: F
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the Bexley Village Dr signal (Suncoast Pkwy inset, right); printed as E (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-ballan.2023
   statement: Level of service, evening peak, SR 54 at Ballantrae Blvd, today (2023 counts)
   value: C
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the SR 54 / Ballantrae Blvd signal; printed as C (C), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
   note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-ballan.2050-nobuild
@@ -502,8 +620,10 @@
   value: E
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the SR 54 / Ballantrae Blvd signal; printed as F (E), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
   note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-ballan.2050-build
@@ -511,8 +631,10 @@
   value: D
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the SR 54 / Ballantrae Blvd signal; printed as D (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
   note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-sunlake.2023
@@ -520,24 +642,30 @@
   value: D
   unit: grade
   source: pasco-2026-09-traffic-existing
+  location: 'page 1, at the SR 54 / Sunlake Blvd signal; printed as C (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunlake.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Sunlake Blvd, 2050 no-build
   value: F
   unit: grade
   source: pasco-2026-09-traffic-nobuild
+  location: 'page 1, at the SR 54 / Sunlake Blvd signal; printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunlake.2050-build
   statement: Level of service, evening peak, SR 54 at Sunlake Blvd, 2050 build, Alternatives A, D and E
   value: F
   unit: grade
   source: pasco-2026-09-traffic-build
+  location: 'page 1, at the SR 54 / Sunlake Blvd signal; printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 
 # ---- Cost
@@ -547,104 +675,130 @@
   value: 100.1
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Preliminary Construction Cost'', Alternative A column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.a.total
   statement: Total cost estimate, Alternative A, September 2026
   value: 150.0
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Total Preliminary Cost Estimate'', Alternative A column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.d.construction
   statement: Construction cost estimate, Alternative D, September 2026
   value: 101.4
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Preliminary Construction Cost'', Alternative D column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.d.total
   statement: Total cost estimate, Alternative D, September 2026
   value: 151.5
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Total Preliminary Cost Estimate'', Alternative D column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.e.construction
   statement: Construction cost estimate, Alternative E, September 2026
   value: 106.7
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Preliminary Construction Cost'', Alternative E column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.e.total
   statement: Total cost estimate, Alternative E, September 2026
   value: 157.8
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Total Preliminary Cost Estimate'', Alternative E column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.a.design
   statement: Design (10%), Alternative A, September 2026
   value: 10.0
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Design (10%)'', Alternative A column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.a.cei
   statement: Construction engineering and inspection (8%), Alternative A, September 2026
   value: 8.0
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Construction Engineering & Inspection (8%)'', Alternative A column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.a.row-road
   statement: Land for the roadway, Alternative A, September 2026
   value: 11.3
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Preliminary right-of-way acquisition for roadway'', Alternative A column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.a.row-ponds
   statement: Land for stormwater ponds, Alternative A, September 2026
   value: 6.2
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Preliminary right-of-way acquisition for pond sites'', Alternative A column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.a.row-flood
   statement: Land for floodplain compensation, Alternative A, September 2026
   value: 5.8
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Preliminary right-of-way acquisition for floodplain compensation sites'', Alternative A column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.a.wetland-mitigation
   statement: Wetland mitigation, Alternative A, September 2026
   value: 8.6
   unit: USD million
   source: pasco-2026-09-matrix
+  location: 'Cost section, row ''Wetland mitigation'', Alternative A column'
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.cost.build-a.2025-01.total
   statement: Total cost as printed, Build A, January 2025
   value: 111.82
   unit: USD million
   source: pasco-2025-01-matrix
+  location: 'Cost section, row ''Total Preliminary Cost Estimate'', Build Condition A column'
   as_of: '2025-01-18'
   status: current
+  checked: '2026-09-28'
   decimals: 2
 
 - id: rangeland.cost.build-a.2025-01.construction
@@ -652,8 +806,10 @@
   value: 93.18
   unit: USD million
   source: pasco-2025-01-matrix
+  location: 'Cost section, row ''Preliminary Construction Cost'', Build Condition A column'
   as_of: '2025-01-18'
   status: current
+  checked: '2026-09-28'
   decimals: 2
 
 
@@ -664,17 +820,22 @@
   value: 24.11
   unit: acres
   source: pasco-2025-01-matrix
+  location: 'row ''Potential impacts to wetlands (Acres)'', Build Condition A column'
   as_of: '2025-01-18'
   status: current
+  checked: '2026-09-28'
   decimals: 2
 
 - id: rangeland.matrix.wetlands.2026-09
-  statement: Wetlands affected, September 2026 matrix
+  statement: 'Wetlands affected, Alternatives A and D, September 2026 matrix'
   value: 33.93
   unit: acres
   source: pasco-2026-09-matrix
+  location: 'row ''Potential impacts to wetlands (Acres)'''
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
+  note: 'Alternative E is 33.97 acres.'
   decimals: 2
 
 - id: rangeland.matrix.surface-waters.2025-01
@@ -682,17 +843,21 @@
   value: 0.0
   unit: acres
   source: pasco-2025-01-matrix
+  location: 'row ''Potential impacts to surface waters (Acres)'', Build Condition A column'
   as_of: '2025-01-18'
   status: current
+  checked: '2026-09-28'
   decimals: 2
 
 - id: rangeland.matrix.surface-waters.2026-09
-  statement: Surface waters affected, September 2026 matrix
+  statement: 'Surface waters affected, Alternatives A, D and E, September 2026 matrix'
   value: 9.57
   unit: acres
   source: pasco-2026-09-matrix
+  location: 'row ''Potential impacts to surface waters (Acres)'''
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
   decimals: 2
 
 - id: rangeland.matrix.parcels.2025-01
@@ -700,16 +865,20 @@
   value: 19
   unit: parcels
   source: pasco-2025-01-matrix
+  location: 'row ''Parcels Impacted'', Build Condition A column'
   as_of: '2025-01-18'
   status: current
+  checked: '2026-09-28'
 
 - id: rangeland.matrix.parcels.2026-09
-  statement: Parcels impacted, September 2026 matrix
+  statement: 'Parcels impacted, Alternatives A, D and E, September 2026 matrix'
   value: 27
   unit: parcels
   source: pasco-2026-09-matrix
+  location: 'row ''Parcels Impacted'''
   as_of: '2026-09-24'
   status: current
+  checked: '2026-09-28'
 
 
 # ---- Project
@@ -719,8 +888,9 @@
   value: 3.41
   unit: miles
   source: mpo-2050-lrtp
-  location: Project 114.2
-  as_of: '2024-12'
+  location: 'Appendix B project sheets, page 40 (Project 114.2, Project Length)'
+  as_of: '2025-04-07'
   status: current
+  checked: '2026-09-28'
   decimals: 2
 

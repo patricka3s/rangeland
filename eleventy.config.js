@@ -158,7 +158,7 @@ export default function (eleventyConfig) {
 
   // Everything a page needs to show one fact.
   function card(f) {
-    return { ...f, display: display(f), withUnit: withUnit(f), report: reportUrl(f), asOf: when(f.as_of), src: data.sourceById[f.source] };
+    return { ...f, display: display(f), withUnit: withUnit(f), report: reportUrl(f), asOf: when(f.as_of), checkedOn: when(f.checked), src: data.sourceById[f.source] };
   }
 
   // For the Figures and sources page: facts grouped by project, then by kind,
@@ -196,7 +196,7 @@ export default function (eleventyConfig) {
       const src = data.sourceById[f.source];
       out[f.id] = {
         s: f.statement, v: withUnit(f), asof: f.as_of, st: f.status,
-        loc: f.location, note: f.note, r: reportUrl(f),
+        loc: f.location, note: f.note, r: reportUrl(f), ck: f.checked,
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
       };
     }

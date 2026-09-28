@@ -310,6 +310,7 @@ eleventyExcludeFromCollections: true
       var bits = [f.src.p, when(f.src.d || f.asof), f.loc].filter(Boolean);
       if (bits.length) src.appendChild(document.createTextNode(" · " + bits.join(" · ")));
       box.appendChild(src);
+      box.appendChild(el("p", "fck", f.ck ? "Checked against the source on " + when(f.ck) + "." : "Not yet checked against the source."));
       if (f.note) box.appendChild(el("p", "fn", f.note));
 
       var p = el("p", "fa");

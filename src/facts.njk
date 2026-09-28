@@ -23,7 +23,7 @@ eleventyExcludeFromCollections: true
 <header>
   <p class="eyebrow"><a href="../">&#8592; Back to the guide</a></p>
   <h1>Figures and sources</h1>
-  <p class="standfirst">Every figure the guide takes from a public document, with the document it comes from. Click a source to read it yourself. If a figure doesn&#8217;t match its source, use <strong>Report an error</strong> beside it &#8212; the form opens with that figure already filled in.</p>
+  <p class="standfirst">Every figure the guide takes from a public document, with the document it comes from. Click a source to read it yourself. Each one says when it was last checked against that document. If a figure doesn&#8217;t match its source, use <strong>Report an error</strong> beside it &#8212; the form opens with that figure already filled in.</p>
 </header>
 
 <div class="fsearch">
@@ -49,6 +49,7 @@ eleventyExcludeFromCollections: true
         <p class="fmeta">
           {%- if f.src.url %}<a href="{{ f.src.url }}" rel="noopener" target="_blank">{{ f.src.title }}</a>{% else %}{{ f.src.title }}{% endif -%}
           {%- if f.location %} &#183; {{ f.location }}{% endif %} &#183; <span class="fdate">{{ f.asOf }}</span>
+          &#183; {% if f.checked %}<span class="fck">checked {{ f.checkedOn }}</span>{% else %}<span class="fck no">not yet checked</span>{% endif %}
           <a class="frep" href="{{ f.report }}" rel="noopener" target="_blank">Report an error</a>
         </p>
         {% if f.note %}<p class="fnote">{{ f.note }}</p>{% endif %}
