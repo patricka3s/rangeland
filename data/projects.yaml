@@ -1,0 +1,12 @@
+# Projects - one entry per road project the site covers.
+#
+#   id     short name; must match the facts file (data/facts/<id>.yaml) and
+#          the first part of every fact id in it ("rangeland.aadt...")
+#   name   how the project is titled on the site
+#   plan   optional - its number(s) in the MPO's long range plan
+#
+# The build stops if a facts file has no project here.
+
+- id: rangeland
+  name: Rangeland Blvd extension - Cattle Gap Trl to Bexley Village Dr
+  plan: LRTP 114.2

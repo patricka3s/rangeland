@@ -7,18 +7,22 @@
 #   url         where to read it; leave out if it was never posted online
 #   note        optional - anything a reader checking it should know
 #
+# If a value contains " #" or ": ", wrap it in double quotes - otherwise
+# everything after the # is treated as a comment and silently dropped:
+#   title: "Public Workshop #3 newsletter"
+#
 # The build stops if a fact names a source id that is not in this file.
 
 # ---- Rangeland Blvd route study, Public Workshop #3 (24 September 2026)
 
 - id: pasco-2026-09-traffic-existing
-  title: Existing traffic board (2023 counts), Public Workshop #3
+  title: "Existing traffic board (2023 counts), Public Workshop #3"
   publisher: Pasco County
   date: 2026-09-24
   url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Existing%20Traffic.pdf
 
 - id: pasco-2026-09-traffic-nobuild
-  title: 2050 no-build traffic board, Public Workshop #3
+  title: "2050 no-build traffic board, Public Workshop #3"
   publisher: Pasco County
   date: 2026-09-24
   url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20No-Build%20Traffic.pdf
@@ -30,25 +34,25 @@
   url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Build%20Traffic.pdf
 
 - id: pasco-2026-09-matrix
-  title: Alternatives evaluation matrix, Public Workshop #3
+  title: "Alternatives evaluation matrix, Public Workshop #3"
   publisher: Pasco County
   date: 2026-09-24
   url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Matrix.pdf
 
 - id: pasco-2026-09-schedule
-  title: Project schedule board, Public Workshop #3
+  title: "Project schedule board, Public Workshop #3"
   publisher: Pasco County
   date: 2026-09-24
   url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Schedule.pdf
 
 - id: pasco-2026-09-newsletter
-  title: Public Workshop #3 newsletter
+  title: "Public Workshop #3 newsletter"
   publisher: Pasco County
   date: 2026-09
   url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland_PW3_Newsletter_final.pdf
 
 - id: pasco-2026-09-mailer
-  title: Public Workshop #3 mailer
+  title: "Public Workshop #3 mailer"
   publisher: Pasco County
   date: 2026-09
   note: Mailed to residents; not posted online.
@@ -86,7 +90,7 @@
 # ---- Rangeland Blvd route study, earlier
 
 - id: pasco-2025-04-boards
-  title: Workshop boards dated 30 April 2025, shown at Public Workshop #2 (1 May 2025)
+  title: "Workshop boards dated 30 April 2025, shown at Public Workshop #2 (1 May 2025)"
   publisher: Pasco County
   date: 2025-04-30
   note: Superseded by the September 2026 boards.

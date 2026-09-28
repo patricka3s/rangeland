@@ -8,11 +8,22 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { execSync } from "node:child_process";
 import yaml from "js-yaml";
 
 const DATA = "data";
 const STATUSES = ["current", "disputed", "superseded"];
 const MINUS = "−";
+
+// Headings for the kinds of fact, from the second part of a fact id
+// ("rangeland.aadt.gunn.2023" -> "aadt"). Used on the Figures and sources page.
+const TOPICS = {
+  aadt: "Daily traffic",
+  los: "Intersection grades (level of service, evening peak)",
+  cost: "Cost",
+  matrix: "Alternatives matrix",
+  "length-miles": "The project",
+};
 
 function load(file) {
   // CORE_SCHEMA keeps dates as plain text instead of turning them into Date objects.
@@ -22,6 +33,8 @@ function load(file) {
 function loadData() {
   const sources = load(path.join(DATA, "sources.yaml"));
   const definitions = load(path.join(DATA, "definitions.yaml"));
+  const site = load(path.join(DATA, "site.yaml"));
+  const projects = load(path.join(DATA, "projects.yaml"));
   const factDir = path.join(DATA, "facts");
   const facts = fs.readdirSync(factDir)
     .filter((f) => /\.ya?ml$/.test(f))
@@ -34,6 +47,11 @@ function loadData() {
     if (sourceIds.has(s.id)) problems.push(`sources.yaml: duplicate id "${s.id}"`);
     sourceIds.add(s.id);
   }
+  const projectIds = new Set(projects.map((p) => p.id));
+  for (const file of new Set(facts.map((f) => f.file))) {
+    const id = file.replace(/\.ya?ml$/, "");
+    if (!projectIds.has(id)) problems.push(`facts/${file}: there is no project "${id}" in projects.yaml`);
+  }
   const byId = {};
   for (const f of facts) {
     const where = `facts/${f.file}: "${f.id}"`;
@@ -41,6 +59,8 @@ function loadData() {
       if (f[k] === undefined || f[k] === null || f[k] === "") problems.push(`${where} is missing "${k}"`);
     }
     if (byId[f.id]) problems.push(`${where} is listed twice`);
+    const project = f.file.replace(/\.ya?ml$/, "");
+    if (f.id && !String(f.id).startsWith(project + ".")) problems.push(`${where} should start with "${project}." to match its file`);
     if (f.source && !sourceIds.has(f.source)) problems.push(`${where} names source "${f.source}", which is not in sources.yaml`);
     if (f.status && !STATUSES.includes(f.status)) problems.push(`${where} has status "${f.status}"; use ${STATUSES.join(", ")}`);
     byId[f.id] = f;
@@ -49,7 +69,8 @@ function loadData() {
     if (d.source && !sourceIds.has(d.source)) problems.push(`definitions.yaml: "${d.id}" names source "${d.source}", which is not in sources.yaml`);
   }
   if (problems.length) throw new Error("Data check failed:\n  " + problems.join("\n  "));
-  return { sources, definitions, facts, byId };
+  const sourceById = Object.fromEntries(sources.map((s) => [s.id, s]));
+  return { site, projects, sources, definitions, facts, byId, sourceById };
 }
 
 // ---- formatting
@@ -62,6 +83,13 @@ function signed(n, decimals = 0) {
 }
 function usdM(v, decimals = 1) {
   return "$" + num(v, decimals) + "M";
+}
+// "2026-09-24" -> "24 Sep 2026"; "2024-12" -> "Dec 2024"; anything else as written.
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+function when(d) {
+  const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(String(d ?? ""));
+  if (!m) return d ?? "";
+  return [m[3] && +m[3], m[2] && MONTHS[+m[2] - 1], m[1]].filter(Boolean).join(" ");
 }
 
 export default function (eleventyConfig) {
@@ -77,22 +105,103 @@ export default function (eleventyConfig) {
     return v;
   };
 
+  eleventyConfig.addGlobalData("site", data.site);
   eleventyConfig.addGlobalData("sources", data.sources);
   eleventyConfig.addGlobalData("definitions", data.definitions);
   eleventyConfig.addGlobalData("facts", data.byId);
   eleventyConfig.addWatchTarget(DATA);
 
-  // {% fact "id" %} prints a fact the way people read it:
-  //   numbers with thousands commas, money as $150.0M, ranges as 58,700–64,800.
-  // {% fact "id", "words" %} prints money as "$150.0 million".
-  eleventyConfig.addShortcode("fact", (id, style) => {
-    const f = get(id), v = f.value;
+  // Which version of the site this is, shown in small print at the foot of the
+  // page so it is easy to tell whether a change has gone live. On GitHub the
+  // commit comes from the workflow; on your own computer, from git.
+  let sha = process.env.GITHUB_SHA || "";
+  if (!sha) {
+    try { sha = execSync("git rev-parse HEAD", { encoding: "utf8" }).trim(); } catch (e) { sha = ""; }
+  }
+  const built = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York", month: "long", day: "numeric", year: "numeric",
+    hour: "numeric", minute: "2-digit", timeZoneName: "short",
+  }).format(new Date());
+  eleventyConfig.addGlobalData("build", {
+    version: sha ? sha.slice(0, 7) : "local",
+    url: sha && process.env.GITHUB_REPOSITORY ? `https://github.com/${process.env.GITHUB_REPOSITORY}/commit/${sha}` : "",
+    when: built,
+  });
+
+  // A fact the way people read it: numbers with thousands commas, money as
+  // $150.0M (or "$150.0 million" in words), ranges as 58,700–64,800.
+  function display(f, words) {
+    const v = f.value;
     if (v && typeof v === "object") return num(v.low) + "–" + num(v.high);
     if (typeof v !== "number") return String(v);
     if (f.unit === "USD million") {
-      return style === "words" ? "$" + num(v, f.decimals ?? 1) + " million" : usdM(v, f.decimals ?? 1);
+      return words ? "$" + num(v, f.decimals ?? 1) + " million" : usdM(v, f.decimals ?? 1);
     }
     return num(v, f.decimals ?? 0);
+  }
+
+  // The figure with its unit: "23,500 vehicles per day", "Grade F", "$150.0M".
+  function withUnit(f) {
+    const d = display(f);
+    if (f.unit === "USD million") return d;
+    if (f.unit === "grade") return "Grade " + d;
+    return d + " " + f.unit;
+  }
+
+  // Link to the error-report form with the first question filled in: the fact's
+  // id, what it states and its value - so a report always says which figure.
+  function reportUrl(f) {
+    const form = data.site.dispute_form;
+    return `${form.url}?usp=pp_url&${form.field}=` +
+      encodeURIComponent(`${f.id} — ${f.statement}: ${display(f)}`);
+  }
+
+  // Everything a page needs to show one fact.
+  function card(f) {
+    return { ...f, display: display(f), withUnit: withUnit(f), report: reportUrl(f), asOf: when(f.as_of), src: data.sourceById[f.source] };
+  }
+
+  // For the Figures and sources page: facts grouped by project, then by kind,
+  // in the order they appear in each facts file.
+  const groups = data.projects.map((p) => {
+    const topics = [];
+    for (const f of data.facts.filter((x) => x.id.startsWith(p.id + "."))) {
+      const key = f.id.split(".")[1];
+      let t = topics.find((x) => x.key === key);
+      if (!t) topics.push((t = { key, label: TOPICS[key] || key, facts: [] }));
+      t.facts.push(card(f));
+    }
+    return { ...p, topics };
+  }).filter((p) => p.topics.length);
+  eleventyConfig.addGlobalData("factGroups", groups);
+  eleventyConfig.addGlobalData("sourceList", data.sources.map((s) => ({
+    ...s, dateText: when(s.date), figures: data.facts.filter((f) => f.source === s.id).length,
+  })));
+
+  // {% fact "id" %} prints a fact as a small button; tapping it shows the fact's
+  // source and a link to report an error in it (see FACT DETAILS in app.js).
+  // {% fact "id", "words" %} writes money out as "$150.0 million".
+  // {% fact "id", "plain" %} prints the bare text - for use inside JavaScript.
+  eleventyConfig.addShortcode("fact", (id, style) => {
+    const f = get(id), text = display(f, style === "words");
+    if (style === "plain") return text;
+    return `<button type="button" class="fact" data-fact="${id}">${text}</button>`;
+  });
+
+  // {% factData %} writes every fact, with its source, into the page as JSON,
+  // so the details box can show them without another download.
+  eleventyConfig.addShortcode("factData", () => {
+    const out = {};
+    for (const f of data.facts) {
+      const src = data.sourceById[f.source];
+      out[f.id] = {
+        s: f.statement, v: withUnit(f), asof: f.as_of, st: f.status,
+        loc: f.location, note: f.note, r: reportUrl(f),
+        src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
+      };
+    }
+    const json = JSON.stringify({ facts: out }).replace(/</g, "\\u003c");
+    return `<script type="application/json" id="fact-data">${json}</script>`;
   });
 
   // {% js "id" %} prints a fact for use inside JavaScript: 18000, "F", or with a

@@ -8,10 +8,14 @@ eleventyExcludeFromCollections: true
     replaced by the fact's value when the site is built.
     Rows marked out:1 are drawn grey and their figures are never shown, so
     those few are still written in directly. -#}
-/* Rangeland guide - behaviour only.
-   Two jobs: the Highlights/Full detail toggle, and flipping the meeting
-   box to the comment deadline once the workshop is over.
-   No wording lives here except the two mode descriptions below. */
+/* Rangeland guide - behaviour only. Three blocks:
+   - reading mode and meeting box: the Highlights/Full detail toggle, opening
+     the corrections from #notes links, and flipping the meeting box to the
+     comment deadline once the workshop is over;
+   - NETWORK MAP: the interactive map's tabs and colours;
+   - FACT DETAILS: the box that opens when a figure is tapped.
+   No page wording lives here except the two mode descriptions and the
+   details box's labels. */
 
 (function(){
   var KEY = "rangeland-reading-mode", root = document.documentElement, saved = null;
@@ -85,7 +89,7 @@ eleventyExcludeFromCollections: true
     "tower":          {out:1, aadt:[null,null,null],    open:[1,1,1]},
     "caliente":       {out:1, aadt:[null,null,null],    open:[1,1,1]},
     "sr54":           {aadt:[{% js "rangeland.aadt.sr54.2023", "high" %},{% js "rangeland.aadt.sr54.2050-nobuild", "high" %},{% js "rangeland.aadt.sr54.2050-build", "high" %}], open:[1,1,1],
-                       disp:["{% fact "rangeland.aadt.sr54.2023" %}","{% fact "rangeland.aadt.sr54.2050-nobuild" %}","{% fact "rangeland.aadt.sr54.2050-build" %}"],
+                       disp:["{% fact "rangeland.aadt.sr54.2023", "plain" %}","{% fact "rangeland.aadt.sr54.2050-nobuild", "plain" %}","{% fact "rangeland.aadt.sr54.2050-build", "plain" %}"],
                        dlt:[null,"+6 to +8%","−9 to −11%"]},
     "gunn":           {aadt:[{% js "rangeland.aadt.gunn.2023" %},{% js "rangeland.aadt.gunn.2050-nobuild" %},{% js "rangeland.aadt.gunn.2050-build" %}], open:[1,1,1]},
     "cattlegap":      {out:1, aadt:[null,1500,null],    open:[1,1,1], disp:[null,"1,200–1,700",null]},
@@ -231,5 +235,104 @@ eleventyExcludeFromCollections: true
     });
 
     paint();
+  });
+})();
+
+/* ==========================================================================
+   FACT DETAILS
+   Figures taken from the county's documents are printed as small buttons.
+   Tapping one opens a box saying what the figure is, which document it comes
+   from, and a link to the error-report form with the figure already filled in.
+   The details are in the page as JSON (#fact-data).
+   ========================================================================== */
+(function(){
+  document.documentElement.classList.add("has-facts");
+  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function when(d){
+    var m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(String(d || ""));
+    if (!m) return d || "";
+    return (m[3] ? +m[3] + " " : "") + (m[2] ? MONTHS[+m[2] - 1] + " " : "") + m[1];
+  }
+  function el(tag, cls, text){
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    var node = document.getElementById("fact-data"), data;
+    if (!node) return;
+    try { data = JSON.parse(node.textContent); } catch (e) { return; }
+
+    var box = el("div", "factpop"), opener = null;
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-label", "Where this figure comes from");
+    box.tabIndex = -1;
+    box.hidden = true;
+    document.body.appendChild(box);
+
+    function close(){
+      if (box.hidden) return;
+      box.hidden = true;
+      if (opener) { opener.setAttribute("aria-expanded", "false"); opener.focus(); }
+      opener = null;
+    }
+    function link(text, href, cls){
+      var a = el("a", cls, text);
+      a.href = href;
+      a.rel = "noopener";
+      a.target = "_blank";
+      return a;
+    }
+    function open(btn){
+      var id = btn.getAttribute("data-fact"), f = data.facts[id];
+      if (!f) return;
+      if (opener) opener.setAttribute("aria-expanded", "false");
+      opener = btn;
+      btn.setAttribute("aria-expanded", "true");
+      box.textContent = "";
+
+      var x = el("button", "x", "×");
+      x.type = "button";
+      x.setAttribute("aria-label", "Close");
+      x.addEventListener("click", close);
+      box.appendChild(x);
+
+      if (f.st === "disputed") box.appendChild(el("p", "fst", "This figure is under dispute."));
+      if (f.st === "superseded") box.appendChild(el("p", "fst", "A newer document has replaced this figure."));
+      box.appendChild(el("p", "fv", f.v));
+      box.appendChild(el("p", "fs", f.s));
+
+      var src = el("p", "fm");
+      src.appendChild(document.createTextNode("Source: "));
+      src.appendChild(f.src.url ? link(f.src.t, f.src.url) : document.createTextNode(f.src.t));
+      var bits = [f.src.p, when(f.src.d || f.asof), f.loc].filter(Boolean);
+      if (bits.length) src.appendChild(document.createTextNode(" · " + bits.join(" · ")));
+      box.appendChild(src);
+      if (f.note) box.appendChild(el("p", "fn", f.note));
+
+      var p = el("p", "fa");
+      p.appendChild(link("Think this is wrong? Tell me →", f.r, "fd"));
+      var all = el("a", "fall", "All figures and sources");
+      all.href = "facts/#" + encodeURIComponent(id);
+      p.appendChild(all);
+      box.appendChild(p);
+      box.hidden = false;
+      box.focus();
+    }
+
+    document.addEventListener("click", function(e){
+      var t = e.target;
+      while (t && t !== document && !(t.classList && t.classList.contains("fact"))) t = t.parentNode;
+      if (t && t !== document) {
+        if (t === opener && !box.hidden) close(); else open(t);
+        return;
+      }
+      if (!box.hidden && !box.contains(e.target)) close();
+    });
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape") close();
+    });
   });
 })();

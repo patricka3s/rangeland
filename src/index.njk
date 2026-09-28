@@ -56,15 +56,7 @@ trafficRows:
 <meta name="twitter:description" content="A plain-language guide to the Rangeland Boulevard Route Study for Bexley neighbors: what is proposed, how it fits Pasco County's larger plan, what the traffic forecasts show, and what has not been answered. Written comments are due Thursday 8 October 2026.">
 <meta name="twitter:image" content="https://patricka3s.github.io/rangeland/og-image.png">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚦</text></svg>">
-<meta name="theme-color" content="#F4F5F7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0F1218" media="(prefers-color-scheme: dark)">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap">
-
-<link rel="stylesheet" href="styles.css">
+{% set root = "" %}{% include "shared-head.njk" %}
 <!-- Not deferred on purpose: it sets the reading mode before anything paints. -->
 <script src="app.js"></script>
 </head>
@@ -73,13 +65,18 @@ trafficRows:
 <!-- ==========================================================================
      EDITING THIS PAGE
 
-     All the wording is in this file. Styling is in styles.css; behaviour is in
-     app.js. You should not need to open either one to change what the page says.
+     All the wording is in this file (src/index.njk). Figures taken from the
+     county's documents are not: they live in data/facts/rangeland.yaml and are
+     pulled in by "fact" tags when the site is built, so a figure changed
+     there changes everywhere it appears. Styling is in src/styles.css;
+     behaviour is in src/app.js.njk. The README explains the whole layout.
 
      The page has two reading modes, and some wording exists twice:
        - the DECK  - div class "hlt", id "deck"  - is the Highlights view
        - the GUIDE - div id "doc", class "det"   - is the Full detail view
-     If you change a figure in one, check whether the other repeats it.
+     If you reword something in one, check whether the other repeats it.
+     Numbers written out in words ("ten thousand", "six of the eleven") are
+     not linked to the facts file - check those by hand when a figure changes.
 
      Regions below are fenced with banner comments like this one. The charts are
      SVG and are fenced separately - skip past them unless a number changed.
@@ -96,7 +93,7 @@ trafficRows:
   <p class="eyebrow">A guide for Bexley neighbors · Updated September 26, 2026</p>
   <h1>What Bexley Residents Should Know About the Rangeland Boulevard Study
   </h1>
-  <p class="standfirst">Hello, I'm Patrick. I put this guide together from public documents on the Pasco county site. I'm not affiliated with Pasco County or the MPO, I'm not on the HOA or CDD. While personally, I don't want this road to be built, my aim is not to convince you one way or the other. Instead, I aim to keep my neighbors informed and encourage them to attend the workshop. If something here is wrong, message me on Facebook and I'll do my best to fix it.</p>
+  <p class="standfirst">Hello, I'm Patrick. I put this guide together from public documents on the Pasco county site. I'm not affiliated with Pasco County or the MPO, I'm not on the HOA or CDD. While personally, I don't want this road to be built, my aim is not to convince you one way or the other. Instead, I aim to keep my neighbors informed and encourage them to attend the workshop. If something here is wrong, tap the figure and use the link in the box, or <a href="{{ site.dispute_form.url }}">tell me through this form</a>, and I'll do my best to fix it.</p>
 </header>
 
 <!-- ==========================================================================
@@ -118,9 +115,10 @@ trafficRows:
 
 <!-- ==========================================================================
      NETWORK MAP
-     Markup only. Styling is the ".netmap" block in styles.css; the traffic
-     figures and the tab behaviour are the "NETWORK MAP" block in app.js.
-     To change a number, edit app.js - not this file.
+     Markup only. Styling is the ".netmap" block in src/styles.css; the tab
+     behaviour is the "NETWORK MAP" block in src/app.js.njk. The traffic
+     figures and grades come from data/facts/rangeland.yaml - to change a
+     number, edit it there, not here or in app.js.
      ========================================================================== -->
 <section class="netmap" id="netmap">
   <p>The county published several traffic boards for this study: what these streets carry now, what they carry in 2050 if the Rangeland extension is not built, and what they carry if it is. Switch between them below. Colour and thickness are daily traffic; the letters are intersection grades; the percentages compare each view with the one to its left.</p>
@@ -382,10 +380,6 @@ trafficRows:
 </section>
 
 <!-- ==========================================================================
-     CORRECTIONS NOTICE
-     The red-edged box near the top.
-     ========================================================================== -->
-<!-- ==========================================================================
      UPDATES - "What's happened lately"
      Two lists: "Still ahead" then "Already happened" (newest first).
      ========================================================================== -->
@@ -421,10 +415,11 @@ trafficRows:
   </div>
   <span id="modenote">Read the highlights or dive into the details</span>
 </div>
+<p class="factnote">Figures with a dotted underline come straight from the county&#8217;s documents. Tap one to see which document, or to tell me it&#8217;s wrong. <a href="facts/">See every figure and its source &#8594;</a></p>
 
 <!-- ==========================================================================
      DECK - the Highlights view
-     Nine slides. Each opens with <p class="sn">NN - Title</p>.
+     Eight slides. Each opens with <p class="sn">NN - Title</p>.
      ========================================================================== -->
 <div class="hlt" id="deck">
 
@@ -862,7 +857,10 @@ trafficRows:
   <p>Set the two 2050 cases against each other and it reads differently again. <strong>Alternative A is better than the no-build at six of the eleven, the same at five, and worse at none.</strong> Two of those six are large: Rangeland Boulevard at Gunn Highway is F in the evening peak if nothing is built and C if this is, and the Bexley Village Drive roundabout is F without the project and D with it.</p>
 
   <figure>
-    <!-- chart: SVG below, skip unless a value changed -->
+    <!-- chart: SVG below. The eleven rows are drawn from the grades in
+         data/facts/rangeland.yaml (the "losChartRow" tag); their order and
+         names are at the top of this file. The aria-label below describes the
+         chart in words and does not update itself - check it if a grade changes. -->
     <svg viewBox="0 0 920 414" role="img" aria-label="Chart comparing evening peak level of service at eleven intersections in three cases: today, the 2050 no-build forecast, and the 2050 Alternative A forecast. Ten of the eleven are worse in 2050 than today, whether or not the road is built. Alternative A is better than the no-build at six intersections and worse at none. The largest differences are Rangeland Boulevard at Gunn Highway, F in the no-build and C with the project, and the Bexley Village Drive roundabout, F in the no-build and D with the project.">
       <g class="l-grid">
 <line x1="400" y1="52" x2="400" y2="368"/>
@@ -1232,14 +1230,19 @@ trafficRows:
      Corrections policy, AI disclosure, counter disclosure.
      ========================================================================== -->
 <footer>
-  <p style="margin:0 0 10px"><strong>Corrections policy.</strong> If a fact here doesn't match its source document, let me know and I will do my best to fix it within 72 hours.</p>
+  <p style="margin:0 0 10px"><strong>Corrections policy.</strong> If a fact here doesn't match its source document, tap the figure and use the link in the box, or let me know and I will do my best to fix it within 72 hours.</p>
   <p style="margin:0 0 10px">If you disagree with a reading, an interpretation or an opinion &#8212; what a number means, or what its absence implies &#8212; let me know and I will consider how best to address it. That might mean publishing it as an alternative viewpoint, linking to another site that argues it, choosing not to address it, or something else. Message me on Facebook.</p>
   <p style="margin:0 0 10px"><strong>How this is made.</strong> I use AI tools for the code behind this site, to help dig through the documents, and for first drafts of the writing. I read and check everything before it goes up, and every figure is sourced so you can check it without taking my word for it.</p>
-  <p style="margin:0 0 10px">Not sure whether something you have read about this project is right? <a href="#check">Here is where to look it up yourself.</a></p>
-  <p style="margin:0"><strong>Visit counter.</strong> This page counts visits using GoatCounter. It sets no cookies, stores nothing on your device and does not identify you. I can see how many times a page was opened and which site a visit came from. That is all I collect and all I want.</p>
+  <p style="margin:0 0 10px">Not sure whether something you have read about this project is right? <a href="#check">Here is where to look it up yourself.</a> Every figure on this page is also listed, with its source, on <a href="facts/">Figures and sources</a>.</p>
+  <p style="margin:0 0 10px"><strong>Visit counter.</strong> This page counts visits using GoatCounter. It sets no cookies, stores nothing on your device and does not identify you. I can see how many times a page was opened and which site a visit came from. That is all I collect and all I want.</p>
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %} &#183; published {{ build.when }}</p>
 </footer>
 
 </div>
+
+<!-- Every figure on the page, with its source, for the details box. Built
+     from data/facts/ - edit the figures there, not here. -->
+{% factData %}
 
 <!-- Visit counter. Disclosed in the footer. Not included in the claude.ai copy. -->
 <script data-goatcounter="https://patricka3s.goatcounter.com/count"

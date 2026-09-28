@@ -14,8 +14,12 @@ figure on it is stored once, cites the document it came from, and can be checked
 |---|---|
 | `data/sources.yaml` | Every document a fact can cite: title, publisher, date, link. |
 | `data/facts/rangeland.yaml` | Every figure the page shows from the county's documents — traffic, intersection grades, costs, matrix quantities — each with its source. |
+| `data/projects.yaml` | The road projects the site covers. Each facts file must match one. |
+| `data/site.yaml` | Site settings: the error-report form's address. |
 | `data/definitions.yaml` | Plain-language definitions of the terms the site uses. Not yet shown as a glossary. |
 | `src/index.njk` | The page. All the wording lives here; figures are pulled in from the facts file. |
+| `src/facts.njk` | The **Figures and sources** page (`/facts/`): every fact, grouped, with its source and a report link. Built entirely from the data files. |
+| `src/_includes/shared-head.njk` | Head tags both pages share: icon, fonts, stylesheet. |
 | `src/app.js.njk` | Page behaviour: the reading-mode toggle, the meeting box, and the network map (whose figures also come from the facts file). |
 | `src/styles.css`, `src/og-image.png` | Styling and the social preview card. |
 | `eleventy.config.js` | The build: loads and checks the data, and defines the tags the page uses. |
@@ -49,6 +53,29 @@ the facts they come from.
 the figures inside the correction notes (which record what the page said at the
 time, on purpose). Check those by hand when a related fact changes.
 
+**Watch out for `#`.** In these files, a `#` after a space starts a comment and
+everything after it is silently dropped. Wrap any value containing ` #` or `: `
+in double quotes: `title: "Public Workshop #3 newsletter"`.
+
+## Sources and error reports on the page
+
+Every figure pulled from the facts file shows with a dotted underline. Tapping it
+opens a small box with what the figure is, the document it comes from (with a
+link), and **"Think this is wrong? Tell me →"**. That link opens the Google Form
+with the first question already filled in with the fact's id, what it states and
+its value, so you know exactly which figure a report is about.
+
+The **Figures and sources** page (`/facts/`) lists every fact the same way —
+grouped by project and kind, searchable, each with its source link and a
+**Report an error** link — followed by every source document and how many
+figures cite it. It needs no editing: add or change a fact and it appears there.
+The guide links to it under the reading-mode toggle, in the footer, and from each
+figure's details box.
+
+The form's address and question code are in `data/site.yaml`. If you rebuild the
+form, get the new code from the form's **⋮ → Get pre-filled link** (type anything
+in the first question, then **Get link**; the code is the `entry.` number).
+
 ## Changing the wording
 
 Edit `src/index.njk` as before. The page has two reading modes: the Highlights
@@ -73,6 +100,14 @@ builds and publishes the site a minute or two later. `main` is protected, so
 nothing can reach it without a merge.
 
 GitHub setting this depends on: **Settings → Pages → Source: GitHub Actions**.
+
+**Is my change live?** The last line of the page reads e.g.
+*Version 0c08780 · published September 28, 2026 at 10:26 AM EDT*. The version is
+the start of the commit's code. Compare it with the latest commit on `main` —
+shown on the repository's front page, or in the **Actions** tab next to the
+newest "Build and publish site" run. If they match, the change is live. If the
+page still shows an old version, force a refresh (Ctrl+Shift+R, or Cmd+Shift+R
+on a Mac).
 
 ## Previewing on your own computer (optional)
 
