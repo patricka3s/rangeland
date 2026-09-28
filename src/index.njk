@@ -421,6 +421,7 @@ trafficRows:
   </div>
   <span id="modenote">Read the highlights or dive into the details</span>
 </div>
+<p class="factnote">Figures with a dotted underline come straight from the county&#8217;s documents. Tap one to see which document, or to tell me it&#8217;s wrong.</p>
 
 <!-- ==========================================================================
      DECK - the Highlights view
@@ -1232,7 +1233,7 @@ trafficRows:
      Corrections policy, AI disclosure, counter disclosure.
      ========================================================================== -->
 <footer>
-  <p style="margin:0 0 10px"><strong>Corrections policy.</strong> If a fact here doesn't match its source document, let me know and I will do my best to fix it within 72 hours.</p>
+  <p style="margin:0 0 10px"><strong>Corrections policy.</strong> If a fact here doesn't match its source document, tap the figure and use the link in the box, or let me know and I will do my best to fix it within 72 hours.</p>
   <p style="margin:0 0 10px">If you disagree with a reading, an interpretation or an opinion &#8212; what a number means, or what its absence implies &#8212; let me know and I will consider how best to address it. That might mean publishing it as an alternative viewpoint, linking to another site that argues it, choosing not to address it, or something else. Message me on Facebook.</p>
   <p style="margin:0 0 10px"><strong>How this is made.</strong> I use AI tools for the code behind this site, to help dig through the documents, and for first drafts of the writing. I read and check everything before it goes up, and every figure is sourced so you can check it without taking my word for it.</p>
   <p style="margin:0 0 10px">Not sure whether something you have read about this project is right? <a href="#check">Here is where to look it up yourself.</a></p>
@@ -1240,6 +1241,10 @@ trafficRows:
 </footer>
 
 </div>
+
+<!-- Every figure on the page, with its source, for the details box. Built
+     from data/facts/ - edit the figures there, not here. -->
+{% factData %}
 
 <!-- Visit counter. Disclosed in the footer. Not included in the claude.ai copy. -->
 <script data-goatcounter="https://patricka3s.goatcounter.com/count"

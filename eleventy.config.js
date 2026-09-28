@@ -22,6 +22,7 @@ function load(file) {
 function loadData() {
   const sources = load(path.join(DATA, "sources.yaml"));
   const definitions = load(path.join(DATA, "definitions.yaml"));
+  const site = load(path.join(DATA, "site.yaml"));
   const factDir = path.join(DATA, "facts");
   const facts = fs.readdirSync(factDir)
     .filter((f) => /\.ya?ml$/.test(f))
@@ -49,7 +50,8 @@ function loadData() {
     if (d.source && !sourceIds.has(d.source)) problems.push(`definitions.yaml: "${d.id}" names source "${d.source}", which is not in sources.yaml`);
   }
   if (problems.length) throw new Error("Data check failed:\n  " + problems.join("\n  "));
-  return { sources, definitions, facts, byId };
+  const sourceById = Object.fromEntries(sources.map((s) => [s.id, s]));
+  return { site, sources, definitions, facts, byId, sourceById };
 }
 
 // ---- formatting
@@ -82,17 +84,42 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("facts", data.byId);
   eleventyConfig.addWatchTarget(DATA);
 
-  // {% fact "id" %} prints a fact the way people read it:
-  //   numbers with thousands commas, money as $150.0M, ranges as 58,700–64,800.
-  // {% fact "id", "words" %} prints money as "$150.0 million".
-  eleventyConfig.addShortcode("fact", (id, style) => {
-    const f = get(id), v = f.value;
+  // A fact the way people read it: numbers with thousands commas, money as
+  // $150.0M (or "$150.0 million" in words), ranges as 58,700–64,800.
+  function display(f, words) {
+    const v = f.value;
     if (v && typeof v === "object") return num(v.low) + "–" + num(v.high);
     if (typeof v !== "number") return String(v);
     if (f.unit === "USD million") {
-      return style === "words" ? "$" + num(v, f.decimals ?? 1) + " million" : usdM(v, f.decimals ?? 1);
+      return words ? "$" + num(v, f.decimals ?? 1) + " million" : usdM(v, f.decimals ?? 1);
     }
     return num(v, f.decimals ?? 0);
+  }
+
+  // {% fact "id" %} prints a fact as a small button; tapping it shows the fact's
+  // source and a link to report an error in it (see FACT DETAILS in app.js).
+  // {% fact "id", "words" %} writes money out as "$150.0 million".
+  // {% fact "id", "plain" %} prints the bare text - for use inside JavaScript.
+  eleventyConfig.addShortcode("fact", (id, style) => {
+    const f = get(id), text = display(f, style === "words");
+    if (style === "plain") return text;
+    return `<button type="button" class="fact" data-fact="${id}">${text}</button>`;
+  });
+
+  // {% factData %} writes every fact, with its source, into the page as JSON,
+  // so the details box can show them without another download.
+  eleventyConfig.addShortcode("factData", () => {
+    const out = {};
+    for (const f of data.facts) {
+      const src = data.sourceById[f.source];
+      out[f.id] = {
+        s: f.statement, v: display(f), u: f.unit, asof: f.as_of, st: f.status,
+        loc: f.location, note: f.note,
+        src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
+      };
+    }
+    const json = JSON.stringify({ form: data.site.dispute_form, facts: out }).replace(/</g, "\\u003c");
+    return `<script type="application/json" id="fact-data">${json}</script>`;
   });
 
   // {% js "id" %} prints a fact for use inside JavaScript: 18000, "F", or with a

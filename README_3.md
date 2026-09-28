@@ -14,6 +14,7 @@ figure on it is stored once, cites the document it came from, and can be checked
 |---|---|
 | `data/sources.yaml` | Every document a fact can cite: title, publisher, date, link. |
 | `data/facts/rangeland.yaml` | Every figure the page shows from the county's documents — traffic, intersection grades, costs, matrix quantities — each with its source. |
+| `data/site.yaml` | Site settings: the error-report form's address. |
 | `data/definitions.yaml` | Plain-language definitions of the terms the site uses. Not yet shown as a glossary. |
 | `src/index.njk` | The page. All the wording lives here; figures are pulled in from the facts file. |
 | `src/app.js.njk` | Page behaviour: the reading-mode toggle, the meeting box, and the network map (whose figures also come from the facts file). |
@@ -48,6 +49,22 @@ the facts they come from.
 "six of the eleven"), the stat tiles on slide 05 other than the −10,000 one, and
 the figures inside the correction notes (which record what the page said at the
 time, on purpose). Check those by hand when a related fact changes.
+
+**Watch out for `#`.** In these files, a `#` after a space starts a comment and
+everything after it is silently dropped. Wrap any value containing ` #` or `: `
+in double quotes: `title: "Public Workshop #3 newsletter"`.
+
+## Sources and error reports on the page
+
+Every figure pulled from the facts file shows with a dotted underline. Tapping it
+opens a small box with what the figure is, the document it comes from (with a
+link), and **"Think this is wrong? Tell me →"**. That link opens the Google Form
+with the first question already filled in with the fact's id, what it states and
+its value, so you know exactly which figure a report is about.
+
+The form's address and question code are in `data/site.yaml`. If you rebuild the
+form, get the new code from the form's **⋮ → Get pre-filled link** (type anything
+in the first question, then **Get link**; the code is the `entry.` number).
 
 ## Changing the wording
 
