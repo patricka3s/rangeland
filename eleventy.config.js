@@ -201,13 +201,15 @@ export default function (eleventyConfig) {
   const sameValue = (a, b) => JSON.stringify(a.value) === JSON.stringify(b.value);
 
   // For the Figures and sources page: "What's changed" - one entry for every
-  // time a newer document replaced a figure, newest first, grouped by document.
+  // time a newer document gave a different figure, newest first, grouped by
+  // document. A newer document that repeats the same value isn't a change, so
+  // it isn't listed (its figure still shows a "Reconfirmed" history).
   const changes = data.facts.filter((f) => f.replaces).map((f) => {
     const old = data.byId[f.replaces];
     return { id: f.id, statement: f.statement, from: withUnit(old), fromAsOf: when(old.as_of),
              to: withUnit(f), same: sameValue(old, f), note: f.change_note,
              asOf: f.as_of, when: when(f.as_of), src: data.sourceById[f.source] };
-  }).sort((a, b) => String(b.asOf).localeCompare(String(a.asOf)));
+  }).filter((c) => !c.same).sort((a, b) => String(b.asOf).localeCompare(String(a.asOf)));
   const changeGroups = [];
   for (const c of changes) {
     let g = changeGroups.find((x) => x.asOf === c.asOf && x.src.id === c.src.id);
@@ -215,7 +217,7 @@ export default function (eleventyConfig) {
     g.items.push(c);
   }
   eleventyConfig.addGlobalData("changeGroups", changeGroups);
-  eleventyConfig.addGlobalData("changeCount", changes.filter((c) => !c.same).length);
+  eleventyConfig.addGlobalData("changeCount", changes.length);
 
   // For the Figures and sources page: facts grouped by project, then by kind,
   // in the order they appear in each facts file. A fact another one replaced
