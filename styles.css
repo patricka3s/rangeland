@@ -473,6 +473,8 @@
   .netmap figcaption{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
     line-height:1.65;color:var(--ink-3);border-top:1px solid var(--rule-soft);margin-top:12px;
     padding:11px 4px 6px}
+  .netmap figcaption > p{display:none;margin:0}
+  .netmap figcaption > p.on{display:block}
   .netmap .src{margin-top:14px}
 
   /* --- map marks --- */
