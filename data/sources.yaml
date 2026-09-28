@@ -268,3 +268,12 @@
   publisher: Pasco County
   date: '2026-08-11'
   url: https://pascocofl.portal.civicclerk.com/event/1933/agenda
+
+# ---- FDOT traffic counts (state roads and some county roads)
+
+- id: fdot-traffic-counts-2025
+  title: "Portable traffic monitoring sites, 2025 annual average daily traffic (Transportation Data and Analytics)"
+  publisher: Florida Department of Transportation
+  date: 2026-09-28
+  url: https://services1.arcgis.com/O1JpcwDW8sjYuddV/arcgis/rest/services/Portable_Traffic_Monitoring_Sites_TDA/FeatureServer/0
+  note: "FDOT's public data layer of its count sites, each with its 2025 average daily traffic and a description of where it is. The date is when FDOT last updated the layer. The same figures are on FDOT's Florida Traffic Online map. FDOT's road-section layer (Annual_Average_Daily_Traffic_TDA) shows which stretch of road each count stands for."

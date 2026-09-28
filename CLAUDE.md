@@ -145,10 +145,13 @@ every value matched. The network map's misplaced figures (Gunn Hwy, northern
 Ballantrae Blvd, Bud Bexley Pkwy east of Ballantrae) were then corrected
 silently at Patrick's request, as barely anyone had seen them. Still open:
 
-- Figures on none of the three boards: section 4's "SR 54 runs 63,500 to 93,000"
-  and "Suncoast Parkway 75,500 to 93,000"; section 5's "existing stub ... about
-  2,000 a day"; and the unused grey-row values in app.js (Cattle Gap, Suncoast,
-  US 41). Patrick is checking where they came from.
+- Section 4's "SR 54 runs 63,500 to 93,000" and "Suncoast Parkway 75,500 to
+  93,000": 63,500 is the 2050 no-build board's SR 54 figure; 75,500 and 93,000
+  are on no board and don't match FDOT's counts (checked 28 Sep 2026), so they
+  look like 2050 forecasts from another document - being searched for. Section
+  5's "existing stub ... about 2,000 a day" and the Cattle Gap value in app.js
+  are still unsourced. (The map's Suncoast and US 41 values now come from FDOT's
+  2025 counts, in the Today view only.)
 - Figures written in words ("ten thousand", "six of the eleven"), the "10 / 11" and
   "6 → 3" stat tiles, and the LOS chart's aria-label are not linked to the facts
   (all checked correct on 28 Sep 2026).
