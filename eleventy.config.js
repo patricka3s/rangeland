@@ -147,6 +147,7 @@ export default function (eleventyConfig) {
     if (f.unit === "USD million") return d;
     if (f.unit.startsWith("USD ")) return d + f.unit.slice(3);
     if (f.unit === "grade") return "Grade " + d;
+    if (f.unit === "rating") return d + " (rating)";
     return d + " " + f.unit;
   }
 
