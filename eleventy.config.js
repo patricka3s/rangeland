@@ -67,6 +67,11 @@ function loadData() {
     if (f.id && !String(f.id).startsWith(project + ".")) problems.push(`${where} should start with "${project}." to match its file`);
     if (f.source && !sourceIds.has(f.source)) problems.push(`${where} names source "${f.source}", which is not in sources.yaml`);
     if (f.status && !STATUSES.includes(f.status)) problems.push(`${where} has status "${f.status}"; use ${STATUSES.join(", ")}`);
+    // ai_checked: when Claude checked it against the document; verified: when Patrick did.
+    if (f.checked !== undefined) problems.push(`${where} uses "checked"; it is now "ai_checked" (Claude) or "verified" (Patrick)`);
+    for (const k of ["ai_checked", "verified"]) {
+      if (f[k] !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(String(f[k]))) problems.push(`${where} has ${k} "${f[k]}"; use a date like '2026-09-28'`);
+    }
     byId[f.id] = f;
   }
   // A fact that replaces another must point at a real, superseded fact, and each
@@ -221,7 +226,7 @@ export default function (eleventyConfig) {
 
   // Everything a page needs to show one fact.
   function card(f) {
-    return { ...f, display: display(f), withUnit: withUnit(f), report: reportUrl(f), asOf: when(f.as_of), checkedOn: when(f.checked), src: data.sourceById[f.source] };
+    return { ...f, display: display(f), withUnit: withUnit(f), report: reportUrl(f), asOf: when(f.as_of), aiCheckedOn: when(f.ai_checked), verifiedOn: when(f.verified), src: data.sourceById[f.source] };
   }
   // A fact's earlier versions, oldest first ([] if it replaces nothing).
   function earlier(f) {
@@ -319,6 +324,14 @@ export default function (eleventyConfig) {
     return { ...p, topics };
   }).filter((p) => p.topics.length);
   eleventyConfig.addGlobalData("factGroups", groups);
+  // How many of the listed figures a human has verified, and how many only AI has checked.
+  const listed = groups.flatMap((p) => p.topics.flatMap((t) => t.facts));
+  eleventyConfig.addGlobalData("checkCounts", {
+    total: listed.length,
+    human: listed.filter((f) => f.verified).length,
+    ai: listed.filter((f) => f.ai_checked).length,
+    unchecked: listed.filter((f) => !f.verified && !f.ai_checked).length,
+  });
   eleventyConfig.addGlobalData("sourceList", data.sources.map((s) => ({
     ...s, dateText: when(s.date), figures: data.facts.filter((f) => f.source === s.id).length,
   })));
@@ -343,7 +356,7 @@ export default function (eleventyConfig) {
       const src = data.sourceById[f.source];
       out[f.id] = {
         s: f.statement, v: withUnit(f), asof: f.as_of, st: f.status,
-        loc: f.location, note: f.note, r: reportUrl(f), ck: f.checked,
+        loc: f.location, note: f.note, r: reportUrl(f), ai: f.ai_checked, vf: f.verified,
         was: f.replaces ? withUnit(data.byId[f.replaces]) + " (" + when(data.byId[f.replaces].as_of) + ")" : undefined,
         now: data.replacedBy[f.id] ? withUnit(data.byId[data.replacedBy[f.id]]) + " (" + when(data.byId[data.replacedBy[f.id]].as_of) + ")" : undefined,
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },

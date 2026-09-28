@@ -17,8 +17,10 @@
 #              two together as a history.
 #   change_note  optional - on a fact with 'replaces': anything a reader
 #              comparing the two should know (e.g. not measured the same way)
-#   checked    optional - date the value, description and location were last
-#              checked against the source document itself
+#   ai_checked optional - date Claude (AI) last checked the value, description
+#              and location against the source document itself
+#   verified   optional - date Patrick last verified it against the document
+#              himself. Only Patrick sets this; Claude never does.
 #   decimals   optional - how many decimal places to print (default 1 for money)
 #
 # Level-of-service grades are the EVENING peak. The county publishes AM (PM)
@@ -34,7 +36,7 @@
   location: 'page 1, purple figure on Rangeland Blvd (printed three times: east of Cattle Gap Trl, and either side of S Branch Blvd)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.budbexley.2023
   statement: 'Daily traffic (AADT), Bud Bexley Pkwy, Bexley Village Dr roundabout to Ballantrae Blvd, today (2023 counts)'
@@ -44,7 +46,7 @@
   location: 'page 1, purple figure on Bud Bexley Pkwy between the roundabout and Ballantrae Blvd'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.budbexley.2050-nobuild
   statement: 'Daily traffic (AADT), Bud Bexley Pkwy, Bexley Village Dr roundabout to Ballantrae Blvd, 2050 no-build'
@@ -54,7 +56,7 @@
   location: 'page 1, purple figure on Bud Bexley Pkwy between the roundabout and Ballantrae Blvd'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.budbexley.2050-build
   statement: 'Daily traffic (AADT), Bud Bexley Pkwy, Bexley Village Dr roundabout to Ballantrae Blvd, 2050 build, Alternatives A, D and E'
@@ -64,7 +66,7 @@
   location: 'page 1, purple figure on Bud Bexley Pkwy between the roundabout and Ballantrae Blvd'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.gunn.2023
   statement: 'Daily traffic (AADT), Gunn Hwy, south of SR 54, today (2023 counts)'
@@ -74,7 +76,7 @@
   location: 'page 1, purple figure on Gunn Hwy, below (south of) its SR 54 signal'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.gunn.2050-nobuild
   statement: 'Daily traffic (AADT), Gunn Hwy, south of SR 54, 2050 no-build'
@@ -84,7 +86,7 @@
   location: 'page 1, purple figure on Gunn Hwy, below (south of) its SR 54 signal'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.gunn.2050-build
   statement: 'Daily traffic (AADT), Gunn Hwy, south of SR 54, 2050 build, Alternatives A, D and E'
@@ -94,7 +96,7 @@
   location: 'page 1, purple figure on Gunn Hwy, below (south of) its SR 54 signal'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.sbranch.2050-nobuild
   statement: 'Daily traffic (AADT), S Branch Blvd, between Rangeland Blvd and SR 54, 2050 no-build'
@@ -104,7 +106,7 @@
   location: 'page 1, purple figure on S Branch Blvd just north of SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.sbranch.2050-build
   statement: 'Daily traffic (AADT), S Branch Blvd, between Rangeland Blvd and SR 54, 2050 build, Alternatives A, D and E'
@@ -114,7 +116,7 @@
   location: 'page 1, purple figure on S Branch Blvd just north of SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-sr54.2023
   statement: 'Daily traffic (AADT), Bexley Village Dr, toward SR 54, today (2023 counts)'
@@ -124,7 +126,7 @@
   location: 'page 1, purple figure on Bexley Village Dr just north of SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-sr54.2050-nobuild
   statement: 'Daily traffic (AADT), Bexley Village Dr, toward SR 54, 2050 no-build'
@@ -134,7 +136,7 @@
   location: 'page 1, purple figure on Bexley Village Dr just north of SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-sr54.2050-build
   statement: 'Daily traffic (AADT), Bexley Village Dr, toward SR 54, 2050 build, Alternatives A, D and E'
@@ -144,7 +146,7 @@
   location: 'page 1, purple figure on Bexley Village Dr just north of SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-rndbt.2023
   statement: 'Daily traffic (AADT), Bexley Village Dr, by the roundabout, today (2023 counts)'
@@ -154,7 +156,7 @@
   location: 'page 1, purple figure on Bexley Village Dr just south of the roundabout'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-rndbt.2050-nobuild
   statement: 'Daily traffic (AADT), Bexley Village Dr, by the roundabout, 2050 no-build'
@@ -164,7 +166,7 @@
   location: 'page 1, purple figure on Bexley Village Dr just south of the roundabout'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-rndbt.2050-build
   statement: 'Daily traffic (AADT), Bexley Village Dr, by the roundabout, 2050 build, Alternatives A, D and E'
@@ -174,7 +176,7 @@
   location: 'page 1, purple figure on Bexley Village Dr just south of the roundabout'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-north.2023
   statement: 'Daily traffic (AADT), Bexley Village Dr, north leg, today (2023 counts)'
@@ -184,7 +186,7 @@
   location: 'page 1, purple figure on Bexley Village Dr north-east of the roundabout'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-north.2050-nobuild
   statement: 'Daily traffic (AADT), Bexley Village Dr, north leg, 2050 no-build'
@@ -194,7 +196,7 @@
   location: 'page 1, purple figure on Bexley Village Dr north-east of the roundabout'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.bvd-north.2050-build
   statement: 'Daily traffic (AADT), Bexley Village Dr, north leg, 2050 build, Alternatives A, D and E'
@@ -204,7 +206,7 @@
   location: 'page 1, purple figure on Bexley Village Dr north-east of the roundabout'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.broadporch.2023
   statement: 'Daily traffic (AADT), Broad Porch Run, today (2023 counts)'
@@ -214,7 +216,7 @@
   location: 'page 1, purple figure on Broad Porch Run next to the roundabout'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.broadporch.2050-nobuild
   statement: 'Daily traffic (AADT), Broad Porch Run, 2050 no-build'
@@ -224,7 +226,7 @@
   location: 'page 1, purple figure on Broad Porch Run next to the roundabout'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.broadporch.2050-build
   statement: 'Daily traffic (AADT), Broad Porch Run, 2050 build, Alternatives A, D and E'
@@ -234,7 +236,7 @@
   location: 'page 1, purple figure on Broad Porch Run next to the roundabout'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-s.2023
   statement: 'Daily traffic (AADT), Ballantrae Blvd, toward SR 54, today (2023 counts)'
@@ -244,7 +246,7 @@
   location: 'page 1, purple figure on Ballantrae Blvd just north of SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-s.2050-nobuild
   statement: 'Daily traffic (AADT), Ballantrae Blvd, toward SR 54, 2050 no-build'
@@ -254,7 +256,7 @@
   location: 'page 1, purple figure on Ballantrae Blvd just north of SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-s.2050-build
   statement: 'Daily traffic (AADT), Ballantrae Blvd, toward SR 54, 2050 build, Alternatives A, D and E'
@@ -264,7 +266,7 @@
   location: 'page 1, purple figure on Ballantrae Blvd just north of SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-n.2023
   statement: 'Daily traffic (AADT), Ballantrae Blvd, just south of Bud Bexley Pkwy, today (2023 counts)'
@@ -274,7 +276,7 @@
   location: 'page 1, purple figure on Ballantrae Blvd just south of Bud Bexley Pkwy'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-n.2050-nobuild
   statement: 'Daily traffic (AADT), Ballantrae Blvd, just south of Bud Bexley Pkwy, 2050 no-build'
@@ -284,7 +286,7 @@
   location: 'page 1, purple figure on Ballantrae Blvd just south of Bud Bexley Pkwy'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.ballantrae-n.2050-build
   statement: 'Daily traffic (AADT), Ballantrae Blvd, just south of Bud Bexley Pkwy, 2050 build, Alternatives A, D and E'
@@ -294,7 +296,7 @@
   location: 'page 1, purple figure on Ballantrae Blvd just south of Bud Bexley Pkwy'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.sr54.2023
   statement: 'Daily traffic (AADT), SR 54, the two segments the board labels, today (2023 counts)'
@@ -306,7 +308,7 @@
   location: 'page 1, the two purple figures on SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'The board gives SR 54 a figure on two segments: 58,700 west of S Branch Blvd; 64,800 between Ballantrae Blvd and Sunlake Blvd. The eastern segment is not the same on every board, so compare years with care.'
 
 - id: rangeland.aadt.sr54.2050-nobuild
@@ -319,7 +321,7 @@
   location: 'page 1, the two purple figures on SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'The board gives SR 54 a figure on two segments: 63,500 west of S Branch Blvd; 69,000 between Bexley Village Dr and Ballantrae Blvd. The eastern segment is not the same on every board, so compare years with care.'
 
 - id: rangeland.aadt.sr54.2050-build
@@ -332,7 +334,7 @@
   location: 'page 1, the two purple figures on SR 54'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'The board gives SR 54 a figure on two segments: 56,500 west of S Branch Blvd; 62,500 between Bexley Village Dr and Ballantrae Blvd. The eastern segment is not the same on every board, so compare years with care.'
 
 
@@ -349,7 +351,7 @@
   location: 'sites 145119 (east of Gunn Hwy, 49,000), 145603 (west of the Suncoast Pkwy, 55,000), 145602 (0.5 mi east of the Suncoast Pkwy, 57,500), 145601 (0.5 mi east of Ballantrae Blvd, 65,500), 145600 (0.4 mi west of US 41, 60,000)'
   as_of: '2025'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'FDOT counts, not the county''s board: the board''s 2023 figures for SR 54 are listed separately, for two segments.'
 
 - id: rangeland.aadt.suncoast-south.2025
@@ -360,7 +362,7 @@
   location: 'site 970340, main line 0.7 mi north of the Hillsborough County line'
   as_of: '2025'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.suncoast-north.2025
   statement: 'Daily traffic (AADT), Suncoast Pkwy between SR 54 and Ridge Rd, FDOT count, 2025'
@@ -370,7 +372,7 @@
   location: 'site 970360, main line north of the Anclote toll plaza (mile marker 23.372)'
   as_of: '2025'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'FDOT counts this stretch at one site, north of where Rangeland Blvd would cross, and applies the figure to the whole stretch from SR 54 northward.'
 
 - id: rangeland.aadt.us41-fdot.2025
@@ -383,7 +385,7 @@
   location: 'sites 145303 (north of SR 54, 48,000), 140029 (south of Ehren Cutoff, 45,000), 145500 (north of Ehren Cutoff, 44,000), 145511 (south of Sundance Lake Blvd, 33,000)'
   as_of: '2025'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 # ---- The Turnpike's 2050 forecasts, from its Suncoast Parkway widening study.
 # Its own model and assumptions (parkway widened, no Rangeland Blvd interchange),
@@ -397,7 +399,7 @@
   location: 'appendix, traffic data sheet "Build, 2050 (without Rangeland Blvd Interchange)", PDF page 37, demand two-way AADT column'
   as_of: '2025-11'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.aadt.suncoast-north.2050-turnpike
   statement: 'Daily traffic (AADT), Suncoast Pkwy between SR 54 and Ridge Rd, 2050 forecast in the Turnpike''s widening study (parkway widened, no Rangeland Blvd interchange)'
@@ -407,7 +409,7 @@
   location: 'appendix, traffic data sheet "Build, 2050 (without Rangeland Blvd Interchange)", PDF page 37, demand two-way AADT column'
   as_of: '2025-11'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'With a Rangeland Blvd interchange, the next sheet (PDF page 38) gives 87,800 between SR 54 and Rangeland Blvd and 75,800 between Rangeland Blvd and Ridge Rd.'
 
 - id: rangeland.aadt.sr54-suncoast.2050-turnpike
@@ -420,7 +422,7 @@
   location: 'appendix, traffic data sheet "Build, 2050 (without Rangeland Blvd Interchange)", PDF page 37, demand two-way AADT column: 98,400 west of the parkway, 94,400 east'
   as_of: '2025-11'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'With a Rangeland Blvd interchange, the next sheet gives 76,400 west and 72,400 east.'
 
 # ---- Level of service, evening peak
@@ -433,7 +435,7 @@
   location: 'page 1, at the Rangeland Blvd / Gunn Hwy junction (top of the Gunn Hwy inset); printed as A (A), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.rg-gunn.2050-nobuild
   statement: Level of service, evening peak, Rangeland Blvd at Gunn Hwy, 2050 no-build
@@ -443,7 +445,7 @@
   location: 'page 1, at the Rangeland Blvd / Gunn Hwy junction (top of the Gunn Hwy inset); printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.rg-gunn.2050-build
   statement: Level of service, evening peak, Rangeland Blvd at Gunn Hwy, 2050 build, Alternatives A, D and E
@@ -453,7 +455,7 @@
   location: 'page 1, at the Rangeland Blvd / Gunn Hwy junction (top of the Gunn Hwy inset); printed as C (C), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.rg-cattle.2023
   statement: Level of service, evening peak, Rangeland Blvd at Cattle Gap Trl, today (2023 counts)
@@ -463,7 +465,7 @@
   location: 'page 1, at the Cattle Gap Trl roundabout (Gunn Hwy inset); printed as A (A), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.rg-cattle.2050-nobuild
   statement: Level of service, evening peak, Rangeland Blvd at Cattle Gap Trl, 2050 no-build
@@ -473,7 +475,7 @@
   location: 'page 1, at the Cattle Gap Trl roundabout (Gunn Hwy inset); printed as A (A), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.rg-cattle.2050-build
   statement: Level of service, evening peak, Rangeland Blvd at Cattle Gap Trl, 2050 build, Alternatives A, D and E
@@ -483,7 +485,7 @@
   location: 'page 1, at the Cattle Gap Trl roundabout (Gunn Hwy inset); printed as A (A), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.bvd-rndbt.2023
   statement: Level of service, evening peak, Bexley Village Dr roundabout, today (2023 counts)
@@ -493,7 +495,7 @@
   location: 'page 1, at the Bexley Village Dr roundabout; printed as A (A), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.bvd-rndbt.2050-nobuild
   statement: Level of service, evening peak, Bexley Village Dr roundabout, 2050 no-build
@@ -503,7 +505,7 @@
   location: 'page 1, at the Bexley Village Dr roundabout; printed as E (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.bvd-rndbt.2050-build
   statement: Level of service, evening peak, Bexley Village Dr roundabout, 2050 build, Alternatives A, D and E
@@ -513,7 +515,7 @@
   location: 'page 1, at the Bexley Village Dr roundabout; printed as C (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.bb-ballan.2023
   statement: Level of service, evening peak, Bud Bexley Pkwy at Ballantrae Blvd, today (2023 counts)
@@ -523,7 +525,7 @@
   location: 'page 1, at the Bud Bexley Pkwy / Ballantrae Blvd junction; printed as A (C), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.bb-ballan.2050-nobuild
   statement: Level of service, evening peak, Bud Bexley Pkwy at Ballantrae Blvd, 2050 no-build
@@ -533,7 +535,7 @@
   location: 'page 1, at the Bud Bexley Pkwy / Ballantrae Blvd junction; printed as E (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.bb-ballan.2050-build
   statement: Level of service, evening peak, Bud Bexley Pkwy at Ballantrae Blvd, 2050 build, Alternatives A, D and E
@@ -543,7 +545,7 @@
   location: 'page 1, at the Bud Bexley Pkwy / Ballantrae Blvd junction; printed as D (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-gunn.2023
   statement: Level of service, evening peak, SR 54 at Gunn Hwy, today (2023 counts)
@@ -553,7 +555,7 @@
   location: 'page 1, at the SR 54 / Gunn Hwy signal (bottom of the Gunn Hwy inset); printed as D (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-gunn.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Gunn Hwy, 2050 no-build
@@ -563,7 +565,7 @@
   location: 'page 1, at the SR 54 / Gunn Hwy signal (bottom of the Gunn Hwy inset); printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-gunn.2050-build
   statement: Level of service, evening peak, SR 54 at Gunn Hwy, 2050 build, Alternatives A, D and E
@@ -573,7 +575,7 @@
   location: 'page 1, at the SR 54 / Gunn Hwy signal (bottom of the Gunn Hwy inset); printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-sbranch.2023
   statement: Level of service, evening peak, SR 54 at S Branch Blvd, today (2023 counts)
@@ -583,7 +585,7 @@
   location: 'page 1, at the SR 54 / S Branch Blvd signal; printed as B (C), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-sbranch.2050-nobuild
   statement: Level of service, evening peak, SR 54 at S Branch Blvd, 2050 no-build
@@ -593,7 +595,7 @@
   location: 'page 1, at the SR 54 / S Branch Blvd signal; printed as D (E), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-sbranch.2050-build
   statement: Level of service, evening peak, SR 54 at S Branch Blvd, 2050 build, Alternatives A, D and E
@@ -603,7 +605,7 @@
   location: 'page 1, at the SR 54 / S Branch Blvd signal; printed as C (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunc-w.2023
   statement: Level of service, evening peak, SR 54 at Suncoast Pkwy ramps, west, today (2023 counts)
@@ -613,7 +615,7 @@
   location: 'page 1, at the west ramp signal (Suncoast Pkwy inset); printed as C (B), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunc-w.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Suncoast Pkwy ramps, west, 2050 no-build
@@ -623,7 +625,7 @@
   location: 'page 1, at the west ramp signal (Suncoast Pkwy inset); printed as F (E), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunc-w.2050-build
   statement: Level of service, evening peak, SR 54 at Suncoast Pkwy ramps, west, 2050 build, Alternatives A, D and E
@@ -633,7 +635,7 @@
   location: 'page 1, at the west ramp signal (Suncoast Pkwy inset); printed as E (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'Board gives E (D): E in the morning peak, D in the evening. See correction 2.'
 
 - id: rangeland.los.sr-sunc-e.2023
@@ -644,7 +646,7 @@
   location: 'page 1, at the east ramp signal (Suncoast Pkwy inset); printed as B (C), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunc-e.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Suncoast Pkwy ramps, east, 2050 no-build
@@ -654,7 +656,7 @@
   location: 'page 1, at the east ramp signal (Suncoast Pkwy inset); printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunc-e.2050-build
   statement: Level of service, evening peak, SR 54 at Suncoast Pkwy ramps, east, 2050 build, Alternatives A, D and E
@@ -664,7 +666,7 @@
   location: 'page 1, at the east ramp signal (Suncoast Pkwy inset); printed as E (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'Board gives E (D): E in the morning peak, D in the evening. See correction 2.'
 
 - id: rangeland.los.sr-bvd.2023
@@ -675,7 +677,7 @@
   location: 'page 1, at the Bexley Village Dr signal (Suncoast Pkwy inset, right); printed as C (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-bvd.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Bexley Village Dr, 2050 no-build
@@ -685,7 +687,7 @@
   location: 'page 1, at the Bexley Village Dr signal (Suncoast Pkwy inset, right); printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-bvd.2050-build
   statement: Level of service, evening peak, SR 54 at Bexley Village Dr, 2050 build, Alternatives A, D and E
@@ -695,7 +697,7 @@
   location: 'page 1, at the Bexley Village Dr signal (Suncoast Pkwy inset, right); printed as E (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-ballan.2023
   statement: Level of service, evening peak, SR 54 at Ballantrae Blvd, today (2023 counts)
@@ -705,7 +707,7 @@
   location: 'page 1, at the SR 54 / Ballantrae Blvd signal; printed as C (C), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-ballan.2050-nobuild
@@ -716,7 +718,7 @@
   location: 'page 1, at the SR 54 / Ballantrae Blvd signal; printed as F (E), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-ballan.2050-build
@@ -727,7 +729,7 @@
   location: 'page 1, at the SR 54 / Ballantrae Blvd signal; printed as D (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-sunlake.2023
@@ -738,7 +740,7 @@
   location: 'page 1, at the SR 54 / Sunlake Blvd signal; printed as C (D), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunlake.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Sunlake Blvd, 2050 no-build
@@ -748,7 +750,7 @@
   location: 'page 1, at the SR 54 / Sunlake Blvd signal; printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.los.sr-sunlake.2050-build
   statement: Level of service, evening peak, SR 54 at Sunlake Blvd, 2050 build, Alternatives A, D and E
@@ -758,7 +760,7 @@
   location: 'page 1, at the SR 54 / Sunlake Blvd signal; printed as F (F), i.e. morning (evening)'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 
 # ---- Cost
@@ -772,7 +774,7 @@
   as_of: '2026-09-24'
   status: current
   replaces: rangeland.cost.build-a.2025-01.construction
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.a.total
   statement: Total cost estimate, Alternative A, September 2026
@@ -784,7 +786,7 @@
   status: current
   replaces: rangeland.cost.build-a.2025-01.total
   change_note: 'Not measured the same way. January''s printed total adds up construction, design and inspection only; September''s also includes land and wetland mitigation. Counting the same items on both, the rise is smaller than these two figures suggest - section 7 of the guide works it through.'
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.d.construction
   statement: Construction cost estimate, Alternative D, September 2026
@@ -794,7 +796,7 @@
   location: 'Cost section, row ''Preliminary Construction Cost'', Alternative D column'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.d.total
   statement: Total cost estimate, Alternative D, September 2026
@@ -804,7 +806,7 @@
   location: 'Cost section, row ''Total Preliminary Cost Estimate'', Alternative D column'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.e.construction
   statement: Construction cost estimate, Alternative E, September 2026
@@ -814,7 +816,7 @@
   location: 'Cost section, row ''Preliminary Construction Cost'', Alternative E column'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.e.total
   statement: Total cost estimate, Alternative E, September 2026
@@ -824,7 +826,7 @@
   location: 'Cost section, row ''Total Preliminary Cost Estimate'', Alternative E column'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.a.design
   statement: Design (10%), Alternative A, September 2026
@@ -834,7 +836,7 @@
   location: 'Cost section, row ''Design (10%)'', Alternative A column'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.a.cei
   statement: Construction engineering and inspection (8%), Alternative A, September 2026
@@ -844,7 +846,7 @@
   location: 'Cost section, row ''Construction Engineering & Inspection (8%)'', Alternative A column'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.a.row-road
   statement: Land for the roadway, Alternative A, September 2026
@@ -854,7 +856,7 @@
   location: 'Cost section, row ''Preliminary right-of-way acquisition for roadway'', Alternative A column'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.a.row-ponds
   statement: Land for stormwater ponds, Alternative A, September 2026
@@ -864,7 +866,7 @@
   location: 'Cost section, row ''Preliminary right-of-way acquisition for pond sites'', Alternative A column'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.a.row-flood
   statement: Land for floodplain compensation, Alternative A, September 2026
@@ -874,7 +876,7 @@
   location: 'Cost section, row ''Preliminary right-of-way acquisition for floodplain compensation sites'', Alternative A column'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.a.wetland-mitigation
   statement: Wetland mitigation, Alternative A, September 2026
@@ -884,7 +886,7 @@
   location: 'Cost section, row ''Wetland mitigation'', Alternative A column'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.wetland-mitigation-rate
   statement: Wetland mitigation cost per acre used in the September 2026 matrix
@@ -894,7 +896,7 @@
   location: 'footnote 2: "Wetland mitigation cost is calculated using a cost of $203,000 per acre."'
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.cost.build-a.2025-01.total
   statement: Total cost as printed, Build A, January 2025
@@ -904,7 +906,7 @@
   location: 'Cost section, row ''Total Preliminary Cost Estimate'', Build Condition A column'
   as_of: '2025-01-18'
   status: superseded
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 2
 
 - id: rangeland.cost.build-a.2025-01.construction
@@ -915,7 +917,7 @@
   location: 'Cost section, row ''Preliminary Construction Cost'', Build Condition A column'
   as_of: '2025-01-18'
   status: superseded
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 2
 
 
@@ -929,7 +931,7 @@
   location: "row 'Potential impacts to noise conditions (Low/Medium/High)', Build Condition A column"
   as_of: '2025-01-18'
   status: superseded
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'Build B was also rated High. Both build alternatives compared then had the same rating.'
 
 - id: rangeland.matrix.noise.2026-09
@@ -941,7 +943,7 @@
   as_of: '2026-09-24'
   status: current
   replaces: rangeland.matrix.noise.2025-01
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'Footnote 3 on the matrix: "Two noise impacted areas were identified on the corridor."'
 
 - id: rangeland.matrix.noise-nobuild.2026-09
@@ -952,7 +954,7 @@
   location: "row 'Potential impacts to noise conditions (Low/Medium/High)', No-Build Alternative column"
   as_of: '2026-09-24'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'The January 2025 matrix also rated the no-build None.'
 
 - id: rangeland.matrix.contamination.2025-01
@@ -963,7 +965,7 @@
   location: "row 'Potential impacts to contamination sites (Low/Medium/High)', Build Condition A column"
   as_of: '2025-01-18'
   status: superseded
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.matrix.contamination.2026-09
   statement: 'Potential impacts to contamination sites, Alternatives A, D and E, September 2026 matrix'
@@ -974,7 +976,7 @@
   as_of: '2026-09-24'
   status: current
   replaces: rangeland.matrix.contamination.2025-01
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.matrix.species.2025-01
   statement: 'Potential impacts to threatened and endangered species, Build A, January 2025 matrix'
@@ -984,7 +986,7 @@
   location: "row 'Potential impacts to threatened and endangered species (Low/Medium/High)', Build Condition A column"
   as_of: '2025-01-18'
   status: superseded
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'Build B was also rated Medium; the no-build None.'
 
 - id: rangeland.matrix.species.2026-09
@@ -996,7 +998,7 @@
   as_of: '2026-09-24'
   status: current
   replaces: rangeland.matrix.species.2025-01
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'The no-build is rated None.'
 
 - id: rangeland.matrix.historic.2025-01
@@ -1007,7 +1009,7 @@
   location: "row 'Historical and Archaeological site potentially affected (Low/Medium/High)', Build Condition A column"
   as_of: '2025-01-18'
   status: superseded
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'Build B was also rated Medium; the no-build None.'
 
 - id: rangeland.matrix.historic.2026-09
@@ -1019,7 +1021,7 @@
   as_of: '2026-09-24'
   status: current
   replaces: rangeland.matrix.historic.2025-01
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'The no-build is rated None.'
 
 - id: rangeland.matrix.wetlands.2025-01
@@ -1030,7 +1032,7 @@
   location: 'row ''Potential impacts to wetlands (Acres)'', Build Condition A column'
   as_of: '2025-01-18'
   status: superseded
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 2
 
 - id: rangeland.matrix.wetlands.2026-09
@@ -1042,7 +1044,7 @@
   as_of: '2026-09-24'
   status: current
   replaces: rangeland.matrix.wetlands.2025-01
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'Alternative E is 33.97 acres.'
   decimals: 2
 
@@ -1054,7 +1056,7 @@
   location: 'row ''Potential impacts to surface waters (Acres)'', Build Condition A column'
   as_of: '2025-01-18'
   status: superseded
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 2
 
 - id: rangeland.matrix.surface-waters.2026-09
@@ -1066,7 +1068,7 @@
   as_of: '2026-09-24'
   status: current
   replaces: rangeland.matrix.surface-waters.2025-01
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 2
 
 - id: rangeland.matrix.parcels.2025-01
@@ -1077,7 +1079,7 @@
   location: 'row ''Parcels Impacted'', Build Condition A column'
   as_of: '2025-01-18'
   status: superseded
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 - id: rangeland.matrix.parcels.2026-09
   statement: 'Parcels impacted, Alternatives A, D and E, September 2026 matrix'
@@ -1088,7 +1090,7 @@
   as_of: '2026-09-24'
   status: current
   replaces: rangeland.matrix.parcels.2025-01
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
 
 
 # ---- Project
@@ -1101,7 +1103,7 @@
   location: 'Appendix B project sheets, page 40 (Project 114.2, Project Length)'
   as_of: '2025-04-07'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 2
 
 # ---- Funding, county capital improvement plan
@@ -1114,7 +1116,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'FY 2026 Adopted'"
   as_of: '2025-09-16'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 1
 
 - id: rangeland.funding.cip.fy2027
@@ -1125,7 +1127,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'FY 2027 Proposed'"
   as_of: '2025-09-16'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 1
 
 - id: rangeland.funding.cip.fy2028
@@ -1136,7 +1138,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'FY 2028 Proposed'"
   as_of: '2025-09-16'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 1
 
 - id: rangeland.funding.cip.fy2029
@@ -1147,7 +1149,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'FY 2029 Proposed'"
   as_of: '2025-09-16'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 1
 
 - id: rangeland.funding.cip.fy2030
@@ -1158,7 +1160,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'FY 2030 Proposed'"
   as_of: '2025-09-16'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 1
 
 - id: rangeland.funding.cip.future
@@ -1169,7 +1171,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'Future Funding'"
   as_of: '2025-09-16'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   decimals: 1
 
 
@@ -1183,5 +1185,5 @@
   location: 'item 41 (TED26-0215) and its agenda memorandum, "Recommended Board Action"'
   as_of: '2026-09-09'
   status: current
-  checked: '2026-09-28'
+  ai_checked: '2026-09-28'
   note: 'First on the 11 August 2026 agenda (item R57), when the Board voted to continue it to 9 September (minutes, page 14). The minutes of 9 September were not yet published on 28 September 2026, so the outcome is not confirmed here. The memo says the trail west of US 41 is expected to be built as multi-use paths alongside county road projects, and that its segment 1 runs along Caliente Blvd and Ehren Cutoff.'

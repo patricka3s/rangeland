@@ -68,7 +68,9 @@ Wait for Patrick to choose before going on.
   them: `aadt`, `los`, `cost`, `matrix`, `length-miles`, plus `funding`
   (`<id>.funding.<phase-or-segment>.fy<year>`) for capital-plan dollars. A new
   kind needs a heading in `TOPICS` in `eleventy.config.js`.
-- Every fact gets `location` (where in the document) and, once verified, `checked`.
+- Every fact gets `location` (where in the document). Once you have compared it
+  with the document yourself, add `ai_checked` with the date. Never add `verified`:
+  that's Patrick's own check.
 - Add the project's events to `data/events.yaml` - the same kinds as other projects
   (workshops, Commission actions, contracts, every change order, plan documents,
   deadlines, and planned phases by fiscal year) - and give it a `short` name in
@@ -82,7 +84,7 @@ Wait for Patrick to choose before going on.
 
 Give Patrick the list of new facts in document order (what you read, where, and
 how confident you are - flag anything read off a map or graphic). He spot-checks
-them against the originals. Only then set `checked` dates.
+them against the originals and adds his own `verified` dates.
 
 ## 6. Build the page
 
