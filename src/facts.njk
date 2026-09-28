@@ -1,0 +1,105 @@
+---
+permalink: facts/index.html
+eleventyExcludeFromCollections: true
+---
+{#- FIGURES AND SOURCES PAGE (not copied into the built page)
+    Lists every fact in data/facts/, grouped by project and kind, each with its
+    source and a link to the error-report form. Nothing here needs editing when
+    a figure changes - it is all built from the data files. -#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figures and Sources · Bexley Guide to Rangeland Blvd Study</title>
+<meta name="description" content="Every figure in the Bexley guide to the Rangeland Boulevard study, with the public document it comes from and a way to report an error.">
+<meta name="author" content="Patrick">
+<link rel="canonical" href="https://patricka3s.github.io/rangeland/facts/">
+{% set root = "../" %}{% include "shared-head.njk" %}
+</head>
+<body class="factspage">
+<div class="wrap">
+
+<header>
+  <p class="eyebrow"><a href="../">&#8592; Back to the guide</a></p>
+  <h1>Figures and sources</h1>
+  <p class="standfirst">Every figure the guide takes from a public document, with the document it comes from. Click a source to read it yourself. If a figure doesn&#8217;t match its source, use <strong>Report an error</strong> beside it &#8212; the form opens with that figure already filled in.</p>
+</header>
+
+<div class="fsearch">
+  <label for="fq">Find a figure</label>
+  <input id="fq" type="search" placeholder="e.g. Ballantrae, 2050, cost" autocomplete="off">
+  <p id="fq-none" class="fnone" hidden>No figures match.</p>
+</div>
+
+{% for p in factGroups %}
+<section class="fproject" id="{{ p.id }}">
+  <h2><span>{{ p.name }}</span>{% if p.plan %} <span class="fplan">{{ p.plan }}</span>{% endif %}</h2>
+  {% for t in p.topics %}
+  <div class="fgroup" id="{{ p.id }}-{{ t.key }}">
+    <h3>{{ t.label }} <span class="fcount">{{ t.facts | length }}</span></h3>
+    <ul class="flist">
+      {% for f in t.facts %}
+      <li class="fitem{% if f.status != 'current' %} is-{{ f.status }}{% endif %}" id="{{ f.id }}">
+        <div class="fhead">
+          <span class="fstat">{{ f.statement }}</span>
+          <span class="fval">{{ f.withUnit }}</span>
+        </div>
+        {% if f.status == "disputed" %}<p class="fst">Under dispute</p>{% elif f.status == "superseded" %}<p class="fst">Replaced by a newer document</p>{% endif %}
+        <p class="fmeta">
+          {%- if f.src.url %}<a href="{{ f.src.url }}" rel="noopener" target="_blank">{{ f.src.title }}</a>{% else %}{{ f.src.title }}{% endif -%}
+          {%- if f.location %} &#183; {{ f.location }}{% endif %} &#183; <span class="fdate">{{ f.asOf }}</span>
+          <a class="frep" href="{{ f.report }}" rel="noopener" target="_blank">Report an error</a>
+        </p>
+        {% if f.note %}<p class="fnote">{{ f.note }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+{% endfor %}
+
+<section class="fsources" id="sources">
+  <h2><span>The documents</span></h2>
+  <p>Every document the guide draws on. The count is how many figures above come from it; a document with none is cited in the guide&#8217;s text rather than for a figure.</p>
+  <ul class="slist">
+    {% for s in sourceList %}
+    <li id="source-{{ s.id }}">
+      {% if s.url %}<a href="{{ s.url }}" rel="noopener" target="_blank">{{ s.title }}</a>{% else %}<span>{{ s.title }}</span>{% endif %}
+      <span class="smeta">{{ s.publisher }}{% if s.date %} &#183; {{ s.dateText }}{% endif %}{% if s.figures %} &#183; {{ s.figures }} figure{% if s.figures != 1 %}s{% endif %}{% endif %}</span>
+      {% if s.note %}<span class="snote">{{ s.note }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<footer>
+  <p style="margin:0 0 10px">This page is built from the same data files as the guide, so it always shows exactly the figures the guide uses. <a href="../#notes">Corrections made so far</a> are listed in the guide.</p>
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %} &#183; published {{ build.when }}</p>
+</footer>
+
+</div>
+
+<script>
+/* Filter the list as you type. Without JavaScript the full list shows. */
+(function(){
+  var q = document.getElementById("fq"), none = document.getElementById("fq-none");
+  var items = document.querySelectorAll(".fitem"), groups = document.querySelectorAll(".fgroup, .fproject");
+  q.addEventListener("input", function(){
+    var words = q.value.toLowerCase().split(/\s+/).filter(Boolean), shown = 0, i;
+    for (i = 0; i < items.length; i++){
+      var t = items[i].textContent.toLowerCase(), ok = true;
+      for (var w = 0; w < words.length; w++) if (t.indexOf(words[w]) < 0) { ok = false; break; }
+      items[i].hidden = !ok;
+      if (ok) shown++;
+    }
+    for (i = 0; i < groups.length; i++) groups[i].hidden = !groups[i].querySelector(".fitem:not([hidden])");
+    none.hidden = shown > 0;
+  });
+})();
+</script>
+<script data-goatcounter="https://patricka3s.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

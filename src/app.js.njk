@@ -301,7 +301,7 @@ eleventyExcludeFromCollections: true
 
       if (f.st === "disputed") box.appendChild(el("p", "fst", "This figure is under dispute."));
       if (f.st === "superseded") box.appendChild(el("p", "fst", "A newer document has replaced this figure."));
-      box.appendChild(el("p", "fv", f.v + " " + f.u));
+      box.appendChild(el("p", "fv", f.v));
       box.appendChild(el("p", "fs", f.s));
 
       var src = el("p", "fm");
@@ -312,13 +312,12 @@ eleventyExcludeFromCollections: true
       box.appendChild(src);
       if (f.note) box.appendChild(el("p", "fn", f.note));
 
-      if (data.form && data.form.url) {
-        var p = el("p", "fa");
-        p.appendChild(link("Think this is wrong? Tell me →",
-          data.form.url + "?usp=pp_url&" + data.form.field + "=" +
-          encodeURIComponent(id + " — " + f.s + ": " + f.v), "fd"));
-        box.appendChild(p);
-      }
+      var p = el("p", "fa");
+      p.appendChild(link("Think this is wrong? Tell me →", f.r, "fd"));
+      var all = el("a", "fall", "All figures and sources");
+      all.href = "facts/#" + encodeURIComponent(id);
+      p.appendChild(all);
+      box.appendChild(p);
       box.hidden = false;
       box.focus();
     }

@@ -56,15 +56,7 @@ trafficRows:
 <meta name="twitter:description" content="A plain-language guide to the Rangeland Boulevard Route Study for Bexley neighbors: what is proposed, how it fits Pasco County's larger plan, what the traffic forecasts show, and what has not been answered. Written comments are due Thursday 8 October 2026.">
 <meta name="twitter:image" content="https://patricka3s.github.io/rangeland/og-image.png">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚦</text></svg>">
-<meta name="theme-color" content="#F4F5F7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0F1218" media="(prefers-color-scheme: dark)">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap">
-
-<link rel="stylesheet" href="styles.css">
+{% set root = "" %}{% include "shared-head.njk" %}
 <!-- Not deferred on purpose: it sets the reading mode before anything paints. -->
 <script src="app.js"></script>
 </head>
@@ -423,7 +415,7 @@ trafficRows:
   </div>
   <span id="modenote">Read the highlights or dive into the details</span>
 </div>
-<p class="factnote">Figures with a dotted underline come straight from the county&#8217;s documents. Tap one to see which document, or to tell me it&#8217;s wrong.</p>
+<p class="factnote">Figures with a dotted underline come straight from the county&#8217;s documents. Tap one to see which document, or to tell me it&#8217;s wrong. <a href="facts/">See every figure and its source &#8594;</a></p>
 
 <!-- ==========================================================================
      DECK - the Highlights view
@@ -1241,7 +1233,7 @@ trafficRows:
   <p style="margin:0 0 10px"><strong>Corrections policy.</strong> If a fact here doesn't match its source document, tap the figure and use the link in the box, or let me know and I will do my best to fix it within 72 hours.</p>
   <p style="margin:0 0 10px">If you disagree with a reading, an interpretation or an opinion &#8212; what a number means, or what its absence implies &#8212; let me know and I will consider how best to address it. That might mean publishing it as an alternative viewpoint, linking to another site that argues it, choosing not to address it, or something else. Message me on Facebook.</p>
   <p style="margin:0 0 10px"><strong>How this is made.</strong> I use AI tools for the code behind this site, to help dig through the documents, and for first drafts of the writing. I read and check everything before it goes up, and every figure is sourced so you can check it without taking my word for it.</p>
-  <p style="margin:0 0 10px">Not sure whether something you have read about this project is right? <a href="#check">Here is where to look it up yourself.</a></p>
+  <p style="margin:0 0 10px">Not sure whether something you have read about this project is right? <a href="#check">Here is where to look it up yourself.</a> Every figure on this page is also listed, with its source, on <a href="facts/">Figures and sources</a>.</p>
   <p style="margin:0 0 10px"><strong>Visit counter.</strong> This page counts visits using GoatCounter. It sets no cookies, stores nothing on your device and does not identify you. I can see how many times a page was opened and which site a visit came from. That is all I collect and all I want.</p>
   <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %} &#183; published {{ build.when }}</p>
 </footer>

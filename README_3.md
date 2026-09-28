@@ -14,9 +14,12 @@ figure on it is stored once, cites the document it came from, and can be checked
 |---|---|
 | `data/sources.yaml` | Every document a fact can cite: title, publisher, date, link. |
 | `data/facts/rangeland.yaml` | Every figure the page shows from the county's documents — traffic, intersection grades, costs, matrix quantities — each with its source. |
+| `data/projects.yaml` | The road projects the site covers. Each facts file must match one. |
 | `data/site.yaml` | Site settings: the error-report form's address. |
 | `data/definitions.yaml` | Plain-language definitions of the terms the site uses. Not yet shown as a glossary. |
 | `src/index.njk` | The page. All the wording lives here; figures are pulled in from the facts file. |
+| `src/facts.njk` | The **Figures and sources** page (`/facts/`): every fact, grouped, with its source and a report link. Built entirely from the data files. |
+| `src/_includes/shared-head.njk` | Head tags both pages share: icon, fonts, stylesheet. |
 | `src/app.js.njk` | Page behaviour: the reading-mode toggle, the meeting box, and the network map (whose figures also come from the facts file). |
 | `src/styles.css`, `src/og-image.png` | Styling and the social preview card. |
 | `eleventy.config.js` | The build: loads and checks the data, and defines the tags the page uses. |
@@ -61,6 +64,13 @@ opens a small box with what the figure is, the document it comes from (with a
 link), and **"Think this is wrong? Tell me →"**. That link opens the Google Form
 with the first question already filled in with the fact's id, what it states and
 its value, so you know exactly which figure a report is about.
+
+The **Figures and sources** page (`/facts/`) lists every fact the same way —
+grouped by project and kind, searchable, each with its source link and a
+**Report an error** link — followed by every source document and how many
+figures cite it. It needs no editing: add or change a fact and it appears there.
+The guide links to it under the reading-mode toggle, in the footer, and from each
+figure's details box.
 
 The form's address and question code are in `data/site.yaml`. If you rebuild the
 form, get the new code from the form's **⋮ → Get pre-filled link** (type anything
