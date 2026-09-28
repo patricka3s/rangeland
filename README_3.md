@@ -65,6 +65,13 @@ link), and **"Think this is wrong? Tell me →"**. That link opens the Google Fo
 with the first question already filled in with the fact's id, what it states and
 its value, so you know exactly which figure a report is about.
 
+**When a newer document updates a figure**, don't overwrite the old one. Add the
+new fact with `replaces:` naming the old fact's id, and change the old one's
+`status` to `superseded`. The Figures and sources page then shows the new figure
+with a **Revised** badge that opens its history, and lists the change under
+**What's changed** at the top of the page. Add a `change_note` if the two
+figures aren't measured the same way.
+
 The **Figures and sources** page (`/facts/`) lists every fact the same way —
 grouped by project and kind, searchable, each with its source link and a
 **Report an error** link — followed by every source document and how many

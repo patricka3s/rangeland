@@ -57,7 +57,15 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
 - Scenarios: `2023` (or the count year), `2050-nobuild`, `2050-build`.
 - Required: `id, statement, value, unit, source, as_of, status`. Status is
   `current | disputed | superseded`. Optional: `location` (page/board spot), `note`,
-  `decimals`.
+  `decimals`, `checked` (date last checked against the document), `replaces`,
+  `change_note`.
+- **When a newer document gives a new figure for something already in the facts**
+  (e.g. a later matrix), add a new fact with `replaces: <older id>` and set the older
+  one's `status: superseded` — the build checks both. Never edit the old value.
+  Add a `change_note` if the two aren't measured the same way. The Figures and
+  sources page then shows the newer figure with a "Revised" (or "Reconfirmed")
+  history and lists it under "What's changed". Keep change styling neutral: no
+  red/green for up/down — a figure rising is not good or bad.
 - Units in use: `vehicles per day`, `grade`, `rating` (the matrix's None / Low / Medium /
   High), `USD million`, `USD per acre`, `acres`, `parcels`, `miles`.
   Ranges are `value: {low: …, high: …}`.

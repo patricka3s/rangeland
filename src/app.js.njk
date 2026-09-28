@@ -303,9 +303,10 @@ eleventyExcludeFromCollections: true
       box.appendChild(x);
 
       if (f.st === "disputed") box.appendChild(el("p", "fst", "This figure is under dispute."));
-      if (f.st === "superseded") box.appendChild(el("p", "fst", "A newer document has replaced this figure."));
+      if (f.st === "superseded") box.appendChild(el("p", "fst", f.now ? "A newer document has replaced this figure: now " + f.now + "." : "A newer document has replaced this figure."));
       box.appendChild(el("p", "fv", f.v));
       box.appendChild(el("p", "fs", f.s));
+      if (f.was) box.appendChild(el("p", "fwas", "Earlier figure: " + f.was + ". See the history on All figures and sources."));
 
       var src = el("p", "fm");
       src.appendChild(document.createTextNode("Source: "));
