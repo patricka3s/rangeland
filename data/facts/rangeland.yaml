@@ -336,6 +336,93 @@
   note: 'The board gives SR 54 a figure on two segments: 56,500 west of S Branch Blvd; 62,500 between Bexley Village Dr and Ballantrae Blvd. The eastern segment is not the same on every board, so compare years with care.'
 
 
+# ---- FDOT counts, 2025, for roads the county's boards don't number.
+# A different source and year from the boards above: FDOT's own count sites.
+
+- id: rangeland.aadt.sr54-fdot.2025
+  statement: 'Daily traffic (AADT), SR 54 between Gunn Hwy and US 41, FDOT''s five count sites, 2025'
+  value:
+    low: 49000
+    high: 65500
+  unit: vehicles per day
+  source: fdot-traffic-counts-2025
+  location: 'sites 145119 (east of Gunn Hwy, 49,000), 145603 (west of the Suncoast Pkwy, 55,000), 145602 (0.5 mi east of the Suncoast Pkwy, 57,500), 145601 (0.5 mi east of Ballantrae Blvd, 65,500), 145600 (0.4 mi west of US 41, 60,000)'
+  as_of: '2025'
+  status: current
+  checked: '2026-09-28'
+  note: 'FDOT counts, not the county''s board: the board''s 2023 figures for SR 54 are listed separately, for two segments.'
+
+- id: rangeland.aadt.suncoast-south.2025
+  statement: 'Daily traffic (AADT), Suncoast Pkwy between the Hillsborough County line and SR 54, FDOT count, 2025'
+  value: 65900
+  unit: vehicles per day
+  source: fdot-traffic-counts-2025
+  location: 'site 970340, main line 0.7 mi north of the Hillsborough County line'
+  as_of: '2025'
+  status: current
+  checked: '2026-09-28'
+
+- id: rangeland.aadt.suncoast-north.2025
+  statement: 'Daily traffic (AADT), Suncoast Pkwy between SR 54 and Ridge Rd, FDOT count, 2025'
+  value: 55300
+  unit: vehicles per day
+  source: fdot-traffic-counts-2025
+  location: 'site 970360, main line north of the Anclote toll plaza (mile marker 23.372)'
+  as_of: '2025'
+  status: current
+  checked: '2026-09-28'
+  note: 'FDOT counts this stretch at one site, north of where Rangeland Blvd would cross, and applies the figure to the whole stretch from SR 54 northward.'
+
+- id: rangeland.aadt.us41-fdot.2025
+  statement: 'Daily traffic (AADT), US 41 between SR 54 and Sundance Lake Blvd, FDOT''s four count sites, 2025'
+  value:
+    low: 33000
+    high: 48000
+  unit: vehicles per day
+  source: fdot-traffic-counts-2025
+  location: 'sites 145303 (north of SR 54, 48,000), 140029 (south of Ehren Cutoff, 45,000), 145500 (north of Ehren Cutoff, 44,000), 145511 (south of Sundance Lake Blvd, 33,000)'
+  as_of: '2025'
+  status: current
+  checked: '2026-09-28'
+
+# ---- The Turnpike's 2050 forecasts, from its Suncoast Parkway widening study.
+# Its own model and assumptions (parkway widened, no Rangeland Blvd interchange),
+# not the county's boards.
+
+- id: rangeland.aadt.suncoast-south.2050-turnpike
+  statement: 'Daily traffic (AADT), Suncoast Pkwy between W Lutz Lake Fern Rd and SR 54, 2050 forecast in the Turnpike''s widening study (parkway widened, no Rangeland Blvd interchange)'
+  value: 93000
+  unit: vehicles per day
+  source: turnpike-suncoast-nsr-2025-11
+  location: 'appendix, traffic data sheet "Build, 2050 (without Rangeland Blvd Interchange)", PDF page 37, demand two-way AADT column'
+  as_of: '2025-11'
+  status: current
+  checked: '2026-09-28'
+
+- id: rangeland.aadt.suncoast-north.2050-turnpike
+  statement: 'Daily traffic (AADT), Suncoast Pkwy between SR 54 and Ridge Rd, 2050 forecast in the Turnpike''s widening study (parkway widened, no Rangeland Blvd interchange)'
+  value: 75400
+  unit: vehicles per day
+  source: turnpike-suncoast-nsr-2025-11
+  location: 'appendix, traffic data sheet "Build, 2050 (without Rangeland Blvd Interchange)", PDF page 37, demand two-way AADT column'
+  as_of: '2025-11'
+  status: current
+  checked: '2026-09-28'
+  note: 'With a Rangeland Blvd interchange, the next sheet (PDF page 38) gives 87,800 between SR 54 and Rangeland Blvd and 75,800 between Rangeland Blvd and Ridge Rd.'
+
+- id: rangeland.aadt.sr54-suncoast.2050-turnpike
+  statement: 'Daily traffic (AADT), SR 54 either side of the Suncoast Pkwy, 2050 forecast in the Turnpike''s widening study (parkway widened, no Rangeland Blvd interchange)'
+  value:
+    low: 94400
+    high: 98400
+  unit: vehicles per day
+  source: turnpike-suncoast-nsr-2025-11
+  location: 'appendix, traffic data sheet "Build, 2050 (without Rangeland Blvd Interchange)", PDF page 37, demand two-way AADT column: 98,400 west of the parkway, 94,400 east'
+  as_of: '2025-11'
+  status: current
+  checked: '2026-09-28'
+  note: 'With a Rangeland Blvd interchange, the next sheet gives 76,400 west and 72,400 east.'
+
 # ---- Level of service, evening peak
 
 - id: rangeland.los.rg-gunn.2023

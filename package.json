@@ -4,7 +4,8 @@
   "description": "Plain-language guide to Pasco County road projects, built from sourced data files.",
   "scripts": {
     "build": "eleventy",
-    "serve": "eleventy --serve"
+    "serve": "eleventy --serve",
+    "preview": "eleventy && node tools/preview.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",

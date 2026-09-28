@@ -75,7 +75,9 @@ eleventyExcludeFromCollections: true
    Public Workshop #3 on 24 September 2026. aadt and open are [2023, 2050 not
    built, 2050 built]; aadt null means no figure for that year; open 0 means the
    road is not open to traffic then; out:1 means this study never numbers the
-   street at all, so it is drawn grey in every view.
+   street at all, so it is drawn grey in every view. fdot:1 marks a road the
+   boards don't number, whose "today" figure is FDOT's 2025 count instead (the
+   map's caption says so); a range uses its high end for the colour, like SR 54.
    No wording lives in this file - tab labels and captions are in index.html.
    ========================================================================== */
 (function(){
@@ -96,9 +98,9 @@ eleventyExcludeFromCollections: true
     "gunn-s":         {aadt:[{% js "rangeland.aadt.gunn.2023" %},{% js "rangeland.aadt.gunn.2050-nobuild" %},{% js "rangeland.aadt.gunn.2050-build" %}], open:[1,1,1]},
     "cattlegap":      {out:1, aadt:[null,1500,null],    open:[1,1,1], disp:[null,"1,200–1,700",null]},
     "sbranch":        {aadt:[null,{% js "rangeland.aadt.sbranch.2050-nobuild" %},{% js "rangeland.aadt.sbranch.2050-build" %}],  open:[1,1,1]},
-    "suncoast-n":     {out:1, aadt:[null,75500,null],   open:[1,1,1]},
-    "suncoast-m":     {out:1, aadt:[null,75500,null],   open:[1,1,1]},
-    "suncoast-s":     {out:1, aadt:[null,93000,null],   open:[1,1,1]},
+    "suncoast-n":     {aadt:[{% js "rangeland.aadt.suncoast-north.2025" %},null,null], open:[1,1,1], fdot:1},
+    "suncoast-m":     {aadt:[{% js "rangeland.aadt.suncoast-north.2025" %},null,null], open:[1,1,1], fdot:1},
+    "suncoast-s":     {aadt:[{% js "rangeland.aadt.suncoast-south.2025" %},null,null], open:[1,1,1], fdot:1},
     "bvd-sr54":       {aadt:[{% js "rangeland.aadt.bvd-sr54.2023" %},{% js "rangeland.aadt.bvd-sr54.2050-nobuild" %},{% js "rangeland.aadt.bvd-sr54.2050-build" %}], open:[1,1,1]},
     "bvd-rndbt":      {aadt:[{% js "rangeland.aadt.bvd-rndbt.2023" %},{% js "rangeland.aadt.bvd-rndbt.2050-nobuild" %},{% js "rangeland.aadt.bvd-rndbt.2050-build" %}],  open:[1,1,1]},
     "bvd-ne-lo":      {aadt:[{% js "rangeland.aadt.bvd-north.2023" %},{% js "rangeland.aadt.bvd-north.2050-nobuild" %},{% js "rangeland.aadt.bvd-north.2050-build" %}],  open:[1,1,1]},
@@ -109,7 +111,7 @@ eleventyExcludeFromCollections: true
     "ballantrae-n":   {out:1, aadt:[null,null,null],    open:[1,1,1]},
     "sunlake-s":      {out:1, aadt:[null,null,null],    open:[1,1,1]},
     "sunlake-n":      {out:1, aadt:[null,null,null],    open:[0,0,0]},
-    "us41":           {out:1, aadt:[54500,null,null],  open:[1,1,1]}
+    "us41":           {aadt:[{% js "rangeland.aadt.us41-fdot.2025", "high" %},null,null], open:[1,1,1], fdot:1}
   };
 
   var INT = {

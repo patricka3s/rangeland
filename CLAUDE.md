@@ -69,7 +69,8 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
   year), `related` (related studies - listed on Figures and sources, not necessarily
   on the guide), plus one-offs like `length-miles`.
   A new kind needs a heading in `TOPICS` in `eleventy.config.js`.
-- Scenarios: `2023` (or the count year), `2050-nobuild`, `2050-build`.
+- Scenarios: `2023` (or the count year), `2050-nobuild`, `2050-build`, and
+  `2050-turnpike` for the Turnpike's own 2050 forecasts (a different model).
 - Required: `id, statement, value, unit, source, as_of, status`. Status is
   `current | disputed | superseded`. Optional: `location` (page/board spot), `note`,
   `decimals`, `checked` (date last checked against the document), `replaces`,
@@ -104,6 +105,15 @@ Patrick decides. In short:
    scenarios as Rangeland; Patrick spot-checks the facts (checkpoint 2).
 3. Build the page at `/<project-id>/` with the standard sections, in the standard
    order - sections with nothing published say so rather than disappearing.
+   **Every project page looks the same.** Copy the layout of an existing page (the
+   skill says which) and reuse the existing styles in `src/styles.css`: the project
+   bar, the "What's happened lately" box, the Reading mode bar (Highlights | Full
+   detail; Full detail disabled until there's a study or workshop to write it
+   from), slides (`.slide`, `.sn`, `.stats`, `.steps`, `.qlist`, `.foot`) and the
+   version line in the footer. Don't invent new components or colours for one
+   project; if a project needs something new, add it as a shared style that every
+   page can use and ask Patrick first. Each project also gets a tag shade
+   (`.pj-<project-id>`) for the Timeline.
 4. Site structure (decided with Patrick, 28 Sep 2026): new projects at
    `/<project-id>/` with a project bar on every page; after 8 Oct 2026 the
    Rangeland guide moves to `/rangeland/`, the home page becomes a projects page,
@@ -117,6 +127,14 @@ Patrick decides. In short:
 - Before pushing: `npm run build` must pass. For visible changes, check the page in
   a browser (Chromium is at `/opt/pw-browsers`; Playwright works) at desktop and
   phone widths, light and dark.
+- **Preview before merge.** After pushing, run `PREVIEW_PR=<N> npm run preview`
+  (builds, then writes `_preview/`: a copy with folder links pointing at
+  `index.html`, no GoatCounter, and a "Preview" banner), and publish
+  `_preview/index.html` with the Artifact tool, passing every other file in
+  `_preview/` in `files` (`styles.css`, `app.js`, `og-image.png`, and each
+  `<folder>/index.html`). Update the one preview page Patrick already has,
+  https://claude.ai/artifact/LUnhSwLPTm6gssWoEFSAuJ (pass it as `url`), rather
+  than making a new one, and give him the link with the pull request.
 - The site publishes itself when a pull request is merged
   (`.github/workflows/site.yml`). The version line at the foot of each page shows
   which commit is live and, for a merge, the pull request number.
@@ -145,10 +163,15 @@ every value matched. The network map's misplaced figures (Gunn Hwy, northern
 Ballantrae Blvd, Bud Bexley Pkwy east of Ballantrae) were then corrected
 silently at Patrick's request, as barely anyone had seen them. Still open:
 
-- Figures on none of the three boards: section 4's "SR 54 runs 63,500 to 93,000"
-  and "Suncoast Parkway 75,500 to 93,000"; section 5's "existing stub ... about
-  2,000 a day"; and the unused grey-row values in app.js (Cattle Gap, Suncoast,
-  US 41). Patrick is checking where they came from.
+- Section 4's "SR 54 runs 63,500 to 93,000" and "Suncoast Parkway 75,500 to
+  93,000": 63,500 is the 2050 no-build board's SR 54 figure; 75,500 and 93,000
+  are on no board and don't match FDOT's counts (checked 28 Sep 2026). They
+  match the Turnpike's Suncoast noise study 2050 forecasts (93,000 south of
+  SR 54; 75,400, not 75,500, north of it) - now facts; Patrick to decide the
+  wording. SR 54's "93,000" matches nothing (that study says 94,400-98,400). Section
+  5's "existing stub ... about 2,000 a day" and the Cattle Gap value in app.js
+  are still unsourced. (The map's Suncoast and US 41 values now come from FDOT's
+  2025 counts, in the Today view only.)
 - Figures written in words ("ten thousand", "six of the eleven"), the "10 / 11" and
   "6 → 3" stat tiles, and the LOS chart's aria-label are not linked to the facts
   (all checked correct on 28 Sep 2026).
