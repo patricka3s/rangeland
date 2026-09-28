@@ -69,7 +69,8 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
   year), `related` (related studies - listed on Figures and sources, not necessarily
   on the guide), plus one-offs like `length-miles`.
   A new kind needs a heading in `TOPICS` in `eleventy.config.js`.
-- Scenarios: `2023` (or the count year), `2050-nobuild`, `2050-build`.
+- Scenarios: `2023` (or the count year), `2050-nobuild`, `2050-build`, and
+  `2050-turnpike` for the Turnpike's own 2050 forecasts (a different model).
 - Required: `id, statement, value, unit, source, as_of, status`. Status is
   `current | disputed | superseded`. Optional: `location` (page/board spot), `note`,
   `decimals`, `checked` (date last checked against the document), `replaces`,
@@ -164,8 +165,10 @@ silently at Patrick's request, as barely anyone had seen them. Still open:
 
 - Section 4's "SR 54 runs 63,500 to 93,000" and "Suncoast Parkway 75,500 to
   93,000": 63,500 is the 2050 no-build board's SR 54 figure; 75,500 and 93,000
-  are on no board and don't match FDOT's counts (checked 28 Sep 2026), so they
-  look like 2050 forecasts from another document - being searched for. Section
+  are on no board and don't match FDOT's counts (checked 28 Sep 2026). They
+  match the Turnpike's Suncoast noise study 2050 forecasts (93,000 south of
+  SR 54; 75,400, not 75,500, north of it) - now facts; Patrick to decide the
+  wording. SR 54's "93,000" matches nothing (that study says 94,400-98,400). Section
   5's "existing stub ... about 2,000 a day" and the Cattle Gap value in app.js
   are still unsourced. (The map's Suncoast and US 41 values now come from FDOT's
   2025 counts, in the Today view only.)

@@ -385,6 +385,44 @@
   status: current
   checked: '2026-09-28'
 
+# ---- The Turnpike's 2050 forecasts, from its Suncoast Parkway widening study.
+# Its own model and assumptions (parkway widened, no Rangeland Blvd interchange),
+# not the county's boards.
+
+- id: rangeland.aadt.suncoast-south.2050-turnpike
+  statement: 'Daily traffic (AADT), Suncoast Pkwy between W Lutz Lake Fern Rd and SR 54, 2050 forecast in the Turnpike''s widening study (parkway widened, no Rangeland Blvd interchange)'
+  value: 93000
+  unit: vehicles per day
+  source: turnpike-suncoast-nsr-2025-11
+  location: 'appendix, traffic data sheet "Build, 2050 (without Rangeland Blvd Interchange)", PDF page 37, demand two-way AADT column'
+  as_of: '2025-11'
+  status: current
+  checked: '2026-09-28'
+
+- id: rangeland.aadt.suncoast-north.2050-turnpike
+  statement: 'Daily traffic (AADT), Suncoast Pkwy between SR 54 and Ridge Rd, 2050 forecast in the Turnpike''s widening study (parkway widened, no Rangeland Blvd interchange)'
+  value: 75400
+  unit: vehicles per day
+  source: turnpike-suncoast-nsr-2025-11
+  location: 'appendix, traffic data sheet "Build, 2050 (without Rangeland Blvd Interchange)", PDF page 37, demand two-way AADT column'
+  as_of: '2025-11'
+  status: current
+  checked: '2026-09-28'
+  note: 'With a Rangeland Blvd interchange, the next sheet (PDF page 38) gives 87,800 between SR 54 and Rangeland Blvd and 75,800 between Rangeland Blvd and Ridge Rd.'
+
+- id: rangeland.aadt.sr54-suncoast.2050-turnpike
+  statement: 'Daily traffic (AADT), SR 54 either side of the Suncoast Pkwy, 2050 forecast in the Turnpike''s widening study (parkway widened, no Rangeland Blvd interchange)'
+  value:
+    low: 94400
+    high: 98400
+  unit: vehicles per day
+  source: turnpike-suncoast-nsr-2025-11
+  location: 'appendix, traffic data sheet "Build, 2050 (without Rangeland Blvd Interchange)", PDF page 37, demand two-way AADT column: 98,400 west of the parkway, 94,400 east'
+  as_of: '2025-11'
+  status: current
+  checked: '2026-09-28'
+  note: 'With a Rangeland Blvd interchange, the next sheet gives 76,400 west and 72,400 east.'
+
 # ---- Level of service, evening peak
 
 - id: rangeland.los.rg-gunn.2023

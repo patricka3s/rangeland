@@ -277,3 +277,12 @@
   date: 2026-09-28
   url: https://services1.arcgis.com/O1JpcwDW8sjYuddV/arcgis/rest/services/Portable_Traffic_Monitoring_Sites_TDA/FeatureServer/0
   note: "FDOT's public data layer of its count sites, each with its 2025 average daily traffic and a description of where it is. The date is when FDOT last updated the layer. The same figures are on FDOT's Florida Traffic Online map. FDOT's road-section layer (Annual_Average_Daily_Traffic_TDA) shows which stretch of road each count stands for."
+
+# ---- Florida's Turnpike: Suncoast Parkway widening study (FPID 448068-1)
+
+- id: turnpike-suncoast-nsr-2025-11
+  title: "Noise Study Report, Widening Suncoast Pkwy (SR 589) PD&E, Van Dyke Road to SR 52"
+  publisher: "Florida's Turnpike Enterprise"
+  date: 2025-11
+  url: https://floridasturnpike.com/wp-content/uploads/2026/07/Suncoast-Parkway-448068-1_PDandE-Van_Dyke_to_SR_52_NSR-11072025.pdf
+  note: "Its appendix has the traffic data used for the noise analysis: 2023, and 2050 with the parkway widened, both without and with a Rangeland Blvd interchange. The March 2025 draft has the same figures."
