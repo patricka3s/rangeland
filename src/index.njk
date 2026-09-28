@@ -84,6 +84,7 @@ trafficRows:
 
 <a class="skip" href="#s1">Skip to contents</a>
 <div class="wrap">
+{% set current = "rangeland" %}{% include "project-bar.njk" %}
 
 <!-- ==========================================================================
      PAGE HEADER
@@ -396,25 +397,24 @@ trafficRows:
 
 <!-- ==========================================================================
      UPDATES - "What's happened lately"
-     Two lists: "Still ahead" then "Already happened" (newest first).
+     Built from data/events.yaml: this project's upcoming events, then its five
+     latest. To add an entry, add an event there - it appears here and on the
+     Timeline page.
      ========================================================================== -->
 <details class="upd">
   <summary>What's happened lately</summary>
   <div class="bd">
-    <h4>Still ahead</h4>
+    {% if recentEvents.rangeland.upcoming.length %}<h4>Still ahead</h4>
     <ol>
-      <li><span class="dt">8 Oct</span><span><strong>Comments close.</strong> This is the deadline to submit a comment to be included in the public record.</span></li>
-    </ol>
+      {% for e in recentEvents.rangeland.upcoming %}<li><span class="dt">{{ e.shown }}</span><span><a href="timeline/#{{ e.id }}">{{ e.title }}</a></span></li>
+      {% endfor %}
+    </ol>{% endif %}
     <h4>Already happened</h4>
     <ol class="past">
-      <li><span class="dt">26 Sep</span><span>The county has <strong>posted the whole workshop package</strong> &#8212; the evaluation matrix, the concept boards, all three traffic boards, the typical sections, the schedule and the newsletter. Everything this page cites from the workshop is now a document you can open for yourself, linked in section 10.</span></li>
-      <li><span class="dt">25 Sep</span><span>I reviewed the county's <strong>updated evaluation matrix</strong> from the workshop. The estimate for Alternative A is now <strong>$150.0 million</strong>, D and E are priced for the first time. Interestingly, noise impact and contamination ratings were lowered since the original assessment from January 2025. See Section 7.</span></li>
-      <li><span class="dt">24 Sep</span><span><strong>Public Workshop #3 happened.</strong> Four things I learned: travel time is folded into the intersection grades rather than published separately; Bexley Village Drive is expected to connect north to <strong>Ridge Road</strong> eventually, which is part of why its traffic rises; and the design team had no budget for a project website, but thanked me for mine.</span></li>
-      <li><span class="dt">22 Sep</span><span>Confirmed that the state's <strong>$4.5 million</strong> for this road survived the Governor's veto pen and is now law. It has been available since 1 July. Section 7.</span></li>
-      <li><span class="dt">18 Sep</span><span>Pasco County's Transportation Engineering Department sent <strong>corrections to this page</strong> and the <strong>2050 no-build forecast</strong>. Thirteen items changed and one claim was withdrawn outright. <a href="#notes">The corrections are at the foot of this page.</a></span></li>
-      <li><span class="dt">14 Sep</span><span>The <em>Tampa Bay Beacon</em> reported the project at <strong>$77 million</strong> &#8212; $38.5 million from the county, $38.5 million sought from the state. That doesn't seem to match any published figures I can find. Section 7.</span></li>
-      <li><span class="dt">3 Sep</span><span>The MPO added Rangeland to its <strong>2026 TRIP priority list</strong>, which is the step before asking the state for construction money.</span></li>
+      {% for e in recentEvents.rangeland.past %}<li><span class="dt">{{ e.shown }}</span><span><a href="timeline/#{{ e.id }}">{{ e.title }}</a>{% if e.about %} <span class="updabout">&#183; {{ e.about }}</span>{% endif %}</span></li>
+      {% endfor %}
     </ol>
+    <p class="updmore"><a href="timeline/#rangeland">See the full timeline, including every change order and what&#8217;s planned &#8594;</a></p>
   </div>
 </details>
 
@@ -1010,6 +1010,21 @@ trafficRows:
   <p>Senator Hooper filed a Local Funding Initiative Request &#8212; Senate form 1718, House form 2969 &#8212; for the Rangeland Boulevard Extension. The House and Senate agreed it at the full $4,500,000 in conference on 24 May 2026, under the Department of Transportation's Local Transportation Projects line. It is <strong>not on the Governor's 2026 veto list</strong>, so it survived into law and has been available since the state's fiscal year began on 1 July. What it pays for &#8212; design, land, or construction &#8212; has not been published, and the county still has to accept it through a grant agreement.</p>
 
   <p><strong>"Funded in the CIP" is doing more work than it looks.</strong> The years above come from the MPO's 2025 List of Project Priorities, which records "Design funded FY 2026 in CIP, ROW funded FY 2027 in CIP, CST Funded in FY 2029 in CIP." That is the MPO restating what the county told it, not the county's adopted budget. And Pasco's own capital plan explains the difference: <em>"Upon adoption of the CIP, funds are appropriated for those projects identified in the first year of the plan"</em> &#8212; the remaining years are estimates. So the design money is a real appropriation. The right-of-way and construction money is a plan.</p>
+
+  <p><strong>The county&#8217;s capital plan puts a figure on each year.</strong> Pasco&#8217;s adopted FY 2026 budget carries a line for the road, printed as &#8220;Rangeland Bl (E of Gunn Hwy to Bexl&#8221;, with an amount for every year to 2030 and beyond:</p>
+  <div class="tw"><table>
+    <thead><tr><th>County capital plan, Rangeland Blvd</th><th class="n">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>FY 2026 &#8212; adopted</td><td class="n">{% fact "rangeland.funding.cip.fy2026" %}</td></tr>
+      <tr><td>FY 2027 &#8212; proposed</td><td class="n">{% fact "rangeland.funding.cip.fy2027" %}</td></tr>
+      <tr><td>FY 2028 &#8212; proposed</td><td class="n">{% fact "rangeland.funding.cip.fy2028" %}</td></tr>
+      <tr><td>FY 2029 &#8212; proposed</td><td class="n">{% fact "rangeland.funding.cip.fy2029" %}</td></tr>
+      <tr><td>FY 2030 &#8212; proposed</td><td class="n">{% fact "rangeland.funding.cip.fy2030" %}</td></tr>
+      <tr><td>Future years, after FY 2030</td><td class="n">{% fact "rangeland.funding.cip.future" %}</td></tr>
+      <tr><td><strong>All years</strong></td><td class="n"><strong>{% sumM "rangeland.funding.cip.fy2026", "rangeland.funding.cip.fy2027", "rangeland.funding.cip.fy2028", "rangeland.funding.cip.fy2029", "rangeland.funding.cip.fy2030", "rangeland.funding.cip.future" %}</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>Only the first year is appropriated; the rest are the county&#8217;s planned amounts and can change each budget cycle. The line isn&#8217;t broken down by phase, so it doesn&#8217;t say which years pay for design, land or construction. The all-years total compares with the September 2026 estimate of {% fact "rangeland.cost.a.total", "words" %} for Alternative A.</p>
 
   <p><strong>The regional plan funds a study, in the 2040s.</strong> In the 2050 plan's cost-feasible table &#8212; the list of what the region expects to be able to afford &#8212; project 114.2 receives <strong>$2,788,496</strong>, all of it for a PD&amp;E study, in the <strong>2041&#8211;2050</strong> band. The design, right-of-way and construction columns are blank. The $150.1 million above comes from a different table, the needs list, which prices projects whether or not the money exists. Since the county says the route study <em>is</em> that process (correction 5), the county is running it roughly two decades ahead of the schedule the adopted plan sets and funds. Probably a good reason for that, but I don't know what it is.</p>
 

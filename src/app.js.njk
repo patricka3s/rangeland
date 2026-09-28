@@ -320,7 +320,7 @@ eleventyExcludeFromCollections: true
       var p = el("p", "fa");
       p.appendChild(link("Think this is wrong? Tell me →", f.r, "fd"));
       var all = el("a", "fall", "All figures and sources");
-      all.href = "facts/#" + encodeURIComponent(id);
+      all.href = (data.root || "") + "facts/#" + encodeURIComponent(id);
       p.appendChild(all);
       box.appendChild(p);
       box.hidden = false;

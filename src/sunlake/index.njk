@@ -1,0 +1,142 @@
+---
+permalink: sunlake/index.html
+eleventyExcludeFromCollections: true
+---
+{#- SUNLAKE BLVD CORRIDOR - project card (not copied into the built page)
+    A short card, built with the new-project skill: the standard sections in the
+    standard order, each saying plainly when nothing has been published. Figures
+    come from data/facts/sunlake.yaml - edit them there. It grows into a full
+    guide page when the county publishes a study or holds a workshop. -#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunlake Blvd Corridor · Pasco Road Projects</title>
+<meta name="description" content="What has been published about plans for Sunlake Boulevard north of Bud Bexley Parkway: the pieces, the planned road, where it is in the process, and the county's funding by year.">
+<meta name="author" content="Patrick">
+<link rel="canonical" href="https://patricka3s.github.io/rangeland/sunlake/">
+{% set root = "../" %}{% include "shared-head.njk" %}
+<script src="../app.js"></script>
+</head>
+<body>
+<div class="wrap">
+{% set current = "sunlake" %}{% include "project-bar.njk" %}
+
+<header>
+  <p class="eyebrow">Project card <span class="cardtag">Short card</span> &#183; Updated September 28, 2026</p>
+  <h1>Sunlake Boulevard corridor</h1>
+  <p class="standfirst">What has been published so far about Sunlake Boulevard north of Bud Bexley Parkway, where the county plans a new road north through the Bexley North development to Angeline. This is a short card, not a full guide: the county hasn&#8217;t yet published traffic forecasts, alternatives or a cost estimate, or held a public workshop. Each section says what is and isn&#8217;t known, and the card will grow as more is published.</p>
+</header>
+<p class="factnote">Figures with a dotted underline come straight from public documents. Tap one to see which document, or to report an error.</p>
+
+<section id="s1">
+  <h2><span class="num">01</span><span>What the project would build</span></h2>
+  <p>The corridor is three pieces, planned and paid for separately:</p>
+  <div class="tw"><table>
+    <thead><tr><th>Piece</th><th>What&#8217;s known</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Center Village Dr to south of Appenzeller Blvd</strong><br>county project, MPO 454568-1</td><td>A new road of about {% fact "sunlake.length-miles.south" %} miles. The county is hiring a firm to design it.</td></tr>
+      <tr><td><strong>South of Appenzeller Blvd to south of Wilton Way</strong></td><td>&#8220;Being designed and will be constructed by Len-Angeline, LLC,&#8221; the Angeline developer, according to the county&#8217;s design solicitation.</td></tr>
+      <tr><td><strong>South of Wilton Way to Anchor Dune Dr</strong></td><td>A line in the county&#8217;s capital plan (section 7). The same solicitation says Sunlake currently runs from south of Wilton Way to State Road 52.</td></tr>
+    </tbody>
+  </table></div>
+  <p>For the county&#8217;s piece, the design solicitation describes two stages. The <strong>ultimate</strong> road has {% fact "sunlake.design.south.lanes-ultimate" %} travel lanes, with bike lanes, a sidewalk and a meandering multi-use trail. The <strong>interim</strong> road has {% fact "sunlake.design.south.lanes-interim" %} lanes &#8212; one each way and a turn lane &#8220;when warranted&#8221; &#8212; with a bike lane and the trail. The solicitation doesn&#8217;t say what would trigger the change from one to the other.</p>
+  <p>The land comes from the <strong>Bexley North</strong> development, which the solicitation says will dedicate {% fact "sunlake.design.south.row-feet" %} feet of right-of-way for the extension.</p>
+</section>
+
+<section id="s2">
+  <h2><span class="num">02</span><span>How it fits the bigger plan</span></h2>
+  <p>Sunlake already connects North Dale Mabry Highway in Hillsborough County with Center Village Drive, and separately runs north from south of Wilton Way to State Road 52. The three pieces would close the gap between them. The county is also building Ridge Road east from Sunlake Boulevard to US 41, which the Commission&#8217;s agendas show under a design-build contract.</p>
+  <p class="notyet">No project sheet for Sunlake was found in the MPO&#8217;s 2050 long range plan appendix, and no corridor-wide study has been published.</p>
+</section>
+
+<section id="s3">
+  <h2><span class="num">03</span><span>What kind of road it is</span></h2>
+  <p>The typical sections in the design solicitation label the road a <strong>{% fact "sunlake.design.south.classification" %}</strong>, with a design speed of {% fact "sunlake.design.south.design-speed" %} mph and a posted speed of {% fact "sunlake.design.south.posted-speed" %} mph.</p>
+  <p class="notyet">Whether the road is on the county&#8217;s Freight Priority Network, and what share of its traffic is expected to be trucks, hasn&#8217;t been published.</p>
+</section>
+
+<section id="s4">
+  <h2><span class="num">04</span><span>Where it is in the process</span></h2>
+  <ul>
+    <li><strong>MPO priority list, June 2026:</strong> funded phase {% fact "sunlake.schedule.south.funded-phase" %}. Its status column records design funded in FY 2026, right-of-way in FY 2027 and construction in FY 2028&#8211;2029, all in the county&#8217;s capital plan. The list places it under the heading &#8220;construction unfunded&#8221;, as it does Rangeland Boulevard, even though its status column records construction money in the county&#8217;s capital plan.</li>
+    <li><strong>Design contract:</strong> on {% fact "sunlake.schedule.south.design-shortlist" %} the Commission approved a ranked shortlist of three firms and let the County Administrator negotiate and sign the contract. The signed contract hadn&#8217;t appeared on an agenda by 28 September 2026.</li>
+  </ul>
+  <p class="notyet">The priority list names a route study for FY 2026, but no route study, alternatives or public workshop for Sunlake has been published.</p>
+</section>
+
+<section id="s5">
+  <h2><span class="num">05</span><span>Traffic</span></h2>
+  <p class="notyet">No traffic counts, forecasts or intersection grades for this stretch of Sunlake have been published.</p>
+</section>
+
+<section id="s6">
+  <h2><span class="num">06</span><span>Noise and environment</span></h2>
+  <p class="notyet">No noise study, wetlands figures or environmental ratings for the corridor have been published.</p>
+</section>
+
+<section id="s7">
+  <h2><span class="num">07</span><span>Cost and funding</span></h2>
+  <p>No cost estimate has been published. What exists is the county&#8217;s capital plan in its adopted FY 2026 budget, which has a line for each piece:</p>
+  <div class="tw"><table>
+    <thead><tr><th>County capital plan</th><th class="n">Amount</th></tr></thead>
+    <tbody>
+      <tr><td colspan="2"><strong>North of Bud Bexley Pkwy to south of the Angeline line</strong> (the county&#8217;s piece)</td></tr>
+      <tr><td>FY 2026 &#8212; adopted</td><td class="n">{% fact "sunlake.funding.south.fy2026" %}</td></tr>
+      <tr><td>FY 2027 &#8212; proposed</td><td class="n">{% fact "sunlake.funding.south.fy2027" %}</td></tr>
+      <tr><td>FY 2028 &#8212; proposed</td><td class="n">{% fact "sunlake.funding.south.fy2028" %}</td></tr>
+      <tr><td>FY 2029 &#8212; proposed</td><td class="n">{% fact "sunlake.funding.south.fy2029" %}</td></tr>
+      <tr><td>FY 2030 &#8212; proposed</td><td class="n">{% fact "sunlake.funding.south.fy2030" %}</td></tr>
+      <tr><td>Future years, after FY 2030</td><td class="n">{% fact "sunlake.funding.south.future" %}</td></tr>
+      <tr><td><strong>All years</strong></td><td class="n"><strong>{% sumM "sunlake.funding.south.fy2026", "sunlake.funding.south.fy2027", "sunlake.funding.south.fy2028", "sunlake.funding.south.fy2029", "sunlake.funding.south.fy2030", "sunlake.funding.south.future" %}</strong></td></tr>
+      <tr><td colspan="2"><strong>South of the Angeline line to south of Wilton Way</strong></td></tr>
+      <tr><td>FY 2026 &#8212; adopted (nothing in later years)</td><td class="n">{% fact "sunlake.funding.angeline.fy2026" %}</td></tr>
+      <tr><td colspan="2"><strong>South of Wilton Way to Anchor Dune Dr</strong></td></tr>
+      <tr><td>FY 2026 &#8212; adopted (nothing in later years)</td><td class="n">{% fact "sunlake.funding.north.fy2026" %}</td></tr>
+    </tbody>
+  </table></div>
+  <p>Only the first year is appropriated; the later years are the county&#8217;s planned amounts. The lines aren&#8217;t split by phase. The budget document doesn&#8217;t say how the two northern lines relate to the developer&#8217;s work on the Angeline piece.</p>
+</section>
+
+<section id="s8">
+  <h2><span class="num">08</span><span>Questions worth asking</span></h2>
+  <ol class="qlist">
+    <li><b>Will a route study be published, with alternatives and a public workshop,</b> before design is fixed? The priority list names one for FY 2026; design procurement began in December 2025.</li>
+    <li><b>What traffic is forecast</b> on the new road and on Bud Bexley Pkwy and Center Village Dr, with and without it, and how do nearby intersections grade?</li>
+    <li><b>What would trigger widening from the interim road to six lanes,</b> and who decides?</li>
+    <li><b>Has noise been studied</b> for homes along the Bexley North and Angeline stretches, and will mitigation be considered?</li>
+    <li><b>What do the two northern budget lines pay for,</b> given the solicitation says the developer is designing and building the Angeline piece?</li>
+    <li><b>What truck share is assumed,</b> and is the road on the Freight Priority Network?</li>
+  </ol>
+</section>
+
+<section id="s9">
+  <h2><span class="num">09</span><span>How to get involved</span></h2>
+  <p>No public workshop or comment period for Sunlake has been announced. Until one is, the County Commission takes public comment at its regular meetings, and its agendas are searchable at <strong>pascocofl.portal.civicclerk.com</strong> &#8212; that&#8217;s where the signed design contract should appear.</p>
+  <p>If a figure here doesn&#8217;t match its source, tap it and use the link in the box, or <a href="{{ site.dispute_form.url }}">use the error-report form</a>.</p>
+</section>
+
+<section id="s10">
+  <h2><span class="num">10</span><span>Where this comes from</span></h2>
+  <p class="src">
+    <a href="https://www.pascocountyfl.gov/Documents/Services/MPO/Plans/Update/LOPP/Pasco%20MPO%202026%20List%20of%20Project%20Priorities_%20ADA.pdf">Pasco MPO 2026 List of Project Priorities</a>, 11 June 2026 &#8212; priority 11<br>
+    <a href="https://pascocofl.portal.civicclerk.com/event/1896/agenda">Board of County Commissioners, 2 June 2026</a> &#8212; consent item C18 (PU26-0018), its memo and the RSQ-BW-26-019 design solicitation, and the annotated minutes<br>
+    <a href="https://www.pascocountyfl.gov/Documents/Services/Office%20of%20Management%20%26%20Budget/Pasco%20County%20FY%202026%20Adopted%20Budget.pdf">Pasco County FY 2026 Adopted Budget</a> &#8212; FY 2026&#8211;2030 Capital Improvement Plan, printed page 124<br>
+    Board of County Commissioners agendas, 2025&#8211;2026 &#8212; Ridge Road, Sunlake Boulevard to US 41, design-build contract with Cone &amp; Graham, Inc. (change orders and amendments)<br>
+    Every figure, with where it appears in its document, is on <a href="../facts/#sunlake">All figures and sources</a>.
+  </p>
+</section>
+
+<footer>
+  <p style="margin:0 0 10px"><strong>Corrections policy.</strong> If a fact here doesn&#8217;t match its source document, tap the figure and use the link in the box, and I will do my best to fix it within 72 hours.</p>
+  <p style="margin:0 0 10px"><strong>Visit counter.</strong> This site counts visits using GoatCounter. It sets no cookies, stores nothing on your device and does not identify you.</p>
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
+</footer>
+
+</div>
+{% factData %}
+<script data-goatcounter="https://patricka3s.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

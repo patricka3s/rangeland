@@ -674,3 +674,71 @@
     .fsearch,.frep{display:none !important}
     .fitem{page-break-inside:avoid}
   }
+
+/* ==========================================================================
+   PROJECT BAR - links every project page, at the top of each page.
+   ========================================================================== */
+  .projbar{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding:12px 0;border-bottom:1px solid var(--rule);
+    font-family:Archivo,sans-serif;font-size:.9rem}
+  .projbar .pb-lab{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-3)}
+  .projbar a{color:var(--ink-2);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:1px}
+  .projbar a:hover{color:var(--accent)}
+  .projbar a[aria-current="page"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+  .projbar + header{padding-top:28px}
+  .cardtag{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+  .notyet{color:var(--ink-2);font-style:italic}
+  @media print{ .projbar{display:none} }
+
+/* ==========================================================================
+   TIMELINE PAGE (timeline/) and the generated "What's happened lately" box.
+   Neutral styling on purpose: no colour says a change is good or bad.
+   ========================================================================== */
+  .updabout{color:var(--ink-3);font-size:.9em}
+  .upd li a{color:inherit;text-decoration-color:var(--rule)}
+  .upd .updmore{margin:12px 0 0;font-size:.92rem}
+
+  .tlpage header{padding-top:28px}
+  .tlfilters{position:sticky;top:0;z-index:5;background:var(--paper);padding:10px 16px;margin:0 -16px 8px;border-bottom:1px solid var(--rule)}
+  .tlrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+  .chip{font-family:Archivo,sans-serif;font-size:.85rem;border:1px solid var(--rule);background:var(--surface);color:var(--ink-2);
+    border-radius:999px;padding:4px 12px;cursor:pointer}
+  .chip.small{font-size:.78rem;padding:3px 10px}
+  .chip[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--wash)}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tlband h2{margin:26px 0 4px}
+  .tlnote{font-size:.9rem;color:var(--ink-2);margin:0 0 8px}
+  .tllist{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--rule)}
+  .tllist > li::before{content:none}
+  .tle{position:relative;padding:0;margin:0;scroll-margin-top:120px}
+  .tle::after{content:"";position:absolute;left:-25px;top:15px;width:10px;height:10px;border-radius:50%;
+    background:var(--ink-3);border:2px solid var(--paper)}
+  .tlplanned .tllist{border-left-style:dashed}
+  .tlplanned .tle::after{background:var(--paper);border:2px dashed var(--ink-3)}
+  .tle.t-deadline::after,.tle.t-decision::after{background:var(--accent)}
+  .tle details{border-bottom:1px solid var(--rule-soft)}
+  .tle summary{list-style:none;cursor:pointer;padding:9px 0;display:grid;grid-template-columns:7.5em 1fr;column-gap:12px;align-items:baseline}
+  .tle summary::-webkit-details-marker{display:none}
+  .tle summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tldate{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;font-weight:600;color:var(--ink-2);grid-row:span 2}
+  .tlmeta{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+  .tltype{color:var(--accent)}
+  .tltitle{font-size:.98rem;line-height:1.4;color:var(--ink)}
+  .tle details[open] .tltitle{font-weight:600}
+  .tlbody{padding:0 0 12px 0;margin-left:calc(7.5em + 12px);font-size:.9rem;color:var(--ink-2)}
+  .tlbody p{margin:0 0 6px}
+  .tlabout{font-style:italic}
+  .tlsrc,.tlfacts{font-size:.82rem;color:var(--ink-3)}
+  .tlbody a{color:var(--accent)}
+  .tlyear{font-family:Archivo,sans-serif;font-weight:800;font-size:1.05rem;color:var(--ink);padding:18px 0 4px;margin-left:-18px}
+  .tltoday{display:flex;align-items:center;gap:10px;margin:22px 0 4px;font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .tltoday::before,.tltoday::after{content:"";flex:1;height:2px;background:var(--accent)}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media (max-width:560px){
+    .tle summary{grid-template-columns:1fr}
+    .tldate{grid-row:auto}
+    .tlbody{margin-left:0}
+  }
+  @media print{ .tlfilters{display:none} .tle details{display:block} }

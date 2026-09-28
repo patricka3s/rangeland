@@ -3,10 +3,17 @@
 #   id     short name; must match the facts file (data/facts/<id>.yaml) and
 #          the first part of every fact id in it ("rangeland.aadt...")
 #   name   how the project is titled on the site
+#   short  the short name used in the project bar, filters and timeline
 #   plan   optional - its number(s) in the MPO's long range plan
 #
 # The build stops if a facts file has no project here.
 
 - id: rangeland
+  short: Rangeland Blvd corridor
   name: Rangeland Blvd extension - Cattle Gap Trl to Bexley Village Dr
   plan: LRTP 114.2
+
+- id: sunlake
+  short: Sunlake Blvd corridor
+  name: Sunlake Blvd corridor - Center Village Dr to Anchor Dune Dr
+  plan: MPO 454568-1 (southern segment)

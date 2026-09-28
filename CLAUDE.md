@@ -37,9 +37,20 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
 
 - `data/projects.yaml` — the projects. `data/facts/<project-id>.yaml` — one file per
   project; every fact id starts with `<project-id>.`
+- `data/events.yaml` — the timeline: what happened and what's planned, per project.
+  Events are sourced records like facts (every date and figure in one comes from its
+  source; the build checks sources, projects, types and dates). The Timeline page
+  (`src/timeline/index.njk`) and the guide's "What's happened lately" box (the
+  project's upcoming events and five latest) are built from it. Every project gets
+  the same kinds of event: every workshop, Commission action, contract, **every
+  change order**, plan document and deadline. Titles stay neutral ("completion
+  extended from X to Y", never "delayed again"). The site rebuilds every morning so
+  "today" moves on by itself.
 - `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms (not yet
   shown on the site). `data/site.yaml` — the error-report form's address.
-- `src/index.njk` — the Rangeland guide. `src/facts.njk` — Figures and sources page
+- `src/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
+  card (a short card until more is published). `src/_includes/project-bar.njk` — the
+  project links at the top of every page. `src/facts.njk` — Figures and sources page
   (all projects, built entirely from data). `src/app.js.njk`, `src/styles.css`.
 - `eleventy.config.js` — loads and validates the data; defines the shortcodes.
 
@@ -52,7 +63,9 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
 ### Fact conventions
 
 - Id: `<project>.<kind>.<subject>.<scenario>`, e.g. `rangeland.aadt.bvd-rndbt.2050-nobuild`.
-  Kinds in use: `aadt`, `los`, `cost`, `matrix`, plus one-offs like `length-miles`.
+  Kinds in use: `aadt`, `los`, `cost`, `matrix`, `funding` (county capital plan by
+  year), `related` (related studies - listed on Figures and sources, not necessarily
+  on the guide), plus one-offs like `length-miles`.
   A new kind needs a heading in `TOPICS` in `eleventy.config.js`.
 - Scenarios: `2023` (or the count year), `2050-nobuild`, `2050-build`.
 - Required: `id, statement, value, unit, source, as_of, status`. Status is
@@ -68,7 +81,8 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
   (a newer document repeating the same value isn't listed there). Keep change styling neutral: no
   red/green for up/down — a figure rising is not good or bad.
 - Units in use: `vehicles per day`, `grade`, `rating` (the matrix's None / Low / Medium /
-  High), `USD million`, `USD per acre`, `acres`, `parcels`, `miles`.
+  High), `USD million`, `USD per acre`, `acres`, `parcels`, `miles`, `date`, `feet`, `lanes`,
+  `mph`, `classification` and `phase` (both shown as plain text).
   Ranges are `value: {low: …, high: …}`.
 - Level-of-service grades are the **evening peak**. The county publishes "AM (PM)"
   pairs — never drop a bare letter from a letter or email into a PM field (see
@@ -78,18 +92,20 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
 
 ## Adding a project
 
-1. Read the project's documents first (county project page, workshop boards,
-   matrix, LRTP entry). Add each to `data/sources.yaml`.
-2. Add the project to `data/projects.yaml` and create `data/facts/<id>.yaml` using
-   the same kinds and scenarios as Rangeland wherever the documents support them.
-3. Run `npm run build`; the facts appear on the Figures and sources page
-   automatically.
-4. **The first time a second project gets its own guide page, stop and propose
-   the site structure to Patrick before building it** — the Rangeland guide
-   currently lives at the site root, so a landing page and per-project URLs
-   (e.g. `/rangeland/`, `/bud-bexley/`) need deciding, along with keeping old links
-   working. Don't choose this alone.
-5. Present a project's page with the same sections and questions as the others.
+**Use the `new-project` skill** (`.claude/skills/new-project/SKILL.md`), which has
+the full step-by-step process, where to search, and the two checkpoints where
+Patrick decides. In short:
+
+1. Read the project's documents first and report to Patrick what exists before
+   writing anything (checkpoint 1).
+2. Register sources, add the project and its facts using the same kinds and
+   scenarios as Rangeland; Patrick spot-checks the facts (checkpoint 2).
+3. Build the page at `/<project-id>/` with the standard sections, in the standard
+   order - sections with nothing published say so rather than disappearing.
+4. Site structure (decided with Patrick, 28 Sep 2026): new projects at
+   `/<project-id>/` with a project bar on every page; after 8 Oct 2026 the
+   Rangeland guide moves to `/rangeland/`, the home page becomes a projects page,
+   and old `/#section` links are forwarded.
 
 ## Workflow
 

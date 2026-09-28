@@ -23,6 +23,10 @@ const TOPICS = {
   cost: "Cost",
   matrix: "Alternatives matrix",
   "length-miles": "The project",
+  funding: "Funding (county capital improvement plan)",
+  design: "Road design",
+  schedule: "Schedule and process",
+  related: "Related studies",
 };
 
 function load(file) {
@@ -84,12 +88,33 @@ function loadData() {
       seen.add(r);
     }
   }
+  // Events (the timeline): same rules as facts - a real source, a known project,
+  // a known type and a readable date.
+  const EVENT_TYPES = ["meeting", "milestone", "decision", "contract", "change-order", "document", "deadline", "planned"];
+  const events = load(path.join(DATA, "events.yaml"));
+  const eventIds = new Set();
+  for (const e of events) {
+    const where = `events.yaml: "${e.id}"`;
+    for (const k of ["id", "date", "project", "type", "title", "source"]) {
+      if (e[k] === undefined || e[k] === null || e[k] === "") problems.push(`${where} is missing "${k}"`);
+    }
+    if (eventIds.has(e.id)) problems.push(`${where} is listed twice`);
+    eventIds.add(e.id);
+    e.projects = [].concat(e.project || []);
+    for (const p of e.projects) if (!projectIds.has(p)) problems.push(`${where} names project "${p}", which is not in projects.yaml`);
+    if (e.type && !EVENT_TYPES.includes(e.type)) problems.push(`${where} has type "${e.type}"; use ${EVENT_TYPES.join(", ")}`);
+    if (e.source && !sourceIds.has(e.source)) problems.push(`${where} names source "${e.source}", which is not in sources.yaml`);
+    if (!/^(\d{4}-\d{2}(-\d{2})?|FY\d{4})$/.test(String(e.date))) problems.push(`${where} has date "${e.date}"; use YYYY-MM-DD, YYYY-MM or FY2027`);
+    if ((e.type === "planned") !== /^FY/.test(String(e.date)) && !(e.type === "planned" && e.when))
+      problems.push(`${where}: planned items use a fiscal-year date (FY2027) or a 'when'; other events use a calendar date`);
+    for (const f of e.facts || []) if (!byId[f]) problems.push(`${where} lists fact "${f}", which does not exist`);
+  }
   for (const d of definitions) {
     if (d.source && !sourceIds.has(d.source)) problems.push(`definitions.yaml: "${d.id}" names source "${d.source}", which is not in sources.yaml`);
   }
   if (problems.length) throw new Error("Data check failed:\n  " + problems.join("\n  "));
   const sourceById = Object.fromEntries(sources.map((s) => [s.id, s]));
-  return { site, projects, sources, definitions, facts, byId, sourceById, replacedBy };
+  return { site, projects, sources, definitions, facts, byId, sourceById, replacedBy, events };
 }
 
 // ---- formatting
@@ -161,6 +186,7 @@ export default function (eleventyConfig) {
   function display(f, words) {
     const v = f.value;
     if (v && typeof v === "object") return num(v.low) + "–" + num(v.high);
+    if (f.unit === "date") return when(v);
     if (typeof v !== "number") return String(v);
     if (f.unit === "USD million") {
       return words ? "$" + num(v, f.decimals ?? 1) + " million" : usdM(v, f.decimals ?? 1);
@@ -176,6 +202,7 @@ export default function (eleventyConfig) {
     if (f.unit.startsWith("USD ")) return d + f.unit.slice(3);
     if (f.unit === "grade") return "Grade " + d;
     if (f.unit === "rating") return d + " (rating)";
+    if (f.unit === "date" || f.unit === "classification" || f.unit === "phase") return d;
     return d + " " + f.unit;
   }
 
@@ -219,6 +246,48 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("changeGroups", changeGroups);
   eleventyConfig.addGlobalData("changeCount", changes.length);
 
+  // ---- Timeline (data/events.yaml)
+  // Sort key: a calendar date as written (a month sorts as its 15th); fiscal
+  // year N as 1 October of N-1, when it begins.
+  const sortKey = (d) => {
+    const s = String(d), fy = /^FY(\d{4})$/.exec(s);
+    if (fy) return `${+fy[1] - 1}-10-01`;
+    return s.length === 7 ? s + "-15" : s;
+  };
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" }).format(new Date());
+  const projectName = Object.fromEntries(data.projects.map((p) => [p.id, p.short || p.name.split(" - ")[0]]));
+  const TYPE_LABEL = { meeting: "Meeting", milestone: "Milestone", decision: "Decision", contract: "Contract",
+    "change-order": "Change order", document: "Document", deadline: "Deadline", planned: "Planned" };
+  const events = data.events.map((e) => {
+    const key = sortKey(e.date);
+    const fy = /^FY(\d{4})$/.exec(String(e.date));
+    return {
+      ...e, key,
+      shown: e.when || (fy ? `FY ${fy[1]}` : when(e.date)),
+      typeLabel: TYPE_LABEL[e.type],
+      projectNames: e.projects.map((p) => projectName[p]),
+      src: data.sourceById[e.source],
+      factCards: (e.facts || []).map((id) => card(data.byId[id])),
+      changed: e.show_changes ? changes.filter((c) => c.asOf === e.date).length : 0,
+      status: e.type === "planned" ? "planned" : key > today ? "upcoming" : "past",
+    };
+  });
+  const byKeyDesc = (a, b) => b.key.localeCompare(a.key);
+  eleventyConfig.addGlobalData("timeline", {
+    today, todayShown: when(today),
+    planned: events.filter((e) => e.status === "planned").sort(byKeyDesc),
+    upcoming: events.filter((e) => e.status === "upcoming").sort(byKeyDesc),
+    past: events.filter((e) => e.status === "past").sort(byKeyDesc),
+    types: Object.entries(TYPE_LABEL).map(([k, label]) => ({ k, label })),
+    projects: data.projects.map((p) => ({ id: p.id, name: projectName[p.id] })),
+  });
+  // Latest past events for one project, and its upcoming ones - for the
+  // "What's happened lately" box on a guide page.
+  eleventyConfig.addGlobalData("recentEvents", Object.fromEntries(data.projects.map((p) => [p.id, {
+    upcoming: events.filter((e) => e.status === "upcoming" && e.projects.includes(p.id)).sort((a, b) => a.key.localeCompare(b.key)),
+    past: events.filter((e) => e.status === "past" && e.projects.includes(p.id)).sort(byKeyDesc).slice(0, 5),
+  }])));
+
   // For the Figures and sources page: facts grouped by project, then by kind,
   // in the order they appear in each facts file. A fact another one replaced
   // is not listed on its own - it appears in its replacement's history.
@@ -250,7 +319,9 @@ export default function (eleventyConfig) {
 
   // {% factData %} writes every fact, with its source, into the page as JSON,
   // so the details box can show them without another download.
-  eleventyConfig.addShortcode("factData", () => {
+  eleventyConfig.addShortcode("factData", function () {
+    // how far this page sits below the site root, so links to facts/ work from any folder
+    const depth = Math.max(0, ((this.page && this.page.url) || "/").split("/").length - 2);
     const out = {};
     for (const f of data.facts) {
       const src = data.sourceById[f.source];
@@ -262,7 +333,7 @@ export default function (eleventyConfig) {
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
       };
     }
-    const json = JSON.stringify({ facts: out }).replace(/</g, "\\u003c");
+    const json = JSON.stringify({ root: "../".repeat(depth), facts: out }).replace(/</g, "\\u003c");
     return `<script type="application/json" id="fact-data">${json}</script>`;
   });
 
@@ -288,6 +359,8 @@ export default function (eleventyConfig) {
   // {% product "a", "b", scale, decimals %}  ->  a x b x scale, e.g. a per-acre
   // rate times acres, scaled to millions: {% product "rate", "acres", 0.000001, 1 %} -> "6.9"
   eleventyConfig.addShortcode("product", (a, b, scale = 1, decimals = 0) => num(value(a) * value(b) * scale, decimals));
+  // {% sumM "a", "b", ... %}  ->  the total of several USD-million facts: "$88.4M"
+  eleventyConfig.addShortcode("sumM", (...ids) => usdM(ids.reduce((t, id) => t + value(id), 0)));
   // {% perMile "cost id", "length id" %}  ->  "$44.0M";  add "words" for "$44.0 million"
   eleventyConfig.addShortcode("perMile", (cost, miles, style) => {
     const v = value(cost) / value(miles);

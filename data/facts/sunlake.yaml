@@ -1,0 +1,185 @@
+# Sunlake Blvd corridor - facts
+#
+# Same format as data/facts/rangeland.yaml (see its header). The corridor is three
+# pieces, used as the <subject> part of each id:
+#   south     Center Village Dr (north of Bud Bexley Pkwy) to south of Appenzeller
+#             Blvd - the county's project, MPO 454568-1
+#   angeline  south of Appenzeller Blvd / the Angeline line to south of Wilton Way
+#   north     south of Wilton Way to Anchor Dune Dr
+#
+# Added 28 Sep 2026. Not yet spot-checked by Patrick, so no 'checked' dates yet.
+
+# ---- The project
+
+- id: sunlake.length-miles.south
+  statement: 'Approximate length of the Sunlake Blvd design project, Center Village Dr to south of Appenzeller Blvd'
+  value: 2.70
+  unit: miles
+  source: pasco-rsq-bw-26-019
+  location: 'Section 1, "which is an approximate length of 2.70 miles"'
+  as_of: '2025-12-18'
+  status: current
+  decimals: 2
+
+- id: sunlake.design.south.row-feet
+  statement: 'Right-of-way the Bexley North MPUD (rezoning no. 7242) will dedicate for the Sunlake Blvd extension'
+  value: 166
+  unit: feet
+  source: pasco-rsq-bw-26-019
+  location: 'Section 2.2 Background; Figures 2 and 3 ("166'' right-of-way")'
+  as_of: '2025-12-18'
+  status: current
+
+- id: sunlake.design.south.lanes-ultimate
+  statement: 'Travel lanes in the ultimate configuration of the Sunlake Blvd extension (11-foot lanes)'
+  value: 6
+  unit: lanes
+  source: pasco-rsq-bw-26-019
+  location: 'Section 2.2 Background; Figure 2, "Sunlake Boulevard (ultimate condition)"'
+  as_of: '2025-12-18'
+  status: current
+  note: 'With 7-foot bike lanes, a 5-foot sidewalk and a 12-foot meandering trail.'
+
+- id: sunlake.design.south.lanes-interim
+  statement: '11-foot lanes in the interim configuration of the Sunlake Blvd extension'
+  value: 3
+  unit: lanes
+  source: pasco-rsq-bw-26-019
+  location: 'Section 2.2 Background; Figure 3, "Sunlake Boulevard (interim condition)"'
+  as_of: '2025-12-18'
+  status: current
+  note: 'Figure 3 shows one southbound lane, one northbound lane, and an 11-foot turn lane "when warranted" between them, plus a 7-foot bike lane and the 12-foot trail.'
+
+- id: sunlake.design.south.classification
+  statement: 'Road type named on the ultimate-condition typical section of the Sunlake Blvd extension'
+  value: Pasco County urban arterial
+  unit: classification
+  source: pasco-rsq-bw-26-019
+  location: 'Figures 2 and 3 captions (ultimate and interim condition)'
+  as_of: '2025-12-18'
+  status: current
+
+- id: sunlake.design.south.design-speed
+  statement: 'Design speed on the typical sections of the Sunlake Blvd extension'
+  value: 45
+  unit: mph
+  source: pasco-rsq-bw-26-019
+  location: 'Figures 2 and 3 captions'
+  as_of: '2025-12-18'
+  status: current
+
+- id: sunlake.design.south.posted-speed
+  statement: 'Posted speed on the typical sections of the Sunlake Blvd extension'
+  value: 40
+  unit: mph
+  source: pasco-rsq-bw-26-019
+  location: 'Figures 2 and 3 captions'
+  as_of: '2025-12-18'
+  status: current
+
+# ---- Schedule and process
+
+- id: sunlake.schedule.south.funded-phase
+  statement: 'Funded phase and year for Sunlake Blvd (454568-1) in the MPO 2026 List of Project Priorities'
+  value: Route study, FY 2026
+  unit: phase
+  source: mpo-lopp-2026
+  location: 'page 3, priority 11, "Funded Phase" and "Funded Year" columns; listed under "Construction unfunded"'
+  as_of: '2026-06-11'
+  status: current
+  note: 'The "2026 Status" column reads: "Design funded FY 2026 in CIP, ROW funded FY 2027 in CIP, CST Funded in FY 2028-2029 CIP". The request is PD&E, design and right-of-way.'
+
+- id: sunlake.schedule.south.design-shortlist
+  statement: 'Commission approved the shortlist for the Sunlake Blvd design contract (WGI, Burgess & Niple, IC&E, in that order) and delegated negotiation to the County Administrator, not to exceed the budgeted amount plus 20%'
+  value: '2026-06-02'
+  unit: date
+  source: pasco-bcc-2026-06-02
+  location: 'consent item C18 (PU26-0018); minutes page 6, "Approved Staff''s recommendation"'
+  as_of: '2026-06-02'
+  status: current
+  note: 'Five firms applied. Per the memo, the agreement runs 540 calendar days once signed and is reported to the Board afterwards as a Noted Item.'
+
+# ---- Funding, county capital improvement plan (FY 2026 adopted budget)
+
+- id: sunlake.funding.south.fy2026
+  statement: 'County capital improvement plan, Sunlake Blvd (north of Bud Bexley Pkwy to south of the Angeline line), FY 2026 (adopted)'
+  value: 4.2
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2026 Adopted'"
+  as_of: '2025-09-16'
+  status: current
+  decimals: 1
+
+- id: sunlake.funding.south.fy2027
+  statement: 'County capital improvement plan, Sunlake Blvd (north of Bud Bexley Pkwy to south of the Angeline line), FY 2027 (proposed)'
+  value: 4.645
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2027 Proposed'"
+  as_of: '2025-09-16'
+  status: current
+  decimals: 3
+
+- id: sunlake.funding.south.fy2028
+  statement: 'County capital improvement plan, Sunlake Blvd (north of Bud Bexley Pkwy to south of the Angeline line), FY 2028 (proposed)'
+  value: 16.324
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2028 Proposed'"
+  as_of: '2025-09-16'
+  status: current
+  decimals: 3
+
+- id: sunlake.funding.south.fy2029
+  statement: 'County capital improvement plan, Sunlake Blvd (north of Bud Bexley Pkwy to south of the Angeline line), FY 2029 (proposed)'
+  value: 7.826
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2029 Proposed'"
+  as_of: '2025-09-16'
+  status: current
+  decimals: 3
+
+- id: sunlake.funding.south.fy2030
+  statement: 'County capital improvement plan, Sunlake Blvd (north of Bud Bexley Pkwy to south of the Angeline line), FY 2030 (proposed)'
+  value: 0.0
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2030 Proposed'"
+  as_of: '2025-09-16'
+  status: current
+  decimals: 1
+
+- id: sunlake.funding.south.future
+  statement: 'County capital improvement plan, Sunlake Blvd (north of Bud Bexley Pkwy to south of the Angeline line), future years, after FY 2030'
+  value: 0.0
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'Future Funding'"
+  as_of: '2025-09-16'
+  status: current
+  decimals: 1
+
+- id: sunlake.funding.angeline.fy2026
+  statement: 'County capital improvement plan, Sunlake Blvd (south of the Angeline line to south of Wilton Way), FY 2026 (adopted)'
+  value: 9.581
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(S Anglin to S Wilton Wy)', column 'FY 2026 Adopted'"
+  as_of: '2025-09-16'
+  status: current
+  decimals: 3
+  note: 'The FY 2027-2030 and future-funding columns on this row are $0.'
+
+- id: sunlake.funding.north.fy2026
+  statement: 'County capital improvement plan, Sunlake Blvd (south of Wilton Way to Anchor Dune Dr), FY 2026 (adopted)'
+  value: 29.0
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(S Wilt Wy to Anch Dn Dr)', column 'FY 2026 Adopted'"
+  as_of: '2025-09-16'
+  status: current
+  decimals: 1
+  note: 'The FY 2027-2030 and future-funding columns on this row are $0.'
+

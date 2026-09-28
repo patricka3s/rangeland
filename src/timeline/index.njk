@@ -1,0 +1,154 @@
+---
+permalink: timeline/index.html
+eleventyExcludeFromCollections: true
+---
+{#- TIMELINE PAGE (not copied into the built page)
+    Built entirely from data/events.yaml - nothing to edit here when an event
+    is added. Planned items sit above the "today" line, events below, newest
+    first. The site rebuilds daily, so "today" stays current. -#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timeline · Pasco Road Projects</title>
+<meta name="description" content="What has happened, and what is planned, for the Rangeland Blvd and Sunlake Blvd corridors: workshops, Commission decisions, contracts, every change order, plan documents and deadlines - each with its source.">
+<meta name="author" content="Patrick">
+<link rel="canonical" href="https://patricka3s.github.io/rangeland/timeline/">
+{% set root = "../" %}{% include "shared-head.njk" %}
+<script src="../app.js"></script>
+</head>
+<body class="tlpage">
+<div class="wrap">
+{% set current = "timeline" %}{% include "project-bar.njk" %}
+
+<header>
+  <h1>Timeline</h1>
+  <p class="standfirst">What has happened on each project, and what the county&#8217;s plans say comes next. Every entry names the document it comes from. Every project gets the same kinds of entry &#8212; each workshop, Commission action, contract, change order, plan document and deadline &#8212; not just the notable ones. Tap an entry for details.</p>
+</header>
+
+<div class="tlfilters" id="tlfilters">
+  <div class="tlrow" role="group" aria-label="Project">
+    <button type="button" class="chip" data-project="all" aria-pressed="true">All projects</button>
+    {% for p in timeline.projects %}<button type="button" class="chip" data-project="{{ p.id }}" aria-pressed="false">{{ p.name }}</button>{% endfor %}
+  </div>
+  <div class="tlrow" role="group" aria-label="Kind of entry">
+    {% for t in timeline.types %}<button type="button" class="chip small" data-type="{{ t.k }}" aria-pressed="true">{{ t.label }}</button>{% endfor %}
+  </div>
+  <p id="tl-none" class="fnone" hidden>No entries match.</p>
+</div>
+
+{% macro entry(e) %}
+<li class="tle t-{{ e.type }}" data-projects="{{ e.projects | join(' ') }}" data-type="{{ e.type }}" id="{{ e.id }}">
+  <details>
+    <summary>
+      <span class="tldate">{{ e.shown }}</span>
+      <span class="tlmeta"><span class="tltype">{{ e.typeLabel }}</span>{% for n in e.projectNames %} &#183; {{ n }}{% endfor %}</span>
+      <span class="tltitle">{{ e.title }}</span>
+    </summary>
+    <div class="tlbody">
+      {% if e.about %}<p class="tlabout">{{ e.about }}</p>{% endif %}
+      {% if e.detail %}<p>{{ e.detail }}</p>{% endif %}
+      {% if e.changed %}<p><a href="../facts/#changes">{{ e.changed }} figures changed from the earlier documents &#8594;</a></p>{% endif %}
+      {% if e.factCards.length %}<p class="tlfacts">Figures from this: {% for f in e.factCards %}<a href="../facts/#{{ f.id }}">{{ f.statement }} ({{ f.withUnit }})</a>{% if not loop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+      <p class="tlsrc">Source: {% if e.src.url %}<a href="{{ e.src.url }}" rel="noopener" target="_blank">{{ e.src.title }}</a>{% else %}{{ e.src.title }}{% endif %}</p>
+    </div>
+  </details>
+</li>
+{% endmacro %}
+
+<section class="tlband tlplanned" aria-labelledby="h-planned">
+  <h2 id="h-planned"><span>Planned</span></h2>
+  <p class="tlnote">What the county&#8217;s plans say will happen. These are plans, not events: they can change in any budget cycle.</p>
+  <ol class="tllist">{% for e in timeline.planned %}{{ entry(e) }}{% endfor %}</ol>
+</section>
+
+{% if timeline.upcoming.length %}
+<section class="tlband" aria-labelledby="h-upcoming">
+  <h2 id="h-upcoming"><span>Coming up</span></h2>
+  <ol class="tllist">{% for e in timeline.upcoming %}{{ entry(e) }}{% endfor %}</ol>
+</section>
+{% endif %}
+
+<div class="tltoday" role="separator"><span>Today &#183; {{ timeline.todayShown }}</span></div>
+
+<section class="tlband" aria-labelledby="h-past">
+  <h2 id="h-past" class="visually-hidden">What has happened</h2>
+  <ol class="tllist">
+    {% set lastYear = "" %}
+    {% for e in timeline.past %}
+      {% set y = e.key.slice(0, 4) %}
+      {% if y != lastYear %}<li class="tlyear" aria-hidden="true">{{ y }}</li>{% set lastYear = y %}{% endif %}
+      {{ entry(e) }}
+    {% endfor %}
+  </ol>
+</section>
+
+<footer>
+  <p style="margin:0 0 10px">Built from the same sourced data as the rest of the site, and rebuilt daily so &#8220;today&#8221; stays current. Something missing or wrong? <a href="{{ site.dispute_form.url }}">Tell me through the form.</a></p>
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
+</footer>
+</div>
+
+<script>
+/* Filters: one project (or all), and any mix of kinds. A link to
+   timeline/#rangeland (or #sunlake) opens with that project chosen; a link to
+   an entry's id opens that entry. Without JavaScript everything shows. */
+(function(){
+  var box = document.getElementById("tlfilters"), none = document.getElementById("tl-none");
+  var items = document.querySelectorAll(".tle"), years = document.querySelectorAll(".tlyear");
+  var project = "all";
+  function types(){
+    var on = {}, b = box.querySelectorAll("[data-type]");
+    for (var i = 0; i < b.length; i++) if (b[i].getAttribute("aria-pressed") === "true") on[b[i].getAttribute("data-type")] = 1;
+    return on;
+  }
+  function apply(){
+    var on = types(), shown = 0, i;
+    for (i = 0; i < items.length; i++){
+      var ps = " " + items[i].getAttribute("data-projects") + " ";
+      var ok = (project === "all" || ps.indexOf(" " + project + " ") >= 0) && on[items[i].getAttribute("data-type")];
+      items[i].hidden = !ok; if (ok) shown++;
+    }
+    for (i = 0; i < years.length; i++){          /* hide a year heading with nothing under it */
+      var n = years[i].nextElementSibling, any = false;
+      while (n && !n.classList.contains("tlyear")){ if (!n.hidden) { any = true; break; } n = n.nextElementSibling; }
+      years[i].hidden = !any;
+    }
+    var bands = document.querySelectorAll(".tlband");
+    for (i = 0; i < bands.length; i++) bands[i].hidden = !bands[i].querySelector(".tle:not([hidden])");
+    none.hidden = shown > 0;
+  }
+  function setProject(p){
+    project = p;
+    var b = box.querySelectorAll("[data-project]");
+    for (var i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", b[i].getAttribute("data-project") === p ? "true" : "false");
+    apply();
+  }
+  box.addEventListener("click", function(e){
+    var t = e.target.closest("button"); if (!t) return;
+    if (t.hasAttribute("data-project")) setProject(t.getAttribute("data-project"));
+    else { t.setAttribute("aria-pressed", t.getAttribute("aria-pressed") === "true" ? "false" : "true"); apply(); }
+  });
+  function fromHash(){
+    var h = decodeURIComponent(location.hash.slice(1));
+    if (!h) return;
+    if (box.querySelector('[data-project="' + h + '"]')) { setProject(h); return; }
+    var el = document.getElementById(h);
+    if (el && el.classList.contains("tle")) {
+      /* make sure the linked entry isn't hidden by a filter */
+      var tb = box.querySelector('[data-type="' + el.getAttribute("data-type") + '"]');
+      if (tb) tb.setAttribute("aria-pressed", "true");
+      setProject("all");
+      el.querySelector("details").open = true;
+      el.scrollIntoView();
+    }
+  }
+  fromHash();
+  window.addEventListener("hashchange", fromHash);
+})();
+</script>
+<script data-goatcounter="https://patricka3s.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
