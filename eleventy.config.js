@@ -8,6 +8,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { execSync } from "node:child_process";
 import yaml from "js-yaml";
 
 const DATA = "data";
@@ -79,10 +80,28 @@ export default function (eleventyConfig) {
     return v;
   };
 
+  eleventyConfig.addGlobalData("site", data.site);
   eleventyConfig.addGlobalData("sources", data.sources);
   eleventyConfig.addGlobalData("definitions", data.definitions);
   eleventyConfig.addGlobalData("facts", data.byId);
   eleventyConfig.addWatchTarget(DATA);
+
+  // Which version of the site this is, shown in small print at the foot of the
+  // page so it is easy to tell whether a change has gone live. On GitHub the
+  // commit comes from the workflow; on your own computer, from git.
+  let sha = process.env.GITHUB_SHA || "";
+  if (!sha) {
+    try { sha = execSync("git rev-parse HEAD", { encoding: "utf8" }).trim(); } catch (e) { sha = ""; }
+  }
+  const built = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York", month: "long", day: "numeric", year: "numeric",
+    hour: "numeric", minute: "2-digit", timeZoneName: "short",
+  }).format(new Date());
+  eleventyConfig.addGlobalData("build", {
+    version: sha ? sha.slice(0, 7) : "local",
+    url: sha && process.env.GITHUB_REPOSITORY ? `https://github.com/${process.env.GITHUB_REPOSITORY}/commit/${sha}` : "",
+    when: built,
+  });
 
   // A fact the way people read it: numbers with thousands commas, money as
   // $150.0M (or "$150.0 million" in words), ranges as 58,700–64,800.

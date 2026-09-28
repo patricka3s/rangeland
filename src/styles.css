@@ -578,3 +578,7 @@
     .has-facts .fact{text-decoration:none;color:inherit}
     .factpop,.factnote{display:none !important}
   }
+
+/* Version line at the foot of the page - which commit is live, and when it was published. */
+  .buildstamp{margin:0;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--ink-3)}
+  .buildstamp a{color:inherit}
