@@ -26,9 +26,35 @@ eleventyExcludeFromCollections: true
   <p class="standfirst">Every figure the guide takes from a public document, with the document it comes from. Click a source to read it yourself. Each one says when it was last checked against that document. If a figure doesn&#8217;t match its source, use <strong>Report an error</strong> beside it &#8212; the form opens with that figure already filled in.</p>
 </header>
 
+{% if changeGroups.length %}
+<section class="fchanges" id="changes">
+  <h2><span>What&#8217;s changed</span></h2>
+  <p>When a newer document gives a figure for something an earlier one already covered, both are kept. The newer figure is listed below with its history; the older one isn&#8217;t deleted. Newest first.</p>
+  {% for g in changeGroups %}
+  <h3>{{ g.when }} &#183; {% if g.src.url %}<a href="{{ g.src.url }}" rel="noopener" target="_blank">{{ g.src.title }}</a>{% else %}{{ g.src.title }}{% endif %}</h3>
+  <ul class="clist">
+    {% for c in g.items %}{% if not c.same %}
+    <li><a href="#{{ c.id }}">{{ c.statement }}</a>
+      <span class="cmove"><span class="cfrom">{{ c.from }}</span> <span class="carrow" aria-label="became">&#8594;</span> <strong>{{ c.to }}</strong></span>
+      <span class="cwas">earlier figure from {{ c.fromAsOf }}</span>
+      {% if c.note %}<span class="cnote">{{ c.note }}</span>{% endif %}
+    </li>
+    {% endif %}{% endfor %}
+    {% for c in g.items %}{% if c.same %}
+    <li class="csame"><a href="#{{ c.id }}">{{ c.statement }}</a>
+      <span class="cmove">unchanged at <strong>{{ c.to }}</strong></span>
+      <span class="cwas">same as {{ c.fromAsOf }}</span>
+    </li>
+    {% endif %}{% endfor %}
+  </ul>
+  {% endfor %}
+</section>
+{% endif %}
+
 <div class="fsearch">
   <label for="fq">Find a figure</label>
   <input id="fq" type="search" placeholder="e.g. Ballantrae, 2050, cost" autocomplete="off">
+  {% if changeCount %}<label class="fonly"><input type="checkbox" id="fchanged"> Only figures that have changed ({{ changeCount }})</label>{% endif %}
   <p id="fq-none" class="fnone" hidden>No figures match.</p>
 </div>
 
@@ -40,7 +66,7 @@ eleventyExcludeFromCollections: true
     <h3>{{ t.label }} <span class="fcount">{{ t.facts | length }}</span></h3>
     <ul class="flist">
       {% for f in t.facts %}
-      <li class="fitem{% if f.status != 'current' %} is-{{ f.status }}{% endif %}" id="{{ f.id }}">
+      <li class="fitem{% if f.status != 'current' %} is-{{ f.status }}{% endif %}" id="{{ f.id }}"{% if f.revised %} data-changed="1"{% endif %}>
         <div class="fhead">
           <span class="fstat">{{ f.statement }}</span>
           <span class="fval">{{ f.withUnit }}</span>
@@ -53,6 +79,25 @@ eleventyExcludeFromCollections: true
           <a class="frep" href="{{ f.report }}" rel="noopener" target="_blank">Report an error</a>
         </p>
         {% if f.note %}<p class="fnote">{{ f.note }}</p>{% endif %}
+        {% if f.history.length %}
+        <details class="fhist">
+          <summary><span class="fbadge">{% if f.revised %}Revised{% else %}Reconfirmed{% endif %}</span> {{ f.history.length + 1 }} versions &#8212; show history</summary>
+          <ol class="fversions">
+            {% for h in f.history %}
+            <li id="{{ h.id }}">
+              <span class="fvval">{{ h.withUnit }}</span>
+              <span class="fvmeta">{% if h.src.url %}<a href="{{ h.src.url }}" rel="noopener" target="_blank">{{ h.src.title }}</a>{% else %}{{ h.src.title }}{% endif %}{% if h.location %} &#183; {{ h.location }}{% endif %} &#183; <span class="fdate">{{ h.asOf }}</span>{% if h.checked %} &#183; <span class="fck">checked {{ h.checkedOn }}</span>{% endif %} <a class="frep" href="{{ h.report }}" rel="noopener" target="_blank">Report an error</a></span>
+              {% if h.note %}<span class="fvnote">{{ h.note }}</span>{% endif %}
+            </li>
+            {% endfor %}
+            <li class="fvnow">
+              <span class="fvval">{{ f.withUnit }}</span>
+              <span class="fvmeta">current &#183; {{ f.src.title }} &#183; <span class="fdate">{{ f.asOf }}</span></span>
+            </li>
+          </ol>
+          {% if f.change_note %}<p class="fnote">{{ f.change_note }}</p>{% endif %}
+        </details>
+        {% endif %}
       </li>
       {% endfor %}
     </ul>
@@ -77,27 +122,41 @@ eleventyExcludeFromCollections: true
 
 <footer>
   <p style="margin:0 0 10px">This page is built from the same data files as the guide, so it always shows exactly the figures the guide uses. <a href="../#notes">Corrections made so far</a> are listed in the guide.</p>
-  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %} &#183; published {{ build.when }}</p>
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
 </footer>
 
 </div>
 
 <script>
-/* Filter the list as you type. Without JavaScript the full list shows. */
+/* Filter the list as you type, and by "only figures that have changed".
+   Without JavaScript the full list shows. */
 (function(){
-  var q = document.getElementById("fq"), none = document.getElementById("fq-none");
+  var q = document.getElementById("fq"), only = document.getElementById("fchanged"), none = document.getElementById("fq-none");
   var items = document.querySelectorAll(".fitem"), groups = document.querySelectorAll(".fgroup, .fproject");
-  q.addEventListener("input", function(){
+  function filter(){
     var words = q.value.toLowerCase().split(/\s+/).filter(Boolean), shown = 0, i;
     for (i = 0; i < items.length; i++){
-      var t = items[i].textContent.toLowerCase(), ok = true;
-      for (var w = 0; w < words.length; w++) if (t.indexOf(words[w]) < 0) { ok = false; break; }
+      var t = items[i].textContent.toLowerCase(), ok = !(only && only.checked) || items[i].hasAttribute("data-changed");
+      for (var w = 0; ok && w < words.length; w++) if (t.indexOf(words[w]) < 0) ok = false;
       items[i].hidden = !ok;
       if (ok) shown++;
     }
     for (i = 0; i < groups.length; i++) groups[i].hidden = !groups[i].querySelector(".fitem:not([hidden])");
     none.hidden = shown > 0;
-  });
+  }
+  q.addEventListener("input", filter);
+  if (only) only.addEventListener("change", filter);
+
+  /* A link to an earlier version (#its-id) lands inside a closed history -
+     open it, so the reader sees what they followed the link to. */
+  function openTarget(){
+    var id = decodeURIComponent(location.hash.slice(1)), el = id && document.getElementById(id);
+    if (!el) return;
+    var d = el.closest("details");
+    if (d && !d.open) { d.open = true; el.scrollIntoView(); }
+  }
+  openTarget();
+  window.addEventListener("hashchange", openTarget);
 })();
 </script>
 <script data-goatcounter="https://patricka3s.goatcounter.com/count"

@@ -65,12 +65,31 @@ function loadData() {
     if (f.status && !STATUSES.includes(f.status)) problems.push(`${where} has status "${f.status}"; use ${STATUSES.join(", ")}`);
     byId[f.id] = f;
   }
+  // A fact that replaces another must point at a real, superseded fact, and each
+  // fact can be replaced only once - so every history is a single straight line.
+  const replacedBy = {};
+  for (const f of facts) {
+    if (!f.replaces) continue;
+    const where = `facts/${f.file}: "${f.id}"`, old = byId[f.replaces];
+    if (!old) { problems.push(`${where} replaces "${f.replaces}", which does not exist`); continue; }
+    if (old.status !== "superseded") problems.push(`${where} replaces "${f.replaces}", which should then have status: superseded`);
+    if (replacedBy[f.replaces]) problems.push(`"${f.replaces}" is replaced by both "${replacedBy[f.replaces]}" and "${f.id}"`);
+    replacedBy[f.replaces] = f.id;
+  }
+  for (const f of facts) {
+    if (f.change_note && !f.replaces) problems.push(`facts/${f.file}: "${f.id}" has a change_note but replaces nothing`);
+    const seen = new Set([f.id]);
+    for (let r = f.replaces; r && byId[r]; r = byId[r].replaces) {
+      if (seen.has(r)) { problems.push(`"${f.id}": its replaces chain loops back on itself`); break; }
+      seen.add(r);
+    }
+  }
   for (const d of definitions) {
     if (d.source && !sourceIds.has(d.source)) problems.push(`definitions.yaml: "${d.id}" names source "${d.source}", which is not in sources.yaml`);
   }
   if (problems.length) throw new Error("Data check failed:\n  " + problems.join("\n  "));
   const sourceById = Object.fromEntries(sources.map((s) => [s.id, s]));
-  return { site, projects, sources, definitions, facts, byId, sourceById };
+  return { site, projects, sources, definitions, facts, byId, sourceById, replacedBy };
 }
 
 // ---- formatting
@@ -113,18 +132,27 @@ export default function (eleventyConfig) {
 
   // Which version of the site this is, shown in small print at the foot of the
   // page so it is easy to tell whether a change has gone live. On GitHub the
-  // commit comes from the workflow; on your own computer, from git.
+  // commit comes from the workflow; on your own computer, from git. When the
+  // commit is a pull request being merged, its number is shown too - that is
+  // known before merging, so a pull request can say what the page will show.
   let sha = process.env.GITHUB_SHA || "";
   if (!sha) {
     try { sha = execSync("git rev-parse HEAD", { encoding: "utf8" }).trim(); } catch (e) { sha = ""; }
   }
+  let pr = "";
+  try {
+    const subject = execSync("git log -1 --format=%s", { encoding: "utf8" }).trim();
+    pr = (/^Merge pull request #(\d+)/.exec(subject) || /\(#(\d+)\)$/.exec(subject) || [])[1] || "";
+  } catch (e) { pr = ""; }
+  const repo = process.env.GITHUB_REPOSITORY || "patricka3s/rangeland";
   const built = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York", month: "long", day: "numeric", year: "numeric",
     hour: "numeric", minute: "2-digit", timeZoneName: "short",
   }).format(new Date());
   eleventyConfig.addGlobalData("build", {
     version: sha ? sha.slice(0, 7) : "local",
-    url: sha && process.env.GITHUB_REPOSITORY ? `https://github.com/${process.env.GITHUB_REPOSITORY}/commit/${sha}` : "",
+    url: sha && process.env.GITHUB_REPOSITORY ? `https://github.com/${repo}/commit/${sha}` : "",
+    pr, prUrl: pr ? `https://github.com/${repo}/pull/${pr}` : "",
     when: built,
   });
 
@@ -163,16 +191,43 @@ export default function (eleventyConfig) {
   function card(f) {
     return { ...f, display: display(f), withUnit: withUnit(f), report: reportUrl(f), asOf: when(f.as_of), checkedOn: when(f.checked), src: data.sourceById[f.source] };
   }
+  // A fact's earlier versions, oldest first ([] if it replaces nothing).
+  function earlier(f) {
+    const out = [];
+    for (let r = f.replaces; r; r = data.byId[r].replaces) out.unshift(card(data.byId[r]));
+    return out;
+  }
+  // Did the value itself change anywhere along the way, or only the document?
+  const sameValue = (a, b) => JSON.stringify(a.value) === JSON.stringify(b.value);
+
+  // For the Figures and sources page: "What's changed" - one entry for every
+  // time a newer document replaced a figure, newest first, grouped by document.
+  const changes = data.facts.filter((f) => f.replaces).map((f) => {
+    const old = data.byId[f.replaces];
+    return { id: f.id, statement: f.statement, from: withUnit(old), fromAsOf: when(old.as_of),
+             to: withUnit(f), same: sameValue(old, f), note: f.change_note,
+             asOf: f.as_of, when: when(f.as_of), src: data.sourceById[f.source] };
+  }).sort((a, b) => String(b.asOf).localeCompare(String(a.asOf)));
+  const changeGroups = [];
+  for (const c of changes) {
+    let g = changeGroups.find((x) => x.asOf === c.asOf && x.src.id === c.src.id);
+    if (!g) changeGroups.push((g = { asOf: c.asOf, when: c.when, src: c.src, items: [] }));
+    g.items.push(c);
+  }
+  eleventyConfig.addGlobalData("changeGroups", changeGroups);
+  eleventyConfig.addGlobalData("changeCount", changes.filter((c) => !c.same).length);
 
   // For the Figures and sources page: facts grouped by project, then by kind,
-  // in the order they appear in each facts file.
+  // in the order they appear in each facts file. A fact another one replaced
+  // is not listed on its own - it appears in its replacement's history.
   const groups = data.projects.map((p) => {
     const topics = [];
-    for (const f of data.facts.filter((x) => x.id.startsWith(p.id + "."))) {
+    for (const f of data.facts.filter((x) => x.id.startsWith(p.id + ".") && !data.replacedBy[x.id])) {
       const key = f.id.split(".")[1];
       let t = topics.find((x) => x.key === key);
       if (!t) topics.push((t = { key, label: TOPICS[key] || key, facts: [] }));
-      t.facts.push(card(f));
+      const history = earlier(f);
+      t.facts.push({ ...card(f), history, revised: history.some((h) => !sameValue(h, f)) });
     }
     return { ...p, topics };
   }).filter((p) => p.topics.length);
@@ -200,6 +255,8 @@ export default function (eleventyConfig) {
       out[f.id] = {
         s: f.statement, v: withUnit(f), asof: f.as_of, st: f.status,
         loc: f.location, note: f.note, r: reportUrl(f), ck: f.checked,
+        was: f.replaces ? withUnit(data.byId[f.replaces]) + " (" + when(data.byId[f.replaces].as_of) + ")" : undefined,
+        now: data.replacedBy[f.id] ? withUnit(data.byId[data.replacedBy[f.id]]) + " (" + when(data.byId[data.replacedBy[f.id]].as_of) + ")" : undefined,
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
       };
     }
