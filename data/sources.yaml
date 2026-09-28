@@ -1,0 +1,167 @@
+# Sources - every document a fact can cite.
+#
+#   id          how facts refer to it (data/facts/*.yaml -> source:)
+#   title       the document's own title, or a plain description
+#   publisher   who issued it
+#   date        the date on the document (YYYY-MM-DD, or YYYY-MM if only the month is known)
+#   url         where to read it; leave out if it was never posted online
+#   note        optional - anything a reader checking it should know
+#
+# The build stops if a fact names a source id that is not in this file.
+
+# ---- Rangeland Blvd route study, Public Workshop #3 (24 September 2026)
+
+- id: pasco-2026-09-traffic-existing
+  title: Existing traffic board (2023 counts), Public Workshop #3
+  publisher: Pasco County
+  date: 2026-09-24
+  url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Existing%20Traffic.pdf
+
+- id: pasco-2026-09-traffic-nobuild
+  title: 2050 no-build traffic board, Public Workshop #3
+  publisher: Pasco County
+  date: 2026-09-24
+  url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20No-Build%20Traffic.pdf
+
+- id: pasco-2026-09-traffic-build
+  title: "Predicted traffic - Alternative A, D & E (2050 build board), Public Workshop #3"
+  publisher: Pasco County
+  date: 2026-09-24
+  url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Build%20Traffic.pdf
+
+- id: pasco-2026-09-matrix
+  title: Alternatives evaluation matrix, Public Workshop #3
+  publisher: Pasco County
+  date: 2026-09-24
+  url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Matrix.pdf
+
+- id: pasco-2026-09-schedule
+  title: Project schedule board, Public Workshop #3
+  publisher: Pasco County
+  date: 2026-09-24
+  url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Schedule.pdf
+
+- id: pasco-2026-09-newsletter
+  title: Public Workshop #3 newsletter
+  publisher: Pasco County
+  date: 2026-09
+  url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland_PW3_Newsletter_final.pdf
+
+- id: pasco-2026-09-mailer
+  title: Public Workshop #3 mailer
+  publisher: Pasco County
+  date: 2026-09
+  note: Mailed to residents; not posted online.
+
+- id: pasco-2026-09-concept-a
+  title: Concept board, Alternative A
+  publisher: Pasco County
+  date: 2026-09-24
+  url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Concept-A.pdf
+
+- id: pasco-2026-09-concept-d
+  title: Concept board, Alternative D
+  publisher: Pasco County
+  date: 2026-09-24
+  url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Concept-D.pdf
+
+- id: pasco-2026-09-concept-e
+  title: Concept board, Alternative E
+  publisher: Pasco County
+  date: 2026-09-24
+  url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Concept-E.pdf
+
+- id: pasco-2026-09-typical-sections
+  title: Typical sections board
+  publisher: Pasco County
+  date: 2026-09-24
+  url: https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Typical%20Sections.pdf
+
+- id: pasco-2026-09-ted-letter
+  title: Corrections and clarifications to this guide, by email
+  publisher: Pasco County Transportation Engineering Department (William Poon, P.E., Interim Director)
+  date: 2026-09-18
+  note: Private correspondence; its contents are summarised in the corrections section of the guide.
+
+# ---- Rangeland Blvd route study, earlier
+
+- id: pasco-2025-04-boards
+  title: Workshop boards dated 30 April 2025, shown at Public Workshop #2 (1 May 2025)
+  publisher: Pasco County
+  date: 2025-04-30
+  note: Superseded by the September 2026 boards.
+
+- id: pasco-2025-01-matrix
+  title: Rangeland Blvd alternatives evaluation matrix
+  publisher: Pasco County
+  date: 2025-01-18
+  url: https://cms1files.revize.com/pasco/Documents/Services/Transportation%20and%20Engineering/Rangeland/01.18.2025%20Rangeland%20Blvd%20Matrix.pdf
+
+- id: pasco-2024-09-newsletter
+  title: Rangeland Boulevard PD&E Study public meeting newsletter
+  publisher: Pasco County
+  date: 2024-09
+  url: https://cms1files.revize.com/pasco/Documents/Services/Transportation%20and%20Engineering/RangelandBlvd_PublicMtg_Newsletter.pdf
+
+- id: pasco-rangeland-project-page
+  title: Rangeland Blvd Extension Route Study (project page)
+  publisher: Pasco County
+  url: https://www.pascocountyfl.gov/services/engineering/rangeland_blvd.php
+
+- id: pasco-budbexley-project-page
+  title: Bud Bexley Pkwy Route Study (project page)
+  publisher: Pasco County
+  url: https://www.pascocountyfl.gov/services/engineering/bud_bexley_pkwy.php
+
+# ---- Regional and state
+
+- id: mpo-2050-lrtp
+  title: Pasco MPO 2050 Long Range Transportation Plan (with Appendix B project sheets and Appendix F socioeconomic forecast)
+  publisher: Pasco MPO
+  url: https://www.pascocountyfl.gov/services/mpo/plans.php
+
+- id: mpo-tip-2027-2031
+  title: MPO Transportation Improvement Program FY 2027-2031 (priority list item 10, project 454569-1)
+  publisher: Pasco MPO
+  url: https://www.pascocountyfl.gov/services/mpo/plans.php
+
+- id: turnpike-suncoast-pde
+  title: Widen Suncoast Parkway (SR 589) PD&E
+  publisher: Florida's Turnpike Enterprise
+  url: https://floridasturnpike.com/turnpike-projects/featured-projects/widen-suncoast-parkway-sr-589-pde/
+
+- id: fdot-federal-obligations-pasco
+  title: Federal obligations by MPO area, Pasco MPO
+  publisher: Florida Department of Transportation
+  url: https://fdotewp1.dot.state.fl.us/FMsupportApps/Documents/Federal/FA_MPO_OBLIGDET/PASCOMPO.PDF
+
+- id: fdot-florida-traffic-online
+  title: Florida Traffic Online (published traffic counts)
+  publisher: Florida Department of Transportation
+  url: https://tdaappsprod.dot.state.fl.us/fto/
+
+- id: fl-2026-veto-list
+  title: 2026 veto list
+  publisher: Executive Office of the Governor of Florida
+  date: 2026-06
+  url: https://www.flgov.com/eog/sites/default/files/shared/2026/06/2026%20Veto%20List.pdf
+
+- id: fl-senate-lfir-2026-27
+  title: Local funding initiative requests, FY 2026-27
+  publisher: The Florida Senate
+  url: https://www.flsenate.gov/Session/Appropriations/FY2026-27/LocalFundingRequests
+
+- id: fl-stat-334-03
+  title: Florida Statutes 334.03 - definitions
+  publisher: The Florida Legislature
+  url: https://www.flsenate.gov/Laws/Statutes/2023/334.03
+
+- id: pasco-ldc-901-3
+  title: Pasco County Land Development Code 901.3 - access management
+  publisher: Pasco County
+  url: https://cms1files.revize.com/pasco/Documents/Services/Planning%20And%20Development/Land%20Development%20Code%20Amendments/12-%20ldc901.3accessmanagement%202-15-24.pdf
+
+- id: fhwa-functional-classification-2023
+  title: "Highway Functional Classification: Concepts, Criteria and Procedures, 2023 edition"
+  publisher: Federal Highway Administration
+  date: 2023

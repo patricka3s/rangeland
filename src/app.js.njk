@@ -1,3 +1,13 @@
+---
+permalink: app.js
+eleventyExcludeFromCollections: true
+---
+{#- TEMPLATE NOTE (not copied into the built app.js)
+    The traffic figures and grades in the NETWORK MAP block come from
+    data/facts/rangeland.yaml. Edit them there, not here: each js tag below is
+    replaced by the fact's value when the site is built.
+    Rows marked out:1 are drawn grey and their figures are never shown, so
+    those few are still written in directly. -#}
 /* Rangeland guide - behaviour only.
    Two jobs: the Highlights/Full detail toggle, and flipping the meeting
    box to the comment deadline once the workshop is over.
@@ -69,44 +79,44 @@
     "ridge-w":        {out:1, aadt:[null,null,null],    open:[1,1,1]},
     "ridge-p2":       {out:1, aadt:[null,null,null],    open:[0,1,1]},
     "rangeland-w":    {out:1, aadt:[null,null,null],    open:[1,1,1]},
-    "rangeland-new":  {aadt:[null,null,18000],   open:[0,0,1]},
-    "budbexley-main": {aadt:[2100,6900,16500],   open:[1,1,1]},
-    "budbexley-gap":  {aadt:[null,6900,16500],   open:[0,1,1]},
+    "rangeland-new":  {aadt:[null,null,{% js "rangeland.aadt.rangeland-new.2050-build" %}],   open:[0,0,1]},
+    "budbexley-main": {aadt:[{% js "rangeland.aadt.budbexley.2023" %},{% js "rangeland.aadt.budbexley.2050-nobuild" %},{% js "rangeland.aadt.budbexley.2050-build" %}],   open:[1,1,1]},
+    "budbexley-gap":  {aadt:[null,{% js "rangeland.aadt.budbexley.2050-nobuild" %},{% js "rangeland.aadt.budbexley.2050-build" %}],   open:[0,1,1]},
     "tower":          {out:1, aadt:[null,null,null],    open:[1,1,1]},
     "caliente":       {out:1, aadt:[null,null,null],    open:[1,1,1]},
-    "sr54":           {aadt:[64800,69000,62500], open:[1,1,1],
-                       disp:["58,700–64,800","63,500–69,000","56,500–62,500"],
+    "sr54":           {aadt:[{% js "rangeland.aadt.sr54.2023", "high" %},{% js "rangeland.aadt.sr54.2050-nobuild", "high" %},{% js "rangeland.aadt.sr54.2050-build", "high" %}], open:[1,1,1],
+                       disp:["{% fact "rangeland.aadt.sr54.2023" %}","{% fact "rangeland.aadt.sr54.2050-nobuild" %}","{% fact "rangeland.aadt.sr54.2050-build" %}"],
                        dlt:[null,"+6 to +8%","−9 to −11%"]},
-    "gunn":           {aadt:[18400,23500,23500], open:[1,1,1]},
+    "gunn":           {aadt:[{% js "rangeland.aadt.gunn.2023" %},{% js "rangeland.aadt.gunn.2050-nobuild" %},{% js "rangeland.aadt.gunn.2050-build" %}], open:[1,1,1]},
     "cattlegap":      {out:1, aadt:[null,1500,null],    open:[1,1,1], disp:[null,"1,200–1,700",null]},
-    "sbranch":        {aadt:[null,22000,15500],  open:[1,1,1]},
+    "sbranch":        {aadt:[null,{% js "rangeland.aadt.sbranch.2050-nobuild" %},{% js "rangeland.aadt.sbranch.2050-build" %}],  open:[1,1,1]},
     "suncoast-n":     {out:1, aadt:[null,75500,null],   open:[1,1,1]},
     "suncoast-m":     {out:1, aadt:[null,75500,null],   open:[1,1,1]},
     "suncoast-s":     {out:1, aadt:[null,93000,null],   open:[1,1,1]},
-    "bvd-sr54":       {aadt:[14300,32500,22500], open:[1,1,1]},
-    "bvd-rndbt":      {aadt:[6100,23500,21500],  open:[1,1,1]},
-    "bvd-ne-lo":      {aadt:[2500,15500,14500],  open:[1,1,1]},
+    "bvd-sr54":       {aadt:[{% js "rangeland.aadt.bvd-sr54.2023" %},{% js "rangeland.aadt.bvd-sr54.2050-nobuild" %},{% js "rangeland.aadt.bvd-sr54.2050-build" %}], open:[1,1,1]},
+    "bvd-rndbt":      {aadt:[{% js "rangeland.aadt.bvd-rndbt.2023" %},{% js "rangeland.aadt.bvd-rndbt.2050-nobuild" %},{% js "rangeland.aadt.bvd-rndbt.2050-build" %}],  open:[1,1,1]},
+    "bvd-ne-lo":      {aadt:[{% js "rangeland.aadt.bvd-north.2023" %},{% js "rangeland.aadt.bvd-north.2050-nobuild" %},{% js "rangeland.aadt.bvd-north.2050-build" %}],  open:[1,1,1]},
     "bvd-ne-hi":      {aadt:[null,null,null],    open:[0,0,0]},
-    "broadporch":     {aadt:[3500,5000,7000],    open:[1,1,1]},
-    "ballantrae-s":   {aadt:[10700,18000,11000], open:[1,1,1]},
-    "ballantrae-n":   {aadt:[4100,7100,8600],    open:[1,1,1]},
+    "broadporch":     {aadt:[{% js "rangeland.aadt.broadporch.2023" %},{% js "rangeland.aadt.broadporch.2050-nobuild" %},{% js "rangeland.aadt.broadporch.2050-build" %}],    open:[1,1,1]},
+    "ballantrae-s":   {aadt:[{% js "rangeland.aadt.ballantrae-s.2023" %},{% js "rangeland.aadt.ballantrae-s.2050-nobuild" %},{% js "rangeland.aadt.ballantrae-s.2050-build" %}], open:[1,1,1]},
+    "ballantrae-n":   {aadt:[{% js "rangeland.aadt.ballantrae-n.2023" %},{% js "rangeland.aadt.ballantrae-n.2050-nobuild" %},{% js "rangeland.aadt.ballantrae-n.2050-build" %}],    open:[1,1,1]},
     "sunlake-s":      {out:1, aadt:[null,null,null],    open:[1,1,1]},
     "sunlake-n":      {out:1, aadt:[null,null,null],    open:[0,0,0]},
     "us41":           {out:1, aadt:[54500,null,null],  open:[1,1,1]}
   };
 
   var INT = {
-    "rg-gunn":    {name:"Rangeland Blvd at Gunn Hwy",       g:["A","F","C"], on:["rangeland","gunn"]},
-    "rg-cattle":  {name:"Rangeland Blvd at Cattle Gap Trl", g:["A","A","A"], on:["rangeland","cattlegap"]},
-    "bvd-rndbt":  {name:"Bexley Village Dr roundabout",     g:["A","F","D"], on:["rangeland","budbexley","bexleyvillage"]},
-    "bb-ballan":  {name:"Bud Bexley Pkwy at Ballantrae",    g:["C","D","D"], on:["budbexley","ballantrae"]},
-    "sr-gunn":    {name:"SR 54 at Gunn Hwy",                g:["D","F","F"], on:["sr54","gunn"]},
-    "sr-sbranch": {name:"SR 54 at S Branch Blvd",           g:["C","E","D"], on:["sr54","sbranch"]},
-    "sr-sunc-w":  {name:"SR 54 at Suncoast ramps, west",    g:["B","E","D"], on:["sr54","suncoast"]},
-    "sr-sunc-e":  {name:"SR 54 at Suncoast ramps, east",    g:["C","F","D"], on:["sr54","suncoast"]},
-    "sr-bvd":     {name:"SR 54 at Bexley Village Dr",       g:["D","F","F"], on:["sr54","bexleyvillage"]},
-    "sr-ballan":  {name:"SR 54 at Ballantrae Blvd",         g:["C","E","D"], on:["sr54","ballantrae"], flag:1},
-    "sr-sunlake": {name:"SR 54 at Sunlake Blvd",            g:["D","F","F"], on:["sr54","sunlake"]}
+    "rg-gunn":    {name:"Rangeland Blvd at Gunn Hwy",       g:[{% js "rangeland.los.rg-gunn.2023" %},{% js "rangeland.los.rg-gunn.2050-nobuild" %},{% js "rangeland.los.rg-gunn.2050-build" %}], on:["rangeland","gunn"]},
+    "rg-cattle":  {name:"Rangeland Blvd at Cattle Gap Trl", g:[{% js "rangeland.los.rg-cattle.2023" %},{% js "rangeland.los.rg-cattle.2050-nobuild" %},{% js "rangeland.los.rg-cattle.2050-build" %}], on:["rangeland","cattlegap"]},
+    "bvd-rndbt":  {name:"Bexley Village Dr roundabout",     g:[{% js "rangeland.los.bvd-rndbt.2023" %},{% js "rangeland.los.bvd-rndbt.2050-nobuild" %},{% js "rangeland.los.bvd-rndbt.2050-build" %}], on:["rangeland","budbexley","bexleyvillage"]},
+    "bb-ballan":  {name:"Bud Bexley Pkwy at Ballantrae",    g:[{% js "rangeland.los.bb-ballan.2023" %},{% js "rangeland.los.bb-ballan.2050-nobuild" %},{% js "rangeland.los.bb-ballan.2050-build" %}], on:["budbexley","ballantrae"]},
+    "sr-gunn":    {name:"SR 54 at Gunn Hwy",                g:[{% js "rangeland.los.sr-gunn.2023" %},{% js "rangeland.los.sr-gunn.2050-nobuild" %},{% js "rangeland.los.sr-gunn.2050-build" %}], on:["sr54","gunn"]},
+    "sr-sbranch": {name:"SR 54 at S Branch Blvd",           g:[{% js "rangeland.los.sr-sbranch.2023" %},{% js "rangeland.los.sr-sbranch.2050-nobuild" %},{% js "rangeland.los.sr-sbranch.2050-build" %}], on:["sr54","sbranch"]},
+    "sr-sunc-w":  {name:"SR 54 at Suncoast ramps, west",    g:[{% js "rangeland.los.sr-sunc-w.2023" %},{% js "rangeland.los.sr-sunc-w.2050-nobuild" %},{% js "rangeland.los.sr-sunc-w.2050-build" %}], on:["sr54","suncoast"]},
+    "sr-sunc-e":  {name:"SR 54 at Suncoast ramps, east",    g:[{% js "rangeland.los.sr-sunc-e.2023" %},{% js "rangeland.los.sr-sunc-e.2050-nobuild" %},{% js "rangeland.los.sr-sunc-e.2050-build" %}], on:["sr54","suncoast"]},
+    "sr-bvd":     {name:"SR 54 at Bexley Village Dr",       g:[{% js "rangeland.los.sr-bvd.2023" %},{% js "rangeland.los.sr-bvd.2050-nobuild" %},{% js "rangeland.los.sr-bvd.2050-build" %}], on:["sr54","bexleyvillage"]},
+    "sr-ballan":  {name:"SR 54 at Ballantrae Blvd",         g:[{% js "rangeland.los.sr-ballan.2023" %},{% js "rangeland.los.sr-ballan.2050-nobuild" %},{% js "rangeland.los.sr-ballan.2050-build" %}], on:["sr54","ballantrae"], flag:1},
+    "sr-sunlake": {name:"SR 54 at Sunlake Blvd",            g:[{% js "rangeland.los.sr-sunlake.2023" %},{% js "rangeland.los.sr-sunlake.2050-nobuild" %},{% js "rangeland.los.sr-sunlake.2050-build" %}], on:["sr54","sunlake"]}
   };
 
   /* The three tabs, in order. Wording lives in index.html: the tab labels are

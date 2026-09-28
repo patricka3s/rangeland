@@ -1,0 +1,14 @@
+{
+  "name": "rangeland-guide",
+  "private": true,
+  "description": "Plain-language guide to Pasco County road projects, built from sourced data files.",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "js-yaml": "^4.3.2"
+  },
+  "type": "module"
+}

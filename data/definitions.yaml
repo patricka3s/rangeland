@@ -1,0 +1,72 @@
+# Definitions - terms the site uses, in plain language.
+#
+#   id          short name for the term
+#   term        the term as it appears on the page
+#   definition  plain-language meaning
+#   source      optional - id from data/sources.yaml when the definition is quoted
+#               or taken from a document; left out for general explanations
+#
+# Not yet shown on the page as a list; the page's own explanations still live
+# in the text. A glossary built from this file is a later step.
+
+- id: aadt
+  term: AADT (Average Annual Daily Traffic)
+  definition: The number of vehicles that pass a point on the road in a typical day, counting both directions together, averaged over the whole year. It smooths out weekday/weekend and seasonal differences and says nothing about peak hours.
+
+- id: los
+  term: LOS (Level of Service)
+  definition: A letter grade from A to F describing delay at an intersection during a peak hour. A is free-flowing; F means the intersection cannot clear the vehicles arriving at it, so the queue builds faster than it empties. Pasco publishes a morning and an evening grade, written "AM (PM)" - so "D (F)" is D in the morning and F in the evening.
+
+- id: arterial
+  term: Arterial
+  definition: A route that is "relatively continuous and of relatively high traffic volume, long average trip length, high operating speed, and high mobility importance."
+  source: fl-stat-334-03
+
+- id: collector
+  term: Collector
+  definition: A route of "relatively moderate average traffic volume, moderately average trip length, and moderately average operating speed."
+  source: fl-stat-334-03
+
+- id: local-road
+  term: Local road
+  definition: A route of "relatively low average traffic volume, short average trip length or minimal through-traffic movements, and high land access for abutting property."
+  source: fl-stat-334-03
+
+- id: principal-arterial
+  term: Principal arterial
+  definition: An arterial serving "the major centers of activity of an urban area, the highest traffic volume corridors, and the longest trip purpose."
+  source: fl-stat-334-03
+
+- id: minor-arterial
+  term: Minor arterial
+  definition: An arterial that "interconnects with and augments" the principal arterials and carries shorter trips.
+  source: fl-stat-334-03
+
+- id: freight-priority-network
+  term: Freight Priority Network
+  definition: The roads Pasco's long range transportation plan designates for the movement of goods, drawing on the state's Florida Mobility and Trade Plan. A listed project earns one point in the plan's project scoring. The county's view is that the designation does not by itself imply heavy truck use.
+  source: mpo-2050-lrtp
+
+- id: wb-40
+  term: WB-40
+  definition: A design vehicle - a medium-sized semitrailer with a 40-foot wheelbase. A road designed for it lets that truck make its turns without leaving the pavement.
+
+- id: pde-study
+  term: PD&E study (Project Development and Environment)
+  definition: The study that compares alternatives for a road project and assesses their traffic, environmental and cost effects before design. Pasco's route study is the same process run under the county's own code rather than federal law.
+
+- id: route-study
+  term: Route study
+  definition: Pasco County's name for a PD&E-style study run under its own code and standards, used when no federal money or federal approval is involved.
+
+- id: no-build
+  term: No-build
+  definition: The forecast of what happens if the project under study is not built. Everything else in the adopted long range plan is still assumed to be built, so it is not a "nothing changes" scenario.
+
+- id: programmed
+  term: Programmed
+  definition: Money for a project sits in a plan for a given year. Only the first year of an adopted capital improvement plan is actually appropriated; later years are estimates.
+
+- id: obligated
+  term: Obligated (federal funds)
+  definition: The federal government has formally authorised the money and it is legally encumbered. Only obligation creates federal duties such as a federal environmental review.

@@ -1,0 +1,52 @@
+# Builds the site from src/ and data/ and publishes it to GitHub Pages.
+#
+#  - On a pull request: build only. If a fact is missing, or names a source that
+#    doesn't exist, the build fails and the pull request shows a red X - so the
+#    mistake is caught before anything is merged.
+#  - On a merge to main: build, then publish.
+#
+# Requires Settings -> Pages -> Source: "GitHub Actions".
+
+name: Build and publish site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
