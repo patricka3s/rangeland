@@ -58,6 +58,29 @@ the facts they come from.
 the figures inside the correction notes (which record what the page said at the
 time, on purpose). Check those by hand when a related fact changes.
 
+## Marking a figure as verified
+
+Two optional dates record who has compared a figure with its document:
+
+```yaml
+  ai_checked: '2026-09-28'   # Claude (AI) checked it on this date
+  verified: '2026-10-02'     # you checked it yourself on this date
+```
+
+The site shows these as **Checked by AI** (outlined) and **Verified by a human**
+(filled), and the Figures and sources page has a key with how many figures are
+in each state. Only you add `verified`; Claude never does. To mark one:
+
+1. On GitHub, open `data/facts/` and the project's file, then click the pencil
+   (**Edit this file**).
+2. Find the figure (press Ctrl+F or ⌘F and type part of its id), and under its
+   other lines add `  verified: 'YYYY-MM-DD'` with today's date, lined up with
+   the lines above it and with the quote marks.
+3. Click **Commit changes…**, choose **Create a new branch**, then **Propose
+   changes** and **Create pull request**. Once the check passes, merge it.
+
+If you mistype the date, the build stops and says which figure.
+
 **Watch out for `#`.** In these files, a `#` after a space starts a comment and
 everything after it is silently dropped. Wrap any value containing ` #` or `: `
 in double quotes: `title: "Public Workshop #3 newsletter"`.

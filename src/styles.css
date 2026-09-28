@@ -569,7 +569,7 @@
   .factpop .fm{font-size:.85rem;color:var(--ink-3)}
   .factpop .fm a{color:var(--accent)}
   .factpop .fwas{font-size:.85rem;color:var(--ink-2)}
-  .factpop .fck{font-size:.8rem;color:var(--good)}
+  .factpop .fck{display:flex;flex-wrap:wrap;gap:6px}
   .factpop .fn{font-size:.85rem;color:var(--ink-2);border-left:3px solid var(--rule);padding-left:10px}
   .factpop .fst{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
     letter-spacing:.08em;text-transform:uppercase;color:var(--hot)}
@@ -618,8 +618,8 @@
   .fstat{font-size:.98rem;line-height:1.45}
   .fval{font-family:Archivo,sans-serif;font-weight:700;font-size:1rem;white-space:nowrap;text-align:right}
   .fmeta{margin:4px 0 0;font-size:.85rem;color:var(--ink-3);line-height:1.5}
-  .fmeta .fdate,.fmeta .fck{white-space:nowrap}
-  .fmeta .fck{color:var(--good)} .fmeta .fck.no{color:var(--hot)}
+  .fmeta .fdate{white-space:nowrap}
+  .fmeta .vtag + .vtag{margin-left:5px}
   .fmeta a{color:var(--ink-2)}
   .fmeta .frep{margin-left:10px;font-family:Archivo,sans-serif;font-weight:600;color:var(--accent);white-space:nowrap}
   .fnote{margin:6px 0 0;font-size:.85rem;color:var(--ink-2);border-left:3px solid var(--rule);padding-left:10px}
@@ -803,3 +803,22 @@
   .fjump a{font-family:Archivo,sans-serif;font-size:.92rem;font-weight:600;color:var(--accent);text-decoration:none}
   .fjump a:hover{text-decoration:underline}
   .fjump .sep{width:1px;align-self:stretch;background:var(--rule)}
+
+/* How a figure has been checked against its document (Figures page, the key,
+   and the tap-for-details box). "Verified by a human" is filled; "Checked by
+   AI" is outlined; "Not yet checked" is plain. */
+  .vtag{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;font-weight:600;
+    letter-spacing:.04em;line-height:1.5;padding:0 6px;border-radius:3px;border:1px solid transparent;white-space:nowrap}
+  .vtag .vd{font-weight:400}
+  .vtag.human{background:var(--good);border-color:var(--good);color:#fff}
+  .vtag.ai{border-color:var(--accent);color:var(--accent)}
+  .vtag.none{border-color:var(--rule);color:var(--ink-3);border-style:dashed}
+  :root[data-theme="dark"] .vtag.human{color:#12161D}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .vtag.human{color:#12161D} }
+  .fkey{margin:0 0 20px;padding:12px 14px;background:var(--surface);border:1px solid var(--rule-soft)}
+  .fkey .pb-lab{margin:0 0 6px}
+  .fkey ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+  .fkey li{padding:0;font-size:.88rem;line-height:1.5;color:var(--ink-2)}
+  .fkey li::before{content:none}
+  .fkey .vtag{margin-right:6px}
+  .fkey .kcount{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.75rem;color:var(--ink-3);white-space:nowrap}

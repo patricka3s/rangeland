@@ -24,8 +24,24 @@ eleventyExcludeFromCollections: true
 <header>
   <p class="eyebrow"><a href="../">&#8592; Back to the guide</a></p>
   <h1>Figures and sources</h1>
-  <p class="standfirst">Every figure the guide takes from a public document, with the document it comes from. Click a source to read it yourself. Each one says when it was last checked against that document. If a figure doesn&#8217;t match its source, use <strong>Report an error</strong> beside it &#8212; the form opens with that figure already filled in.</p>
+  <p class="standfirst">Every figure the guide takes from a public document, with the document it comes from. Click a source to read it yourself. Each one says whether it has been checked against that document, and by whom (see the key below). If a figure doesn&#8217;t match its source, use <strong>Report an error</strong> beside it &#8212; the form opens with that figure already filled in.</p>
 </header>
+
+{#- How each figure has been checked. "verified" is set only by Patrick; "ai_checked" by Claude. -#}
+{% macro checks(f) -%}
+{%- if f.verified %}<span class="vtag human">Verified by a human<span class="vd"> {{ f.verifiedOn }}</span></span>{% endif -%}
+{%- if f.ai_checked %}<span class="vtag ai">Checked by AI<span class="vd"> {{ f.aiCheckedOn }}</span></span>{% endif -%}
+{%- if not f.verified and not f.ai_checked %}<span class="vtag none">Not yet checked</span>{% endif -%}
+{%- endmacro %}
+
+<div class="fkey" aria-label="Key">
+  <p class="pb-lab">Key</p>
+  <ul>
+    <li><span class="vtag human">Verified by a human</span> Patrick has compared the figure with the document himself, on the date shown. <span class="kcount">{{ checkCounts.human }} of {{ checkCounts.total }}</span></li>
+    <li><span class="vtag ai">Checked by AI</span> Claude, an AI assistant, has compared the figure with the document, on the date shown. It can still make mistakes. <span class="kcount">{{ checkCounts.ai }} of {{ checkCounts.total }}</span></li>
+    <li><span class="vtag none">Not yet checked</span> Taken from the document, but not yet checked against it by anyone. <span class="kcount">{{ checkCounts.unchecked }} of {{ checkCounts.total }}</span></li>
+  </ul>
+</div>
 
 <nav class="fjump" aria-label="Jump to">
   <span class="pb-lab">Jump to</span>
@@ -78,7 +94,7 @@ eleventyExcludeFromCollections: true
         <p class="fmeta">
           {%- if f.src.url %}<a href="{{ f.src.url }}" rel="noopener" target="_blank">{{ f.src.title }}</a>{% else %}{{ f.src.title }}{% endif -%}
           {%- if f.location %} &#183; {{ f.location }}{% endif %} &#183; <span class="fdate">{{ f.asOf }}</span>
-          &#183; {% if f.checked %}<span class="fck">checked {{ f.checkedOn }}</span>{% else %}<span class="fck no">not yet checked</span>{% endif %}
+          &#183; {{ checks(f) }}
           <a class="frep" href="{{ f.report }}" rel="noopener" target="_blank">Report an error</a>
         </p>
         {% if f.note %}<p class="fnote">{{ f.note }}</p>{% endif %}
@@ -89,7 +105,7 @@ eleventyExcludeFromCollections: true
             {% for h in f.history %}
             <li id="{{ h.id }}">
               <span class="fvval">{{ h.withUnit }}</span>
-              <span class="fvmeta">{% if h.src.url %}<a href="{{ h.src.url }}" rel="noopener" target="_blank">{{ h.src.title }}</a>{% else %}{{ h.src.title }}{% endif %}{% if h.location %} &#183; {{ h.location }}{% endif %} &#183; <span class="fdate">{{ h.asOf }}</span>{% if h.checked %} &#183; <span class="fck">checked {{ h.checkedOn }}</span>{% endif %} <a class="frep" href="{{ h.report }}" rel="noopener" target="_blank">Report an error</a></span>
+              <span class="fvmeta">{% if h.src.url %}<a href="{{ h.src.url }}" rel="noopener" target="_blank">{{ h.src.title }}</a>{% else %}{{ h.src.title }}{% endif %}{% if h.location %} &#183; {{ h.location }}{% endif %} &#183; <span class="fdate">{{ h.asOf }}</span>{% if h.verified or h.ai_checked %} &#183; {{ checks(h) }}{% endif %} <a class="frep" href="{{ h.report }}" rel="noopener" target="_blank">Report an error</a></span>
               {% if h.note %}<span class="fvnote">{{ h.note }}</span>{% endif %}
             </li>
             {% endfor %}
