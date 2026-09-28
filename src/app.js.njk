@@ -8,10 +8,14 @@ eleventyExcludeFromCollections: true
     replaced by the fact's value when the site is built.
     Rows marked out:1 are drawn grey and their figures are never shown, so
     those few are still written in directly. -#}
-/* Rangeland guide - behaviour only.
-   Two jobs: the Highlights/Full detail toggle, and flipping the meeting
-   box to the comment deadline once the workshop is over.
-   No wording lives here except the two mode descriptions below. */
+/* Rangeland guide - behaviour only. Three blocks:
+   - reading mode and meeting box: the Highlights/Full detail toggle, opening
+     the corrections from #notes links, and flipping the meeting box to the
+     comment deadline once the workshop is over;
+   - NETWORK MAP: the interactive map's tabs and colours;
+   - FACT DETAILS: the box that opens when a figure is tapped.
+   No page wording lives here except the two mode descriptions and the
+   details box's labels. */
 
 (function(){
   var KEY = "rangeland-reading-mode", root = document.documentElement, saved = null;
