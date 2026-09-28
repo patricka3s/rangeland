@@ -20,6 +20,7 @@ figure on it is stored once, cites the document it came from, and can be checked
 | `src/index.njk` | The page. All the wording lives here; figures are pulled in from the facts file. |
 | `src/sunlake/index.njk` | The **Sunlake Blvd corridor** page at `/sunlake/`, laid out like Rangeland's Highlights: slides for the three pieces of the corridor, the planned road, the process and funding, with a plain "not yet published" wherever nothing is. "Full detail" is switched off until the county publishes a study or holds a workshop. |
 | `data/events.yaml` | The **timeline**: each project's workshops, Commission actions, contracts, change orders, plan documents, deadlines and planned phases, each with its source. |
+| `tools/preview.mjs` | Makes the private preview copy (`npm run preview`) that Claude publishes so you can look before merging. Not part of the live site. |
 | `src/timeline/index.njk` | The **Timeline** page at `/timeline/`, built from `events.yaml`. The guide's "What's happened lately" box is built from it too. |
 | `src/_includes/project-bar.njk` | The bar at the top of every page: projects on the left, Timeline and All figures & sources on the right. Add a project link to the left-hand group when a project gets a page. |
 | `src/facts.njk` | The **Figures and sources** page (`/facts/`): every fact, grouped, with its source and a report link. Built entirely from the data files. |

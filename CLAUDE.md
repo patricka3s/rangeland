@@ -104,6 +104,15 @@ Patrick decides. In short:
    scenarios as Rangeland; Patrick spot-checks the facts (checkpoint 2).
 3. Build the page at `/<project-id>/` with the standard sections, in the standard
    order - sections with nothing published say so rather than disappearing.
+   **Every project page looks the same.** Copy the layout of an existing page (the
+   skill says which) and reuse the existing styles in `src/styles.css`: the project
+   bar, the "What's happened lately" box, the Reading mode bar (Highlights | Full
+   detail; Full detail disabled until there's a study or workshop to write it
+   from), slides (`.slide`, `.sn`, `.stats`, `.steps`, `.qlist`, `.foot`) and the
+   version line in the footer. Don't invent new components or colours for one
+   project; if a project needs something new, add it as a shared style that every
+   page can use and ask Patrick first. Each project also gets a tag shade
+   (`.pj-<project-id>`) for the Timeline.
 4. Site structure (decided with Patrick, 28 Sep 2026): new projects at
    `/<project-id>/` with a project bar on every page; after 8 Oct 2026 the
    Rangeland guide moves to `/rangeland/`, the home page becomes a projects page,
@@ -117,6 +126,14 @@ Patrick decides. In short:
 - Before pushing: `npm run build` must pass. For visible changes, check the page in
   a browser (Chromium is at `/opt/pw-browsers`; Playwright works) at desktop and
   phone widths, light and dark.
+- **Preview before merge.** After pushing, run `PREVIEW_PR=<N> npm run preview`
+  (builds, then writes `_preview/`: a copy with folder links pointing at
+  `index.html`, no GoatCounter, and a "Preview" banner), and publish
+  `_preview/index.html` with the Artifact tool, passing every other file in
+  `_preview/` in `files` (`styles.css`, `app.js`, `og-image.png`, and each
+  `<folder>/index.html`). Update the one preview page Patrick already has,
+  https://claude.ai/artifact/LUnhSwLPTm6gssWoEFSAuJ (pass it as `url`), rather
+  than making a new one, and give him the link with the pull request.
 - The site publishes itself when a pull request is merged
   (`.github/workflows/site.yml`). The version line at the foot of each page shows
   which commit is live and, for a merge, the pull request number.

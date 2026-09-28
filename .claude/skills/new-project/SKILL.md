@@ -132,6 +132,7 @@ Before opening the pull request, reread the page and check:
 Build (`npm run build`), browser-check at desktop and phone widths in light and
 dark, branch from the latest `main`, open a pull request, and end its description
 with **When it's live:** the foot of the page will show *pull request #N*.
+Then publish the preview (see Workflow in CLAUDE.md) and give Patrick the link.
 
 ## Site structure (decided 28 Sep 2026)
 
