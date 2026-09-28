@@ -62,6 +62,7 @@
    built, 2050 built]; aadt null means no figure for that year; open 0 means the
    road is not open to traffic then; out:1 means this study never numbers the
    street at all, so it is drawn grey in every view.
+   No wording lives in this file - tab labels and captions are in index.html.
    ========================================================================== */
 (function(){
   var SEG = {
@@ -108,14 +109,10 @@
     "sr-sunlake": {name:"SR 54 at Sunlake Blvd",            g:["D","F","F"], on:["sr54","sunlake"]}
   };
 
-  var VIEWS = [
-    {k:"today", label:"Today",
-     cap:"The county's existing-traffic board, base year 2023, read off the board itself rather than taken from a summary. Three of the four corridor roads already exist; the 3.41 miles being decided do not."},
-    {k:"notbuilt", label:"2050, not built",
-     cap:"The county calls this the no-build. It is not a future in which nothing is built — the model includes every project in the long range plan, Bud Bexley Parkway among them, so the corridor still joins up. Only the Rangeland extension is missing."},
-    {k:"built", label:"2050, built",
-     cap:"The county's build board, which covers Alternatives A, D and E on one sheet. Note what it says about SR 54: 56,500 west and 62,500 east, both lower than the same county's 2023 counts of 58,700 and 64,800."}
-  ];
+  /* The three tabs, in order. Wording lives in index.html: the tab labels are
+     in the .nmviews block, the captions under the key are in the figcaption.
+     Only the keys are here, and they must match the data-view attributes. */
+  var VIEWS = [{k:"today"}, {k:"notbuilt"}, {k:"built"}];
 
   document.addEventListener("DOMContentLoaded", function(){
     var svg = document.getElementById("nm-map");
@@ -180,7 +177,10 @@
       }
       var u = document.getElementById("nm-stn-us41ridge");
       if (u) setCls(u, "stn" + (vi === 0 ? " absent" : ""));
-      cap.textContent = VIEWS[vi].cap;
+      var caps = cap.querySelectorAll("[data-view]");
+      for (i = 0; i < caps.length; i++){
+        caps[i].classList.toggle("on", caps[i].getAttribute("data-view") === VIEWS[vi].k);
+      }
     }
 
     /* hover isolates one street; there is no detail panel on this page */
