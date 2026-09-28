@@ -72,7 +72,9 @@ Wait for Patrick to choose before going on.
 - Add the project's events to `data/events.yaml` - the same kinds as other projects
   (workshops, Commission actions, contracts, every change order, plan documents,
   deadlines, and planned phases by fiscal year) - and give it a `short` name in
-  `projects.yaml` and a link in `src/_includes/project-bar.njk`.
+  `projects.yaml`, a link in `src/_includes/project-bar.njk`, and a tag shade
+  (`.pj-<project-id>`) in the Timeline section of `src/styles.css`. A change order
+  that moves a completion date gets `moved: {from, to}` rather than dates in its title.
 - A figure that a newer document updates: new fact with `replaces:`, old one
   `superseded` - never overwrite.
 
@@ -104,6 +106,15 @@ never fill it with anything that isn't a sourced fact or labelled analysis.
 
 Figures go in with `{% fact %}`; differences and ratios with the computed
 shortcodes, never typed.
+
+Layout: the page looks like the Rangeland guide's Highlights view - the
+"What's happened lately" box, the Reading mode bar, then one slide per section
+(number tiles, a headline, a source line at the foot). Sections with nothing
+published can share one "Not yet published" slide; the sources section sits
+below the slides. Until a study or workshop gives enough for a full guide, the
+"Full detail" button is disabled with a note saying why (copy
+`src/sunlake/index.njk`). Headlines state what is published, neutrally; Patrick
+rewords them in his own voice if he wants.
 
 ## 7. Neutrality review
 
