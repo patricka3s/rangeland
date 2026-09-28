@@ -137,6 +137,7 @@ export default function (eleventyConfig) {
     if (f.unit === "USD million") {
       return words ? "$" + num(v, f.decimals ?? 1) + " million" : usdM(v, f.decimals ?? 1);
     }
+    if (f.unit.startsWith("USD")) return "$" + num(v, f.decimals ?? 0);
     return num(v, f.decimals ?? 0);
   }
 
@@ -144,6 +145,7 @@ export default function (eleventyConfig) {
   function withUnit(f) {
     const d = display(f);
     if (f.unit === "USD million") return d;
+    if (f.unit.startsWith("USD ")) return d + f.unit.slice(3);
     if (f.unit === "grade") return "Grade " + d;
     return d + " " + f.unit;
   }
@@ -158,7 +160,7 @@ export default function (eleventyConfig) {
 
   // Everything a page needs to show one fact.
   function card(f) {
-    return { ...f, display: display(f), withUnit: withUnit(f), report: reportUrl(f), asOf: when(f.as_of), src: data.sourceById[f.source] };
+    return { ...f, display: display(f), withUnit: withUnit(f), report: reportUrl(f), asOf: when(f.as_of), checkedOn: when(f.checked), src: data.sourceById[f.source] };
   }
 
   // For the Figures and sources page: facts grouped by project, then by kind,
@@ -196,7 +198,7 @@ export default function (eleventyConfig) {
       const src = data.sourceById[f.source];
       out[f.id] = {
         s: f.statement, v: withUnit(f), asof: f.as_of, st: f.status,
-        loc: f.location, note: f.note, r: reportUrl(f),
+        loc: f.location, note: f.note, r: reportUrl(f), ck: f.checked,
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
       };
     }
@@ -223,6 +225,9 @@ export default function (eleventyConfig) {
     const d = value(b) - value(a);
     return d > 0 ? "up" : d < 0 ? "down" : "flat";
   });
+  // {% product "a", "b", scale, decimals %}  ->  a x b x scale, e.g. a per-acre
+  // rate times acres, scaled to millions: {% product "rate", "acres", 0.000001, 1 %} -> "6.9"
+  eleventyConfig.addShortcode("product", (a, b, scale = 1, decimals = 0) => num(value(a) * value(b) * scale, decimals));
   // {% perMile "cost id", "length id" %}  ->  "$44.0M";  add "words" for "$44.0 million"
   eleventyConfig.addShortcode("perMile", (cost, miles, style) => {
     const v = value(cost) / value(miles);

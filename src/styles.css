@@ -565,6 +565,7 @@
   .factpop .fs{color:var(--ink-2)}
   .factpop .fm{font-size:.85rem;color:var(--ink-3)}
   .factpop .fm a{color:var(--accent)}
+  .factpop .fck{font-size:.8rem;color:var(--good)}
   .factpop .fn{font-size:.85rem;color:var(--ink-2);border-left:3px solid var(--rule);padding-left:10px}
   .factpop .fst{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
     letter-spacing:.08em;text-transform:uppercase;color:var(--hot)}
@@ -613,7 +614,8 @@
   .fstat{font-size:.98rem;line-height:1.45}
   .fval{font-family:Archivo,sans-serif;font-weight:700;font-size:1rem;white-space:nowrap;text-align:right}
   .fmeta{margin:4px 0 0;font-size:.85rem;color:var(--ink-3);line-height:1.5}
-  .fmeta .fdate{white-space:nowrap}
+  .fmeta .fdate,.fmeta .fck{white-space:nowrap}
+  .fmeta .fck{color:var(--good)} .fmeta .fck.no{color:var(--hot)}
   .fmeta a{color:var(--ink-2)}
   .fmeta .frep{margin-left:10px;font-family:Archivo,sans-serif;font-weight:600;color:var(--accent);white-space:nowrap}
   .fnote{margin:6px 0 0;font-size:.85rem;color:var(--ink-2);border-left:3px solid var(--rule);padding-left:10px}
