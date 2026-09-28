@@ -825,6 +825,59 @@
 
 # ---- Alternatives matrix quantities
 
+- id: rangeland.matrix.noise.2025-01
+  statement: 'Potential impacts to noise conditions, Build A, January 2025 matrix'
+  value: High
+  unit: rating
+  source: pasco-2025-01-matrix
+  location: "row 'Potential impacts to noise conditions (Low/Medium/High)', Build Condition A column"
+  as_of: '2025-01-18'
+  status: current
+  checked: '2026-09-28'
+  note: 'Build B was also rated High. Both build alternatives compared then had the same rating.'
+
+- id: rangeland.matrix.noise.2026-09
+  statement: 'Potential impacts to noise conditions, Alternatives A, D and E, September 2026 matrix'
+  value: Medium
+  unit: rating
+  source: pasco-2026-09-matrix
+  location: "row 'Potential impacts to noise conditions (Low/Medium/High)'"
+  as_of: '2026-09-24'
+  status: current
+  checked: '2026-09-28'
+  note: 'Footnote 3 on the matrix: "Two noise impacted areas were identified on the corridor."'
+
+- id: rangeland.matrix.noise-nobuild.2026-09
+  statement: 'Potential impacts to noise conditions, No-Build, September 2026 matrix'
+  value: None
+  unit: rating
+  source: pasco-2026-09-matrix
+  location: "row 'Potential impacts to noise conditions (Low/Medium/High)', No-Build Alternative column"
+  as_of: '2026-09-24'
+  status: current
+  checked: '2026-09-28'
+  note: 'The January 2025 matrix also rated the no-build None.'
+
+- id: rangeland.matrix.contamination.2025-01
+  statement: 'Potential impacts to contamination sites, Build A, January 2025 matrix'
+  value: High
+  unit: rating
+  source: pasco-2025-01-matrix
+  location: "row 'Potential impacts to contamination sites (Low/Medium/High)', Build Condition A column"
+  as_of: '2025-01-18'
+  status: current
+  checked: '2026-09-28'
+
+- id: rangeland.matrix.contamination.2026-09
+  statement: 'Potential impacts to contamination sites, Alternatives A, D and E, September 2026 matrix'
+  value: Low
+  unit: rating
+  source: pasco-2026-09-matrix
+  location: "row 'Potential impacts to contamination sites (Low/Medium/High)'"
+  as_of: '2026-09-24'
+  status: current
+  checked: '2026-09-28'
+
 - id: rangeland.matrix.wetlands.2025-01
   statement: Wetlands affected, Build A, January 2025 matrix
   value: 24.11
