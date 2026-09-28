@@ -397,25 +397,24 @@ trafficRows:
 
 <!-- ==========================================================================
      UPDATES - "What's happened lately"
-     Two lists: "Still ahead" then "Already happened" (newest first).
+     Built from data/events.yaml: this project's upcoming events, then its five
+     latest. To add an entry, add an event there - it appears here and on the
+     Timeline page.
      ========================================================================== -->
 <details class="upd">
   <summary>What's happened lately</summary>
   <div class="bd">
-    <h4>Still ahead</h4>
+    {% if recentEvents.rangeland.upcoming.length %}<h4>Still ahead</h4>
     <ol>
-      <li><span class="dt">8 Oct</span><span><strong>Comments close.</strong> This is the deadline to submit a comment to be included in the public record.</span></li>
-    </ol>
+      {% for e in recentEvents.rangeland.upcoming %}<li><span class="dt">{{ e.shown }}</span><span><a href="timeline/#{{ e.id }}">{{ e.title }}</a></span></li>
+      {% endfor %}
+    </ol>{% endif %}
     <h4>Already happened</h4>
     <ol class="past">
-      <li><span class="dt">26 Sep</span><span>The county has <strong>posted the whole workshop package</strong> &#8212; the evaluation matrix, the concept boards, all three traffic boards, the typical sections, the schedule and the newsletter. Everything this page cites from the workshop is now a document you can open for yourself, linked in section 10.</span></li>
-      <li><span class="dt">25 Sep</span><span>I reviewed the county's <strong>updated evaluation matrix</strong> from the workshop. The estimate for Alternative A is now <strong>$150.0 million</strong>, D and E are priced for the first time. Interestingly, noise impact and contamination ratings were lowered since the original assessment from January 2025. See Section 7.</span></li>
-      <li><span class="dt">24 Sep</span><span><strong>Public Workshop #3 happened.</strong> Four things I learned: travel time is folded into the intersection grades rather than published separately; Bexley Village Drive is expected to connect north to <strong>Ridge Road</strong> eventually, which is part of why its traffic rises; and the design team had no budget for a project website, but thanked me for mine.</span></li>
-      <li><span class="dt">22 Sep</span><span>Confirmed that the state's <strong>$4.5 million</strong> for this road survived the Governor's veto pen and is now law. It has been available since 1 July. Section 7.</span></li>
-      <li><span class="dt">18 Sep</span><span>Pasco County's Transportation Engineering Department sent <strong>corrections to this page</strong> and the <strong>2050 no-build forecast</strong>. Thirteen items changed and one claim was withdrawn outright. <a href="#notes">The corrections are at the foot of this page.</a></span></li>
-      <li><span class="dt">14 Sep</span><span>The <em>Tampa Bay Beacon</em> reported the project at <strong>$77 million</strong> &#8212; $38.5 million from the county, $38.5 million sought from the state. That doesn't seem to match any published figures I can find. Section 7.</span></li>
-      <li><span class="dt">3 Sep</span><span>The MPO added Rangeland to its <strong>2026 TRIP priority list</strong>, which is the step before asking the state for construction money.</span></li>
+      {% for e in recentEvents.rangeland.past %}<li><span class="dt">{{ e.shown }}</span><span><a href="timeline/#{{ e.id }}">{{ e.title }}</a>{% if e.about %} <span class="updabout">&#183; {{ e.about }}</span>{% endif %}</span></li>
+      {% endfor %}
     </ol>
+    <p class="updmore"><a href="timeline/#rangeland">See the full timeline, including every change order and what&#8217;s planned &#8594;</a></p>
   </div>
 </details>
 

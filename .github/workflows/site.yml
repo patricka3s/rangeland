@@ -3,7 +3,7 @@
 #  - On a pull request: build only. If a fact is missing, or names a source that
 #    doesn't exist, the build fails and the pull request shows a red X - so the
 #    mistake is caught before anything is merged.
-#  - On a merge to main: build, then publish.
+#  - On a merge to main, and every morning: build, then publish.
 #
 # Requires Settings -> Pages -> Source: "GitHub Actions".
 
@@ -12,6 +12,10 @@ name: Build and publish site
 on:
   push:
     branches: [main]
+  # Rebuild every morning so the timeline's "today" line and the guide's
+  # "still ahead" list move on by themselves (about 6:23 a.m. Eastern).
+  schedule:
+    - cron: '23 10 * * *'
   pull_request:
   workflow_dispatch:
 

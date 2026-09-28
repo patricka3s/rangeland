@@ -107,7 +107,7 @@
   unit: USD million
   source: pasco-fy2026-budget
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2026 Adopted'"
-  as_of: '2025'
+  as_of: '2025-09-16'
   status: current
   decimals: 1
 
@@ -117,7 +117,7 @@
   unit: USD million
   source: pasco-fy2026-budget
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2027 Proposed'"
-  as_of: '2025'
+  as_of: '2025-09-16'
   status: current
   decimals: 3
 
@@ -127,7 +127,7 @@
   unit: USD million
   source: pasco-fy2026-budget
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2028 Proposed'"
-  as_of: '2025'
+  as_of: '2025-09-16'
   status: current
   decimals: 3
 
@@ -137,7 +137,7 @@
   unit: USD million
   source: pasco-fy2026-budget
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2029 Proposed'"
-  as_of: '2025'
+  as_of: '2025-09-16'
   status: current
   decimals: 3
 
@@ -147,7 +147,7 @@
   unit: USD million
   source: pasco-fy2026-budget
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2030 Proposed'"
-  as_of: '2025'
+  as_of: '2025-09-16'
   status: current
   decimals: 1
 
@@ -157,7 +157,7 @@
   unit: USD million
   source: pasco-fy2026-budget
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'Future Funding'"
-  as_of: '2025'
+  as_of: '2025-09-16'
   status: current
   decimals: 1
 
@@ -167,7 +167,7 @@
   unit: USD million
   source: pasco-fy2026-budget
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(S Anglin to S Wilton Wy)', column 'FY 2026 Adopted'"
-  as_of: '2025'
+  as_of: '2025-09-16'
   status: current
   decimals: 3
   note: 'The FY 2027-2030 and future-funding columns on this row are $0.'
@@ -178,7 +178,7 @@
   unit: USD million
   source: pasco-fy2026-budget
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(S Wilt Wy to Anch Dn Dr)', column 'FY 2026 Adopted'"
-  as_of: '2025'
+  as_of: '2025-09-16'
   status: current
   decimals: 1
   note: 'The FY 2027-2030 and future-funding columns on this row are $0.'

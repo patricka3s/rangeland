@@ -69,6 +69,10 @@ Wait for Patrick to choose before going on.
   (`<id>.funding.<phase-or-segment>.fy<year>`) for capital-plan dollars. A new
   kind needs a heading in `TOPICS` in `eleventy.config.js`.
 - Every fact gets `location` (where in the document) and, once verified, `checked`.
+- Add the project's events to `data/events.yaml` - the same kinds as other projects
+  (workshops, Commission actions, contracts, every change order, plan documents,
+  deadlines, and planned phases by fiscal year) - and give it a `short` name in
+  `projects.yaml` and a link in `src/_includes/project-bar.njk`.
 - A figure that a newer document updates: new fact with `replaces:`, old one
   `superseded` - never overwrite.
 

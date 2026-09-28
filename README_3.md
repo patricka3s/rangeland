@@ -19,6 +19,8 @@ figure on it is stored once, cites the document it came from, and can be checked
 | `data/definitions.yaml` | Plain-language definitions of the terms the site uses. Not yet shown as a glossary. |
 | `src/index.njk` | The page. All the wording lives here; figures are pulled in from the facts file. |
 | `src/sunlake/index.njk` | The **Sunlake Blvd corridor** card at `/sunlake/`: the three pieces of the corridor, the planned road, the process and funding, with a plain "not yet published" wherever nothing is. |
+| `data/events.yaml` | The **timeline**: each project's workshops, Commission actions, contracts, change orders, plan documents, deadlines and planned phases, each with its source. |
+| `src/timeline/index.njk` | The **Timeline** page at `/timeline/`, built from `events.yaml`. The guide's "What's happened lately" box is built from it too. |
 | `src/_includes/project-bar.njk` | The project links at the top of every page. Add a line here when a project gets a page. |
 | `src/facts.njk` | The **Figures and sources** page (`/facts/`): every fact, grouped, with its source and a report link. Built entirely from the data files. |
 | `src/_includes/shared-head.njk` | Head tags both pages share: icon, fonts, stylesheet. |
@@ -84,6 +86,13 @@ figure's details box.
 The form's address and question code are in `data/site.yaml`. If you rebuild the
 form, get the new code from the form's **⋮ → Get pre-filled link** (type anything
 in the first question, then **Get link**; the code is the `entry.` number).
+
+## Adding something to the timeline
+
+Add an entry to `data/events.yaml` (the header explains each field). It appears on
+the Timeline page and, if it's one of the project's five latest, in the guide's
+"What's happened lately" box. The site rebuilds every morning, so upcoming items
+move below the "today" line on their own.
 
 ## Changing the wording
 

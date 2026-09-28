@@ -37,6 +37,15 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
 
 - `data/projects.yaml` — the projects. `data/facts/<project-id>.yaml` — one file per
   project; every fact id starts with `<project-id>.`
+- `data/events.yaml` — the timeline: what happened and what's planned, per project.
+  Events are sourced records like facts (every date and figure in one comes from its
+  source; the build checks sources, projects, types and dates). The Timeline page
+  (`src/timeline/index.njk`) and the guide's "What's happened lately" box (the
+  project's upcoming events and five latest) are built from it. Every project gets
+  the same kinds of event: every workshop, Commission action, contract, **every
+  change order**, plan document and deadline. Titles stay neutral ("completion
+  extended from X to Y", never "delayed again"). The site rebuilds every morning so
+  "today" moves on by itself.
 - `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms (not yet
   shown on the site). `data/site.yaml` — the error-report form's address.
 - `src/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor

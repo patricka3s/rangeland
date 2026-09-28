@@ -88,12 +88,33 @@ function loadData() {
       seen.add(r);
     }
   }
+  // Events (the timeline): same rules as facts - a real source, a known project,
+  // a known type and a readable date.
+  const EVENT_TYPES = ["meeting", "milestone", "decision", "contract", "change-order", "document", "deadline", "planned"];
+  const events = load(path.join(DATA, "events.yaml"));
+  const eventIds = new Set();
+  for (const e of events) {
+    const where = `events.yaml: "${e.id}"`;
+    for (const k of ["id", "date", "project", "type", "title", "source"]) {
+      if (e[k] === undefined || e[k] === null || e[k] === "") problems.push(`${where} is missing "${k}"`);
+    }
+    if (eventIds.has(e.id)) problems.push(`${where} is listed twice`);
+    eventIds.add(e.id);
+    e.projects = [].concat(e.project || []);
+    for (const p of e.projects) if (!projectIds.has(p)) problems.push(`${where} names project "${p}", which is not in projects.yaml`);
+    if (e.type && !EVENT_TYPES.includes(e.type)) problems.push(`${where} has type "${e.type}"; use ${EVENT_TYPES.join(", ")}`);
+    if (e.source && !sourceIds.has(e.source)) problems.push(`${where} names source "${e.source}", which is not in sources.yaml`);
+    if (!/^(\d{4}-\d{2}(-\d{2})?|FY\d{4})$/.test(String(e.date))) problems.push(`${where} has date "${e.date}"; use YYYY-MM-DD, YYYY-MM or FY2027`);
+    if ((e.type === "planned") !== /^FY/.test(String(e.date)) && !(e.type === "planned" && e.when))
+      problems.push(`${where}: planned items use a fiscal-year date (FY2027) or a 'when'; other events use a calendar date`);
+    for (const f of e.facts || []) if (!byId[f]) problems.push(`${where} lists fact "${f}", which does not exist`);
+  }
   for (const d of definitions) {
     if (d.source && !sourceIds.has(d.source)) problems.push(`definitions.yaml: "${d.id}" names source "${d.source}", which is not in sources.yaml`);
   }
   if (problems.length) throw new Error("Data check failed:\n  " + problems.join("\n  "));
   const sourceById = Object.fromEntries(sources.map((s) => [s.id, s]));
-  return { site, projects, sources, definitions, facts, byId, sourceById, replacedBy };
+  return { site, projects, sources, definitions, facts, byId, sourceById, replacedBy, events };
 }
 
 // ---- formatting
@@ -224,6 +245,48 @@ export default function (eleventyConfig) {
   }
   eleventyConfig.addGlobalData("changeGroups", changeGroups);
   eleventyConfig.addGlobalData("changeCount", changes.length);
+
+  // ---- Timeline (data/events.yaml)
+  // Sort key: a calendar date as written (a month sorts as its 15th); fiscal
+  // year N as 1 October of N-1, when it begins.
+  const sortKey = (d) => {
+    const s = String(d), fy = /^FY(\d{4})$/.exec(s);
+    if (fy) return `${+fy[1] - 1}-10-01`;
+    return s.length === 7 ? s + "-15" : s;
+  };
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" }).format(new Date());
+  const projectName = Object.fromEntries(data.projects.map((p) => [p.id, p.short || p.name.split(" - ")[0]]));
+  const TYPE_LABEL = { meeting: "Meeting", milestone: "Milestone", decision: "Decision", contract: "Contract",
+    "change-order": "Change order", document: "Document", deadline: "Deadline", planned: "Planned" };
+  const events = data.events.map((e) => {
+    const key = sortKey(e.date);
+    const fy = /^FY(\d{4})$/.exec(String(e.date));
+    return {
+      ...e, key,
+      shown: e.when || (fy ? `FY ${fy[1]}` : when(e.date)),
+      typeLabel: TYPE_LABEL[e.type],
+      projectNames: e.projects.map((p) => projectName[p]),
+      src: data.sourceById[e.source],
+      factCards: (e.facts || []).map((id) => card(data.byId[id])),
+      changed: e.show_changes ? changes.filter((c) => c.asOf === e.date).length : 0,
+      status: e.type === "planned" ? "planned" : key > today ? "upcoming" : "past",
+    };
+  });
+  const byKeyDesc = (a, b) => b.key.localeCompare(a.key);
+  eleventyConfig.addGlobalData("timeline", {
+    today, todayShown: when(today),
+    planned: events.filter((e) => e.status === "planned").sort(byKeyDesc),
+    upcoming: events.filter((e) => e.status === "upcoming").sort(byKeyDesc),
+    past: events.filter((e) => e.status === "past").sort(byKeyDesc),
+    types: Object.entries(TYPE_LABEL).map(([k, label]) => ({ k, label })),
+    projects: data.projects.map((p) => ({ id: p.id, name: projectName[p.id] })),
+  });
+  // Latest past events for one project, and its upcoming ones - for the
+  // "What's happened lately" box on a guide page.
+  eleventyConfig.addGlobalData("recentEvents", Object.fromEntries(data.projects.map((p) => [p.id, {
+    upcoming: events.filter((e) => e.status === "upcoming" && e.projects.includes(p.id)).sort((a, b) => a.key.localeCompare(b.key)),
+    past: events.filter((e) => e.status === "past" && e.projects.includes(p.id)).sort(byKeyDesc).slice(0, 5),
+  }])));
 
   // For the Figures and sources page: facts grouped by project, then by kind,
   // in the order they appear in each facts file. A fact another one replaced

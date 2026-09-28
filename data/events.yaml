@@ -1,0 +1,310 @@
+# Events - what happened, and what is planned, for each project.
+#
+# Shown on the Timeline page (/timeline/), newest first, with planned items above
+# a "today" line; the Rangeland guide's "What's happened lately" box is built from
+# its project's latest events. Events are sourced records, like facts: every date
+# and every figure in an event comes from its source document, and the build
+# stops if a source or project doesn't exist.
+#
+#   id        unique short name
+#   date      'YYYY-MM-DD' (or 'YYYY-MM'). Planned items use a fiscal year: 'FY2027'
+#             (county fiscal year N runs 1 Oct of N-1 to 30 Sep of N)
+#   when      optional - how to show the date if not exact (e.g. 'Fall 2026')
+#   project   a project id from projects.yaml, or a list of them
+#   about     optional - which study or piece within the project
+#   type      meeting | milestone | decision | contract | change-order | document |
+#             deadline | planned
+#   title     one line, plain and neutral ("completion extended", never "delayed again")
+#   detail    optional - a sentence or two more
+#   source    id from sources.yaml
+#   facts     optional - fact ids this event published or changed
+#
+# Every project gets the same kinds of event: every Commission action, every change
+# order, every workshop and deadline, and every plan document - not just notable ones.
+
+# ============================ Rangeland Blvd corridor ============================
+
+- id: rl-study-contract
+  date: '2023-03-07'
+  project: rangeland
+  about: Rangeland route study (contract name "Tower Road PD&E Study")
+  type: contract
+  title: 'Study contract awarded to Kisinger Campo & Associates, eastern end of Rangeland Blvd to Bexley Village Dr'
+  detail: 'Not to exceed $1,864,209.'
+  source: pasco-bcc-2023-03-07
+
+- id: rl-study-began
+  date: '2023-03-13'
+  project: rangeland
+  about: Rangeland route study
+  type: milestone
+  title: Study began
+  source: pasco-2026-09-schedule
+
+- id: bb-co3
+  date: '2024-09-17'
+  project: rangeland
+  about: Bud Bexley Pkwy extension (contract name "Tower Road Route Study"), west of Sunlake Blvd to east of US 41
+  type: change-order
+  title: 'Change order 3: completion extended from 8 Oct 2024 to 25 May 2025'
+  detail: 'Adds 230 days and $304,071 for topographic survey and mapping.'
+  source: pasco-bcc-2024-09-17
+
+- id: rl-workshop-cancelled
+  date: '2024-09-25'
+  project: rangeland
+  about: Rangeland route study
+  type: meeting
+  title: 'Public workshop scheduled for this date cancelled because of Hurricane Helene'
+  detail: 'Announced in the county''s September 2024 newsletter, with comments open to 16 October 2024. Kisinger Campo''s change order 1 records the cancellation and the new date, 30 January 2025.'
+  source: pasco-bcc-2025-04-22
+
+- id: rl-matrix-2025-01
+  date: '2025-01-18'
+  project: rangeland
+  about: Rangeland route study
+  type: document
+  title: Alternatives evaluation matrix (Build A and Build B)
+  source: pasco-2025-01-matrix
+
+- id: rl-workshop-1
+  date: '2025-01-30'
+  project: rangeland
+  about: Rangeland route study
+  type: meeting
+  title: Public Workshop 1
+  source: pasco-2026-09-schedule
+
+- id: rl-co1
+  date: '2025-04-22'
+  project: rangeland
+  about: Rangeland route study (contract name "Tower Road PD&E Study")
+  type: change-order
+  title: 'Change order 1: completion extended from 7 Mar 2025 to 3 Sep 2025'
+  detail: 'Reasons given: coordination with FDOT as lead agency for the Federal Highway Administration on the NEPA and PD&E process; coordination with Florida''s Turnpike on its Suncoast Parkway study, including a possible Rangeland interchange; and the workshop cancelled by Hurricane Helene. Reported as a Noted Item.'
+  source: pasco-bcc-2025-04-22
+
+- id: rl-workshop-2
+  date: '2025-05-01'
+  project: rangeland
+  about: Rangeland route study
+  type: meeting
+  title: Public Workshop 2
+  source: pasco-2026-09-schedule
+
+- id: bb-co4
+  date: '2025-06-03'
+  project: rangeland
+  about: Bud Bexley Pkwy extension (contract name "Tower Road Route Study")
+  type: change-order
+  title: 'Change order 4: completion extended from 25 May 2025 to 21 Nov 2025'
+  detail: 'Adds 180 days to overcome survey delays from Hurricanes Helene and Milton. No change in fee. Reported as a Noted Item.'
+  source: pasco-bcc-2025-06-03
+
+- id: rl-co2
+  date: '2025-08-19'
+  project: rangeland
+  about: Rangeland route study (contract name "Tower Road PD&E Study")
+  type: change-order
+  title: 'Change order 2: completion extended to 2 Nov 2025'
+  detail: 'Adds 60 days to formulate the study''s recommendations and present them to the Commission. No change in fee. Reported as a Noted Item.'
+  source: pasco-bcc-2025-08-19
+
+- id: budget-fy2026
+  date: '2025-09-16'
+  project: [rangeland, sunlake]
+  type: decision
+  title: 'Commission adopts the FY 2026 budget, with the FY 2026-2030 capital improvement plan'
+  detail: 'Includes year-by-year lines for Rangeland Blvd and for three pieces of Sunlake Blvd. Only the first year is appropriated.'
+  source: pasco-fy2026-budget
+  facts: [rangeland.funding.cip.fy2026, sunlake.funding.south.fy2026]
+
+- id: bb-co5
+  date: '2025-12-09'
+  project: rangeland
+  about: Bud Bexley Pkwy extension (contract name "Tower Road Route Study")
+  type: change-order
+  title: 'Change order 5: completion extended from 21 Nov 2025 to 19 Feb 2026'
+  detail: 'Adds 90 days for survey delays and for developing and evaluating additional conceptual design alternatives. No change in fee. Reported as a Noted Item.'
+  source: pasco-bcc-2025-12-09
+
+- id: rl-co3
+  date: '2026-01-06'
+  project: rangeland
+  about: Rangeland route study (contract name "Tower Road PD&E Study")
+  type: change-order
+  title: 'Change order 3: completion extended from 2 Nov 2025 to 2 Mar 2026'
+  detail: 'Adds 120 days to formulate the recommendations and present them to the Commission. No change in fee. Reported as a Noted Item.'
+  source: pasco-bcc-2026-01-06
+
+- id: rl-co4
+  date: '2026-04-07'
+  project: rangeland
+  about: Rangeland route study (contract name "Tower Road PD&E Study")
+  type: change-order
+  title: 'Change order 4: completion extended from 2 Mar 2026 to 1 May 2026'
+  detail: 'The presentation of the study''s recommendations to the Commission, set for 17 Feb 2026, was moved to 24 Mar 2026 "to ensure the attendance of all commissioners." No change in fee. Reported as a Noted Item.'
+  source: pasco-bcc-2026-04-07
+
+- id: bb-co6
+  date: '2026-04-07'
+  project: rangeland
+  about: Bud Bexley Pkwy extension (contract name "Tower Road Route Study")
+  type: change-order
+  title: 'Change order 6: completion extended from 19 Feb 2026 to 19 Jun 2026'
+  detail: 'Adds 120 days to finalize the route study and pond siting report. No change in fee. Reported as a Noted Item.'
+  source: pasco-bcc-2026-04-07
+
+- id: lopp-2026
+  date: '2026-06-11'
+  project: [rangeland, sunlake]
+  type: document
+  title: 'MPO 2026 List of Project Priorities: Rangeland Blvd at no. 10, Sunlake Blvd at no. 11'
+  detail: 'Both listed under "Construction unfunded". Rangeland''s request is a TRIP grant for right-of-way, design and construction.'
+  source: mpo-lopp-2026
+  facts: [sunlake.schedule.south.funded-phase]
+
+- id: bb-co7
+  date: '2026-07-14'
+  project: rangeland
+  about: Bud Bexley Pkwy extension (contract name "Tower Road Route Study")
+  type: change-order
+  title: 'Change order 7: completion extended from 19 Jun 2026 to 17 Sep 2026'
+  detail: 'Adds 90 days to finalize the route study and pond siting report. No change in fee. Reported as a Noted Item. Change orders 1 and 2, and the original award, were not found on the county''s agenda portal.'
+  source: pasco-bcc-2026-07-14
+
+- id: obt-continued
+  date: '2026-08-11'
+  project: rangeland
+  about: Orange Belt Trail PD&E study (US 41 and Caliente Blvd to Dade City)
+  type: decision
+  title: 'Commission continues the Orange Belt Trail study item to 9 September'
+  source: pasco-bcc-2026-08-11
+
+- id: obt-agenda
+  date: '2026-09-09'
+  project: rangeland
+  about: Orange Belt Trail PD&E study (US 41 and Caliente Blvd to Dade City)
+  type: meeting
+  title: 'Orange Belt Trail study on the Commission agenda, with a resolution approving alternatives 1, 2A, 3A, 4A and 5A'
+  detail: 'The minutes of this meeting were not yet published on 28 September 2026, so the outcome is not recorded here.'
+  source: pasco-bcc-2026-09-09-agenda
+  facts: [rangeland.related.orange-belt-trail.pde-agenda]
+
+- id: rl-county-letter
+  date: '2026-09-18'
+  project: rangeland
+  type: document
+  title: 'County Transportation Engineering sends corrections to this guide'
+  detail: 'See the corrections at the foot of the guide.'
+  source: pasco-2026-09-ted-letter
+
+- id: rl-workshop-3
+  date: '2026-09-24'
+  project: rangeland
+  about: Rangeland route study
+  type: meeting
+  title: 'Public Workshop 3: Alternatives A, D and E, with new traffic boards and matrix'
+  detail: 'The newsletter said materials would be online the same day.'
+  source: pasco-2026-09-newsletter
+  show_changes: true
+
+- id: rl-comments-due
+  date: '2026-10-08'
+  project: rangeland
+  about: Rangeland route study
+  type: deadline
+  title: 'Workshop 3 comments due: received, or postmarked if mailed, to be in the workshop record'
+  source: pasco-2026-09-newsletter
+
+- id: rl-study-complete
+  date: '2026-10'
+  when: Fall 2026
+  project: rangeland
+  about: Rangeland route study
+  type: planned
+  title: 'Study complete (anticipated)'
+  detail: 'The schedule board notes the schedule is subject to change and construction is "TBD".'
+  source: pasco-2026-09-schedule
+
+- id: rl-plan-design
+  date: FY2026
+  project: rangeland
+  type: planned
+  title: 'Design funded in the county capital plan'
+  source: mpo-lopp-2026
+
+- id: rl-plan-row
+  date: FY2027
+  project: rangeland
+  type: planned
+  title: 'Right-of-way funded in the county capital plan'
+  source: mpo-lopp-2026
+
+- id: rl-plan-cst
+  date: FY2029
+  project: rangeland
+  type: planned
+  title: 'Construction funded in the county capital plan'
+  source: mpo-lopp-2026
+
+# ============================ Sunlake Blvd corridor ============================
+
+- id: sl-rsq-issued
+  date: '2025-12-18'
+  project: sunlake
+  about: Center Village Dr to south of Appenzeller Blvd
+  type: contract
+  title: 'County asks for design firms: solicitation RSQ-BW-26-019 issued'
+  source: pasco-bcc-2026-06-02
+  facts: [sunlake.length-miles.south, sunlake.design.south.row-feet]
+
+- id: sl-rsq-opened
+  date: '2026-02-03'
+  project: sunlake
+  about: Center Village Dr to south of Appenzeller Blvd
+  type: milestone
+  title: 'Design proposals opened: five firms responded'
+  source: pasco-bcc-2026-06-02
+
+- id: sl-rsq-ranked
+  date: '2026-03-31'
+  project: sunlake
+  about: Center Village Dr to south of Appenzeller Blvd
+  type: meeting
+  title: 'Evaluation committee ranks the design firms at a public meeting'
+  source: pasco-bcc-2026-06-02
+
+- id: sl-shortlist
+  date: '2026-06-02'
+  project: sunlake
+  about: Center Village Dr to south of Appenzeller Blvd
+  type: decision
+  title: 'Commission approves the design shortlist (WGI, Burgess & Niple, IC&E) and delegates the contract to the County Administrator'
+  source: pasco-bcc-2026-06-02
+  facts: [sunlake.schedule.south.design-shortlist]
+
+- id: sl-plan-design
+  date: FY2026
+  project: sunlake
+  about: Center Village Dr to south of the Angeline line
+  type: planned
+  title: 'Design funded in the county capital plan'
+  source: mpo-lopp-2026
+
+- id: sl-plan-row
+  date: FY2027
+  project: sunlake
+  about: Center Village Dr to south of the Angeline line
+  type: planned
+  title: 'Right-of-way funded in the county capital plan'
+  source: mpo-lopp-2026
+
+- id: sl-plan-cst
+  date: FY2029
+  when: FY 2028-2029
+  project: sunlake
+  about: Center Village Dr to south of the Angeline line
+  type: planned
+  title: 'Construction funded in the county capital plan'
+  source: mpo-lopp-2026
