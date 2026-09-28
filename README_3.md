@@ -18,10 +18,10 @@ figure on it is stored once, cites the document it came from, and can be checked
 | `data/site.yaml` | Site settings: the error-report form's address. |
 | `data/definitions.yaml` | Plain-language definitions of the terms the site uses. Not yet shown as a glossary. |
 | `src/index.njk` | The page. All the wording lives here; figures are pulled in from the facts file. |
-| `src/sunlake/index.njk` | The **Sunlake Blvd corridor** card at `/sunlake/`: the three pieces of the corridor, the planned road, the process and funding, with a plain "not yet published" wherever nothing is. |
+| `src/sunlake/index.njk` | The **Sunlake Blvd corridor** page at `/sunlake/`, laid out like Rangeland's Highlights: slides for the three pieces of the corridor, the planned road, the process and funding, with a plain "not yet published" wherever nothing is. "Full detail" is switched off until the county publishes a study or holds a workshop. |
 | `data/events.yaml` | The **timeline**: each project's workshops, Commission actions, contracts, change orders, plan documents, deadlines and planned phases, each with its source. |
 | `src/timeline/index.njk` | The **Timeline** page at `/timeline/`, built from `events.yaml`. The guide's "What's happened lately" box is built from it too. |
-| `src/_includes/project-bar.njk` | The project links at the top of every page. Add a line here when a project gets a page. |
+| `src/_includes/project-bar.njk` | The bar at the top of every page: projects on the left, Timeline and All figures & sources on the right. Add a project link to the left-hand group when a project gets a page. |
 | `src/facts.njk` | The **Figures and sources** page (`/facts/`): every fact, grouped, with its source and a report link. Built entirely from the data files. |
 | `src/_includes/shared-head.njk` | Head tags both pages share: icon, fonts, stylesheet. |
 | `src/app.js.njk` | Page behaviour: the reading-mode toggle, the meeting box, and the network map (whose figures also come from the facts file). |

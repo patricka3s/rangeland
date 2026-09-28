@@ -108,6 +108,11 @@ function loadData() {
     if ((e.type === "planned") !== /^FY/.test(String(e.date)) && !(e.type === "planned" && e.when))
       problems.push(`${where}: planned items use a fiscal-year date (FY2027) or a 'when'; other events use a calendar date`);
     for (const f of e.facts || []) if (!byId[f]) problems.push(`${where} lists fact "${f}", which does not exist`);
+    if (e.moved !== undefined) {
+      const ok = (d) => /^\d{4}-\d{2}-\d{2}$/.test(String(d));
+      if (!e.moved || !ok(e.moved.to) || (e.moved.from !== undefined && !ok(e.moved.from)))
+        problems.push(`${where} has "moved" without dates; use {from: 'YYYY-MM-DD', to: 'YYYY-MM-DD'}`);
+    }
   }
   for (const d of definitions) {
     if (d.source && !sourceIds.has(d.source)) problems.push(`definitions.yaml: "${d.id}" names source "${d.source}", which is not in sources.yaml`);
@@ -258,14 +263,25 @@ export default function (eleventyConfig) {
   const projectName = Object.fromEntries(data.projects.map((p) => [p.id, p.short || p.name.split(" - ")[0]]));
   const TYPE_LABEL = { meeting: "Meeting", milestone: "Milestone", decision: "Decision", contract: "Contract",
     "change-order": "Change order", document: "Document", deadline: "Deadline", planned: "Planned" };
+  // The bigger moments get a bigger dot and a bold title on the Timeline.
+  const MAJOR = new Set(["meeting", "decision", "deadline"]);
   const events = data.events.map((e) => {
     const key = sortKey(e.date);
     const fy = /^FY(\d{4})$/.exec(String(e.date));
+    // A moved completion date is written into the title for plain lists ("from X to Y");
+    // the Timeline shows it separately, with the old date struck through.
+    const movedText = e.moved ? (e.moved.from ? ` from ${when(e.moved.from)}` : "") + ` to ${when(e.moved.to)}` : "";
     return {
       ...e, key,
+      short: e.title,
+      title: e.title + movedText,
+      movedFrom: e.moved && e.moved.from ? when(e.moved.from) : "",
+      movedTo: e.moved ? when(e.moved.to) : "",
+      major: MAJOR.has(e.type),
       shown: e.when || (fy ? `FY ${fy[1]}` : when(e.date)),
       typeLabel: TYPE_LABEL[e.type],
       projectNames: e.projects.map((p) => projectName[p]),
+      projectTags: e.projects.map((p) => ({ id: p, name: projectName[p].replace(/ corridor$/, "") })),
       src: data.sourceById[e.source],
       factCards: (e.facts || []).map((id) => card(data.byId[id])),
       changed: e.show_changes ? changes.filter((c) => c.asOf === e.date).length : 0,

@@ -5,7 +5,7 @@
     --paper:#F4F5F7; --surface:#FFFFFF; --ink:#12161D; --ink-2:#4A5260; --ink-3:#6E7684;
     --rule:#C8CDD5; --rule-soft:#E2E5EA; --accent:#5636C9; --hot:#B0341F; --good:#3E7A5E;
     --wash:rgba(86,54,201,.07); --band:rgba(18,22,29,.045);
-    --now:#2a78d6; --then:#e34948; --bld:#5B3FB8;
+    --now:#2a78d6; --then:#e34948; --bld:#5B3FB8; --pj2:#0E6B7D;
     --shadow:0 1px 3px rgba(18,22,29,.07);
   }
   @media (prefers-color-scheme: dark){
@@ -13,7 +13,7 @@
       --paper:#0F1218; --surface:#171C24; --ink:#E7EAF0; --ink-2:#9BA4B3; --ink-3:#7C8695;
       --rule:#333B48; --rule-soft:#232A34; --accent:#A78EFF; --hot:#F0836C; --good:#5FC0A0;
       --wash:rgba(167,142,255,.1); --band:rgba(231,234,240,.05);
-      --now:#3987e5; --then:#e66767; --bld:#7B5BD6;
+      --now:#3987e5; --then:#e66767; --bld:#7B5BD6; --pj2:#5CC3D6;
       --shadow:0 1px 3px rgba(0,0,0,.45);
     }
   }
@@ -21,7 +21,7 @@
     --paper:#0F1218; --surface:#171C24; --ink:#E7EAF0; --ink-2:#9BA4B3; --ink-3:#7C8695;
     --rule:#333B48; --rule-soft:#232A34; --accent:#A78EFF; --hot:#F0836C; --good:#5FC0A0;
     --wash:rgba(167,142,255,.1); --band:rgba(231,234,240,.05);
-    --now:#3987e5; --then:#e66767; --bld:#7B5BD6;
+    --now:#3987e5; --then:#e66767; --bld:#7B5BD6; --pj2:#5CC3D6;
     --shadow:0 1px 3px rgba(0,0,0,.45);
   }
 
@@ -282,7 +282,9 @@
     :root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#12161D}
   }
   .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  #modenote{font-family:"IBM Plex Mono",monospace;font-size:10.5px;line-height:1.5;color:var(--ink-3);flex:1 1 230px}
+  #modenote,.modenote{font-family:"IBM Plex Mono",monospace;font-size:10.5px;line-height:1.5;color:var(--ink-3);flex:1 1 230px}
+  .seg button:disabled{color:var(--ink-3);cursor:not-allowed;background:repeating-linear-gradient(135deg,transparent 0 5px,var(--band) 5px 10px)}
+  .deck .slide ul{margin:6px 0 14px}
   section, .toc, .slide{scroll-margin-top:66px}
 
   /* ---- slides ---- */
@@ -553,6 +555,7 @@
 
   .factnote{display:none;font-size:.9rem;color:var(--ink-3);margin:-8px 0 24px}
   .has-facts .factnote{display:block}
+  .factnote a{color:var(--accent)}
 
   .factpop{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;
     width:calc(100% - 32px);max-width:520px;max-height:70vh;overflow:auto;
@@ -676,15 +679,31 @@
   }
 
 /* ==========================================================================
-   PROJECT BAR - links every project page, at the top of each page.
+   PROJECT BAR - top of every page. Projects on the left as a segmented
+   control (same look as the guide's reading-mode toggle); the site-wide pages
+   (Timeline, All figures & sources) on the right.
    ========================================================================== */
-  .projbar{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding:12px 0;border-bottom:1px solid var(--rule);
-    font-family:Archivo,sans-serif;font-size:.9rem}
-  .projbar .pb-lab{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;letter-spacing:.14em;
+  .projbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;
+    padding:12px 0;border-bottom:1px solid var(--rule)}
+  .pb-projects{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .pb-lab{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;font-weight:600;letter-spacing:.13em;
     text-transform:uppercase;color:var(--ink-3)}
-  .projbar a{color:var(--ink-2);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:1px}
-  .projbar a:hover{color:var(--accent)}
-  .projbar a[aria-current="page"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+  .pb-seg{display:inline-flex;border:1px solid var(--rule);background:var(--surface)}
+  .pb-seg a{font-family:Archivo,sans-serif;font-size:13px;font-weight:600;color:var(--ink-2);text-decoration:none;padding:7px 14px}
+  .pb-seg a + a{border-left:1px solid var(--rule)}
+  .pb-seg a:hover{color:var(--accent)}
+  .pb-seg a[aria-current="page"]{background:var(--accent);color:#fff}
+  :root[data-theme="dark"] .pb-seg a[aria-current="page"]{color:#12161D}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .pb-seg a[aria-current="page"]{color:#12161D} }
+  .pb-site{display:flex;align-items:center;gap:18px;padding-left:20px;border-left:1px solid var(--rule)}
+  .pb-site a{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-2);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+  .pb-site a:hover{color:var(--accent)}
+  .pb-site a[aria-current="page"]{color:var(--accent);border-bottom-color:var(--accent)}
+  .projbar a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  @media (max-width:560px){
+    .pb-site{padding-left:0;border-left:0;width:100%;padding-top:8px;border-top:1px solid var(--rule-soft)}
+  }
   .projbar + header{padding-top:28px}
   .cardtag{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;font-weight:600;
     letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle}
@@ -705,18 +724,52 @@
   .chip{font-family:Archivo,sans-serif;font-size:.85rem;border:1px solid var(--rule);background:var(--surface);color:var(--ink-2);
     border-radius:999px;padding:4px 12px;cursor:pointer}
   .chip.small{font-size:.78rem;padding:3px 10px}
-  .chip[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--wash)}
+  .chip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:#fff}
+  .chip[aria-pressed="true"]::before{content:"\2713\00a0"}
+  .chip[aria-pressed="false"]{color:var(--ink-3);background:var(--surface)}
+  .chip[aria-pressed="false"]:hover{border-color:var(--accent);color:var(--accent)}
+  :root[data-theme="dark"] .chip[aria-pressed="true"]{color:#12161D}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .chip[aria-pressed="true"]{color:#12161D} }
   .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .tlband h2{margin:26px 0 4px}
   .tlnote{font-size:.9rem;color:var(--ink-2);margin:0 0 8px}
   .tllist{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--rule)}
   .tllist > li::before{content:none}
   .tle{position:relative;padding:0;margin:0;scroll-margin-top:120px}
-  .tle::after{content:"";position:absolute;left:-25px;top:15px;width:10px;height:10px;border-radius:50%;
-    background:var(--ink-3);border:2px solid var(--paper)}
+  /* Each kind of entry has its own dot shape (shown in its filter chip too), so
+     kinds can be told apart without colour. The bigger moments (meetings,
+     decisions, deadlines) get a bigger dot in the accent colour and a bold title. */
+  .tle::after,.shp{content:"";box-sizing:border-box;display:inline-block;width:var(--d);height:var(--d);
+    background:var(--ink-3);border-radius:50%}
+  .tle{--d:11px}
+  .tle.major{--d:15px}
+  .tle::after{position:absolute;left:calc(-19px - var(--d) / 2);top:calc(21px - var(--d) / 2);box-shadow:0 0 0 3px var(--paper)}
+  .tle.major::after{background:var(--accent)}
+  .t-decision::after,.s-decision{border-radius:1px;transform:rotate(45deg) scale(.86)}
+  .t-contract::after,.s-contract{border-radius:1px}
+  .t-document::after,.s-document{border-radius:1px;background:var(--paper) !important;border:2px solid var(--ink-3)}
+  .t-change-order::after,.s-change-order{background:var(--paper) !important;border:2px solid var(--ink-3)}
+  .t-milestone::after,.s-milestone{border-radius:0;clip-path:polygon(50% 0,100% 100%,0 100%)}
+  .t-milestone::after{box-shadow:none}
+  .t-deadline::after,.s-deadline{border:3px solid var(--accent);background:var(--paper) !important;box-shadow:inset 0 0 0 2px var(--paper)}
+  .t-deadline::after{background:var(--accent) !important;box-shadow:0 0 0 3px var(--paper),inset 0 0 0 2px var(--paper)}
+  .s-deadline{background:currentColor !important}
+  .t-planned::after,.s-planned{background:var(--paper) !important;border:2px dashed var(--ink-3)}
   .tlplanned .tllist{border-left-style:dashed}
-  .tlplanned .tle::after{background:var(--paper);border:2px dashed var(--ink-3)}
-  .tle.t-deadline::after,.tle.t-decision::after{background:var(--accent)}
+  .shp{--d:9px;margin-right:6px;vertical-align:0;background:currentColor}
+  .shp.s-decision{--d:8px}
+  .chip .shp.s-document,.chip .shp.s-change-order,.chip .shp.s-planned{border-color:currentColor;background:transparent !important}
+  .chip[aria-pressed="true"] .shp{border-color:currentColor}
+  .chip.small[aria-pressed="true"]::before{content:none}
+  .chip .shp.s-deadline{background:radial-gradient(currentColor 30%,transparent 38%) !important;border:2px solid currentColor;box-shadow:none}
+  /* Project tags: each project has its own shade (add one when a project is added). */
+  .pjtag{display:inline-block;margin-left:6px;padding:0 5px;border:1px solid currentColor;border-radius:3px;line-height:1.5;color:var(--ink-2)}
+  .pj-rangeland{color:var(--accent)}
+  .pj-sunlake{color:var(--pj2)}
+  .tle.major .tltitle{font-weight:650}
+  .tlmoved{display:block;margin-top:3px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;color:var(--ink-2)}
+  .tlmoved s{color:var(--ink-3);text-decoration-thickness:1.5px}
+  .tlmoved b{color:var(--ink);font-weight:600}
   .tle details{border-bottom:1px solid var(--rule-soft)}
   .tle summary{list-style:none;cursor:pointer;padding:9px 0;display:grid;grid-template-columns:7.5em 1fr;column-gap:12px;align-items:baseline}
   .tle summary::-webkit-details-marker{display:none}
@@ -742,3 +795,11 @@
     .tlbody{margin-left:0}
   }
   @media print{ .tlfilters{display:none} .tle details{display:block} }
+
+/* Jump links at the top of the Figures & sources page. */
+  .fjump{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin:0 0 24px;padding:12px 0;
+    border-top:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)}
+  .fjump .pb-lab{margin-right:2px}
+  .fjump a{font-family:Archivo,sans-serif;font-size:.92rem;font-weight:600;color:var(--accent);text-decoration:none}
+  .fjump a:hover{text-decoration:underline}
+  .fjump .sep{width:1px;align-self:stretch;background:var(--rule)}

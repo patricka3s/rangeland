@@ -44,12 +44,14 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   project's upcoming events and five latest) are built from it. Every project gets
   the same kinds of event: every workshop, Commission action, contract, **every
   change order**, plan document and deadline. Titles stay neutral ("completion
-  extended from X to Y", never "delayed again"). The site rebuilds every morning so
+  extended", never "delayed again"); a moved completion date goes in
+  `moved: {from, to}`, which the build adds to the title and the Timeline shows
+  with the old date struck through. The site rebuilds every morning so
   "today" moves on by itself.
 - `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms (not yet
   shown on the site). `data/site.yaml` — the error-report form's address.
 - `src/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
-  card (a short card until more is published). `src/_includes/project-bar.njk` — the
+  page (highlights only, "Full detail" disabled, until more is published). `src/_includes/project-bar.njk` — the
   project links at the top of every page. `src/facts.njk` — Figures and sources page
   (all projects, built entirely from data). `src/app.js.njk`, `src/styles.css`.
 - `eleventy.config.js` — loads and validates the data; defines the shortcodes.

@@ -25,7 +25,7 @@ eleventyExcludeFromCollections: true
 
   function apply(m){
     root.classList.toggle("brief", m === "brief");
-    var b = document.querySelectorAll(".seg button"), i;
+    var b = document.querySelectorAll(".seg button[data-mode]"), i;
     for (i = 0; i < b.length; i++){
       b[i].setAttribute("aria-pressed", b[i].getAttribute("data-mode") === m ? "true" : "false");
     }
@@ -64,7 +64,7 @@ eleventyExcludeFromCollections: true
     seg.addEventListener("click", function(e){
       var t = e.target;
       while (t && t !== seg && t.tagName !== "BUTTON") t = t.parentNode;
-      if (t && t.tagName === "BUTTON") apply(t.getAttribute("data-mode"));
+      if (t && t.tagName === "BUTTON" && t.hasAttribute("data-mode")) apply(t.getAttribute("data-mode"));
     });
   });
 })();

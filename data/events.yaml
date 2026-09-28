@@ -15,6 +15,9 @@
 #   type      meeting | milestone | decision | contract | change-order | document |
 #             deadline | planned
 #   title     one line, plain and neutral ("completion extended", never "delayed again")
+#   moved     optional, for a changed completion date - {from: 'YYYY-MM-DD', to: 'YYYY-MM-DD'}
+#             (leave out 'from' if the source doesn't give it). The build adds
+#             "from X to Y" to the title, and the Timeline shows the old date struck through.
 #   detail    optional - a sentence or two more
 #   source    id from sources.yaml
 #   facts     optional - fact ids this event published or changed
@@ -46,7 +49,8 @@
   project: rangeland
   about: Bud Bexley Pkwy extension (contract name "Tower Road Route Study"), west of Sunlake Blvd to east of US 41
   type: change-order
-  title: 'Change order 3: completion extended from 8 Oct 2024 to 25 May 2025'
+  title: 'Change order 3: completion extended'
+  moved: {from: '2024-10-08', to: '2025-05-25'}
   detail: 'Adds 230 days and $304,071 for topographic survey and mapping.'
   source: pasco-bcc-2024-09-17
 
@@ -80,7 +84,8 @@
   project: rangeland
   about: Rangeland route study (contract name "Tower Road PD&E Study")
   type: change-order
-  title: 'Change order 1: completion extended from 7 Mar 2025 to 3 Sep 2025'
+  title: 'Change order 1: completion extended'
+  moved: {from: '2025-03-07', to: '2025-09-03'}
   detail: 'Reasons given: coordination with FDOT as lead agency for the Federal Highway Administration on the NEPA and PD&E process; coordination with Florida''s Turnpike on its Suncoast Parkway study, including a possible Rangeland interchange; and the workshop cancelled by Hurricane Helene. Reported as a Noted Item.'
   source: pasco-bcc-2025-04-22
 
@@ -97,7 +102,8 @@
   project: rangeland
   about: Bud Bexley Pkwy extension (contract name "Tower Road Route Study")
   type: change-order
-  title: 'Change order 4: completion extended from 25 May 2025 to 21 Nov 2025'
+  title: 'Change order 4: completion extended'
+  moved: {from: '2025-05-25', to: '2025-11-21'}
   detail: 'Adds 180 days to overcome survey delays from Hurricanes Helene and Milton. No change in fee. Reported as a Noted Item.'
   source: pasco-bcc-2025-06-03
 
@@ -106,7 +112,8 @@
   project: rangeland
   about: Rangeland route study (contract name "Tower Road PD&E Study")
   type: change-order
-  title: 'Change order 2: completion extended to 2 Nov 2025'
+  title: 'Change order 2: completion extended'
+  moved: {to: '2025-11-02'}
   detail: 'Adds 60 days to formulate the study''s recommendations and present them to the Commission. No change in fee. Reported as a Noted Item.'
   source: pasco-bcc-2025-08-19
 
@@ -124,7 +131,8 @@
   project: rangeland
   about: Bud Bexley Pkwy extension (contract name "Tower Road Route Study")
   type: change-order
-  title: 'Change order 5: completion extended from 21 Nov 2025 to 19 Feb 2026'
+  title: 'Change order 5: completion extended'
+  moved: {from: '2025-11-21', to: '2026-02-19'}
   detail: 'Adds 90 days for survey delays and for developing and evaluating additional conceptual design alternatives. No change in fee. Reported as a Noted Item.'
   source: pasco-bcc-2025-12-09
 
@@ -133,7 +141,8 @@
   project: rangeland
   about: Rangeland route study (contract name "Tower Road PD&E Study")
   type: change-order
-  title: 'Change order 3: completion extended from 2 Nov 2025 to 2 Mar 2026'
+  title: 'Change order 3: completion extended'
+  moved: {from: '2025-11-02', to: '2026-03-02'}
   detail: 'Adds 120 days to formulate the recommendations and present them to the Commission. No change in fee. Reported as a Noted Item.'
   source: pasco-bcc-2026-01-06
 
@@ -142,7 +151,8 @@
   project: rangeland
   about: Rangeland route study (contract name "Tower Road PD&E Study")
   type: change-order
-  title: 'Change order 4: completion extended from 2 Mar 2026 to 1 May 2026'
+  title: 'Change order 4: completion extended'
+  moved: {from: '2026-03-02', to: '2026-05-01'}
   detail: 'The presentation of the study''s recommendations to the Commission, set for 17 Feb 2026, was moved to 24 Mar 2026 "to ensure the attendance of all commissioners." No change in fee. Reported as a Noted Item.'
   source: pasco-bcc-2026-04-07
 
@@ -151,7 +161,8 @@
   project: rangeland
   about: Bud Bexley Pkwy extension (contract name "Tower Road Route Study")
   type: change-order
-  title: 'Change order 6: completion extended from 19 Feb 2026 to 19 Jun 2026'
+  title: 'Change order 6: completion extended'
+  moved: {from: '2026-02-19', to: '2026-06-19'}
   detail: 'Adds 120 days to finalize the route study and pond siting report. No change in fee. Reported as a Noted Item.'
   source: pasco-bcc-2026-04-07
 
@@ -169,7 +180,8 @@
   project: rangeland
   about: Bud Bexley Pkwy extension (contract name "Tower Road Route Study")
   type: change-order
-  title: 'Change order 7: completion extended from 19 Jun 2026 to 17 Sep 2026'
+  title: 'Change order 7: completion extended'
+  moved: {from: '2026-06-19', to: '2026-09-17'}
   detail: 'Adds 90 days to finalize the route study and pond siting report. No change in fee. Reported as a Noted Item. Change orders 1 and 2, and the original award, were not found on the county''s agenda portal.'
   source: pasco-bcc-2026-07-14
 

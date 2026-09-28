@@ -33,18 +33,18 @@ eleventyExcludeFromCollections: true
     {% for p in timeline.projects %}<button type="button" class="chip" data-project="{{ p.id }}" aria-pressed="false">{{ p.name }}</button>{% endfor %}
   </div>
   <div class="tlrow" role="group" aria-label="Kind of entry">
-    {% for t in timeline.types %}<button type="button" class="chip small" data-type="{{ t.k }}" aria-pressed="true">{{ t.label }}</button>{% endfor %}
+    {% for t in timeline.types %}<button type="button" class="chip small" data-type="{{ t.k }}" aria-pressed="true"><i class="shp s-{{ t.k }}" aria-hidden="true"></i>{{ t.label }}</button>{% endfor %}
   </div>
   <p id="tl-none" class="fnone" hidden>No entries match.</p>
 </div>
 
 {% macro entry(e) %}
-<li class="tle t-{{ e.type }}" data-projects="{{ e.projects | join(' ') }}" data-type="{{ e.type }}" id="{{ e.id }}">
+<li class="tle t-{{ e.type }}{% if e.major %} major{% endif %}" data-projects="{{ e.projects | join(' ') }}" data-type="{{ e.type }}" id="{{ e.id }}">
   <details>
     <summary>
       <span class="tldate">{{ e.shown }}</span>
-      <span class="tlmeta"><span class="tltype">{{ e.typeLabel }}</span>{% for n in e.projectNames %} &#183; {{ n }}{% endfor %}</span>
-      <span class="tltitle">{{ e.title }}</span>
+      <span class="tlmeta"><span class="tltype">{{ e.typeLabel }}</span>{% for p in e.projectTags %} <span class="pjtag pj-{{ p.id }}">{{ p.name }}</span>{% endfor %}</span>
+      <span class="tltitle">{{ e.short }}{% if e.movedTo %}<span class="tlmoved">Completion{% if e.movedFrom %} <span class="visually-hidden">moved from</span><s>{{ e.movedFrom }}</s> <span aria-hidden="true">&#8594;</span><span class="visually-hidden">to</span>{% else %} now{% endif %} <b>{{ e.movedTo }}</b></span>{% endif %}</span>
     </summary>
     <div class="tlbody">
       {% if e.about %}<p class="tlabout">{{ e.about }}</p>{% endif %}

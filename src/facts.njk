@@ -27,6 +27,14 @@ eleventyExcludeFromCollections: true
   <p class="standfirst">Every figure the guide takes from a public document, with the document it comes from. Click a source to read it yourself. Each one says when it was last checked against that document. If a figure doesn&#8217;t match its source, use <strong>Report an error</strong> beside it &#8212; the form opens with that figure already filled in.</p>
 </header>
 
+<nav class="fjump" aria-label="Jump to">
+  <span class="pb-lab">Jump to</span>
+  {% for p in factGroups %}<a href="#{{ p.id }}">{{ p.short or p.name }}</a>
+  {% endfor %}<span class="sep" aria-hidden="true"></span>
+  {% if changeGroups.length %}<a href="#changes">What&#8217;s changed</a>{% endif %}
+  <a href="#sources">The documents</a>
+</nav>
+
 {% if changeGroups.length %}
 <section class="fchanges" id="changes">
   <h2><span>What&#8217;s changed</span></h2>
