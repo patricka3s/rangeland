@@ -34,8 +34,16 @@ numbers are drawn as graphics must be rendered to images and read visually).
 | FDOT | State or federal money | FDOT work program; federal obligations report (`fdotewp1.dot.state.fl.us`) |
 | Turnpike / FDOT studies | Interchanges, widenings that touch the project | `floridasturnpike.com` |
 
-Commission agenda attachments are stored on `civicclerk.blob.core.windows.net`;
-if that host is blocked, list the attachments you need and ask Patrick to allow it.
+Commission agenda attachments and staff memos are stored on
+`civicclerk.blob.core.windows.net` (allowed since 28 Sep 2026): in `/v1/Meetings/<agendaId>`
+each item's `reportsList` (the memo) and `attachmentsList` give `pdfMediaFullPath` /
+`pdfVersionFullPath` download links. Published minutes download from
+`/v1/Meetings/GetMeetingFileStream(fileId=<id>,plainText=false)` (file ids are in the
+event's `publishedFiles`; find events with `/v1/Events?$filter=startDateTime ge ...`).
+Change orders and small task orders often appear as **Noted Items** - "receive and
+file", not a vote - so don't describe them as approved by the Board. Only the
+minutes record how a vote went; if they aren't published yet, say the outcome isn't
+confirmed.
 If any other site is blocked, say which and ask - never reconstruct what a
 document says from memory or from other pages.
 
