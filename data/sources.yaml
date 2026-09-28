@@ -170,3 +170,18 @@
   title: "Highway Functional Classification: Concepts, Criteria and Procedures, 2023 edition"
   publisher: Federal Highway Administration
   date: 2023
+
+# ---- County budget and Commission agendas
+
+- id: pasco-fy2026-budget
+  title: Fiscal Year 2026 Adopted Budget (includes the FY 2026-2030 Capital Improvement Plan)
+  publisher: Pasco County
+  date: '2025'
+  url: https://www.pascocountyfl.gov/Documents/Services/Office%20of%20Management%20%26%20Budget/Pasco%20County%20FY%202026%20Adopted%20Budget.pdf
+  note: Fiscal year 2026 runs 1 October 2025 to 30 September 2026. In the capital plan only the FY 2026 column is adopted; FY 2027-2030 are proposed.
+
+- id: pasco-bcc-2026-09-09-agenda
+  title: Board of County Commissioners meeting agenda, 9 September 2026
+  publisher: Pasco County
+  date: '2026-09-09'
+  url: https://pascocofl.portal.civicclerk.com/event/1935/agenda

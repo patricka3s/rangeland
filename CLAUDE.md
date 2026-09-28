@@ -52,7 +52,9 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
 ### Fact conventions
 
 - Id: `<project>.<kind>.<subject>.<scenario>`, e.g. `rangeland.aadt.bvd-rndbt.2050-nobuild`.
-  Kinds in use: `aadt`, `los`, `cost`, `matrix`, plus one-offs like `length-miles`.
+  Kinds in use: `aadt`, `los`, `cost`, `matrix`, `funding` (county capital plan by
+  year), `related` (related studies - listed on Figures and sources, not necessarily
+  on the guide), plus one-offs like `length-miles`.
   A new kind needs a heading in `TOPICS` in `eleventy.config.js`.
 - Scenarios: `2023` (or the count year), `2050-nobuild`, `2050-build`.
 - Required: `id, statement, value, unit, source, as_of, status`. Status is
@@ -68,7 +70,7 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
   (a newer document repeating the same value isn't listed there). Keep change styling neutral: no
   red/green for up/down — a figure rising is not good or bad.
 - Units in use: `vehicles per day`, `grade`, `rating` (the matrix's None / Low / Medium /
-  High), `USD million`, `USD per acre`, `acres`, `parcels`, `miles`.
+  High), `USD million`, `USD per acre`, `acres`, `parcels`, `miles`, `date`.
   Ranges are `value: {low: …, high: …}`.
 - Level-of-service grades are the **evening peak**. The county publishes "AM (PM)"
   pairs — never drop a bare letter from a letter or email into a PM field (see

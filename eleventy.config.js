@@ -23,6 +23,8 @@ const TOPICS = {
   cost: "Cost",
   matrix: "Alternatives matrix",
   "length-miles": "The project",
+  funding: "Funding (county capital improvement plan)",
+  related: "Related studies",
 };
 
 function load(file) {
@@ -161,6 +163,7 @@ export default function (eleventyConfig) {
   function display(f, words) {
     const v = f.value;
     if (v && typeof v === "object") return num(v.low) + "–" + num(v.high);
+    if (f.unit === "date") return when(v);
     if (typeof v !== "number") return String(v);
     if (f.unit === "USD million") {
       return words ? "$" + num(v, f.decimals ?? 1) + " million" : usdM(v, f.decimals ?? 1);
@@ -176,6 +179,7 @@ export default function (eleventyConfig) {
     if (f.unit.startsWith("USD ")) return d + f.unit.slice(3);
     if (f.unit === "grade") return "Grade " + d;
     if (f.unit === "rating") return d + " (rating)";
+    if (f.unit === "date") return d;
     return d + " " + f.unit;
   }
 
@@ -288,6 +292,8 @@ export default function (eleventyConfig) {
   // {% product "a", "b", scale, decimals %}  ->  a x b x scale, e.g. a per-acre
   // rate times acres, scaled to millions: {% product "rate", "acres", 0.000001, 1 %} -> "6.9"
   eleventyConfig.addShortcode("product", (a, b, scale = 1, decimals = 0) => num(value(a) * value(b) * scale, decimals));
+  // {% sumM "a", "b", ... %}  ->  the total of several USD-million facts: "$88.4M"
+  eleventyConfig.addShortcode("sumM", (...ids) => usdM(ids.reduce((t, id) => t + value(id), 0)));
   // {% perMile "cost id", "length id" %}  ->  "$44.0M";  add "words" for "$44.0 million"
   eleventyConfig.addShortcode("perMile", (cost, miles, style) => {
     const v = value(cost) / value(miles);

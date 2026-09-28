@@ -1017,3 +1017,85 @@
   checked: '2026-09-28'
   decimals: 2
 
+# ---- Funding, county capital improvement plan
+
+- id: rangeland.funding.cip.fy2026
+  statement: 'County capital improvement plan, Rangeland Blvd (east of Gunn Hwy to Bexley Village Dr), FY 2026 (adopted)'
+  value: 6.0
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'FY 2026 Adopted'"
+  as_of: '2025'
+  status: current
+  checked: '2026-09-28'
+  decimals: 1
+
+- id: rangeland.funding.cip.fy2027
+  statement: 'County capital improvement plan, Rangeland Blvd (east of Gunn Hwy to Bexley Village Dr), FY 2027 (proposed)'
+  value: 10.4
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'FY 2027 Proposed'"
+  as_of: '2025'
+  status: current
+  checked: '2026-09-28'
+  decimals: 1
+
+- id: rangeland.funding.cip.fy2028
+  statement: 'County capital improvement plan, Rangeland Blvd (east of Gunn Hwy to Bexley Village Dr), FY 2028 (proposed)'
+  value: 0.0
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'FY 2028 Proposed'"
+  as_of: '2025'
+  status: current
+  checked: '2026-09-28'
+  decimals: 1
+
+- id: rangeland.funding.cip.fy2029
+  statement: 'County capital improvement plan, Rangeland Blvd (east of Gunn Hwy to Bexley Village Dr), FY 2029 (proposed)'
+  value: 19.0
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'FY 2029 Proposed'"
+  as_of: '2025'
+  status: current
+  checked: '2026-09-28'
+  decimals: 1
+
+- id: rangeland.funding.cip.fy2030
+  statement: 'County capital improvement plan, Rangeland Blvd (east of Gunn Hwy to Bexley Village Dr), FY 2030 (proposed)'
+  value: 17.0
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'FY 2030 Proposed'"
+  as_of: '2025'
+  status: current
+  checked: '2026-09-28'
+  decimals: 1
+
+- id: rangeland.funding.cip.future
+  statement: 'County capital improvement plan, Rangeland Blvd (east of Gunn Hwy to Bexley Village Dr), future years, after FY 2030'
+  value: 36.0
+  unit: USD million
+  source: pasco-fy2026-budget
+  location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Rangeland Bl (E of Gunn Hwy to Bexl', column 'Future Funding'"
+  as_of: '2025'
+  status: current
+  checked: '2026-09-28'
+  decimals: 1
+
+
+# ---- Related studies
+
+- id: rangeland.related.orange-belt-trail.pde-agenda
+  statement: 'Orange Belt Trail PD&E study (US 41 and Caliente Blvd to Meridian Ave and 8th St, Dade City) on the Board of County Commissioners agenda for a presentation and resolution'
+  value: '2026-09-09'
+  unit: date
+  source: pasco-bcc-2026-09-09-agenda
+  location: 'item 41 (TED26-0215), "Project Development and Environment Study Presentation and Resolution - Orange Belt Trail"'
+  as_of: '2026-09-09'
+  status: current
+  checked: '2026-09-28'
+  note: 'The study was first on the 11 August 2026 agenda (item 57). The agenda does not record the outcome of the vote.'
+
