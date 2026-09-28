@@ -121,7 +121,7 @@ trafficRows:
      number, edit it there, not here or in app.js.
      ========================================================================== -->
 <section class="netmap" id="netmap">
-  <p>The county published several traffic boards for this study: what these streets carry now, what they carry in 2050 if the Rangeland extension is not built, and what they carry if it is. Switch between them below. Colour and thickness are daily traffic; the letters are intersection grades; the percentages compare each view with the one to its left.</p>
+  <p>The county published several traffic boards for this study: what these streets carry now, what they carry in 2050 if the Rangeland extension is not built, and what they carry if it is. Switch between them below. Colour and thickness are daily traffic; the letters are intersection grades at the evening peak; the percentages compare each view with the one to its left.</p>
 
   <div class="nmviews" id="nm-views" role="group" aria-label="Which future to show">
     <button type="button" data-view="today" aria-pressed="true">
@@ -169,9 +169,14 @@ trafficRows:
       <text class="rd-lbl lbl" data-street="rangeland" x="196" y="422" transform="rotate(-18.8 196 422)">Rangeland Blvd</text>
 
       <g class="nmseg" data-street="budbexley" data-seg="budbexley-main">
-        <line class="base" x1="540" y1="313.4" x2="820" y2="218.4"/>
-        <line class="top"  x1="540" y1="313.4" x2="820" y2="218.4"/>
-        <line class="hit"  x1="540" y1="313.4" x2="820" y2="218.4"/>
+        <line class="base" x1="540" y1="313.4" x2="680" y2="265.6"/>
+        <line class="top"  x1="540" y1="313.4" x2="680" y2="265.6"/>
+        <line class="hit"  x1="540" y1="313.4" x2="680" y2="265.6"/>
+      </g>
+      <g class="nmseg" data-street="budbexley" data-seg="budbexley-east">
+        <line class="base" x1="680" y1="265.6" x2="820" y2="218.4"/>
+        <line class="top"  x1="680" y1="265.6" x2="820" y2="218.4"/>
+        <line class="hit"  x1="680" y1="265.6" x2="820" y2="218.4"/>
       </g>
       <g class="nmseg" data-street="budbexley" data-seg="budbexley-gap">
         <line class="base" x1="820" y1="218.4" x2="880" y2="198"/>
@@ -207,6 +212,11 @@ trafficRows:
         <line class="base" x1="80" y1="470" x2="80" y2="545"/>
         <line class="top"  x1="80" y1="470" x2="80" y2="545"/>
         <line class="hit"  x1="80" y1="470" x2="80" y2="545"/>
+      </g>
+      <g class="nmseg" data-street="gunn" data-seg="gunn-s">
+        <line class="base" x1="80" y1="545" x2="80" y2="616"/>
+        <line class="top"  x1="80" y1="545" x2="80" y2="616"/>
+        <line class="hit"  x1="80" y1="545" x2="80" y2="616"/>
       </g>
       <text class="rd-sub lbl" data-street="gunn" x="64" y="486" text-anchor="end" transform="rotate(-90 64 486)">Gunn Hwy</text>
 
@@ -270,10 +280,15 @@ trafficRows:
       </g>
       <text class="rd-sub lbl" data-street="broadporch" x="458" y="236">Broad Porch Run</text>
 
+      <g class="nmseg" data-street="ballantrae" data-seg="ballantrae-m">
+        <line class="base" x1="680" y1="265.6" x2="680" y2="405"/>
+        <line class="top"  x1="680" y1="265.6" x2="680" y2="405"/>
+        <line class="hit"  x1="680" y1="265.6" x2="680" y2="405"/>
+      </g>
       <g class="nmseg" data-street="ballantrae" data-seg="ballantrae-s">
-        <line class="base" x1="680" y1="265.6" x2="680" y2="545"/>
-        <line class="top"  x1="680" y1="265.6" x2="680" y2="545"/>
-        <line class="hit"  x1="680" y1="265.6" x2="680" y2="545"/>
+        <line class="base" x1="680" y1="405" x2="680" y2="545"/>
+        <line class="top"  x1="680" y1="405" x2="680" y2="545"/>
+        <line class="hit"  x1="680" y1="405" x2="680" y2="545"/>
       </g>
       <g class="nmseg" data-street="ballantrae" data-seg="ballantrae-n">
         <line class="base" x1="680" y1="195" x2="680" y2="265.6"/>
@@ -328,15 +343,15 @@ trafficRows:
       </g>
       <g id="nm-deltas">
         <text class="delta lbl" data-street="sr54"          data-seg="sr54"            x="905" y="528" text-anchor="end"></text>
-        <text class="delta lbl" data-street="gunn"          data-seg="gunn"            x="96"  y="530"></text>
+        <text class="delta lbl" data-street="gunn"          data-seg="gunn-s"          x="66"  y="596" text-anchor="end"></text>
         <text class="delta lbl" data-street="sbranch"       data-seg="sbranch"         x="336" y="470"></text>
         <text class="delta lbl" data-street="bexleyvillage" data-seg="bvd-sr54"        x="556" y="500"></text>
         <text class="delta lbl" data-street="bexleyvillage" data-seg="bvd-rndbt"       x="556" y="400"></text>
         <text class="delta lbl" data-street="bexleyvillage" data-seg="bvd-ne-lo"       x="600" y="250"></text>
         <text class="delta lbl" data-street="broadporch"    data-seg="broadporch"      x="458" y="222"></text>
-        <text class="delta lbl" data-street="budbexley"     data-seg="budbexley-main"  x="716" y="232"></text>
-        <text class="delta lbl" data-street="ballantrae"    data-seg="ballantrae-n"    x="696" y="210"></text>
-        <text class="delta lbl" data-street="ballantrae"    data-seg="ballantrae-s"    x="696" y="420"></text>
+        <text class="delta lbl" data-street="budbexley"     data-seg="budbexley-main"  x="602" y="274"></text>
+        <text class="delta lbl" data-street="ballantrae"    data-seg="ballantrae-m"    x="696" y="300"></text>
+        <text class="delta lbl" data-street="ballantrae"    data-seg="ballantrae-s"    x="696" y="470"></text>
       </g>
       <g id="nm-grades">
         <text class="grade" data-int="rg-gunn"    x="80"  y="450" text-anchor="middle"></text>
@@ -376,7 +391,7 @@ trafficRows:
       <p data-view="built">Based on the county&#8217;s design boards for Alternatives A, D and E, which all have the same traffic estimates.</p>
     </figcaption>
   </figure>
-  <p class="src">County traffic boards shown at Public Workshop #3, 24 September 2026, read from the boards themselves. Seven streets are drawn in grey because the study never puts a number on them; their figures, where any exist, are in section 5.</p>
+  <p class="src">County traffic boards shown at Public Workshop #3, 24 September 2026, read from the boards themselves. Streets and stretches drawn in grey have no figure on any of the county&#8217;s boards.</p>
 </section>
 
 <!-- ==========================================================================
@@ -499,7 +514,7 @@ trafficRows:
   <p>As Pasco's population grows and Bexley expands north to Ridge road, traffic inside and outside our neighborhood is only going to get worse. The expanded road will relieve congestion at the expense of routing traffic through Bexley.</p>
   <details class="xp">
     <summary>See all eleven intersections</summary>
-    <p style="margin:12px 0 0;font-size:.98rem">The following table shows how Pasco grades intersections on an A to F scale. The three columns show today, 2050 with nothing built, and 2050 with Alternative A. Alternative A is better than doing nothing at six of the eleven, the same at five, and worse at none.</p>
+    <p style="margin:12px 0 0;font-size:.98rem">The following table shows how Pasco grades intersections on an A to F scale, at the evening peak. The three columns show today, 2050 with nothing built, and 2050 with Alternative A. Alternative A is better than doing nothing at six of the eleven, the same at five, and worse at none.</p>
     <div class="viz">
 {%- for r in losRows %}
     <div class="lrow"><span class="lnm">{{ r[1] }}</span><span class="grades"><span class="g now">{% fact "rangeland.los." + r[0] + ".2023" %}</span><span class="g nob">{% fact "rangeland.los." + r[0] + ".2050-nobuild" %}</span><span class="g bld">{% fact "rangeland.los." + r[0] + ".2050-build" %}</span></span></div>
@@ -539,6 +554,7 @@ trafficRows:
     <li><b>Which Board of County Commissioners votes have authorised money for this project, and on what dates?</b> And what is the $4.5 million state appropriation for &#8212; has the county executed a grant agreement to accept it?</li>
     <li><b>Why does the adopted regional plan fund only a study in 2041&#8211;2050</b> while the county plans to build in 2029 &#8212; and has the state TRIP grant been awarded?</li>
     <li><b>Is the county pursuing the Suncoast interchange,</b> and what counts as demonstrating stakeholder support? Has the Bud Bexley Pkwy / Bexley Village Dr intersection been tested with it through 2050?</li>
+    <li><b>What acreage is the wetland mitigation cost based on?</b> At {% fact "rangeland.cost.wetland-mitigation-rate" %} an acre, {% fact "rangeland.matrix.wetlands.2026-09" %} acres of wetland comes to about ${% product "rangeland.cost.wetland-mitigation-rate", "rangeland.matrix.wetlands.2026-09", 0.000001, 1 %} million; the matrix shows {% fact "rangeland.cost.a.wetland-mitigation", "words" %}.</li>
   </ol>
   <p class="foot">Comments due Thursday 8 October 2026 &#183; pkontses@mypasco.net &#183; pasco.rja.revize.com/forms/11000</p>
 </div>
@@ -850,7 +866,7 @@ trafficRows:
   <div class="callout">
     <h3>Key Term: LOS</h3>
     <p style="margin-bottom:10px"><strong>Level of Service</strong> — a letter grade from A to F describing how much delay you experience at an intersection. A is free-flowing and each step down means a longer wait. <strong>F</strong> means the intersection cannot clear the vehicles arriving at it during the peak: the queue builds faster than it empties.</p>
-    <p style="margin-bottom:0">The county grades each intersection twice, once for the morning peak and once for the evening, and usually writes them together as one letter with the other in parentheses — so "D (F)" means D in the morning and F in the evening.</p>
+    <p style="margin-bottom:0">The county grades each intersection twice, once for the morning peak and once for the evening, and usually writes them together as one letter with the other in parentheses — so "D (F)" means D in the morning and F in the evening. This page shows the evening grade throughout.</p>
   </div>
 
   <p>Every intersection in the study area is graded with a Level of Service. Eleven appear in all three cases. Of those, <strong>ten are worse in 2050 than they are today, whether or not the road is built.</strong> Only the Cattle Gap Trail roundabout holds its grade, and it holds either way.</p>
@@ -908,14 +924,14 @@ trafficRows:
   <p>What still has not been published is a number: the truck percentage the 2050 forecast actually assumes for the finished corridor. Existing counts on a disconnected road are not the same thing as a design-year assumption for a connected one, and the noise analysis depends on it. That is a question worth asking the BCC.</p>
 
   <h3>Pasco did analyze noise</h3>
-  <p>The route study's alternatives evaluation matrix scores "potential impacts to noise conditions" as <strong>None</strong> for the no-build option and originally (in January 2025) scored <strong>High</strong> for both build alternatives it compared. The county has since revised that down to <strong>Medium</strong>.</p>
+  <p>The route study's alternatives evaluation matrix scores "potential impacts to noise conditions" as <strong>None</strong> for the no-build option and originally (in January 2025) scored <strong>High</strong> for both build alternatives it compared, A and B. The September 2026 matrix rates all three remaining alternatives &#8212; A, D and E &#8212; <strong>Medium</strong>, noting two noise-impacted areas on the corridor.</p>
   <p>The county explained the High rating simply: no roadway exists there today, so any road raises noise levels along the whole corridor from a baseline of essentially nothing. The justification that I heard for changing it to Medium was that "only two small areas are affected." The county has chosen to follow the <strong>Federal Highway Administration's procedures</strong> for measuring and predicting highway traffic noise, and under those procedures, noise mitigation measures were only found to be reasonable and feasible for one short segment of the project near the Bexley roundabout.</p>
  <p>I don't know what the underlying numbers are: which homes were modelled as receptors, what sound levels they were predicted to experience, and which test each location failed. Again, worth asking about.</p>
 
   <div class="callout">
     <h3>Worth asking the BCC</h3>
     <p style="margin-bottom:10px"><strong>Where are the noise receptors, and what were the modelled levels at each?</strong> Mitigation was found reasonable and feasible for one short segment. For everywhere else, which test did the location fail &#8212; reasonableness or feasibility &#8212; and by how much?</p>
-    <p style="margin-bottom:0">What truck percentage does the 2050 forecast assume for the completed corridor? And does the noise result differ between A, D and E, given that the matrix only ever compared A and B?</p>
+    <p style="margin-bottom:0">What truck percentage does the 2050 forecast assume for the completed corridor? The September matrix gives A, D and E the same Medium noise rating &#8212; were they modelled separately, and do the predicted levels at any homes differ between them?</p>
   </div>
 </section>
 
@@ -1007,6 +1023,7 @@ trafficRows:
     <h3>Worth asking the BCC</h3>
     <p style="margin-bottom:10px">What do the updated construction estimates come to, and how much of the cost is the two bridges? What is the $4.5 million state appropriation for, and has the county executed a grant agreement to accept it?</p>
     <p style="margin-bottom:0">Design money was appropriated for a fiscal year that ends on 30 September, while this study has not yet chosen between A, D and E. Did design work begin before an alternative was selected, or did the money go unspent? And which Board of County Commissioners votes have authorised money for this project, on what dates?</p>
+    <p style="margin-bottom:0;margin-top:10px">The matrix prices wetland mitigation at {% fact "rangeland.cost.wetland-mitigation-rate" %} an acre. At {% fact "rangeland.matrix.wetlands.2026-09" %} acres of wetland that comes to about ${% product "rangeland.cost.wetland-mitigation-rate", "rangeland.matrix.wetlands.2026-09", 0.000001, 1 %} million, but the matrix shows {% fact "rangeland.cost.a.wetland-mitigation", "words" %}. What acreage is the mitigation cost based on &#8212; does it include the {% fact "rangeland.matrix.surface-waters.2026-09" %} acres of surface waters?</p>
   </div>
 </section>
 

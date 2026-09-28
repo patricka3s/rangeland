@@ -109,23 +109,18 @@ every outcome.
 ## Known loose ends
 
 A full check of all 84 facts against their documents was done on 28 Sep 2026:
-every value matched. Open items it turned up, awaiting Patrick's decision:
+every value matched. The network map's misplaced figures (Gunn Hwy, northern
+Ballantrae Blvd, Bud Bexley Pkwy east of Ballantrae) were then corrected
+silently at Patrick's request, as barely anyone had seen them. Still open:
 
-- The network map draws two figures on the wrong stretch: Gunn Hwy (the board's
-  figure is south of SR 54; the map shows it between Rangeland Blvd and SR 54) and
-  the northern Ballantrae Blvd figure (printed just south of Bud Bexley Pkwy; the
-  map shows it north of it). The map also extends the Bud Bexley Pkwy figure east
-  of Ballantrae Blvd, where the boards give none. Needs a map fix and a correction.
-- SR 54's eastern labelled segment differs between the 2023 and 2050 boards, so
-  the map's "+6 to +8%" compares different stretches at the east end.
 - Figures on none of the three boards: section 4's "SR 54 runs 63,500 to 93,000"
   and "Suncoast Parkway 75,500 to 93,000"; section 5's "existing stub ... about
   2,000 a day"; and the unused grey-row values in app.js (Cattle Gap, Suncoast,
-  US 41). Ask Patrick where they came from before keeping them.
-- Section 6 says the matrix "only ever compared A and B"; the September 2026 matrix
-  rates A, D and E (all Medium for noise).
+  US 41). Patrick is checking where they came from.
 - Figures written in words ("ten thousand", "six of the eleven"), the "10 / 11" and
   "6 → 3" stat tiles, and the LOS chart's aria-label are not linked to the facts
   (all checked correct on 28 Sep 2026).
 - The guide's prose still refers to Workshop #3 and the 8 October 2026 deadline
   as upcoming in places.
+
+Decided: the site shows evening-peak grades only, and says so where grades appear.

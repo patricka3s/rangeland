@@ -790,6 +790,16 @@
   status: current
   checked: '2026-09-28'
 
+- id: rangeland.cost.wetland-mitigation-rate
+  statement: Wetland mitigation cost per acre used in the September 2026 matrix
+  value: 203000
+  unit: USD per acre
+  source: pasco-2026-09-matrix
+  location: 'footnote 2: "Wetland mitigation cost is calculated using a cost of $203,000 per acre."'
+  as_of: '2026-09-24'
+  status: current
+  checked: '2026-09-28'
+
 - id: rangeland.cost.build-a.2025-01.total
   statement: Total cost as printed, Build A, January 2025
   value: 111.82
