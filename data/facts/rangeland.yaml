@@ -587,6 +587,7 @@
   as_of: '2025-11-03'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.funding.state-request
   statement: 'State funds requested for FY 2026-27 (Local Funding Initiative Request 1718)'
@@ -597,6 +598,7 @@
   as_of: '2025-11-03'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
   note: 'The request gives local matching funds of $7.8 million and a total of $12.3 million for FY 2026-27.'
 
 # ---- From the county's letter to Patrick (Transportation Engineering, William
@@ -622,6 +624,7 @@
   as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
   note: 'The letter says "about". It expects the share to rise once the segments are connected, but to stay below SR 54.'
 
 - id: rangeland.trucks.sr54
@@ -633,6 +636,7 @@
   as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
   note: 'The letter says "about".'
 
 - id: rangeland.schedule.comp-plan-since
@@ -644,6 +648,7 @@
   as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.design.wb40-wheelbase
   statement: 'Wheelbase of the WB-40 design vehicle ("intermediate semitrailer"), the two wheelbases added together'
@@ -678,6 +683,7 @@
   as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.claim.truck-volume-outlook
   statement: 'Where the county expects the corridor''s future truck volumes to sit'
@@ -688,6 +694,7 @@
   as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.claim.construction-tbd
   statement: 'When construction will happen, according to the project schedule board'
@@ -698,6 +705,7 @@
   as_of: '2026-09-24'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.claim.regional-collector
   statement: 'What the county says connecting the corridor will make it'
@@ -708,6 +716,7 @@
   as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.claim.interchange-suspended
   statement: 'Status of a Suncoast Parkway interchange at Rangeland Blvd, from the Turnpike study''s project manager'
@@ -730,6 +739,7 @@
   as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 # ---- Level of service, evening peak
 
@@ -1248,6 +1258,7 @@
   as_of: '2026-09-24'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
 
 - id: rangeland.cost.build-a.2025-01.total
   statement: Total cost as printed, Build A, January 2025
@@ -1333,6 +1344,7 @@
   status: current
   replaces: rangeland.matrix.contamination.2025-01
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
 
 - id: rangeland.matrix.species.2025-01
   statement: 'Potential impacts to threatened and endangered species, Build A, January 2025 matrix'
@@ -1355,6 +1367,7 @@
   status: current
   replaces: rangeland.matrix.species.2025-01
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'The no-build is rated None.'
 
 - id: rangeland.matrix.historic.2025-01
@@ -1378,6 +1391,7 @@
   status: current
   replaces: rangeland.matrix.historic.2025-01
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'The no-build is rated None.'
 
 - id: rangeland.matrix.wetlands.2025-01
@@ -1480,6 +1494,7 @@
   as_of: '2025-09-16'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   decimals: 1
 
 - id: rangeland.funding.cip.fy2027
@@ -1491,6 +1506,7 @@
   as_of: '2025-09-16'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   decimals: 1
 
 - id: rangeland.funding.cip.fy2028
@@ -1502,6 +1518,7 @@
   as_of: '2025-09-16'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   decimals: 1
 
 - id: rangeland.funding.cip.fy2029
@@ -1513,6 +1530,7 @@
   as_of: '2025-09-16'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   decimals: 1
 
 - id: rangeland.funding.cip.fy2030
@@ -1524,6 +1542,7 @@
   as_of: '2025-09-16'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   decimals: 1
 
 - id: rangeland.funding.cip.future
@@ -1535,6 +1554,7 @@
   as_of: '2025-09-16'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   decimals: 1
 
 
@@ -1549,4 +1569,5 @@
   as_of: '2026-09-09'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'First on the 11 August 2026 agenda (item R57), when the Board voted to continue it to 9 September (minutes, page 14). The minutes of 9 September were not yet published on 28 September 2026, so the outcome is not confirmed here. The memo says the trail west of US 41 is expected to be built as multi-use paths alongside county road projects, and that its segment 1 runs along Caliente Blvd and Ehren Cutoff.'
