@@ -121,9 +121,10 @@ Figures go in with `{% fact %}`; differences and ratios with the computed
 shortcodes, never typed.
 
 Layout: the page looks like the Rangeland guide's Highlights view - the top
-line ("A guide for Pasco residents · Updated ..."), the checking status
-(`{% include "project-checks.njk" %}`), the heading "What Pasco Residents Should
-Know About the ...", the "What's happened lately" box, the Reading mode bar, then one slide per section
+line ("A guide for Pasco residents · Updated ..."), the heading "What Pasco
+Residents Should Know About the ...", the "What's happened lately" box, the
+Reading mode bar, the note on dotted-underline figures followed by the checking
+status (`{% include "project-checks.njk" %}`), then one slide per section
 (number tiles, a headline, a source line at the foot). Sections with nothing
 published can share one "Not yet published" slide; the sources section sits
 below the slides. Until a study or workshop gives enough for a full guide, the
