@@ -1,7 +1,7 @@
 {#- Link-preview tags (Facebook, texts, X). Set before including:
-    ogTitle, ogDesc, ogPath (e.g. "timeline/", "" for the home page), and
-    optionally ogImage (default: the site-wide card, og-home.png, drawn by
-    tools/og-card.mjs). The Rangeland guide keeps its own card and tags. -#}
+    ogTitle, ogDesc, ogPath (e.g. "timeline/", "" for the home page), and on
+    a project page ogImage ("og-<id>.png") and ogAlt. Default: the site card,
+    og-home.png. The cards are drawn by tools/og-card.mjs. -#}
 {%- set ogImg = ogImage or "og-home.png" %}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Pasco Roadmap">
@@ -11,7 +11,7 @@
 <meta property="og:image" content="https://pascoroadmap.info/{{ ogImg }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Pasco Roadmap: plain-language guides to the road projects around Bexley, with every figure linked to its public document.">
+<meta property="og:image:alt" content="{{ ogAlt or 'Pasco Roadmap: plain-language guides to the road projects around Bexley, with every figure linked to its public document.' }}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ ogTitle }}">
 <meta name="twitter:description" content="{{ ogDesc }}">

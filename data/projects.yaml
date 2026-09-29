@@ -8,6 +8,13 @@
 #   stage  where it is in the process, in a few words (home page card)
 #   about  one plain sentence on what is proposed (home page card)
 #   page   true when the project has its own page at /<id>/
+#   card   the words on its link-preview card (src/og-<id>.png), needed once it
+#          has a page: title, and optionally eyebrow (top line; default
+#          "Pasco County · <short>"), sub (a line under the title), note (bottom
+#          left; default its address) and right (bottom right). Keep dates off
+#          it unless someone will change them when they pass. After changing a
+#          card, Claude redraws it (node tools/og-card.mjs); the build stops
+#          until then.
 #
 # Rule (Patrick, 29 Sep 2026): a NEW project is published (page: true) only once
 # every project already published - those above it in this file - has at least
@@ -27,6 +34,12 @@
   stage: Route study - Workshop 3 held, comments open
   about: A mostly new four-lane road from Cattle Gap Trail to Bexley Village Drive, with a bridge over the Suncoast Parkway. Three alternatives remain.
   page: true
+  card:
+    eyebrow: "Pasco County · Rangeland Blvd Route Study"
+    title: "Bexley Guide to Rangeland Blvd Study"
+    sub: "What's proposed, how it fits into the county's larger plan, and what still hasn't been answered."
+    note: "Comments close Thursday, 8 October"
+    right: "Study complete · Fall 2026"
 
 - id: sunlake
   short: Sunlake Blvd corridor
@@ -36,3 +49,6 @@
   published_before_rule: true
   about: A new road north from Center Village Drive through Bexley North towards Angeline, in three pieces planned separately. No study or workshop published yet.
   page: true
+  card:
+    title: "Sunlake Blvd Corridor"
+    sub: "What has been published about plans for Sunlake Boulevard north of Bud Bexley Parkway, and where it stands."

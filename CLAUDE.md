@@ -56,11 +56,12 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   links are forwarded to `/rangeland/`). `src/rangeland/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
   page (highlights only, "Full detail" disabled, until more is published). `src/_includes/project-bar.njk` — the
   project links at the top of every page. `src/facts.njk` — Figures and sources page
-  (all projects, built entirely from data). `src/app.js.njk`, `src/styles.css`. Link previews: `src/_includes/social.njk` on every page but the
-  Rangeland guide (which has its own card, `og-image.png`), using `og-home.png`, drawn from
-  `tools/og-card.html` by `node tools/og-card.mjs` - keep dates off that card so it never
-  goes stale. It shows a tag per published project; the build stops if a project is
-  published without redrawing it.
+  (all projects, built entirely from data). `src/app.js.njk`, `src/styles.css`. Link previews (`src/_includes/social.njk`, and the Rangeland
+  guide's own tags): the site card `og-home.png` (home, Timeline, Figures and sources; a tag per
+  published project) and one card per project, `og-<id>.png`, worded from its `card:` in
+  `projects.yaml` and shaded in its tag colour. All are drawn from `tools/og-card.html` by
+  `node tools/og-card.mjs`; the build stops if a project is published, or its `card:` changed,
+  without redrawing. Keep dates off cards unless someone will change them when they pass.
 - `eleventy.config.js` — loads and validates the data; defines the shortcodes.
 
 Pages show figures with `{% fact "id" %}` (a tappable button showing the source and
@@ -155,7 +156,7 @@ Patrick decides. In short:
   (builds, then writes `_preview/`: a copy with folder links pointing at
   `index.html`, no GoatCounter, and a "Preview" banner), and publish
   `_preview/index.html` with the Artifact tool, passing every other file in
-  `_preview/` in `files` (`styles.css`, `app.js`, `og-image.png`, `og-home.png`, and each
+  `_preview/` in `files` (`styles.css`, `app.js`, every `og-*.png`, and each
   `<folder>/index.html`). Update the one preview page Patrick already has,
   https://claude.ai/artifact/LUnhSwLPTm6gssWoEFSAuJ (pass it as `url`), rather
   than making a new one, and give him the link with the pull request.

@@ -1,36 +1,40 @@
 <!DOCTYPE html>
-<!-- The site-wide link-preview card (src/og-home.png), 1200 x 630.
-     Remake it with:  node tools/og-card.mjs
-     Colours match the Rangeland card (src/og-image.png). Keep the wording
-     free of dates so it never goes out of date. The project tags are filled
-     in by og-card.mjs from data/projects.yaml, in each project's dark-mode
-     tag colour from src/styles.css. -->
+<!-- The link-preview cards, 1200 x 630: the site card (src/og-home.png) and
+     one per published project (src/og-<id>.png). All are drawn from this one
+     template by  node tools/og-card.mjs , which fills in the words (from
+     data/projects.yaml, "card:") and colours (the project's tag shade from
+     src/styles.css: the bar in its light-mode shade, the top line in its
+     dark-mode shade). The layout follows the original Rangeland card. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <style>
+  :root { --bar: #5636C9; --eyebrow: #A78EFF; }
   html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
-  body { background: #0F1218; border-left: 18px solid #5636C9; box-sizing: border-box; position: relative; }
+  body { background: #0F1218; border-left: 18px solid var(--bar); box-sizing: border-box; position: relative; }
   .main { padding: 62px 66px 0; }
-  .eyebrow { font: 700 19px/1 "DejaVu Sans Mono", monospace; letter-spacing: .2em; color: #A78EFF; margin: 0 0 44px; }
-  h1 { font: 700 104px/1 "Liberation Sans", Arial, sans-serif; letter-spacing: -.035em; color: #fff; margin: 0 0 34px; }
-  .sub { font: 400 27px/1.45 "Liberation Serif", Georgia, serif; color: #9AA3B2; margin: 0 0 34px; max-width: 760px; }
+  .eyebrow { font: 700 19px/1 "DejaVu Sans Mono", monospace; letter-spacing: .2em; text-transform: uppercase; color: var(--eyebrow); margin: 0 0 44px; }
+  h1 { font: 700 78px/1.03 "Liberation Sans", Arial, sans-serif; letter-spacing: -.03em; color: #fff; margin: 0 0 34px; max-width: 820px; }
+  .site h1 { font-size: 104px; line-height: 1; letter-spacing: -.035em; max-width: none; }
+  .sub { font: 400 27px/1.45 "Liberation Serif", Georgia, serif; color: #9AA3B2; margin: 0 0 34px; max-width: 560px; }
+  .site .sub { max-width: 760px; }
   .tags { display: flex; flex-wrap: wrap; gap: 14px; max-width: 1060px; }
+  .tags:empty { display: none; }
   .tags span { font: 700 18px/1 "DejaVu Sans Mono", monospace; letter-spacing: .1em; text-transform: uppercase;
                border: 2px solid currentColor; border-radius: 5px; padding: 9px 13px; }
-  .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 93px; background: #5636C9;
-         display: flex; align-items: center; justify-content: space-between; padding: 0 66px; }
-  .bar b { font: 700 30px/1 "Liberation Sans", Arial, sans-serif; letter-spacing: -.01em; color: #fff; }
-  .bar span { font: 400 17px/1 "DejaVu Sans Mono", monospace; letter-spacing: .18em; color: #D9CCFF; }
+  .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 93px; background: var(--bar);
+         display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 0 66px; }
+  .bar b { font: 700 30px/1 "Liberation Sans", Arial, sans-serif; letter-spacing: -.01em; color: #fff; white-space: nowrap; }
+  .bar span { font: 400 17px/1 "DejaVu Sans Mono", monospace; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.8); white-space: nowrap; }
 </style>
 </head>
-<body>
+<body class="site">
   <div class="main">
-    <p class="eyebrow">PASCO COUNTY, FLORIDA &#183; ROAD PROJECTS</p>
-    <h1>Pasco Roadmap</h1>
-    <p class="sub">Plain-language guides to the road projects around Bexley, with every figure linked to the public document it comes from.</p>
-    <div class="tags" id="tags"><span style="color:#A78EFF">Example project</span></div>
+    <p class="eyebrow" id="eyebrow">Pasco County, Florida &#183; Road projects</p>
+    <h1 id="title">Pasco Roadmap</h1>
+    <p class="sub" id="sub">Plain-language guides to the road projects around Bexley, with every figure linked to the public document it comes from.</p>
+    <div class="tags" id="tags"></div>
   </div>
-  <div class="bar"><b>pascoroadmap.info</b><span>SOURCED &#183; CHECKED &#183; CORRECTED IN PUBLIC</span></div>
+  <div class="bar"><b id="note">pascoroadmap.info</b><span id="right">Sourced &#183; checked &#183; corrected in public</span></div>
 </body>
 </html>

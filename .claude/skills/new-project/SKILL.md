@@ -92,8 +92,10 @@ already on the site is at least 90% verified by Patrick. Check this before
 starting (the home page shows where each stands): if any is below 90%, tell
 Patrick first - the build will stop otherwise. Add the new project at the end of
 `projects.yaml`. When it gets `page: true`, add its tag shade (`.pj-<project-id>`)
-first, then redraw the link-preview card, which shows a tag per published
-project: `node tools/og-card.mjs` (the build stops until you do).
+first and its `card:` wording (see the header of `projects.yaml`; copy the
+Sunlake card's pattern), then redraw the link-preview cards - the site card
+shows a tag per published project, and the project gets its own card:
+`node tools/og-card.mjs` (the build stops until you do). Show Patrick its card.
 
 ## 6. Build the page
 
