@@ -58,7 +58,9 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   project links at the top of every page. `src/facts.njk` — Figures and sources page
   (all projects, built entirely from data). `src/app.js.njk`, `src/styles.css`. Link previews: `src/_includes/social.njk` on every page but the
   Rangeland guide (which has its own card, `og-image.png`), using `og-home.png`, drawn from
-  `tools/og-card.html` - keep dates off that card so it never goes stale.
+  `tools/og-card.html` by `node tools/og-card.mjs` - keep dates off that card so it never
+  goes stale. It shows a tag per published project; the build stops if a project is
+  published without redrawing it.
 - `eleventy.config.js` — loads and validates the data; defines the shortcodes.
 
 Pages show figures with `{% fact "id" %}` (a tappable button showing the source and

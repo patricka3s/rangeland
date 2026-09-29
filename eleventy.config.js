@@ -354,6 +354,12 @@ export default function (eleventyConfig) {
       `. Every existing project needs ${PUBLISH_THRESHOLD}% first - see data/projects.yaml.`);
   });
   eleventyConfig.addGlobalData("nextProjectReady", published.every((p) => pctOf(p.id) >= PUBLISH_THRESHOLD));
+  // The link-preview card (src/og-home.png) shows a tag for each published
+  // project; tools/og-card.json records which ones it was drawn with.
+  const onCard = JSON.parse(fs.readFileSync("tools/og-card.json", "utf8")).projects.join(", ");
+  if (onCard !== published.map((p) => p.id).join(", ")) throw new Error(
+    `The link-preview card shows projects "${onCard}" but the published projects are ` +
+    `"${published.map((p) => p.id).join(", ")}". Redraw it: node tools/og-card.mjs`);
   // How many of the listed figures a human has verified, and how many only AI has checked.
   const listed = groups.flatMap((p) => p.topics.flatMap((t) => t.facts));
   eleventyConfig.addGlobalData("checkCounts", {

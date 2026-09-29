@@ -91,7 +91,9 @@ them against the originals and adds his own `verified` dates.
 already on the site is at least 90% verified by Patrick. Check this before
 starting (the home page shows where each stands): if any is below 90%, tell
 Patrick first - the build will stop otherwise. Add the new project at the end of
-`projects.yaml`.
+`projects.yaml`. When it gets `page: true`, add its tag shade (`.pj-<project-id>`)
+first, then redraw the link-preview card, which shows a tag per published
+project: `node tools/og-card.mjs` (the build stops until you do).
 
 ## 6. Build the page
 

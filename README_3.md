@@ -29,7 +29,7 @@ figure on it is stored once, cites the document it came from, and can be checked
 | `src/_includes/shared-head.njk` | Head tags both pages share: icon, fonts, stylesheet. |
 | `src/app.js.njk` | Page behaviour: the reading-mode toggle, the meeting box, and the network map (whose figures also come from the facts file). |
 | `src/styles.css` | Styling. |
-| `src/og-home.png`, `src/og-image.png` | The **link-preview cards** shown when a page is shared on Facebook or in a text. `og-home.png` (Pasco Roadmap) is used by the home page, Sunlake, Timeline and Figures and sources; `og-image.png` is the Rangeland guide's own card. `og-home.png` is drawn from `tools/og-card.html` (run `node tools/og-card.mjs` to remake it); the tags that use it are in `src/_includes/social.njk`. |
+| `src/og-home.png`, `src/og-image.png` | The **link-preview cards** shown when a page is shared on Facebook or in a text. `og-home.png` (Pasco Roadmap) is used by the home page, Sunlake, Timeline and Figures and sources; `og-image.png` is the Rangeland guide's own card. `og-home.png` is drawn from `tools/og-card.html` (run `node tools/og-card.mjs` to remake it) and shows a tag for each published project, so Claude redraws it whenever a project is added; the tags that use it are in `src/_includes/social.njk`. |
 | `eleventy.config.js` | The build: loads and checks the data, and defines the tags the page uses. |
 | `.github/workflows/site.yml` | Builds the site on every pull request and publishes it on every merge to `main`. |
 
