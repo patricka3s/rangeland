@@ -659,6 +659,7 @@
   as_of: '2016-04'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.design.wb40-length
   statement: 'Overall length of the WB-40 design vehicle ("intermediate semitrailer")'
