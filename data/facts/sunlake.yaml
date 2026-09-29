@@ -184,3 +184,31 @@
   decimals: 1
   note: 'The FY 2027-2030 and future-funding columns on this row are $0.'
 
+# ---- Added 29 Sep 2026: the funded years the card typed in by hand
+
+- id: sunlake.schedule.south.design-funded
+  statement: 'Design: fiscal year funded in the county capital plan, per the MPO priority list'
+  value: FY 2026
+  unit: phase
+  source: mpo-lopp-2026
+  location: 'priority 11 (454568-1), status column: "Design funded FY 2026 in CIP"'
+  as_of: '2026-06-11'
+  status: current
+
+- id: sunlake.schedule.south.row-funded
+  statement: 'Right-of-way: fiscal year funded in the county capital plan, per the MPO priority list'
+  value: FY 2027
+  unit: phase
+  source: mpo-lopp-2026
+  location: 'priority 11 (454568-1), status column: "ROW funded FY 2027 in CIP"'
+  as_of: '2026-06-11'
+  status: current
+
+- id: sunlake.schedule.south.cst-funded
+  statement: 'Construction: fiscal years funded in the county capital plan, per the MPO priority list'
+  value: FY 2028–2029
+  unit: phase
+  source: mpo-lopp-2026
+  location: 'priority 11 (454568-1), status column: "CST Funded in FY 2028-2029 CIP"'
+  as_of: '2026-06-11'
+  status: current

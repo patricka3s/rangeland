@@ -455,6 +455,133 @@
   ai_checked: '2026-09-28'
   note: 'With a Rangeland Blvd interchange, the next sheet gives 76,400 west and 72,400 east.'
 
+# ---- Added 29 Sep 2026: figures the guide's Highlights typed in by hand, now
+# linked to the documents they come from (read on 29 Sep 2026).
+
+- id: rangeland.design.lanes
+  statement: 'Travel lanes on the proposed Rangeland Blvd, both typical sections (two each way)'
+  value: 4
+  unit: lanes
+  source: pasco-2026-09-typical-sections
+  location: 'both drawings: two 11-foot travel lanes each side of the median'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.design.median-standard
+  statement: 'Median width, standard typical section (Alternative A throughout)'
+  value: 22
+  unit: feet
+  source: pasco-2026-09-typical-sections
+  location: 'lower drawing, "22′ Median"'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.design.median-wide
+  statement: 'Median width, wider typical section (Alternatives D and E, South Branch Blvd to Bexley Village Dr)'
+  value: 44
+  unit: feet
+  source: pasco-2026-09-typical-sections
+  location: 'upper drawing, "44′ Median"'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.length-miles.budbexley
+  statement: 'Length of LRTP project 114.3, Bud Bexley Pkwy, Bexley Village Dr to US 41'
+  value: 5.43
+  unit: miles
+  source: mpo-2050-lrtp
+  location: 'Appendix B project sheets, page 38 (Project 114.3, Project Length)'
+  as_of: '2025-04-07'
+  status: current
+  decimals: 2
+  ai_checked: '2026-09-29'
+
+- id: rangeland.length-miles.caliente
+  statement: 'Length of LRTP project 114.4, Caliente Blvd, US 41 to CR 583 (Ehren Cutoff)'
+  value: 1.47
+  unit: miles
+  source: mpo-2050-lrtp
+  location: 'Appendix B project sheets, page 39 (Project 114.4, Project Length)'
+  as_of: '2025-04-07'
+  status: current
+  decimals: 2
+  ai_checked: '2026-09-29'
+
+- id: rangeland.schedule.design-funded
+  statement: 'Design: fiscal year funded in the county capital plan, per the MPO priority list'
+  value: FY 2026
+  unit: phase
+  source: mpo-lopp-2026
+  location: 'priority 10 (454569-1), status column: "Design funded FY 2026 in CIP"'
+  as_of: '2026-06-11'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.schedule.row-funded
+  statement: 'Right-of-way: fiscal year funded in the county capital plan, per the MPO priority list'
+  value: FY 2027
+  unit: phase
+  source: mpo-lopp-2026
+  location: 'priority 10 (454569-1), status column: "ROW funded FY 2027 in CIP"'
+  as_of: '2026-06-11'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.schedule.cst-funded
+  statement: 'Construction: fiscal year funded in the county capital plan, per the MPO priority list'
+  value: FY 2029
+  unit: phase
+  source: mpo-lopp-2026
+  location: 'priority 10 (454569-1), status column: "CST Funded in FY 2029 in CIP"'
+  as_of: '2026-06-11'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.schedule.comments-due
+  statement: 'Workshop #3 comments due: received, or postmarked if mailed, to be in the workshop record'
+  value: '2026-10-08'
+  unit: date
+  source: pasco-2026-09-newsletter
+  location: 'page 2, "comments must be received (or postmarked if mailed) by Thursday, October 8, 2026"'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.schedule.lfir-cst-start
+  statement: 'Estimated start of construction, as given in the state funding request'
+  value: '2030-10-01'
+  unit: date
+  source: fl-senate-lfir-1718
+  location: 'page 2, question 10c'
+  as_of: '2025-11-03'
+  status: current
+  ai_checked: '2026-09-29'
+  note: 'Later than the county capital plan, which the MPO priority list records as funding construction in FY 2029 (which starts 1 Oct 2028).'
+
+- id: rangeland.schedule.lfir-cst-end
+  statement: 'Estimated completion of construction, as given in the state funding request'
+  value: '2032-09-30'
+  unit: date
+  source: fl-senate-lfir-1718
+  location: 'page 2, question 10d'
+  as_of: '2025-11-03'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.funding.state-request
+  statement: 'State funds requested for FY 2026-27 (Local Funding Initiative Request 1718)'
+  value: 4.5
+  unit: USD million
+  source: fl-senate-lfir-1718
+  location: 'page 1, question 6, "Total State Funds Requested 4,500,000"'
+  as_of: '2025-11-03'
+  status: current
+  ai_checked: '2026-09-29'
+  note: 'The request gives local matching funds of $7.8 million and a total of $12.3 million for FY 2026-27.'
+
 # ---- Level of service, evening peak
 
 - id: rangeland.los.rg-gunn.2023

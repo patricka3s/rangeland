@@ -27,6 +27,7 @@ const TOPICS = {
   design: "Road design",
   schedule: "Schedule and process",
   related: "Related studies",
+  claim: "Statements, designations and quotes",
 };
 
 function load(file) {
@@ -213,6 +214,7 @@ export default function (eleventyConfig) {
     if (f.unit === "grade") return "Grade " + d;
     if (f.unit === "rating") return d + " (rating)";
     if (f.unit === "date" || f.unit === "classification" || f.unit === "phase") return d;
+    if (f.unit === "statement") return "\u201C" + d + "\u201D";
     return d + " " + f.unit;
   }
 
@@ -378,7 +380,50 @@ export default function (eleventyConfig) {
   // {% diff "a", "b" %}  ->  b minus a, signed: "+2,000", "−10,000".  {% diff "a", "b", "M" %} for money.
   eleventyConfig.addShortcode("diff", (a, b, style) => {
     const d = value(b) - value(a);
+    if (style === "abs") return num(Math.abs(d));       // "10,000", for prose: "about 10,000 fewer"
     return style === "M" ? signed(Math.round(d * 10) / 10, 1) : signed(d);
+  });
+  // {% sum "a", "b", ..., 0 %}  ->  the total of several facts, to that many decimals
+  // (the last argument). E.g. the corridor's length from its three project sheets.
+  eleventyConfig.addShortcode("sum", (...args) => {
+    const decimals = typeof args[args.length - 1] === "number" ? args.pop() : 0;
+    return num(args.reduce((t, id) => t + value(id), 0), decimals);
+  });
+  // {% share "a", "a", "b", "c" %}  ->  a as a percentage of a+b+c, for widths: "33.1"
+  eleventyConfig.addShortcode("share", (part, ...all) => (value(part) / all.reduce((t, id) => t + value(id), 0) * 100).toFixed(1));
+
+  // Level-of-service counts, worked out from the grade facts rather than typed:
+  // {% losTotal "rangeland.los" %} -> intersections graded in every scenario;
+  // {% losCount "rangeland.los", "2050-nobuild", "F" %} -> how many are at that grade;
+  // {% losWorse "rangeland.los", "2023", "2050-build" %} -> how many are worse in the second.
+  const losKeys = (prefix) => [...new Set(data.facts.filter((f) => f.id.startsWith(prefix + ".") && f.status === "current")
+    .map((f) => f.id.slice(prefix.length + 1).split(".")[0]))];
+  const grade = (prefix, key, sc) => String(get(`${prefix}.${key}.${sc}`).value);
+  eleventyConfig.addShortcode("losTotal", (prefix) => String(losKeys(prefix).length));
+  eleventyConfig.addShortcode("losCount", (prefix, sc, g) => String(losKeys(prefix).filter((k) => grade(prefix, k, sc) === g).length));
+  eleventyConfig.addShortcode("losWorse", (prefix, from, to) =>
+    String(losKeys(prefix).filter((k) => grade(prefix, k, to) > grade(prefix, k, from)).length));
+  // {% losSame "rangeland.los", "2050-nobuild", "2050-build" %} -> how many get the same grade in both.
+  eleventyConfig.addShortcode("losSame", (prefix, a, b) =>
+    String(losKeys(prefix).filter((k) => grade(prefix, k, a) === grade(prefix, k, b)).length));
+
+  // {% calc "id", "id", "prefix*" %}...{% endcalc %}  ->  marks a figure worked out
+  // from facts (a sum, a count). Tapping it opens the slide's source list, which
+  // then includes the facts it was worked out from. "prefix*" means every current
+  // fact whose id starts with prefix.
+  eleventyConfig.addPairedShortcode("calc", (content, ...ids) => {
+    const all = ids.flatMap((id) => id.endsWith("*")
+      ? data.facts.filter((f) => f.id.startsWith(id.slice(0, -1)) && f.status === "current").map((f) => f.id)
+      : [get(id).id]);
+    return `<button type="button" class="calc" data-calc="${all.join(" ")}" title="Worked out from the figures listed under Sources on this slide">${content.trim()}</button>`;
+  });
+
+  // {% src "id" %}  ->  a small superscript "source" mark after a claim (a statement,
+  // designation or quote, stored as a fact with unit "statement"). Tapping it opens
+  // the same details box as a figure.
+  eleventyConfig.addShortcode("src", (id) => {
+    get(id);
+    return `<button type="button" class="fact srcmark" data-fact="${id}" aria-label="Source for this statement"><sup>source</sup></button>`;
   });
   // {% diffClass "a", "b" %}  ->  "up", "down" or "flat", for colouring a table cell.
   eleventyConfig.addShortcode("diffClass", (a, b) => {
