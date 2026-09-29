@@ -1,4 +1,4 @@
-# Rangeland Boulevard Guide
+# Pasco Roadmap (formerly the Rangeland Boulevard Guide)
 
 A plain-language guide to the Rangeland Boulevard Route Study for Bexley neighbors,
 built from Pasco County, Pasco MPO and FDOT public documents.
@@ -17,7 +17,8 @@ figure on it is stored once, cites the document it came from, and can be checked
 | `data/projects.yaml` | The road projects the site covers. Each facts file must match one. |
 | `data/site.yaml` | Site settings: the reader-check script's address. |
 | `data/definitions.yaml` | Plain-language definitions of the terms the site uses. Not yet shown as a glossary. |
-| `src/index.njk` | The page. All the wording lives here; figures are pulled in from the facts file. |
+| `src/index.njk` | The **home page**: your introduction, what the site is, what's coming up, a card per project, checking progress and how to get involved. The cards and dates build themselves from the data files. |
+| `src/rangeland/index.njk` | The **Rangeland guide** at `/rangeland/`. All its wording lives here; figures are pulled in from the facts file. |
 | `src/sunlake/index.njk` | The **Sunlake Blvd corridor** page at `/sunlake/`, laid out like Rangeland's Highlights: slides for the three pieces of the corridor, the planned road, the process and funding, with a plain "not yet published" wherever nothing is. "Full detail" is switched off until the county publishes a study or holds a workshop. |
 | `data/events.yaml` | The **timeline**: each project's workshops, Commission actions, contracts, change orders, plan documents, deadlines and planned phases, each with its source. |
 | `tools/preview.mjs` | Makes the private preview copy (`npm run preview`) that Claude publishes so you can look before merging. Not part of the live site. |
@@ -122,7 +123,7 @@ move below the "today" line on their own.
 
 ## Changing the wording
 
-Edit `src/index.njk` as before. The page has two reading modes: the Highlights
+Edit `src/rangeland/index.njk` as before. The page has two reading modes: the Highlights
 view (`#deck`, eight slides) and Full detail (`#doc`, sections 01–10). If you
 reword something in one, check whether the other repeats it.
 

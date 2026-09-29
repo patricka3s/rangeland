@@ -1,6 +1,6 @@
 # Instructions for Claude
 
-This repository is a plain-language guide to Pasco County, Florida road projects,
+This repository is **Pasco Roadmap**, a plain-language guide to Pasco County, Florida road projects,
 written by Patrick for his neighbors. It started with the Rangeland Blvd route
 study and is meant to grow to cover more projects. Patrick is not a developer:
 explain things in plain English, and give GitHub steps click by click.
@@ -51,7 +51,9 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
 - `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms, listed
   under Definitions on Figures and sources; a page marks a term with
   `{% src "def.<id>" %}`, the same dagger (†) used for claims. `data/site.yaml` — the reader-check script's address.
-- `src/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
+- `src/index.njk` — the home page (introduction, coming up, a card per project
+  from `projects.yaml`, checking progress, how to get involved; old `/#section`
+  links are forwarded to `/rangeland/`). `src/rangeland/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
   page (highlights only, "Full detail" disabled, until more is published). `src/_includes/project-bar.njk` — the
   project links at the top of every page. `src/facts.njk` — Figures and sources page
   (all projects, built entirely from data). `src/app.js.njk`, `src/styles.css`.
@@ -111,6 +113,13 @@ Patrick decides. In short:
    writing anything (checkpoint 1).
 2. Register sources, add the project and its facts using the same kinds and
    scenarios as Rangeland; Patrick spot-checks the facts (checkpoint 2).
+   **Publishing rule (Patrick, 29 Sep 2026): a new project goes live only once
+   every project already on the site is at least 90% verified by Patrick**
+   (`verified` dates), so the site never takes on unchecked data faster than he
+   can check it. New projects go at the end of `projects.yaml`; the build stops if
+   one has `page: true` while an earlier project is below 90%. Sunlake went up
+   before the rule (`published_before_rule: true`). Patrick adds projects as time
+   allows; don't promise readers otherwise.
 3. Build the page at `/<project-id>/` with the standard sections, in the standard
    order - sections with nothing published say so rather than disappearing.
    **Every project page looks the same.** Copy the layout of an existing page (the
@@ -122,10 +131,11 @@ Patrick decides. In short:
    project; if a project needs something new, add it as a shared style that every
    page can use and ask Patrick first. Each project also gets a tag shade
    (`.pj-<project-id>`) for the Timeline.
-4. Site structure (decided with Patrick, 28 Sep 2026): new projects at
-   `/<project-id>/` with a project bar on every page; after 8 Oct 2026 the
-   Rangeland guide moves to `/rangeland/`, the home page becomes a projects page,
-   and old `/#section` links are forwarded.
+4. Site structure: every project at `/<project-id>/` with the project bar on every
+   page; the home page lists the projects (done 29 Sep 2026 - the Rangeland guide
+   moved to `/rangeland/`, and old `/#section` links are forwarded there). Give
+   a new project `stage`, `about` and `page: true` in `projects.yaml` and its card
+   appears on the home page by itself.
 
 ## Workflow
 

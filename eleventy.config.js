@@ -169,6 +169,7 @@ export default function (eleventyConfig) {
   const readerChecksUrl = process.env.READER_CHECKS_URL || (data.site.reader_checks && data.site.reader_checks.url) || "";
   eleventyConfig.addGlobalData("readerChecks", readerChecksUrl);
   eleventyConfig.addGlobalData("sources", data.sources);
+  eleventyConfig.addGlobalData("projects", data.projects);
   eleventyConfig.addGlobalData("definitions", data.definitions.map((d) => ({
     ...d, src: d.source ? data.sourceById[d.source] : null, aiCheckedOn: when(d.ai_checked), verifiedOn: when(d.verified),
   })));
@@ -330,6 +331,29 @@ export default function (eleventyConfig) {
     return { ...p, topics };
   }).filter((p) => p.topics.length);
   eleventyConfig.addGlobalData("factGroups", groups);
+  // Per project, for the home page cards: figures listed, and how many a human has verified.
+  const projectChecks = Object.fromEntries(groups.map((p) => {
+    const fs = p.topics.flatMap((t) => t.facts);
+    return [p.id, { total: fs.length, human: fs.filter((f) => f.verified).length }];
+  }));
+  eleventyConfig.addGlobalData("projectChecks", projectChecks);
+  // Publishing rule (Patrick, 29 Sep 2026): a new project goes live (page: true in
+  // projects.yaml) only once every project published before it - earlier in
+  // projects.yaml - has at least this share of its figures verified by Patrick.
+  // So the site never takes on a new project while older ones are still unchecked.
+  const PUBLISH_THRESHOLD = 90;
+  const pctOf = (id) => { const ck = projectChecks[id] || { total: 0, human: 0 }; return ck.total ? Math.floor(ck.human / ck.total * 100) : 0; };
+  Object.values(projectChecks).forEach((ck, i) => { ck.pct = ck.total ? Math.floor(ck.human / ck.total * 100) : 0; });
+  eleventyConfig.addGlobalData("publishThreshold", PUBLISH_THRESHOLD);
+  const published = data.projects.filter((p) => p.page);
+  published.forEach((p, i) => {
+    if (p.published_before_rule) return;
+    const behind = published.slice(0, i).filter((q) => pctOf(q.id) < PUBLISH_THRESHOLD);
+    if (behind.length) throw new Error(`Publishing rule: "${p.id}" can't be published yet - ` +
+      behind.map((q) => `"${q.id}" is ${pctOf(q.id)}% verified by Patrick`).join(", ") +
+      `. Every existing project needs ${PUBLISH_THRESHOLD}% first - see data/projects.yaml.`);
+  });
+  eleventyConfig.addGlobalData("nextProjectReady", published.every((p) => pctOf(p.id) >= PUBLISH_THRESHOLD));
   // How many of the listed figures a human has verified, and how many only AI has checked.
   const listed = groups.flatMap((p) => p.topics.flatMap((t) => t.facts));
   eleventyConfig.addGlobalData("checkCounts", {

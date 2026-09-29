@@ -86,6 +86,13 @@ Give Patrick the list of new facts in document order (what you read, where, and
 how confident you are - flag anything read off a map or graphic). He spot-checks
 them against the originals and adds his own `verified` dates.
 
+**Publishing rule:** the new project is published (`page: true` in
+`projects.yaml`, which puts its card on the home page) only once every project
+already on the site is at least 90% verified by Patrick. Check this before
+starting (the home page shows where each stands): if any is below 90%, tell
+Patrick first - the build will stop otherwise. Add the new project at the end of
+`projects.yaml`.
+
 ## 6. Build the page
 
 Project pages live at `/<project-id>/` (`src/<project-id>/index.njk`), and every
@@ -139,6 +146,7 @@ Then publish the preview (see Workflow in CLAUDE.md) and give Patrick the link.
 ## Site structure (decided 28 Sep 2026)
 
 - New projects go at `/<project-id>/` now, with a project bar on every page.
-- After 8 Oct 2026: move the Rangeland guide to `/rangeland/`, turn the home page
-  into a projects page (one card per project: stage, next date), and add a script
-  on the home page that forwards old `/#section` links to `/rangeland/#section`.
+- Done 29 Sep 2026: the Rangeland guide is at `/rangeland/`, the home page lists
+  every project (a card built from `projects.yaml`: give the new project `stage`,
+  `about` and `page: true`), and old `/#section` links forward to `/rangeland/`.
+  Add the project to the project bar too.
