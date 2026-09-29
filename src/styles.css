@@ -703,6 +703,17 @@
   .pb-site a:hover{color:var(--accent)}
   .pb-site a[aria-current="page"]{color:var(--accent);border-bottom-color:var(--accent)}
   .projbar a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  /* Light/dark switch: shows the mode it switches TO (app.js sets data-now) */
+  .pb-theme{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin-left:auto;padding:0;
+    border:1px solid var(--rule);border-radius:50%;background:var(--surface);color:var(--ink-2);cursor:pointer}
+  .pb-theme[hidden]{display:none}
+  .pb-theme:hover{color:var(--accent);border-color:var(--accent)}
+  .pb-theme:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .pb-theme svg{width:17px;height:17px}
+  .pb-theme .i-moon{fill:currentColor}
+  .pb-theme .i-sun{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+  .pb-theme .i-sun circle{fill:currentColor;stroke:none}
+  .pb-theme[data-now="light"] .i-sun,.pb-theme[data-now="dark"] .i-moon{display:none}
   @media (max-width:560px){
     .pb-site{padding-left:0;border-left:0;width:100%;padding-top:8px;border-top:1px solid var(--rule-soft)}
   }
@@ -871,7 +882,7 @@
     .netmap .nmopen::before{content:"\2922";font-size:1.1em}
     :root[data-theme="dark"] .netmap .nmopen{color:#12161D}
   }
-  @media (prefers-color-scheme: dark) and (max-width:700px){
+  @media (prefers-color-scheme: dark) and (max-width:700px), (prefers-color-scheme: dark) and (max-height:500px){
     :root:not([data-theme="light"]) .netmap .nmopen{color:#12161D}
   }
 
@@ -903,6 +914,7 @@
     .fmeta a,.fvmeta a,.frep,.fjump a,.tlsrc a,.tlfacts a,.upd li a,.updmore a,.buildstamp a,
     .factnote a,.factpop .fall,.factpop .fd,.eyebrow a,.slist a{padding:8px 0;margin:-8px 0}
     .pb-seg a,.pb-site a{min-height:40px;display:inline-flex;align-items:center}
+    .pb-theme{width:40px;height:40px}
     .chip{min-height:36px}
   }
 
@@ -968,6 +980,12 @@
   .ckl.ck-none i{background:repeating-linear-gradient(135deg,var(--ink-3) 0 2px,transparent 2px 6px);box-shadow:inset 0 0 0 1px var(--ink-3)}
   .ckl b{color:var(--ink);font-weight:600}
   @media (forced-colors:active){ .ckseg,.ckl i{forced-color-adjust:none;border:1px solid CanvasText} }
+  /* on a project page, under the note on dotted-underline figures: a slimmer bar */
+  .pjchecks{margin:-6px 0 28px}
+  .pjchecks .ckbar{height:8px;margin:6px 0 6px}
+  .pjck-head{margin:0;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-2)}
+  .pjck-head a{color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+  .pjck-head a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 
 /* --- Reader checks: the "Matches / Doesn't match" form in the details box --- */
   .rck{margin:12px 0 0;padding:12px 0 0;border-top:1px solid var(--rule-soft)}

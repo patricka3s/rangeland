@@ -332,10 +332,28 @@ export default function (eleventyConfig) {
   }).filter((p) => p.topics.length);
   eleventyConfig.addGlobalData("factGroups", groups);
   // Per project, for the home page cards: figures listed, and how many a human has verified.
-  const projectChecks = Object.fromEntries(groups.map((p) => {
-    const fs = p.topics.flatMap((t) => t.facts);
-    return [p.id, { total: fs.length, human: fs.filter((f) => f.verified).length }];
-  }));
+  // How many figures a human has verified, how many only AI has checked, and
+  // the progress bar's parts: each figure in exactly one state, as whole-number
+  // percentages that add up to 100 (largest remainder).
+  const tally = (list) => {
+    const n = list.length || 1;
+    const bar = [
+      { k: "human", label: "Verified by a human", count: list.filter((f) => f.verified).length },
+      { k: "ai", label: "Checked by AI only", count: list.filter((f) => !f.verified && f.ai_checked).length },
+      { k: "none", label: "Not yet checked", count: list.filter((f) => !f.verified && !f.ai_checked).length },
+    ];
+    bar.forEach((p) => { p.exact = p.count / n * 100; p.pct = Math.floor(p.exact); });
+    let left = 100 - bar.reduce((t, p) => t + p.pct, 0);
+    [...bar].sort((a, b) => (b.exact - b.pct) - (a.exact - a.pct)).forEach((p) => { if (left > 0 && p.count) { p.pct++; left--; } });
+    return {
+      total: list.length,
+      human: list.filter((f) => f.verified).length,
+      ai: list.filter((f) => f.ai_checked).length,
+      unchecked: list.filter((f) => !f.verified && !f.ai_checked).length,
+      bar,
+    };
+  };
+  const projectChecks = Object.fromEntries(groups.map((p) => [p.id, tally(p.topics.flatMap((t) => t.facts))]));
   eleventyConfig.addGlobalData("projectChecks", projectChecks);
   // Publishing rule (Patrick, 29 Sep 2026): a new project goes live (page: true in
   // projects.yaml) only once every project published before it - earlier in
@@ -368,28 +386,8 @@ export default function (eleventyConfig) {
       `The "${p.id}" card: wording in data/projects.yaml has changed since its card was drawn.` + redraw);
     if (!fs.existsSync(`src/og-${p.id}.png`)) throw new Error(`src/og-${p.id}.png is missing.` + redraw);
   });
-  // How many of the listed figures a human has verified, and how many only AI has checked.
-  const listed = groups.flatMap((p) => p.topics.flatMap((t) => t.facts));
-  eleventyConfig.addGlobalData("checkCounts", {
-    total: listed.length,
-    human: listed.filter((f) => f.verified).length,
-    ai: listed.filter((f) => f.ai_checked).length,
-    unchecked: listed.filter((f) => !f.verified && !f.ai_checked).length,
-    // For the progress bar: each figure in exactly one state, as whole-number
-    // percentages that add up to 100 (largest remainder).
-    bar: (() => {
-      const n = listed.length || 1;
-      const parts = [
-        { k: "human", label: "Verified by a human", count: listed.filter((f) => f.verified).length },
-        { k: "ai", label: "Checked by AI only", count: listed.filter((f) => !f.verified && f.ai_checked).length },
-        { k: "none", label: "Not yet checked", count: listed.filter((f) => !f.verified && !f.ai_checked).length },
-      ];
-      parts.forEach((p) => { p.exact = p.count / n * 100; p.pct = Math.floor(p.exact); });
-      let left = 100 - parts.reduce((t, p) => t + p.pct, 0);
-      [...parts].sort((a, b) => (b.exact - b.pct) - (a.exact - a.pct)).forEach((p) => { if (left > 0 && p.count) { p.pct++; left--; } });
-      return parts;
-    })(),
-  });
+  // The same counts for every listed figure, all projects together.
+  eleventyConfig.addGlobalData("checkCounts", tally(groups.flatMap((p) => p.topics.flatMap((t) => t.facts))));
   eleventyConfig.addGlobalData("sourceList", data.sources.map((s) => ({
     ...s, dateText: when(s.date), figures: data.facts.filter((f) => f.source === s.id).length,
   })));

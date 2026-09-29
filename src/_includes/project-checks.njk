@@ -1,0 +1,10 @@
+{#- A project page's checking status, under the note on dotted-underline
+    figures that follows the Reading mode bar:
+    how many of the project's figures have been checked, and by whom. Set
+    "root" and "current" (the project id) first, as for the project bar. -#}
+{%- set ck = projectChecks[current] %}
+<div class="pjchecks">
+  <p class="pjck-head"><a href="{{ root }}facts/#{{ current }}">{{ ck.total }} figures on this project</a> &#183; {{ ck.bar[0].pct }}% verified by a human</p>
+  {% include "checkbar.njk" %}
+</div>
+{%- set ck = null %}

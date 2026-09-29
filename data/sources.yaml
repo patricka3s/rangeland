@@ -281,8 +281,8 @@
   title: "Portable traffic monitoring sites, 2025 annual average daily traffic (Transportation Data and Analytics)"
   publisher: Florida Department of Transportation
   date: 2026-09-28
-  url: https://services1.arcgis.com/O1JpcwDW8sjYuddV/arcgis/rest/services/Portable_Traffic_Monitoring_Sites_TDA/FeatureServer/0
-  note: "FDOT's public data layer of its count sites, each with its 2025 average daily traffic and a description of where it is. The date is when FDOT last updated the layer. The same figures are on FDOT's Florida Traffic Online map. FDOT's road-section layer (Annual_Average_Daily_Traffic_TDA) shows which stretch of road each count stands for."
+  url: https://tdaappsprod.dot.state.fl.us/fto/
+  note: "The link opens FDOT's Florida Traffic Online map. To check a figure, zoom in to the road in Pasco County and tap the count site (each fact lists its site numbers, e.g. 145119): its 2025 average daily traffic is in the details. Claude checked the figures against the map's own data (gis.fdot.gov/arcgis/rest/services/FTO/fto_PROD/MapServer, layer 5) and FDOT's public data layer (services1.arcgis.com/O1JpcwDW8sjYuddV/arcgis/rest/services/Portable_Traffic_Monitoring_Sites_TDA/FeatureServer/0). The date is when FDOT last updated that layer."
 
 # ---- Florida's Turnpike: Suncoast Parkway widening study (FPID 448068-1)
 
