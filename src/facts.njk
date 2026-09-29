@@ -36,7 +36,12 @@ eleventyExcludeFromCollections: true
 {%- endmacro %}
 
 <div class="fkey" aria-label="Key">
-  <p class="pb-lab">Key</p>
+  <p class="pb-lab">How the {{ checkCounts.total }} figures have been checked</p>
+  <div class="ckbar" role="img" aria-label="{% for b in checkCounts.bar %}{{ b.label }}: {{ b.pct }}% ({{ b.count }}){% if not loop.last %}; {% endif %}{% endfor %}">
+    {%- for b in checkCounts.bar %}{% if b.count %}<span class="ckseg ck-{{ b.k }}" style="flex-grow:{{ b.count }}" title="{{ b.label }}: {{ b.count }} of {{ checkCounts.total }} ({{ b.pct }}%)"></span>{% endif %}{% endfor -%}
+  </div>
+  <p class="cklabels" aria-hidden="true">{% for b in checkCounts.bar %}<span class="ckl ck-{{ b.k }}"><i></i>{{ b.label }} <b>{{ b.pct }}%</b></span>{% endfor %}</p>
+  <p class="pb-lab" style="margin-top:12px">Key</p>
   <ul>
     <li><span class="vtag human">Verified by a human</span> Patrick has compared the figure with the document himself, on the date shown. <span class="kcount">{{ checkCounts.human }} of {{ checkCounts.total }}</span></li>
     <li><span class="vtag ai">Checked by AI</span> Claude, an AI assistant, has compared the figure with the document, on the date shown. It can still make mistakes. <span class="kcount">{{ checkCounts.ai }} of {{ checkCounts.total }}</span></li>

@@ -340,6 +340,20 @@ export default function (eleventyConfig) {
     human: listed.filter((f) => f.verified).length,
     ai: listed.filter((f) => f.ai_checked).length,
     unchecked: listed.filter((f) => !f.verified && !f.ai_checked).length,
+    // For the progress bar: each figure in exactly one state, as whole-number
+    // percentages that add up to 100 (largest remainder).
+    bar: (() => {
+      const n = listed.length || 1;
+      const parts = [
+        { k: "human", label: "Verified by a human", count: listed.filter((f) => f.verified).length },
+        { k: "ai", label: "Checked by AI only", count: listed.filter((f) => !f.verified && f.ai_checked).length },
+        { k: "none", label: "Not yet checked", count: listed.filter((f) => !f.verified && !f.ai_checked).length },
+      ];
+      parts.forEach((p) => { p.exact = p.count / n * 100; p.pct = Math.floor(p.exact); });
+      let left = 100 - parts.reduce((t, p) => t + p.pct, 0);
+      [...parts].sort((a, b) => (b.exact - b.pct) - (a.exact - a.pct)).forEach((p) => { if (left > 0 && p.count) { p.pct++; left--; } });
+      return parts;
+    })(),
   });
   eleventyConfig.addGlobalData("sourceList", data.sources.map((s) => ({
     ...s, dateText: when(s.date), figures: data.facts.filter((f) => f.source === s.id).length,

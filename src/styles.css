@@ -946,3 +946,23 @@
   .calc{border:0;background:none;padding:0;margin:0;font:inherit;color:inherit;letter-spacing:inherit;cursor:pointer;
     text-decoration:underline dashed;text-decoration-thickness:1px;text-underline-offset:.18em;text-decoration-color:var(--ink-3)}
   .calc:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* --- Figures and sources: how much has been checked. One 100% bar, a 2px gap
+       between states, the same colours as the tags; "not yet checked" is also
+       hatched so the states differ without colour. Labels carry the numbers. --- */
+  .ckbar{display:flex;gap:2px;height:14px;margin:4px 0 8px;background:var(--surface)}
+  .ckseg{display:block;min-width:4px;flex-basis:0}
+  .ckseg:first-child{border-radius:4px 0 0 4px} .ckseg:last-child{border-radius:0 4px 4px 0}
+  .ckseg:only-child{border-radius:4px}
+  .ck-human{background:var(--good)}
+  .ck-ai{background:var(--accent)}
+  .ck-none{background:repeating-linear-gradient(135deg,var(--ink-3) 0 2px,transparent 2px 6px);box-shadow:inset 0 0 0 1px var(--ink-3)}
+  .cklabels{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 4px;font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;color:var(--ink-2)}
+  .ckl{display:inline-flex;align-items:center;gap:6px}
+  .ckl i{display:inline-block;width:12px;height:12px;border-radius:3px}
+  .ckl.ck-human,.ckl.ck-ai,.ckl.ck-none{background:none;box-shadow:none}
+  .ckl.ck-human i{background:var(--good)} .ckl.ck-ai i{background:var(--accent)}
+  .ckl.ck-none i{background:repeating-linear-gradient(135deg,var(--ink-3) 0 2px,transparent 2px 6px);box-shadow:inset 0 0 0 1px var(--ink-3)}
+  .ckl b{color:var(--ink);font-weight:600}
+  @media (forced-colors:active){ .ckseg,.ckl i{forced-color-adjust:none;border:1px solid CanvasText} }
