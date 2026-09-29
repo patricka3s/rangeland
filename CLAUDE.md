@@ -190,10 +190,11 @@ silently at Patrick's request, as barely anyone had seen them. Still open:
 
 Decided: the site shows evening-peak grades only, and says so where grades appear.
 
-## Later
+## Reader checks
 
-- **Reader checks** are built (29 Sep 2026) but switched off until Patrick
-  deploys the Apps Script and its address goes in `data/site.yaml`
-  (`reader_checks: url:`). Script, set-up steps and rules: `docs/reader-checks.md`.
-  Answers are claims to check, like error reports; Patrick decides.
+- **Reader checks** are live (29 Sep 2026): the form in each figure's details box
+  posts to Patrick's Apps Script (address in `data/site.yaml`, `reader_checks: url:`;
+  empty it to switch the form off). Answers land in the "Reader checks" tab of his
+  Sheet. Script, set-up steps and rules: `docs/reader-checks.md`. Answers are claims
+  to check, like error reports; Patrick decides.
 

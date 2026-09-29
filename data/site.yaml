@@ -15,4 +15,4 @@ dispute_form:
 #   url    the script's web app address, ending in /exec. Leave it empty ('')
 #          and the form stays hidden.
 reader_checks:
-  url: ''
+  url: https://script.google.com/macros/s/AKfycbzFvgRN4BA9Fcy27ZZIQ67EgnzBY9TK8nLAWBuwSxTsomCpBKqr2-vKaE5bBvB-4VRB7w/exec
