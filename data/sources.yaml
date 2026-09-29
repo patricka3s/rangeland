@@ -282,7 +282,7 @@
   publisher: Florida Department of Transportation
   date: 2026-09-28
   url: https://tdaappsprod.dot.state.fl.us/fto/
-  note: "The link opens FDOT's Florida Traffic Online map. To check a figure, go straight to a count site by adding its number to the address (each fact lists its site numbers), e.g. tdaappsprod.dot.state.fl.us/fto/?cosite=145119, or zoom in to the road and tap the site: its 2025 average daily traffic is in the details. Claude checked the figures against the map's own data (gis.fdot.gov/arcgis/rest/services/FTO/fto_PROD/MapServer, layer 5) and FDOT's public data layer (services1.arcgis.com/O1JpcwDW8sjYuddV/arcgis/rest/services/Portable_Traffic_Monitoring_Sites_TDA/FeatureServer/0). The date is when FDOT last updated that layer."
+  note: "The link opens FDOT's Florida Traffic Online map. To check a figure, zoom in to the road in Pasco County and tap the count site (each fact lists its site numbers, e.g. 145119): its 2025 average daily traffic is in the details. Claude checked the figures against the map's own data (gis.fdot.gov/arcgis/rest/services/FTO/fto_PROD/MapServer, layer 5) and FDOT's public data layer (services1.arcgis.com/O1JpcwDW8sjYuddV/arcgis/rest/services/Portable_Traffic_Monitoring_Sites_TDA/FeatureServer/0). The date is when FDOT last updated that layer."
 
 # ---- Florida's Turnpike: Suncoast Parkway widening study (FPID 448068-1)
 
