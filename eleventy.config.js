@@ -354,6 +354,20 @@ export default function (eleventyConfig) {
       `. Every existing project needs ${PUBLISH_THRESHOLD}% first - see data/projects.yaml.`);
   });
   eleventyConfig.addGlobalData("nextProjectReady", published.every((p) => pctOf(p.id) >= PUBLISH_THRESHOLD));
+  // Link-preview cards: the site card (src/og-home.png) shows a tag for each
+  // published project, and each project has its own (src/og-<id>.png) worded
+  // from its "card:". tools/og-card.json records what they were drawn from.
+  const drawn = JSON.parse(fs.readFileSync("tools/og-card.json", "utf8"));
+  const redraw = " Redraw the link-preview cards: node tools/og-card.mjs";
+  if (drawn.projects.join(", ") !== published.map((p) => p.id).join(", ")) throw new Error(
+    `The link-preview cards were drawn for projects "${drawn.projects.join(", ")}" but the published ` +
+    `projects are "${published.map((p) => p.id).join(", ")}".` + redraw);
+  published.forEach((p) => {
+    if (!p.card || !p.card.title) throw new Error(`Project "${p.id}" has a page but no card: title in data/projects.yaml.`);
+    if (JSON.stringify(p.card) !== JSON.stringify(drawn.cards[p.id])) throw new Error(
+      `The "${p.id}" card: wording in data/projects.yaml has changed since its card was drawn.` + redraw);
+    if (!fs.existsSync(`src/og-${p.id}.png`)) throw new Error(`src/og-${p.id}.png is missing.` + redraw);
+  });
   // How many of the listed figures a human has verified, and how many only AI has checked.
   const listed = groups.flatMap((p) => p.topics.flatMap((t) => t.facts));
   eleventyConfig.addGlobalData("checkCounts", {
@@ -530,7 +544,7 @@ export default function (eleventyConfig) {
     return s + "        </g>";
   });
 
-  eleventyConfig.addPassthroughCopy({ "src/styles.css": "styles.css", "src/og-image.png": "og-image.png" });
+  eleventyConfig.addPassthroughCopy({ "src/styles.css": "styles.css", "src/og-*.png": "." });
 
   return {
     dir: { input: "src", output: "_site" },

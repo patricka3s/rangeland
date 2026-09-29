@@ -28,7 +28,8 @@ figure on it is stored once, cites the document it came from, and can be checked
 | `src/facts.njk` | The **Figures and sources** page (`/facts/`): every fact, grouped, with its source and a report link. Built entirely from the data files. |
 | `src/_includes/shared-head.njk` | Head tags both pages share: icon, fonts, stylesheet. |
 | `src/app.js.njk` | Page behaviour: the reading-mode toggle, the meeting box, and the network map (whose figures also come from the facts file). |
-| `src/styles.css`, `src/og-image.png` | Styling and the social preview card. |
+| `src/styles.css` | Styling. |
+| `src/og-*.png` | The **link-preview cards** shown when a page is shared on Facebook or in a text. `og-home.png` (Pasco Roadmap, with a tag for each project) is used by the home page, Timeline and Figures and sources; each project has its own, e.g. `og-rangeland.png`, worded from the `card:` lines in `data/projects.yaml`. To change a card's words, edit those lines and ask Claude to redraw the cards (`node tools/og-card.mjs`, from `tools/og-card.html`); the build stops until the pictures match. |
 | `eleventy.config.js` | The build: loads and checks the data, and defines the tags the page uses. |
 | `.github/workflows/site.yml` | Builds the site on every pull request and publishes it on every merge to `main`. |
 

@@ -1,0 +1,19 @@
+{
+  "projects": [
+    "rangeland",
+    "sunlake"
+  ],
+  "cards": {
+    "rangeland": {
+      "eyebrow": "Pasco County · Rangeland Blvd Route Study",
+      "title": "Bexley Guide to Rangeland Blvd Study",
+      "sub": "What's proposed, how it fits into the county's larger plan, and what still hasn't been answered.",
+      "note": "Comments close Thursday, 8 October",
+      "right": "Study complete · Fall 2026"
+    },
+    "sunlake": {
+      "title": "Sunlake Blvd Corridor",
+      "sub": "What has been published about plans for Sunlake Boulevard north of Bud Bexley Parkway, and where it stands."
+    }
+  }
+}
