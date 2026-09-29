@@ -1,6 +1,6 @@
 # Pasco Roadmap (formerly the Rangeland Boulevard Guide)
 
-A plain-language guide to the Rangeland Boulevard Route Study for Bexley neighbors,
+A plain-language guide to Pasco County road projects, starting with the Rangeland Boulevard Route Study,
 built from Pasco County, Pasco MPO and FDOT public documents.
 
 Live at **https://pascoroadmap.info/** (formerly patricka3s.github.io/rangeland/, which forwards here).
