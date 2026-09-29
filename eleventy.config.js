@@ -388,6 +388,41 @@ export default function (eleventyConfig) {
   });
   // The same counts for every listed figure, all projects together.
   eleventyConfig.addGlobalData("checkCounts", tally(groups.flatMap((p) => p.topics.flatMap((t) => t.facts))));
+
+  // Rangeland Highlights, "Where the traffic goes": each street's 2050 traffic
+  // with the road built minus with nothing built, worked out from the boards'
+  // facts (rangeland.aadt.<street>.2050-nobuild / -build). A street given as a
+  // range (SR 54) keeps both ends; the new road has no no-build figure. Bar
+  // widths are a share of the largest change, so the chart is to scale.
+  const SHIFT_STREETS = [
+    ["bvd-sr54", "Bexley Village Dr", "toward SR 54"], ["ballantrae-s", "Ballantrae Blvd", "south"],
+    ["sbranch", "S Branch Blvd", ""], ["sr54", "SR 54", "a range on the boards"],
+    ["bvd-rndbt", "Bexley Village Dr", "at the roundabout"], ["bvd-north", "Bexley Village Dr", "north"],
+    ["gunn", "Gunn Hwy", ""], ["ballantrae-n", "Ballantrae Blvd", "north"],
+    ["broadporch", "Broad Porch Run", ""], ["budbexley", "Bud Bexley Pkwy", ""],
+    ["rangeland-new", "Rangeland Blvd", "the new road"],
+  ];
+  const n0 = (n) => Math.abs(n).toLocaleString("en-US");
+  const signed = (n) => (n < 0 ? "−" : n > 0 ? "+" : "") + n0(n);
+  const shiftRows = SHIFT_STREETS.map(([key, name, sub]) => {
+    const nbId = `rangeland.aadt.${key}.2050-nobuild`, bId = `rangeland.aadt.${key}.2050-build`;
+    const b = get(bId).value, nb = data.byId[nbId] ? get(nbId).value : null;
+    if (nb === null) return { name, sub, ids: [bId], isNew: true, lo: b, hi: b, label: `+${n0(b)}` };
+    if (typeof nb === "object") {
+      const a = b.low - nb.low, z = b.high - nb.high, lo = Math.min(a, z), hi = Math.max(a, z);
+      return { name, sub, ids: [nbId, bId], lo, hi, isRange: true, label: `${signed(hi < 0 ? hi : lo)} to ${signed(hi < 0 ? lo : hi)}` };
+    }
+    const d = b - nb;
+    return { name, sub, ids: [nbId, bId], lo: d, hi: d, label: d === 0 ? "No change" : signed(d) };
+  });
+  const shiftMax = Math.max(...shiftRows.map((r) => Math.max(Math.abs(r.lo), Math.abs(r.hi))));
+  shiftRows.forEach((r) => {
+    const near = Math.min(Math.abs(r.lo), Math.abs(r.hi)), far = Math.max(Math.abs(r.lo), Math.abs(r.hi));
+    r.side = r.hi < 0 ? "neg" : r.lo > 0 ? "pos" : "zero";
+    r.w = +(near / shiftMax * 50).toFixed(2);         // solid bar, % of the track
+    r.wFar = +(far / shiftMax * 50).toFixed(2);       // to the far end of a range
+  });
+  eleventyConfig.addGlobalData("trafficShift", shiftRows);
   eleventyConfig.addGlobalData("sourceList", data.sources.map((s) => ({
     ...s, dateText: when(s.date), figures: data.facts.filter((f) => f.source === s.id).length,
   })));

@@ -125,7 +125,7 @@ move below the "today" line on their own.
 ## Changing the wording
 
 Edit `src/rangeland/index.njk` as before. The page has two reading modes: the Highlights
-view (`#deck`, eight slides) and Full detail (`#doc`, sections 01–10). If you
+view (`#deck`, nine slides) and Full detail (`#doc`, sections 01–10). If you
 reword something in one, check whether the other repeats it.
 
 ## Safety checks

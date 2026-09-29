@@ -1010,6 +1010,42 @@
   .pjck-head a{color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
   .pjck-head a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 
+/* --- "Where the traffic goes" (Rangeland slide 06): the change in each street's
+       2050 traffic, road built minus nothing built, as bars either side of a
+       zero line. One colour for both directions: more traffic is not better or
+       worse than less. The build works out every value (trafficShift). --- */
+  .shift,.shkey{--mk:var(--accent);--mkfar:rgba(86,54,201,.32)} .shift{margin:10px 0 8px}
+  :root[data-theme="dark"] .shift,:root[data-theme="dark"] .shkey{--mk:#9B7CF0;--mkfar:rgba(155,124,240,.45)}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .shift,:root:not([data-theme="light"]) .shkey{--mk:#9B7CF0;--mkfar:rgba(155,124,240,.45)} }
+  .sh-row{display:grid;grid-template-columns:minmax(0,11.5rem) minmax(0,1fr);align-items:center;gap:2px 14px;padding:5px 0;border-top:1px solid var(--rule-soft)}
+  .sh-axis{border-top:0;padding:0 0 4px}
+  .sh-name{font-family:Archivo,sans-serif;font-size:.86rem;font-weight:600;line-height:1.25;color:var(--ink)}
+  .sh-name small{display:block;font-weight:500;font-size:.78rem;color:var(--ink-3)}
+  .sh-track{position:relative;display:block;height:26px}
+  .sh-track::before{content:"";position:absolute;left:50%;top:-5px;bottom:-5px;border-left:1px solid var(--ink-3)}
+  .sh-axis .sh-track{height:auto;display:flex}
+  .sh-axis .sh-track::before{top:0;bottom:-4px}
+  .sh-lab{flex:1 1 50%;font:600 11px/1.3 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .sh-lab.neg{text-align:right;padding-right:10px} .sh-lab.pos{padding-left:10px}
+  .sh-bar{position:absolute;top:6px;height:14px;background:var(--mk)}
+  .sh-neg .sh-bar{right:50%;border-radius:4px 0 0 4px} .sh-pos .sh-bar{left:50%;border-radius:0 4px 4px 0}
+  .sh-bar.sh-far{background:var(--mkfar)}
+  .sh-bar.sh-new{background:repeating-linear-gradient(135deg,var(--mk) 0 3px,transparent 3px 7px);box-shadow:inset 0 0 0 1.5px var(--mk)}
+  .sh-val{position:absolute;top:4px;font:500 12px/18px "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--ink-2);white-space:nowrap}
+  .sh-neg .sh-val{right:calc(50% + var(--at) + 8px)} .sh-pos .sh-val{left:calc(50% + var(--at) + 8px)}
+  .sh-zero .sh-val{left:calc(50% + 8px);color:var(--ink-3)}
+  .sh-up{height:40px} .sh-up .sh-bar{top:22px} .sh-up.sh-pos .sh-val{left:auto;right:0;top:0}
+  .sh-val .calc,.sh-v2 .calc{color:inherit}
+  .sh-v2{display:none;margin-left:8px;font:500 12px/1 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+  .slide p.shkey,.shkey{display:flex;flex-wrap:wrap;gap:4px 18px;margin:6px 0 14px;font:500 11px/1.5 "IBM Plex Mono",ui-monospace,monospace;color:var(--ink-2)}
+  .shkey i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px}
+  .shkey .k-bar{background:var(--mk)} .shkey .k-far{background:var(--mkfar)}
+  .shkey .k-new{background:repeating-linear-gradient(135deg,var(--mk) 0 3px,transparent 3px 7px);box-shadow:inset 0 0 0 1.5px var(--mk)}
+  @media (max-width:560px){
+    .sh-row{grid-template-columns:1fr} .sh-axis .sh-name{display:none}
+    .sh-v2{display:inline} .sh-val{display:none} .sh-up{height:26px} .sh-up .sh-bar{top:6px}
+  }
+
 /* --- Reader checks: the "Matches / Doesn't match" form in the details box --- */
   .rck{margin:12px 0 0;padding:12px 0 0;border-top:1px solid var(--rule-soft)}
   .rck-q{font-family:Archivo,sans-serif;font-weight:700;font-size:.92rem;margin:0 0 8px}

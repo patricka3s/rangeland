@@ -442,7 +442,7 @@ trafficRows:
 
 <!-- ==========================================================================
      DECK - the Highlights view
-     Eight slides. Each opens with <p class="sn">NN - Title</p>.
+     Nine slides. Each opens with <p class="sn">NN - Title</p>.
      ========================================================================== -->
 <div class="hlt" id="deck">
 
@@ -536,7 +536,39 @@ trafficRows:
 </div>
 
 <div class="slide">
-  <p class="sn">06 &nbsp;·&nbsp; Noise</p>
+  <p class="sn">06 &nbsp;·&nbsp; Where the traffic goes</p>
+  <h2>With the road built, 2050 traffic falls on some streets and rises on others.</h2>
+  <p>Each bar is the county&#8217;s 2050 forecast with Alternative A built, minus its 2050 forecast with nothing built, in vehicles a day. Tap a number to see the figures it comes from.</p>
+  <div class="shift" role="img" aria-label="Change in 2050 daily traffic with the road built, compared with nothing built: {% for r in trafficShift %}{{ r.name }}{% if r.sub %} ({{ r.sub }}){% endif %}, {{ r.label }}{% if not loop.last %}; {% endif %}{% endfor %}.">
+    <div class="sh-row sh-axis" aria-hidden="true"><span class="sh-name"></span><span class="sh-track"><span class="sh-lab neg">&#8592; Fewer vehicles</span><span class="sh-lab pos">More vehicles &#8594;</span></span></div>
+{%- for r in trafficShift %}
+    <div class="sh-row">
+      <span class="sh-name">{{ r.name }}<span class="sh-v2">{% calc r.ids[0], r.ids[1] or r.ids[0] %}{{ r.label }}{% endcalc %}</span>{% if r.sub %}<small>{{ r.sub }}</small>{% endif %}</span>
+      <span class="sh-track sh-{{ r.side }}{% if r.wFar > 40 %} sh-up{% endif %}">
+        {%- if r.isRange %}<i class="sh-bar sh-far" style="width:{{ r.wFar }}%"></i>{% endif -%}
+        {%- if r.side != "zero" %}<i class="sh-bar{% if r.isNew %} sh-new{% endif %}" style="width:{{ r.w }}%"></i>{% endif -%}
+        <span class="sh-val" style="--at:{{ r.wFar }}%">{% calc r.ids[0], r.ids[1] or r.ids[0] %}{{ r.label }}{% endcalc %}</span>
+      </span>
+    </div>
+{%- endfor %}
+  </div>
+  <p class="shkey" aria-hidden="true"><span><i class="k-bar"></i>Change on an existing street</span><span><i class="k-far"></i>SR 54, given as a range</span><span><i class="k-new"></i>New road: nothing there if it isn&#8217;t built</span></p>
+  <details class="xp">
+    <summary>Show as a table</summary>
+    <div class="tw"><table>
+      <thead><tr><th>Street</th><th class="n">2050, nothing built</th><th class="n">2050, road built</th><th class="n">Change</th></tr></thead>
+      <tbody>
+{%- for r in trafficShift %}
+        <tr><td>{{ r.name }}{% if r.sub %}, {{ r.sub }}{% endif %}</td><td class="n">{% if r.isNew %}&#8212;{% else %}{% fact r.ids[0] %}{% endif %}</td><td class="n">{% fact r.ids[1] or r.ids[0] %}</td><td class="n">{{ r.label }}</td></tr>
+{%- endfor %}
+      </tbody>
+    </table></div>
+  </details>
+  <p class="foot">County traffic boards shown at Public Workshop #3, 24 September 2026 &#8212; 2050 no-build and 2050 build</p>
+</div>
+
+<div class="slide">
+  <p class="sn">07 &nbsp;·&nbsp; Noise</p>
   <h2>Two stretches are marked noise impacted. One of them may get a barrier.</h2>
   <p>The workshop boards label <strong>two noise impacted areas</strong> along the corridor: one behind the homes at <strong>The Preserve</strong>, and one in <strong>Bexley near the Bexley Village Drive roundabout</strong>. Mitigation was found reasonable and feasible at the roundabout location.</p>
   <p>Both areas are short, but the Bexley area is very close to homes. The county has changed the overall noise impact from {% fact "rangeland.matrix.noise.2025-01" %} to <strong>{% fact "rangeland.matrix.noise.2026-09" %}</strong>, since the original assessment in January 2025. </p>
@@ -545,7 +577,7 @@ trafficRows:
 </div>
 
 <div class="slide">
-  <p class="sn">07 &nbsp;&#183;&nbsp; The interchange</p>
+  <p class="sn">08 &nbsp;&#183;&nbsp; The interchange</p>
   <h2>The Suncoast interchange is suspended, but not dead.</h2>
   <div class="quote">Advancement of the Rangeland Boulevard interchange to the design and construction phases has been suspended until Pasco County demonstrates stakeholder support and confirms that the Bud Bexley Parkway and Bexley Village Drive intersection will operate acceptably with the interchange through the year 2050.<span class="attr">Gregory Moore, PE, Project Manager for the Turnpike&#8217;s Suncoast Parkway study (a consultant to Florida&#8217;s Turnpike Enterprise), email of 28 August 2025{% src "rangeland.claim.interchange-suspended" %}</span></div>
   <p>It is neither cancelled nor approved. If it is built, the county says a <strong>six-lane</strong> segment would be required from South Branch Boulevard to west of Bexley Village Drive. Options D and E include space for this expansion. Option A does not. </p>
@@ -553,7 +585,7 @@ trafficRows:
 </div>
 
 <div class="slide">
-  <p class="sn">08 &nbsp;·&nbsp; What to do</p>
+  <p class="sn">09 &nbsp;·&nbsp; What to do</p>
   <h2>Things I'm still curious about</h2>
   <ol class="qlist">
     <li><b>Where were the noise receptors, and what levels were modelled at each?</b> Mitigation was found reasonable and feasible for one short segment near the roundabout in Bexley. Everywhere else, which test did the location fail &#8212; reasonableness or feasibility &#8212; and by how much?</li>
