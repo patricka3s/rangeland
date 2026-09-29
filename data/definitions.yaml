@@ -5,9 +5,13 @@
 #   definition  plain-language meaning
 #   source      optional - id from data/sources.yaml when the definition is quoted
 #               or taken from a document; left out for general explanations
+#   location    optional - where in the source
+#   ai_checked  optional - date Claude compared it with the source
+#   verified    optional - date Patrick verified it himself (only Patrick sets this)
 #
-# Not yet shown on the page as a list; the page's own explanations still live
-# in the text. A glossary built from this file is a later step.
+# Listed on the Figures and sources page under "Definitions". A page can mark a
+# word with {% src "def.<id>" %} - a small dagger that opens the definition and
+# its source.
 
 - id: aadt
   term: AADT (Average Annual Daily Traffic)
@@ -21,26 +25,39 @@
   term: Arterial
   definition: A route that is "relatively continuous and of relatively high traffic volume, long average trip length, high operating speed, and high mobility importance."
   source: fl-stat-334-03
+  location: 's. 334.03(1), "Arterial road"'
+  ai_checked: '2026-09-29'
+
 
 - id: collector
   term: Collector
-  definition: A route of "relatively moderate average traffic volume, moderately average trip length, and moderately average operating speed."
+  definition: A route of "relatively moderate average traffic volume, moderately average trip length, and moderately average operating speed." It also "collects and distributes traffic between local roads or arterial roads and serves as a linkage between land access and mobility needs."
   source: fl-stat-334-03
+  location: 's. 334.03(4), "Collector road"'
+  ai_checked: '2026-09-29'
+
 
 - id: local-road
   term: Local road
   definition: A route of "relatively low average traffic volume, short average trip length or minimal through-traffic movements, and high land access for abutting property."
   source: fl-stat-334-03
+  location: 's. 334.03(14), "Local road"'
+  ai_checked: '2026-09-29'
+
 
 - id: principal-arterial
   term: Principal arterial
   definition: An arterial serving "the major centers of activity of an urban area, the highest traffic volume corridors, and the longest trip purpose."
-  source: fl-stat-334-03
+  source: fhwa-functional-classification-2023
+  note: 'Florida Statute 334.03 defines arterial, collector and local roads but not principal or minor arterials; this wording is the federal classification guidance. Not yet checked against it: the FHWA site is outside what the research tools can reach.'
+
 
 - id: minor-arterial
   term: Minor arterial
   definition: An arterial that "interconnects with and augments" the principal arterials and carries shorter trips.
-  source: fl-stat-334-03
+  source: fhwa-functional-classification-2023
+  note: 'Florida Statute 334.03 does not define minor arterials; this wording is the federal classification guidance. Not yet checked against it: the FHWA site is outside what the research tools can reach.'
+
 
 - id: freight-priority-network
   term: Freight Priority Network
@@ -49,7 +66,11 @@
 
 - id: wb-40
   term: WB-40
-  definition: A design vehicle - a medium-sized semitrailer with a 40-foot wheelbase. A road designed for it lets that truck make its turns without leaving the pavement.
+  definition: A design vehicle, the "intermediate semitrailer" - wheelbase 12.5 + 25.5 = 38 feet, 45.5 feet long overall. A road designed for it lets that truck make its turns without leaving the pavement.
+  source: fdot-florida-greenbook-2016
+  location: 'Chapter 3, Table 3-2 Design Vehicles'
+  ai_checked: '2026-09-29'
+
 
 - id: pde-study
   term: PD&E study (Project Development and Environment)

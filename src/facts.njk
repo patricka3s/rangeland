@@ -36,7 +36,12 @@ eleventyExcludeFromCollections: true
 {%- endmacro %}
 
 <div class="fkey" aria-label="Key">
-  <p class="pb-lab">Key</p>
+  <p class="pb-lab">How the {{ checkCounts.total }} figures have been checked</p>
+  <div class="ckbar" role="img" aria-label="{% for b in checkCounts.bar %}{{ b.label }}: {{ b.pct }}% ({{ b.count }}){% if not loop.last %}; {% endif %}{% endfor %}">
+    {%- for b in checkCounts.bar %}{% if b.count %}<span class="ckseg ck-{{ b.k }}" style="flex-grow:{{ b.count }}" title="{{ b.label }}: {{ b.count }} of {{ checkCounts.total }} ({{ b.pct }}%)"></span>{% endif %}{% endfor -%}
+  </div>
+  <p class="cklabels" aria-hidden="true">{% for b in checkCounts.bar %}<span class="ckl ck-{{ b.k }}"><i></i>{{ b.label }} <b>{{ b.pct }}%</b></span>{% endfor %}</p>
+  <p class="pb-lab" style="margin-top:12px">Key</p>
   <ul>
     <li><span class="vtag human">Verified by a human</span> Patrick has compared the figure with the document himself, on the date shown. <span class="kcount">{{ checkCounts.human }} of {{ checkCounts.total }}</span></li>
     <li><span class="vtag ai">Checked by AI</span> Claude, an AI assistant, has compared the figure with the document, on the date shown. It can still make mistakes. <span class="kcount">{{ checkCounts.ai }} of {{ checkCounts.total }}</span></li>
@@ -49,6 +54,7 @@ eleventyExcludeFromCollections: true
   {% for p in factGroups %}<a href="#{{ p.id }}">{{ p.short or p.name }}</a>
   {% endfor %}<span class="sep" aria-hidden="true"></span>
   {% if changeGroups.length %}<a href="#changes">What&#8217;s changed</a>{% endif %}
+  <a href="#definitions">Definitions</a>
   <a href="#sources">The documents</a>
 </nav>
 
@@ -125,6 +131,24 @@ eleventyExcludeFromCollections: true
   {% endfor %}
 </section>
 {% endfor %}
+
+<section class="fsources" id="definitions">
+  <h2><span>Definitions</span></h2>
+  <p>Terms the site uses. Where a definition is quoted from a document, it names the document; a word marked with a small dagger (&#8224;) on a project page opens its definition here.</p>
+  <ul class="flist">
+    {% for d in definitions %}
+    <li class="fitem" id="def.{{ d.id }}">
+      <div class="fhead"><span class="fstat"><strong>{{ d.term }}</strong></span></div>
+      <p class="fnote" style="border:0;padding:0;margin:4px 0 0;font-size:.95rem;color:var(--ink)">{{ d.definition }}</p>
+      <p class="fmeta">
+        {%- if d.src %}{% if d.src.url %}<a href="{{ d.src.url }}" rel="noopener" target="_blank">{{ d.src.title }}</a>{% else %}{{ d.src.title }}{% endif %}{% if d.location %} &#183; {{ d.location }}{% endif %}{% else %}General explanation, not from one document{% endif %}
+        {% if d.source %}&#183; {{ checks(d) }}{% endif %}
+      </p>
+      {% if d.note %}<p class="fnote">{{ d.note }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
 
 <section class="fsources" id="sources">
   <h2><span>The documents</span></h2>

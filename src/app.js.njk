@@ -431,3 +431,62 @@ eleventyExcludeFromCollections: true
     }
   });
 })();
+
+/* ==========================================================================
+   SOURCES ON THIS SLIDE
+   Each Highlights slide gets a fold-out list of every figure and statement on
+   it that links to a document, with how it has been checked. Built from what
+   is tappable on the slide, so it can never go out of date. Tapping an entry
+   opens the same details box as tapping the figure itself.
+   ========================================================================== */
+(function(){
+  document.addEventListener("DOMContentLoaded", function(){
+    var node = document.getElementById("fact-data"), data;
+    if (!node) return;
+    try { data = JSON.parse(node.textContent); } catch (e) { return; }
+    var slides = document.querySelectorAll(".slide"), i;
+    for (i = 0; i < slides.length; i++){
+      var btns = slides[i].querySelectorAll("[data-fact],[data-calc]"), seen = {}, ids = [], j;
+      for (j = 0; j < btns.length; j++){
+        var list = (btns[j].getAttribute("data-fact") || btns[j].getAttribute("data-calc")).split(" ");
+        for (var k = 0; k < list.length; k++){
+          var id = list[k];
+          if (!seen[id] && data.facts[id]) { seen[id] = 1; ids.push(id); }
+        }
+      }
+      if (!ids.length) continue;
+      var human = 0, ai = 0;
+      for (j = 0; j < ids.length; j++){ if (data.facts[ids[j]].vf) human++; else if (data.facts[ids[j]].ai) ai++; }
+      var box = document.createElement("details");
+      box.className = "slsrc";
+      var sum = document.createElement("summary");
+      sum.textContent = "Sources on this slide \u00b7 " + ids.length + (ids.length === 1 ? " item" : " items") +
+        " \u00b7 " + human + " verified by a human" + (ai ? ", " + ai + " checked by AI" : "") +
+        (ids.length - human - ai ? ", " + (ids.length - human - ai) + " not yet checked" : "");
+      box.appendChild(sum);
+      var ul = document.createElement("ul");
+      for (j = 0; j < ids.length; j++){
+        var f = data.facts[ids[j]], li = document.createElement("li"), b = document.createElement("button");
+        b.type = "button"; b.className = "fact slsrc-item"; b.setAttribute("data-fact", ids[j]);
+        b.textContent = f.v + " \u2014 " + f.s;
+        var tag = document.createElement("span");
+        tag.className = "vtag " + (f.vf ? "human" : f.ai ? "ai" : "none");
+        tag.textContent = f.vf ? "Verified by a human" : f.ai ? "Checked by AI" : "Not yet checked";
+        var src = document.createElement("span");
+        src.className = "slsrc-doc"; src.textContent = f.src.t;
+        li.appendChild(b); li.appendChild(document.createTextNode(" ")); li.appendChild(tag);
+        li.appendChild(src); ul.appendChild(li);
+      }
+      box.appendChild(ul);
+      var foot = slides[i].querySelector(".foot");
+      if (foot) foot.parentNode.insertBefore(box, foot.nextSibling); else slides[i].appendChild(box);
+    }
+    /* a worked-out figure opens its slide's source list */
+    document.addEventListener("click", function(e){
+      var c = e.target.closest && e.target.closest(".calc");
+      if (!c) return;
+      var s = c.closest(".slide"), box = s && s.querySelector(".slsrc");
+      if (box) { box.open = true; box.scrollIntoView({block: "nearest", behavior: "smooth"}); }
+    });
+  });
+})();

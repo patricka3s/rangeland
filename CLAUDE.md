@@ -48,8 +48,9 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   `moved: {from, to}`, which the build adds to the title and the Timeline shows
   with the old date struck through. The site rebuilds every morning so
   "today" moves on by itself.
-- `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms (not yet
-  shown on the site). `data/site.yaml` — the error-report form's address.
+- `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms, listed
+  under Definitions on Figures and sources; a page marks a term with
+  `{% src "def.<id>" %}`, the same dagger (†) used for claims. `data/site.yaml` — the error-report form's address.
 - `src/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
   page (highlights only, "Full detail" disabled, until more is published). `src/_includes/project-bar.njk` — the
   project links at the top of every page. `src/facts.njk` — Figures and sources page
@@ -91,7 +92,8 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
   red/green for up/down — a figure rising is not good or bad.
 - Units in use: `vehicles per day`, `grade`, `rating` (the matrix's None / Low / Medium /
   High), `USD million`, `USD per acre`, `acres`, `parcels`, `miles`, `date`, `feet`, `lanes`,
-  `mph`, `classification` and `phase` (both shown as plain text).
+  `mph`, `classification` and `phase` (both shown as plain text), `percent`, and
+  `statement` (a claim, shown in quotes and marked with `{% src "id" %}`, kind `claim`).
   Ranges are `value: {low: …, high: …}`.
 - Level-of-service grades are the **evening peak**. The county publishes "AM (PM)"
   pairs — never drop a bare letter from a letter or email into a PM field (see
@@ -187,3 +189,11 @@ silently at Patrick's request, as barely anyone had seen them. Still open:
   as upcoming in places.
 
 Decided: the site shows evening-peak grades only, and says so where grades appear.
+
+## Later
+
+- **Reader checks** (agreed 29 Sep 2026): a small in-page form on each figure -
+  "Matches / Doesn't match the document" - that writes straight to Patrick's Google
+  Sheet through an Apps Script, with no Google Form page and no third-party script
+  on the site. Design, rules and a script sketch: `docs/reader-checks.md`.
+

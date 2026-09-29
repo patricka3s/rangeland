@@ -455,6 +455,264 @@
   ai_checked: '2026-09-28'
   note: 'With a Rangeland Blvd interchange, the next sheet gives 76,400 west and 72,400 east.'
 
+# ---- Added 29 Sep 2026: figures the guide's Highlights typed in by hand, now
+# linked to the documents they come from (read on 29 Sep 2026).
+
+- id: rangeland.design.lanes
+  statement: 'Travel lanes on the proposed Rangeland Blvd, both typical sections (two each way)'
+  value: 4
+  unit: lanes
+  source: pasco-2026-09-typical-sections
+  location: 'both drawings: two 11-foot travel lanes each side of the median'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-09-29'
+  verified: '2026-09-29'
+
+- id: rangeland.design.median-standard
+  statement: 'Median width, standard typical section (Alternative A throughout)'
+  value: 22
+  unit: feet
+  source: pasco-2026-09-typical-sections
+  location: 'lower drawing, "22′ Median"'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.design.median-wide
+  statement: 'Median width, wider typical section (Alternatives D and E, South Branch Blvd to Bexley Village Dr)'
+  value: 44
+  unit: feet
+  source: pasco-2026-09-typical-sections
+  location: 'upper drawing, "44′ Median"'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.length-miles.budbexley
+  statement: 'Length of LRTP project 114.3, Bud Bexley Pkwy, Bexley Village Dr to US 41'
+  value: 5.43
+  unit: miles
+  source: mpo-2050-lrtp
+  location: 'Appendix B project sheets, page 38 (Project 114.3, Project Length)'
+  as_of: '2025-04-07'
+  status: current
+  decimals: 2
+  ai_checked: '2026-09-29'
+
+- id: rangeland.length-miles.caliente
+  statement: 'Length of LRTP project 114.4, Caliente Blvd, US 41 to CR 583 (Ehren Cutoff)'
+  value: 1.47
+  unit: miles
+  source: mpo-2050-lrtp
+  location: 'Appendix B project sheets, page 39 (Project 114.4, Project Length)'
+  as_of: '2025-04-07'
+  status: current
+  decimals: 2
+  ai_checked: '2026-09-29'
+
+- id: rangeland.schedule.design-funded
+  statement: 'Design: fiscal year funded in the county capital plan, per the MPO priority list'
+  value: FY 2026
+  unit: phase
+  source: mpo-lopp-2026
+  location: 'priority 10 (454569-1), status column: "Design funded FY 2026 in CIP"'
+  as_of: '2026-06-11'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.schedule.row-funded
+  statement: 'Right-of-way: fiscal year funded in the county capital plan, per the MPO priority list'
+  value: FY 2027
+  unit: phase
+  source: mpo-lopp-2026
+  location: 'priority 10 (454569-1), status column: "ROW funded FY 2027 in CIP"'
+  as_of: '2026-06-11'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.schedule.cst-funded
+  statement: 'Construction: fiscal year funded in the county capital plan, per the MPO priority list'
+  value: FY 2029
+  unit: phase
+  source: mpo-lopp-2026
+  location: 'priority 10 (454569-1), status column: "CST Funded in FY 2029 in CIP"'
+  as_of: '2026-06-11'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.schedule.comments-due
+  statement: 'Workshop #3 comments due: received, or postmarked if mailed, to be in the workshop record'
+  value: '2026-10-08'
+  unit: date
+  source: pasco-2026-09-newsletter
+  location: 'page 2, "comments must be received (or postmarked if mailed) by Thursday, October 8, 2026"'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.schedule.lfir-cst-start
+  statement: 'Estimated start of construction, as given in the state funding request'
+  value: '2030-10-01'
+  unit: date
+  source: fl-senate-lfir-1718
+  location: 'page 2, question 10c'
+  as_of: '2025-11-03'
+  status: current
+  ai_checked: '2026-09-29'
+  note: 'Later than the county capital plan, which the MPO priority list records as funding construction in FY 2029 (which starts 1 Oct 2028).'
+
+- id: rangeland.schedule.lfir-cst-end
+  statement: 'Estimated completion of construction, as given in the state funding request'
+  value: '2032-09-30'
+  unit: date
+  source: fl-senate-lfir-1718
+  location: 'page 2, question 10d'
+  as_of: '2025-11-03'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.funding.state-request
+  statement: 'State funds requested for FY 2026-27 (Local Funding Initiative Request 1718)'
+  value: 4.5
+  unit: USD million
+  source: fl-senate-lfir-1718
+  location: 'page 1, question 6, "Total State Funds Requested 4,500,000"'
+  as_of: '2025-11-03'
+  status: current
+  ai_checked: '2026-09-29'
+  note: 'The request gives local matching funds of $7.8 million and a total of $12.3 million for FY 2026-27.'
+
+# ---- From the county's letter to Patrick (Transportation Engineering, William
+# Poon), as pasted by Patrick on 29 Sep 2026.
+
+- id: rangeland.design.design-vehicle
+  statement: 'Design vehicle the proposed Rangeland Blvd is designed to accommodate'
+  value: WB-40
+  unit: classification
+  source: pasco-2026-09-ted-letter
+  location: 'section "04 How the Rangeland study fits into the larger Pasco plan": "designed to accommodate a WB-40 vehicle ... a medium sized semitrailer"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.trucks.corridor-existing
+  statement: 'Trucks as a share of daily traffic, existing segments of the Rangeland Blvd corridor'
+  value: 4
+  unit: percent
+  source: pasco-2026-09-ted-letter
+  location: 'sections "01 Key Takeaways" and "06 Trucks and noise": "About 4% of the daily traffic volumes are trucks"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+  note: 'The letter says "about". It expects the share to rise once the segments are connected, but to stay below SR 54.'
+
+- id: rangeland.trucks.sr54
+  statement: 'Trucks as a share of daily traffic, the parallel segment of SR 54'
+  value: 12
+  unit: percent
+  source: pasco-2026-09-ted-letter
+  location: 'sections "01 Key Takeaways" and "06 Trucks and noise": "About 12% of the traffic along the parallel segment of SR 54 are trucks"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+  note: 'The letter says "about".'
+
+- id: rangeland.schedule.comp-plan-since
+  statement: 'Year since which the project has been in the Pasco County Comprehensive Plan'
+  value: '2006'
+  unit: date
+  source: pasco-2026-09-ted-letter
+  location: 'section "03 Where we are in the overall process": "included in the Pasco County Comprehensive Plan since 2006"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.design.wb40-wheelbase
+  statement: 'Wheelbase of the WB-40 design vehicle ("intermediate semitrailer"), the two wheelbases added together'
+  value: 38
+  unit: feet
+  source: fdot-florida-greenbook-2016
+  location: 'Chapter 3, Table 3-2 Design Vehicles (page 3-13, PDF page 77): WB-40, wheelbase 12.5 + 25.5 = 38'
+  as_of: '2016-04'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.design.wb40-length
+  statement: 'Overall length of the WB-40 design vehicle ("intermediate semitrailer")'
+  value: 45.5
+  unit: feet
+  source: fdot-florida-greenbook-2016
+  location: 'Chapter 3, Table 3-2 Design Vehicles (PDF page 77): WB-40, overall length 45.5'
+  as_of: '2016-04'
+  status: current
+  decimals: 1
+  ai_checked: '2026-09-29'
+
+# ---- Statements (claims): marked with a superscript "source" on the page
+
+- id: rangeland.claim.truck-share-outlook
+  statement: 'What the county expects of the corridor''s truck share once the segments are connected'
+  value: 'It is anticipated that the truck percentage along the Rangeland Blvd. corridor will increase after the existing segments are connected but remain below the parallel SR 54 corridor.'
+  unit: statement
+  source: pasco-2026-09-ted-letter
+  location: 'sections "01 Key Takeaways" and "06 Trucks and noise"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.claim.truck-volume-outlook
+  statement: 'Where the county expects the corridor''s future truck volumes to sit'
+  value: 'The future truck volumes are likely to remain below the parallel segment of SR 54, but above the local roadway network.'
+  unit: statement
+  source: pasco-2026-09-ted-letter
+  location: 'section "04 How the Rangeland study fits into the larger Pasco plan"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.claim.construction-tbd
+  statement: 'When construction will happen, according to the project schedule board'
+  value: 'Construction is TBD'
+  unit: statement
+  source: pasco-2026-09-schedule
+  location: 'Notes: "Schedule is subject to change", "Construction is TBD"'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.claim.regional-collector
+  statement: 'What the county says connecting the corridor will make it'
+  value: 'By connecting the existing and planned segments of Rangeland Blvd, Bud Bexley Parkway, and Tower Road together, the corridor will serve as a regional collector that enhances connectivity to the surrounding areas.'
+  unit: statement
+  source: pasco-2026-09-ted-letter
+  location: 'section "01 Key Takeaways"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.claim.interchange-suspended
+  statement: 'Status of a Suncoast Parkway interchange at Rangeland Blvd, from the Turnpike study''s project manager'
+  value: 'Advancement of the Rangeland Boulevard interchange to the design and construction phases has been suspended until Pasco County demonstrates stakeholder support and confirms that the Bud Bexley Parkway and Bexley Village Drive intersection will operate acceptably with the interchange through the year 2050.'
+  unit: statement
+  source: turnpike-moore-email-2025-08
+  location: 'second paragraph'
+  as_of: '2025-08-28'
+  status: current
+  ai_checked: '2026-09-29'
+  verified: '2026-09-29'
+  note: 'The next sentence reads: "Once support is demonstrated and funding is identified for the interchange, the interchange will be reevaluated."'
+
+- id: rangeland.claim.no-interchange-in-study
+  statement: 'Whether an interchange or six-lane section is part of the Rangeland route study, according to the county'
+  value: 'No interchange or six-lane section is currently being considered for approval in the Rangeland Blvd Route Study.'
+  unit: statement
+  source: pasco-2026-09-ted-letter
+  location: 'section "02 Project Overview"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+
 # ---- Level of service, evening peak
 
 - id: rangeland.los.rg-gunn.2023
@@ -766,7 +1024,7 @@
   status: current
   ai_checked: '2026-09-28'
   verified: '2026-09-26'
-  note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
+  note: The county's 14 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-ballan.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Ballantrae Blvd, 2050 no-build
@@ -778,7 +1036,7 @@
   status: current
   ai_checked: '2026-09-28'
   verified: '2026-09-26'
-  note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
+  note: The county's 14 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-ballan.2050-build
   statement: Level of service, evening peak, SR 54 at Ballantrae Blvd, 2050 build, Alternatives A, D and E
@@ -790,7 +1048,7 @@
   status: current
   ai_checked: '2026-09-28'
   verified: '2026-09-26'
-  note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
+  note: The county's 14 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-sunlake.2023
   statement: Level of service, evening peak, SR 54 at Sunlake Blvd, today (2023 counts)
@@ -1009,6 +1267,7 @@
   as_of: '2025-01-18'
   status: superseded
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'Build B was also rated High. Both build alternatives compared then had the same rating.'
 
 - id: rangeland.matrix.noise.2026-09
@@ -1021,6 +1280,7 @@
   status: current
   replaces: rangeland.matrix.noise.2025-01
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'Footnote 3 on the matrix: "Two noise impacted areas were identified on the corridor."'
 
 - id: rangeland.matrix.noise-nobuild.2026-09
@@ -1032,6 +1292,7 @@
   as_of: '2026-09-24'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'The January 2025 matrix also rated the no-build None.'
 
 - id: rangeland.matrix.contamination.2025-01

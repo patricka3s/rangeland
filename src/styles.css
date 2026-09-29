@@ -917,3 +917,52 @@
     .fjump .pb-lab{display:none}
   }
   @media print{ .sharerow,.nmopen,.nmfullbar{display:none !important} }
+
+/* --- Claims: a small superscript "source" mark after a sourced statement.
+       It opens the same details box as a figure. Patrick's own opinions carry
+       no mark. --- */
+  .fact.srcmark{border:0;background:none;padding:0 1px;margin:0;font:inherit;color:var(--accent);cursor:pointer;
+    text-decoration:none;line-height:1}
+  .fact.srcmark sup{font-family:Georgia,"Times New Roman",serif;font-size:.8em;font-weight:700;line-height:0}
+  .fact.srcmark:hover sup,.fact.srcmark:focus-visible sup{text-decoration:underline}
+  @media (pointer:coarse){ .fact.srcmark{padding:8px 3px;margin:-8px -1px} }
+
+/* --- "Sources on this slide" (built by app.js from the slide's tappable items) --- */
+  .slsrc{margin:12px 0 0;border-top:1px solid var(--rule-soft);padding-top:8px}
+  .slsrc summary{cursor:pointer;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.04em;
+    color:var(--ink-3);list-style:none;padding:6px 0}
+  .slsrc summary::-webkit-details-marker{display:none}
+  .slsrc summary::before{content:"+ ";color:var(--accent);font-weight:700}
+  .slsrc[open] summary::before{content:"\2212 "}
+  .slsrc ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:8px}
+  .slsrc li{padding:0;font-size:.88rem;line-height:1.45;color:var(--ink-2)}
+  .slsrc li::before{content:none}
+  .slsrc .slsrc-item{display:inline;border:0;background:none;padding:0;font:inherit;color:var(--ink);text-align:left;
+    cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
+  .slsrc .slsrc-doc{display:block;font-size:.8rem;color:var(--ink-3)}
+  @media print{ .slsrc{display:none} }
+/* A figure worked out from facts (a sum or a count): dashed rather than dotted
+   underline; tapping it opens the slide's source list. */
+  .calc{border:0;background:none;padding:0;margin:0;font:inherit;color:inherit;letter-spacing:inherit;cursor:pointer;
+    text-decoration:underline dashed;text-decoration-thickness:1px;text-underline-offset:.18em;text-decoration-color:var(--ink-3)}
+  .calc:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* --- Figures and sources: how much has been checked. One 100% bar, a 2px gap
+       between states, the same colours as the tags; "not yet checked" is also
+       hatched so the states differ without colour. Labels carry the numbers. --- */
+  .ckbar{display:flex;gap:2px;height:14px;margin:4px 0 8px;background:var(--surface)}
+  .ckseg{display:block;min-width:4px;flex-basis:0}
+  .ckseg:first-child{border-radius:4px 0 0 4px} .ckseg:last-child{border-radius:0 4px 4px 0}
+  .ckseg:only-child{border-radius:4px}
+  .ck-human{background:var(--good)}
+  .ck-ai{background:var(--accent)}
+  .ck-none{background:repeating-linear-gradient(135deg,var(--ink-3) 0 2px,transparent 2px 6px);box-shadow:inset 0 0 0 1px var(--ink-3)}
+  .cklabels{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 4px;font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;color:var(--ink-2)}
+  .ckl{display:inline-flex;align-items:center;gap:6px}
+  .ckl i{display:inline-block;width:12px;height:12px;border-radius:3px}
+  .ckl.ck-human,.ckl.ck-ai,.ckl.ck-none{background:none;box-shadow:none}
+  .ckl.ck-human i{background:var(--good)} .ckl.ck-ai i{background:var(--accent)}
+  .ckl.ck-none i{background:repeating-linear-gradient(135deg,var(--ink-3) 0 2px,transparent 2px 6px);box-shadow:inset 0 0 0 1px var(--ink-3)}
+  .ckl b{color:var(--ink);font-weight:600}
+  @media (forced-colors:active){ .ckseg,.ckl i{forced-color-adjust:none;border:1px solid CanvasText} }

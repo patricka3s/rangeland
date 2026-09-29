@@ -26,7 +26,9 @@ const TOPICS = {
   funding: "Funding (county capital improvement plan)",
   design: "Road design",
   schedule: "Schedule and process",
+  trucks: "Trucks",
   related: "Related studies",
+  claim: "Statements, designations and quotes",
 };
 
 function load(file) {
@@ -121,6 +123,9 @@ function loadData() {
   }
   for (const d of definitions) {
     if (d.source && !sourceIds.has(d.source)) problems.push(`definitions.yaml: "${d.id}" names source "${d.source}", which is not in sources.yaml`);
+    for (const k of ["ai_checked", "verified"]) {
+      if (d[k] !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(String(d[k]))) problems.push(`definitions.yaml: "${d.id}" has ${k} "${d[k]}"; use a date like '2026-09-28'`);
+    }
   }
   if (problems.length) throw new Error("Data check failed:\n  " + problems.join("\n  "));
   const sourceById = Object.fromEntries(sources.map((s) => [s.id, s]));
@@ -161,7 +166,9 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addGlobalData("site", data.site);
   eleventyConfig.addGlobalData("sources", data.sources);
-  eleventyConfig.addGlobalData("definitions", data.definitions);
+  eleventyConfig.addGlobalData("definitions", data.definitions.map((d) => ({
+    ...d, src: d.source ? data.sourceById[d.source] : null, aiCheckedOn: when(d.ai_checked), verifiedOn: when(d.verified),
+  })));
   eleventyConfig.addGlobalData("facts", data.byId);
   eleventyConfig.addWatchTarget(DATA);
 
@@ -213,6 +220,8 @@ export default function (eleventyConfig) {
     if (f.unit === "grade") return "Grade " + d;
     if (f.unit === "rating") return d + " (rating)";
     if (f.unit === "date" || f.unit === "classification" || f.unit === "phase") return d;
+    if (f.unit === "percent") return d + "%";
+    if (f.unit === "statement") return "\u201C" + d + "\u201D";
     return d + " " + f.unit;
   }
 
@@ -331,6 +340,20 @@ export default function (eleventyConfig) {
     human: listed.filter((f) => f.verified).length,
     ai: listed.filter((f) => f.ai_checked).length,
     unchecked: listed.filter((f) => !f.verified && !f.ai_checked).length,
+    // For the progress bar: each figure in exactly one state, as whole-number
+    // percentages that add up to 100 (largest remainder).
+    bar: (() => {
+      const n = listed.length || 1;
+      const parts = [
+        { k: "human", label: "Verified by a human", count: listed.filter((f) => f.verified).length },
+        { k: "ai", label: "Checked by AI only", count: listed.filter((f) => !f.verified && f.ai_checked).length },
+        { k: "none", label: "Not yet checked", count: listed.filter((f) => !f.verified && !f.ai_checked).length },
+      ];
+      parts.forEach((p) => { p.exact = p.count / n * 100; p.pct = Math.floor(p.exact); });
+      let left = 100 - parts.reduce((t, p) => t + p.pct, 0);
+      [...parts].sort((a, b) => (b.exact - b.pct) - (a.exact - a.pct)).forEach((p) => { if (left > 0 && p.count) { p.pct++; left--; } });
+      return parts;
+    })(),
   });
   eleventyConfig.addGlobalData("sourceList", data.sources.map((s) => ({
     ...s, dateText: when(s.date), figures: data.facts.filter((f) => f.source === s.id).length,
@@ -362,6 +385,17 @@ export default function (eleventyConfig) {
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
       };
     }
+    // Definitions open in the same box: {% src "def.collector" %}
+    for (const d of data.definitions) {
+      const src = d.source ? data.sourceById[d.source] : null;
+      const form = data.site.dispute_form;
+      out["def." + d.id] = {
+        s: "Definition: " + d.term, v: d.definition, st: "current",
+        loc: d.location, note: d.note, ai: d.ai_checked, vf: d.verified, def: 1,
+        r: `${form.url}?usp=pp_url&${form.field}=` + encodeURIComponent(`def.${d.id} — ${d.term}: ${d.definition}`),
+        src: src ? { t: src.title, p: src.publisher, d: src.date, url: src.url } : { t: "General explanation, not from one document" },
+      };
+    }
     const json = JSON.stringify({ root: "../".repeat(depth), facts: out }).replace(/</g, "\\u003c");
     return `<script type="application/json" id="fact-data">${json}</script>`;
   });
@@ -378,7 +412,52 @@ export default function (eleventyConfig) {
   // {% diff "a", "b" %}  ->  b minus a, signed: "+2,000", "−10,000".  {% diff "a", "b", "M" %} for money.
   eleventyConfig.addShortcode("diff", (a, b, style) => {
     const d = value(b) - value(a);
+    if (style === "abs") return num(Math.abs(d));       // "10,000", for prose: "about 10,000 fewer"
     return style === "M" ? signed(Math.round(d * 10) / 10, 1) : signed(d);
+  });
+  // {% sum "a", "b", ..., 0 %}  ->  the total of several facts, to that many decimals
+  // (the last argument). E.g. the corridor's length from its three project sheets.
+  eleventyConfig.addShortcode("sum", (...args) => {
+    const decimals = typeof args[args.length - 1] === "number" ? args.pop() : 0;
+    return num(args.reduce((t, id) => t + value(id), 0), decimals);
+  });
+  // {% share "a", "a", "b", "c" %}  ->  a as a percentage of a+b+c, for widths: "33.1"
+  eleventyConfig.addShortcode("share", (part, ...all) => (value(part) / all.reduce((t, id) => t + value(id), 0) * 100).toFixed(1));
+
+  // Level-of-service counts, worked out from the grade facts rather than typed:
+  // {% losTotal "rangeland.los" %} -> intersections graded in every scenario;
+  // {% losCount "rangeland.los", "2050-nobuild", "F" %} -> how many are at that grade;
+  // {% losWorse "rangeland.los", "2023", "2050-build" %} -> how many are worse in the second.
+  const losKeys = (prefix) => [...new Set(data.facts.filter((f) => f.id.startsWith(prefix + ".") && f.status === "current")
+    .map((f) => f.id.slice(prefix.length + 1).split(".")[0]))];
+  const grade = (prefix, key, sc) => String(get(`${prefix}.${key}.${sc}`).value);
+  eleventyConfig.addShortcode("losTotal", (prefix) => String(losKeys(prefix).length));
+  eleventyConfig.addShortcode("losCount", (prefix, sc, g) => String(losKeys(prefix).filter((k) => grade(prefix, k, sc) === g).length));
+  eleventyConfig.addShortcode("losWorse", (prefix, from, to) =>
+    String(losKeys(prefix).filter((k) => grade(prefix, k, to) > grade(prefix, k, from)).length));
+  // {% losSame "rangeland.los", "2050-nobuild", "2050-build" %} -> how many get the same grade in both.
+  eleventyConfig.addShortcode("losSame", (prefix, a, b) =>
+    String(losKeys(prefix).filter((k) => grade(prefix, k, a) === grade(prefix, k, b)).length));
+
+  // {% calc "id", "id", "prefix*" %}...{% endcalc %}  ->  marks a figure worked out
+  // from facts (a sum, a count). Tapping it opens the slide's source list, which
+  // then includes the facts it was worked out from. "prefix*" means every current
+  // fact whose id starts with prefix.
+  eleventyConfig.addPairedShortcode("calc", (content, ...ids) => {
+    const all = ids.flatMap((id) => id.endsWith("*")
+      ? data.facts.filter((f) => f.id.startsWith(id.slice(0, -1)) && f.status === "current").map((f) => f.id)
+      : [get(id).id]);
+    return `<button type="button" class="calc" data-calc="${all.join(" ")}" title="Worked out from the figures listed under Sources on this slide">${content.trim()}</button>`;
+  });
+
+  // {% src "id" %}  ->  a small superscript "source" mark after a claim (a statement,
+  // designation or quote, stored as a fact with unit "statement"). Tapping it opens
+  // the same details box as a figure.
+  eleventyConfig.addShortcode("src", (id) => {
+    if (id.startsWith("def.")) {
+      if (!data.definitions.some((d) => "def." + d.id === id)) throw new Error(`Definition "${id.slice(4)}" is not in definitions.yaml`);
+    } else get(id);
+    return `<button type="button" class="fact srcmark" data-fact="${id}" aria-label="Source for this statement"><sup>\u2020</sup></button>`;
   });
   // {% diffClass "a", "b" %}  ->  "up", "down" or "flat", for colouring a table cell.
   eleventyConfig.addShortcode("diffClass", (a, b) => {
