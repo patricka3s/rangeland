@@ -130,16 +130,24 @@ trafficRows:
       <span class="s">county&#8217;s existing-traffic board &#183; 2023 counts</span>
     </button>
     <button type="button" data-view="notbuilt" aria-pressed="false">
-      <span class="t">2050 &#183; Rangeland extension not built</span>
+      <span class="t"><span class="tl">2050 &#183; Rangeland extension not built</span><span class="ts">2050 &#183; not built</span></span>
       <span class="s">county&#8217;s &#8220;no-build&#8221; &#183; everything else in the plan is built</span>
     </button>
     <button type="button" data-view="built" aria-pressed="false">
-      <span class="t">2050 &#183; Rangeland extension built</span>
+      <span class="t"><span class="tl">2050 &#183; Rangeland extension built</span><span class="ts">2050 &#183; built</span></span>
       <span class="s">county&#8217;s alternative A &#183; D and E forecast the same</span>
     </button>
   </div>
 
-  <figure>
+  {#- On phones the map shows small, fitted to the screen, with a button that
+      opens it full screen (the "FULL-SCREEN MAP" block in app.js). -#}
+  <button type="button" class="nmopen" id="nm-open" hidden>Open the map full screen</button>
+
+  <figure id="nm-fig">
+    <div class="nmfullbar">
+      <span class="nmrotate">Turn your phone sideways for a bigger map</span>
+      <button type="button" class="nmclose" id="nm-close">Close map</button>
+    </div>
     <svg viewBox="0 0 1080 660" role="img" id="nm-map" aria-label="Schematic map of the Bexley street network. Four named roads form one intended corridor running diagonally from south-west to north-east: Rangeland Boulevard, Bud Bexley Parkway, Tower Road and Caliente Boulevard, from Gunn Highway and Cattle Gap Trail up to Ehren Cutoff. State Road 54 runs horizontally below the corridor and Ridge Road horizontally above it. Cross streets, from west to east, are Gunn Highway, Cattle Gap Trail, South Branch Boulevard, the Suncoast Parkway, Bexley Village Drive, Ballantrae Boulevard, Sunlake Boulevard and US 41. Each street is shaded by its published daily traffic in the selected view, left hollow where no figure has been published, and drawn as a faint dashed line where the road is not open to traffic in that view. Eleven intersections carry their level-of-service grade as a letter. The same figures are in the tables below the map.">
 
       <!-- ===== RIDGE ROAD ===== -->
@@ -1267,6 +1275,7 @@ trafficRows:
   <p style="margin:0 0 10px"><strong>How this is made.</strong> I use AI tools for the code behind this site, to help dig through the documents, and for first drafts of the writing. I read and check everything before it goes up, and every figure is sourced so you can check it without taking my word for it.</p>
   <p style="margin:0 0 10px">Not sure whether something you have read about this project is right? <a href="#check">Here is where to look it up yourself.</a> Every figure on this page is also listed, with its source, on <a href="facts/">Figures and sources</a>.</p>
   <p style="margin:0 0 10px"><strong>Visit counter.</strong> This page counts visits using GoatCounter. It sets no cookies, stores nothing on your device and does not identify you. I can see how many times a page was opened and which site a visit came from. That is all I collect and all I want.</p>
+  {% include "share.njk" %}
   <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
 </footer>
 

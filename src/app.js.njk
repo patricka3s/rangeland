@@ -348,3 +348,86 @@ eleventyExcludeFromCollections: true
     });
   });
 })();
+
+/* ==========================================================================
+   FULL-SCREEN MAP (phones)
+   On a narrow or short screen the map shows small, fitted to the width, with
+   an "Open the map full screen" button (tapping the map does the same). Full
+   screen, the three views sit along the bottom; Close, the Escape key or the
+   phone's Back button return to the page. Without JavaScript the map simply
+   shows fitted to the width.
+   ========================================================================== */
+(function(){
+  document.addEventListener("DOMContentLoaded", function(){
+    var sec = document.getElementById("netmap"), fig = document.getElementById("nm-fig");
+    var openBtn = document.getElementById("nm-open"), closeBtn = document.getElementById("nm-close");
+    if (!sec || !fig || !openBtn || !closeBtn) return;
+    var root = document.documentElement, small = window.matchMedia ? matchMedia("(max-width:700px), (max-height:500px)") : null;
+    var isOpen = false, pushed = false;
+    openBtn.hidden = false;
+    root.classList.add("js-map");
+
+    function open(){
+      if (isOpen) return;
+      isOpen = true;
+      sec.classList.add("nm-full");
+      root.classList.add("nm-lock");
+      fig.setAttribute("role", "dialog");
+      fig.setAttribute("aria-modal", "true");
+      fig.setAttribute("aria-label", "Traffic map, full screen");
+      try { history.pushState({nmfull: 1}, ""); pushed = true; } catch (e) {}
+      unhighlight();
+      closeBtn.focus();
+    }
+    function close(fromHistory){
+      if (!isOpen) return;
+      isOpen = false;
+      sec.classList.remove("nm-full");
+      root.classList.remove("nm-lock");
+      fig.removeAttribute("role"); fig.removeAttribute("aria-modal"); fig.removeAttribute("aria-label");
+      if (pushed && !fromHistory) { pushed = false; try { history.back(); } catch (e) {} }
+      pushed = false;
+      openBtn.focus();
+    }
+    openBtn.addEventListener("click", open);
+    closeBtn.addEventListener("click", function(){ close(false); });
+    /* On a touch screen a tap counts as hovering, which fades every other
+       street; the map would stay faded. Clear that when the map opens, and
+       when someone taps an empty part of it. */
+    var svg = fig.querySelector("svg");
+    function unhighlight(){ if (svg) svg.dispatchEvent(new Event("mouseleave")); }
+    fig.addEventListener("click", function(e){
+      if (!isOpen && small && small.matches && e.target.closest("svg")) { open(); return; }
+      if (!e.target.closest("[data-street]")) unhighlight();
+    });
+    document.addEventListener("keydown", function(e){ if (e.key === "Escape") close(false); });
+    window.addEventListener("popstate", function(){ close(true); });
+  });
+})();
+
+/* ==========================================================================
+   SHARE (footer of every page)
+   Uses the phone's own share menu where there is one; otherwise copies the
+   page's address. No third-party code. The button stays hidden if neither
+   is available.
+   ========================================================================== */
+(function(){
+  document.addEventListener("DOMContentLoaded", function(){
+    var btns = document.querySelectorAll(".share"), i;
+    var canShare = !!navigator.share, canCopy = !!(navigator.clipboard && navigator.clipboard.writeText);
+    if (!canShare && !canCopy) return;
+    for (i = 0; i < btns.length; i++){
+      btns[i].hidden = false;
+      if (!canShare) btns[i].textContent = "Copy link to this page";
+      btns[i].addEventListener("click", function(){
+        var msg = this.parentNode.querySelector(".sharemsg"), url = location.href.split("#")[0];
+        function say(t){ if (msg) { msg.textContent = t; setTimeout(function(){ msg.textContent = ""; }, 4000); } }
+        if (canShare) {
+          navigator.share({title: document.title, url: url}).catch(function(){});
+        } else {
+          navigator.clipboard.writeText(url).then(function(){ say("Link copied"); }, function(){ say(url); });
+        }
+      });
+    }
+  });
+})();

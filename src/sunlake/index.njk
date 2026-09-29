@@ -194,6 +194,7 @@ eleventyExcludeFromCollections: true
 <footer>
   <p style="margin:0 0 10px"><strong>Corrections policy.</strong> If a fact here doesn&#8217;t match its source document, tap the figure and use the link in the box, and I will do my best to fix it within 72 hours.</p>
   <p style="margin:0 0 10px"><strong>Visit counter.</strong> This site counts visits using GoatCounter. It sets no cookies, stores nothing on your device and does not identify you.</p>
+  {% include "share.njk" %}
   <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
 </footer>
 

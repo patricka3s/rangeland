@@ -822,3 +822,98 @@
   .fkey li::before{content:none}
   .fkey .vtag{margin-right:6px}
   .fkey .kcount{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.75rem;color:var(--ink-3);white-space:nowrap}
+
+/* ==========================================================================
+   PHONES
+   Most visits are on phones. "Phone" here means a narrow screen, or a short
+   one (a phone held sideways).
+   ========================================================================== */
+
+/* --- Figures and sources: each kind of figure is a fold-out box (closed at
+       the start on phones, by the script on that page) --- */
+  details.fgroup > summary{list-style:none;cursor:pointer}
+  details.fgroup > summary::-webkit-details-marker{display:none}
+  details.fgroup > summary h3{display:flex;align-items:baseline;gap:6px}
+  details.fgroup > summary h3::after{content:"\2212";margin-left:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-weight:600;color:var(--ink-3)}
+  details.fgroup:not([open]) > summary h3::after{content:"+"}
+  details.fgroup > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* --- Share button (footer of every page) --- */
+  .sharerow{margin:0 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .share{font-family:Archivo,sans-serif;font-size:.92rem;font-weight:600;color:var(--accent);background:var(--surface);
+    border:1px solid var(--accent);border-radius:6px;padding:9px 16px;cursor:pointer;min-height:44px}
+  .share:hover{background:var(--wash)}
+  .share:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .sharemsg{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--ink-3)}
+
+/* --- Map: open-full-screen button, and the full-screen view itself --- */
+  .netmap .nmopen{display:none}
+  .netmap .nmfullbar{display:none}
+  .netmap .nmviews .ts{display:none}
+
+  @media (max-width:700px), (max-height:500px){
+    /* the three views as one slim row, right above the map */
+    .netmap .nmviews{flex-wrap:nowrap;margin-bottom:8px}
+    .netmap .nmviews button{flex:1 1 0;padding:10px 6px;text-align:center;min-height:44px}
+    .netmap .nmviews .s,.netmap .nmviews .tl{display:none}
+    .netmap .nmviews .ts{display:inline}
+    .netmap .nmviews .t{font-size:.86rem}
+    /* the map fits the screen width (small) instead of being cut off */
+    .netmap figure svg{min-width:0}
+    .netmap figure{overflow:hidden}
+    html.js-map .netmap figure svg{cursor:zoom-in}
+    .netmap .nmopen:not([hidden]){display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+      min-height:48px;margin:0 0 8px;font-family:Archivo,sans-serif;font-size:.95rem;font-weight:700;
+      color:#fff;background:var(--accent);border:0;border-radius:6px;cursor:pointer}
+    .netmap .nmopen::before{content:"\2922";font-size:1.1em}
+    :root[data-theme="dark"] .netmap .nmopen{color:#12161D}
+  }
+  @media (prefers-color-scheme: dark) and (max-width:700px){
+    :root:not([data-theme="light"]) .netmap .nmopen{color:#12161D}
+  }
+
+  /* Full screen: the figure fills the screen, the three views sit pinned along
+     the bottom, and a bar at the top has Close (and, held upright, a hint to
+     turn the phone). The key and caption are below the map - scroll to them. */
+  html.nm-lock,html.nm-lock body{overflow:hidden}
+  .netmap.nm-full figure{position:fixed;inset:0 0 58px 0;z-index:100;margin:0;width:auto;max-width:none;
+    transform:none;border:0;box-shadow:none;overflow:auto;padding:0 10px 10px;-webkit-overflow-scrolling:touch}
+  .netmap.nm-full figure svg{min-width:0;width:100%;height:calc(100dvh - 58px - 52px);cursor:default}
+  @media (orientation:portrait){ .netmap.nm-full figure svg{height:auto;margin-top:12px} }
+  .netmap.nm-full .nmfullbar{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    position:sticky;top:0;z-index:1;background:var(--surface);padding:6px 0;min-height:52px}
+  .netmap .nmrotate{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;color:var(--ink-3)}
+  .netmap .nmrotate::before{content:"\21BB\00a0"}
+  @media (orientation:landscape){ .netmap .nmrotate{visibility:hidden} }
+  .netmap .nmclose{margin-left:auto;font-family:Archivo,sans-serif;font-size:.92rem;font-weight:700;min-height:44px;
+    padding:8px 14px;border:1px solid var(--rule);border-radius:6px;background:var(--surface);color:var(--ink);cursor:pointer}
+  .netmap.nm-full .nmviews{position:fixed;left:0;right:0;bottom:0;z-index:101;margin:0;width:auto;max-width:none;
+    transform:none;height:58px;flex-wrap:nowrap;border-width:1px 0 0}
+  .netmap.nm-full .nmviews button{flex:1 1 0;padding:8px 6px;text-align:center}
+  .netmap.nm-full .nmviews .s,.netmap.nm-full .nmviews .tl{display:none}
+  .netmap.nm-full .nmviews .ts{display:inline}
+
+/* --- Bigger touch areas on touch screens, without changing the look: the
+       padding reaches past the text, so a near miss still counts --- */
+  @media (pointer:coarse){
+    .fact{padding:6px 2px;margin:-6px -2px}
+    .fmeta a,.fvmeta a,.frep,.fjump a,.tlsrc a,.tlfacts a,.upd li a,.updmore a,.buildstamp a,
+    .factnote a,.factpop .fall,.factpop .fd,.eyebrow a,.slist a{padding:8px 0;margin:-8px 0}
+    .pb-seg a,.pb-site a{min-height:40px;display:inline-flex;align-items:center}
+    .chip{min-height:36px}
+  }
+
+/* --- Narrow screens: a slimmer Reading mode bar, and on Figures and sources
+       the Jump-to row stays pinned (the search box scrolls away) --- */
+  @media (max-width:560px){
+    .modebar{padding:7px 0 6px;margin-bottom:20px;gap:6px 10px}
+    .modebar #modenote,.modebar .lab{display:none}
+    .modebar .seg{width:100%}
+    .modebar .seg button{flex:1 1 0;padding:9px 10px}
+    .fsearch{position:static}
+    .fjump{position:sticky;top:0;z-index:6;background:var(--paper);flex-wrap:nowrap;overflow-x:auto;
+      white-space:nowrap;padding:10px 0;margin-bottom:16px;-webkit-overflow-scrolling:touch}
+    .fjump .pb-lab{display:none}
+  }
+  @media print{ .sharerow,.nmopen,.nmfullbar{display:none !important} }

@@ -16,6 +16,7 @@ eleventyExcludeFromCollections: true
 <meta name="author" content="Patrick">
 <link rel="canonical" href="https://patricka3s.github.io/rangeland/facts/">
 {% set root = "../" %}{% include "shared-head.njk" %}
+<script src="../app.js"></script>
 </head>
 <body class="factspage">
 <div class="wrap">
@@ -81,8 +82,8 @@ eleventyExcludeFromCollections: true
 <section class="fproject" id="{{ p.id }}">
   <h2><span>{{ p.name }}</span>{% if p.plan %} <span class="fplan">{{ p.plan }}</span>{% endif %}</h2>
   {% for t in p.topics %}
-  <div class="fgroup" id="{{ p.id }}-{{ t.key }}">
-    <h3>{{ t.label }} <span class="fcount">{{ t.facts | length }}</span></h3>
+  <details class="fgroup" id="{{ p.id }}-{{ t.key }}" open>
+    <summary><h3>{{ t.label }} <span class="fcount">{{ t.facts | length }}</span></h3></summary>
     <ul class="flist">
       {% for f in t.facts %}
       <li class="fitem{% if f.status != 'current' %} is-{{ f.status }}{% endif %}" id="{{ f.id }}"{% if f.revised %} data-changed="1"{% endif %}>
@@ -120,7 +121,7 @@ eleventyExcludeFromCollections: true
       </li>
       {% endfor %}
     </ul>
-  </div>
+  </details>
   {% endfor %}
 </section>
 {% endfor %}
@@ -141,6 +142,7 @@ eleventyExcludeFromCollections: true
 
 <footer>
   <p style="margin:0 0 10px">This page is built from the same data files as the guide, so it always shows exactly the figures the guide uses. <a href="../#notes">Corrections made so far</a> are listed in the guide.</p>
+  {% include "share.njk" %}
   <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
 </footer>
 
@@ -161,18 +163,32 @@ eleventyExcludeFromCollections: true
       if (ok) shown++;
     }
     for (i = 0; i < groups.length; i++) groups[i].hidden = !groups[i].querySelector(".fitem:not([hidden])");
+    /* while searching, open every group that has a match */
+    if (words.length || (only && only.checked)) for (i = 0; i < folds.length; i++) if (!folds[i].hidden) folds[i].open = true;
     none.hidden = shown > 0;
   }
   q.addEventListener("input", filter);
   if (only) only.addEventListener("change", filter);
 
-  /* A link to an earlier version (#its-id) lands inside a closed history -
-     open it, so the reader sees what they followed the link to. */
+  /* On a phone each kind of figure starts folded up, with its count showing,
+     so the page is a short list to open rather than a very long scroll. */
+  var folds = document.querySelectorAll("details.fgroup");
+  if (window.matchMedia && matchMedia("(max-width:700px)").matches)
+    for (var k = 0; k < folds.length; k++) folds[k].open = false;
+  /* a printout shows everything */
+  window.addEventListener("beforeprint", function(){ for (var k = 0; k < folds.length; k++) folds[k].open = true; });
+
+  /* A link to one figure (#its-id) can land inside a folded group or a closed
+     history - open every box around it, so the reader sees what they followed. */
   function openTarget(){
     var id = decodeURIComponent(location.hash.slice(1)), el = id && document.getElementById(id);
     if (!el) return;
-    var d = el.closest("details");
-    if (d && !d.open) { d.open = true; el.scrollIntoView(); }
+    var opened = false;
+    for (var d = el.closest("details"); d; d = d.parentElement && d.parentElement.closest("details")){
+      if (!d.open) { d.open = true; opened = true; }
+    }
+    if (el.tagName === "DETAILS" && !el.open) { el.open = true; opened = true; }
+    if (opened) el.scrollIntoView();
   }
   openTarget();
   window.addEventListener("hashchange", openTarget);

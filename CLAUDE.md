@@ -115,8 +115,8 @@ Patrick decides. In short:
    skill says which) and reuse the existing styles in `src/styles.css`: the project
    bar, the "What's happened lately" box, the Reading mode bar (Highlights | Full
    detail; Full detail disabled until there's a study or workshop to write it
-   from), slides (`.slide`, `.sn`, `.stats`, `.steps`, `.qlist`, `.foot`) and the
-   version line in the footer. Don't invent new components or colours for one
+   from), slides (`.slide`, `.sn`, `.stats`, `.steps`, `.qlist`, `.foot`), and in the
+   footer the share button (`{% include "share.njk" %}`) and the version line. Don't invent new components or colours for one
    project; if a project needs something new, add it as a shared style that every
    page can use and ask Patrick first. Each project also gets a tag shade
    (`.pj-<project-id>`) for the Timeline.
@@ -132,7 +132,9 @@ Patrick decides. In short:
   a merged branch must not be reused.
 - Before pushing: `npm run build` must pass. For visible changes, check the page in
   a browser (Chromium is at `/opt/pw-browsers`; Playwright works) at desktop and
-  phone widths, light and dark.
+  phone widths, light and dark. **Most readers are on phones**: check phone first,
+  held upright and sideways (the "PHONES" block at the end of `src/styles.css`
+  holds the phone-only rules).
 - **Preview before merge.** After pushing, run `PREVIEW_PR=<N> npm run preview`
   (builds, then writes `_preview/`: a copy with folder links pointing at
   `index.html`, no GoatCounter, and a "Preview" banner), and publish
