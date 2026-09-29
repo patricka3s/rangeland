@@ -10,11 +10,13 @@
 #   page   true when the project has its own page at /<id>/
 #
 # Rule (Patrick, 29 Sep 2026): a NEW project is published (page: true) only once
-# Patrick has verified at least 90% of its figures himself. The build stops if a
-# project with page: true is below that. The number lives in eleventy.config.js
+# every project already published - those above it in this file - has at least
+# 90% of its figures verified by Patrick. New projects go at the END of this file.
+# The build stops otherwise. The number lives in eleventy.config.js
 # (PUBLISH_THRESHOLD) and is shown on the home page.
 #   published_before_rule  true only for a project that was already live when
-#                          the rule was made; the rule then doesn't apply to it
+#                          the rule was made (Sunlake went up before Rangeland
+#                          reached 90%)
 #
 # The build stops if a facts file has no project here.
 
@@ -23,7 +25,6 @@
   name: Rangeland Blvd extension - Cattle Gap Trl to Bexley Village Dr
   plan: LRTP 114.2
   stage: Route study - Workshop 3 held, comments open
-  published_before_rule: true
   about: A mostly new four-lane road from Cattle Gap Trail to Bexley Village Drive, with a bridge over the Suncoast Parkway. Three alternatives remain.
   page: true
 

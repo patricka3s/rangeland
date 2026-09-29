@@ -81,7 +81,7 @@ eleventyExcludeFromCollections: true
       <span class="hc-rows">
         <span class="hc-row"><span class="hc-k">Next</span>{% if lately.upcoming.length %}{{ lately.upcoming[0].shown }} &#8212; {{ lately.upcoming[0].title }}{% else %}No dates announced{% endif %}</span>
         {% if lately.past.length %}<span class="hc-row"><span class="hc-k">Latest</span>{{ lately.past[0].shown }} &#8212; {{ lately.past[0].title }}</span>{% endif %}
-        {% if ck %}<span class="hc-row"><span class="hc-k">Figures</span>{{ ck.total }} sourced &#183; {{ ck.human }} verified by a human</span>{% endif %}
+        {% if ck %}<span class="hc-row"><span class="hc-k">Figures</span>{{ ck.total }} sourced &#183; {{ ck.human }} verified by a human ({{ ck.pct }}%)</span>{% endif %}
       </span>
       <span class="hc-go">Open the {{ p.short }} &#8594;</span>
     </a>
@@ -104,7 +104,7 @@ eleventyExcludeFromCollections: true
     <li><strong>{{ p.short }}, {{ e.shown }}:</strong> {{ e.title }}. <a href="{{ p.id }}/#s9">How to send a comment &#8594;</a></li>
     {% endif %}{% endfor %}{% endfor %}
     <li><strong>Any project:</strong> the Pasco County Commission takes public comment at its regular meetings. Its agendas, where contracts and change orders appear, are searchable at <strong>pascocofl.portal.civicclerk.com</strong>.</li>
-    <li><strong>A project you&#8217;d like covered?</strong> Message me on Facebook. I add projects as time allows, and a new one goes up only once I&#8217;ve verified at least {{ publishThreshold }}% of its figures myself. Each gets the same sections and the same checks as the others.</li>
+    <li><strong>A project you&#8217;d like covered?</strong> Message me on Facebook. I add projects as time allows, and only once I&#8217;ve verified at least {{ publishThreshold }}% of the figures in every project already here, so the site never runs ahead of its checking.{% if not nextProjectReady %} Where things stand: {% for p in projects %}{% if p.page %}{{ p.short }} {{ projectChecks[p.id].pct }}%{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}.{% endif %} Each gets the same sections and the same checks as the others.</li>
   </ul>
 </section>
 

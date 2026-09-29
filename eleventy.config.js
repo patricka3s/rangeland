@@ -338,15 +338,22 @@ export default function (eleventyConfig) {
   }));
   eleventyConfig.addGlobalData("projectChecks", projectChecks);
   // Publishing rule (Patrick, 29 Sep 2026): a new project goes live (page: true in
-  // projects.yaml) only once Patrick has verified at least this share of its figures.
+  // projects.yaml) only once every project published before it - earlier in
+  // projects.yaml - has at least this share of its figures verified by Patrick.
+  // So the site never takes on a new project while older ones are still unchecked.
   const PUBLISH_THRESHOLD = 90;
+  const pctOf = (id) => { const ck = projectChecks[id] || { total: 0, human: 0 }; return ck.total ? Math.floor(ck.human / ck.total * 100) : 0; };
+  Object.values(projectChecks).forEach((ck, i) => { ck.pct = ck.total ? Math.floor(ck.human / ck.total * 100) : 0; });
   eleventyConfig.addGlobalData("publishThreshold", PUBLISH_THRESHOLD);
-  for (const p of data.projects) {
-    if (!p.page || p.published_before_rule) continue;
-    const ck = projectChecks[p.id] || { total: 0, human: 0 };
-    const pct = ck.total ? Math.floor(ck.human / ck.total * 100) : 0;
-    if (pct < PUBLISH_THRESHOLD) throw new Error(`Publishing rule: project "${p.id}" has page: true but Patrick has verified only ${ck.human} of its ${ck.total} figures (${pct}%). New projects need ${PUBLISH_THRESHOLD}% before they are published - see data/projects.yaml.`);
-  }
+  const published = data.projects.filter((p) => p.page);
+  published.forEach((p, i) => {
+    if (p.published_before_rule) return;
+    const behind = published.slice(0, i).filter((q) => pctOf(q.id) < PUBLISH_THRESHOLD);
+    if (behind.length) throw new Error(`Publishing rule: "${p.id}" can't be published yet - ` +
+      behind.map((q) => `"${q.id}" is ${pctOf(q.id)}% verified by Patrick`).join(", ") +
+      `. Every existing project needs ${PUBLISH_THRESHOLD}% first - see data/projects.yaml.`);
+  });
+  eleventyConfig.addGlobalData("nextProjectReady", published.every((p) => pctOf(p.id) >= PUBLISH_THRESHOLD));
   // How many of the listed figures a human has verified, and how many only AI has checked.
   const listed = groups.flatMap((p) => p.topics.flatMap((t) => t.facts));
   eleventyConfig.addGlobalData("checkCounts", {
