@@ -1,6 +1,8 @@
 {#- The checking-progress bar: the share of figures verified by a human, checked
-    by AI only, and not yet checked. Used on the home page and Figures and sources. -#}
-  <div class="ckbar" role="img" aria-label="{% for b in checkCounts.bar %}{{ b.label }}: {{ b.pct }}% ({{ b.count }}){% if not loop.last %}; {% endif %}{% endfor %}">
-    {%- for b in checkCounts.bar %}{% if b.count %}<span class="ckseg ck-{{ b.k }}" style="flex-grow:{{ b.count }}" title="{{ b.label }}: {{ b.count }} of {{ checkCounts.total }} ({{ b.pct }}%)"></span>{% endif %}{% endfor -%}
+    by AI only, and not yet checked. All projects together (home page, Figures and
+    sources), or one project's figures when "ck" is set first (project pages). -#}
+{%- set ckd = ck or checkCounts %}
+  <div class="ckbar" role="img" aria-label="{% for b in ckd.bar %}{{ b.label }}: {{ b.pct }}% ({{ b.count }}){% if not loop.last %}; {% endif %}{% endfor %}">
+    {%- for b in ckd.bar %}{% if b.count %}<span class="ckseg ck-{{ b.k }}" style="flex-grow:{{ b.count }}" title="{{ b.label }}: {{ b.count }} of {{ ckd.total }} ({{ b.pct }}%)"></span>{% endif %}{% endfor -%}
   </div>
-  <p class="cklabels" aria-hidden="true">{% for b in checkCounts.bar %}<span class="ckl ck-{{ b.k }}"><i></i>{{ b.label }} <b>{{ b.pct }}%</b></span>{% endfor %}</p>
+  <p class="cklabels" aria-hidden="true">{% for b in ckd.bar %}<span class="ckl ck-{{ b.k }}"><i></i>{{ b.label }} <b>{{ b.pct }}%</b></span>{% endfor %}</p>

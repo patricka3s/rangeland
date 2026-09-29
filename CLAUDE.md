@@ -129,7 +129,7 @@ Patrick decides. In short:
    order - sections with nothing published say so rather than disappearing.
    **Every project page looks the same.** Copy the layout of an existing page (the
    skill says which) and reuse the existing styles in `src/styles.css`: the project
-   bar, the "What's happened lately" box, the Reading mode bar (Highlights | Full
+   bar, the checking status under the top line (`{% include "project-checks.njk" %}`), the "What's happened lately" box, the Reading mode bar (Highlights | Full
    detail; Full detail disabled until there's a study or workshop to write it
    from), slides (`.slide`, `.sn`, `.stats`, `.steps`, `.qlist`, `.foot`), and in the
    footer the share button (`{% include "share.njk" %}`) and the version line. Don't invent new components or colours for one

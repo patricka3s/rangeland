@@ -980,6 +980,12 @@
   .ckl.ck-none i{background:repeating-linear-gradient(135deg,var(--ink-3) 0 2px,transparent 2px 6px);box-shadow:inset 0 0 0 1px var(--ink-3)}
   .ckl b{color:var(--ink);font-weight:600}
   @media (forced-colors:active){ .ckseg,.ckl i{forced-color-adjust:none;border:1px solid CanvasText} }
+  /* on a project page, under the top line: a slimmer bar */
+  .pjchecks{margin:-8px 0 22px}
+  .pjchecks .ckbar{height:8px;margin:6px 0 6px}
+  .pjck-head{margin:0;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-2)}
+  .pjck-head a{color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+  .pjck-head a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 
 /* --- Reader checks: the "Matches / Doesn't match" form in the details box --- */
   .rck{margin:12px 0 0;padding:12px 0 0;border-top:1px solid var(--rule-soft)}
