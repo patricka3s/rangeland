@@ -2,7 +2,9 @@
     page), the projects (styled like the guide's reading-mode toggle), and the
     site-wide pages on the right, then the light/dark switch (app.js). Set "root" ("" on the home page, "../" one
     folder down) and "current" (the page's id) before including. Add a project
-    here when it gets a page. -#}
+    here when it gets a page. On phones the two groups are flattened (styles.css,
+    "Project bar on phones") into two rows: the name, site pages and switch, then the projects.
+    Whichever page you're on is filled in, the same way, wherever it sits in the bar. -#}
 <nav class="projbar" aria-label="Site">
   <div class="pb-projects">
     <a class="pb-home" href="{{ root or './' }}"{% if current == "home" %} aria-current="page"{% endif %}>Pasco Roadmap</a>
@@ -12,7 +14,7 @@
   </div>
   <div class="pb-site">
     <a href="{{ root }}timeline/"{% if current == "timeline" %} aria-current="page"{% endif %}>Timeline</a>
-    <a href="{{ root }}facts/"{% if current == "facts" %} aria-current="page"{% endif %}>All figures &amp; sources</a>
+    <a href="{{ root }}facts/"{% if current == "facts" %} aria-current="page"{% endif %}><span class="pb-long">All figures &amp; sources</span><span class="pb-short">Figures</span></a>
     <button type="button" class="pb-theme" hidden aria-label="Switch to dark mode" title="Switch to dark mode"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></button>
   </div>
 </nav>

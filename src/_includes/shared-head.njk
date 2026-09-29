@@ -9,3 +9,14 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap">
 
 <link rel="stylesheet" href="{{ root }}styles.css">
+<script>
+/* Printing: open every folded box so its contents print, then fold back the ones that were closed. */
+(function(){
+  var was = [];
+  window.addEventListener("beforeprint", function(){
+    was = [];
+    [].forEach.call(document.querySelectorAll("details"), function(d){ if (!d.open) { was.push(d); d.open = true; } });
+  });
+  window.addEventListener("afterprint", function(){ was.forEach(function(d){ d.open = false; }); was = []; });
+})();
+</script>
