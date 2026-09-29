@@ -476,7 +476,7 @@ trafficRows:
     </div>
   </div>
   <p>All three segments are four-lane roads, listed together on the county's <strong>Freight Priority Network</strong>. Pasco's description is that connecting them turns Rangeland Boulevard, Bud Bexley Parkway and Tower Road from isolated, local traffic only roads into a
-    <strong>regional collector</strong>. The next section defines a collector road vs other types.</p>
+    <strong>regional collector</strong>.{% src "rangeland.claim.regional-collector" %} The next section defines a collector road vs other types.</p>
   <p>According to Pasco county, the freight designation does not imply heavy truck use; however, the road is designed for <strong>{% fact "rangeland.design.design-vehicle" %} vehicles</strong>. A WB-40 is the design standards&#8217; &#8220;intermediate semitrailer&#8221;: a <strong>{% fact "rangeland.design.wb40-wheelbase" %}-foot</strong> wheelbase and {% fact "rangeland.design.wb40-length" %} feet long overall.</p>
   <p>Trucks are about <strong>{% fact "rangeland.trucks.corridor-existing" %}</strong> of daily traffic on the existing segments here against <strong>{% fact "rangeland.trucks.sr54" %}</strong> on SR 54. The county expects the share to rise once the existing segments are connected, but to stay below SR 54&#8217;s.{% src "rangeland.claim.truck-share-outlook" %}</p>
   <p class="foot">Pasco MPO 2050 LRTP &#183; projects 114.2, 114.3, 114.4, 118.1</p>
@@ -486,14 +486,14 @@ trafficRows:
   <p class="sn">03 &nbsp;&#183;&nbsp; What kind of road</p>
   <h2>It is unclear if this is a collector or arterial roadway.</h2>
   <div class="steps">
-    <div class="step"><span class="st">Local road</span><span class="sm">Short trips, reaching the properties on it</span></div>
-    <div class="step now"><span class="st">Collector</span><span class="sm">Moderate volume, trips and speed</span></div>
-    <div class="step now"><span class="st">Minor arterial</span><span class="sm">Feeds and augments a principal arterial</span></div>
-    <div class="step"><span class="st">Principal arterial</span><span class="sm">The highest-volume corridors</span></div>
+    <div class="step"><span class="st">Local road</span><span class="sm">Short trips, reaching the properties on it{% src "def.local-road" %}</span></div>
+    <div class="step now"><span class="st">Collector</span><span class="sm">Moderate volume, trips and speed{% src "def.collector" %}</span></div>
+    <div class="step now"><span class="st">Minor arterial</span><span class="sm">Feeds and augments a principal arterial{% src "def.minor-arterial" %}</span></div>
+    <div class="step"><span class="st">Principal arterial</span><span class="sm">The highest-volume corridors{% src "def.principal-arterial" %}</span></div>
   </div>
-  <p>Florida law sorts roads by how they behave rather than how big they are. A <strong>collector</strong> carries "relatively moderate" volume, trip length and speed. An <strong>arterial</strong> is "relatively continuous," higher volume, longer trips. A <strong>principal</strong> arterial serves "the highest traffic volume corridors" &#8212; here that is SR 54 and the Suncoast Parkway.</p>
+  <p>Florida law sorts roads by how they behave rather than how big they are. A <strong>collector</strong> carries "relatively moderate" volume, trip length and speed.{% src "def.collector" %} An <strong>arterial</strong> is "relatively continuous," higher volume, longer trips.{% src "def.arterial" %} Federal guidance splits arterials further: a <strong>principal</strong> arterial serves "the highest traffic volume corridors"{% src "def.principal-arterial" %} &#8212; here that is SR 54 and the Suncoast Parkway.</p>
   <p>The label is not cosmetic. It decides which design standards apply, and under Pasco's access management code, how far apart driveways and median openings have to be and where turn lanes are required.</p>
-  <p>The county describes this corridor as a collector; however, a new four-lane road carrying <strong>{% fact "rangeland.aadt.rangeland-new.2050-build" %} vehicles a day</strong>, bridging the Suncoast Parkway and completing a continuous ten-mile route sounds a lot more like a minor arterial. I don't know if the designation can change after it is built, but that is something I'd like to ask.</p>
+  <p>The county describes this corridor as a collector;{% src "rangeland.claim.regional-collector" %} however, a new four-lane road carrying <strong>{% fact "rangeland.aadt.rangeland-new.2050-build" %} vehicles a day</strong>, bridging the Suncoast Parkway and completing a continuous {% calc "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente" %}{% sum "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente", 0 %}{% endcalc %}-mile route sounds a lot more like a minor arterial. I don't know if the designation can change after it is built, but that is something I'd like to ask.</p>
   <p class="foot">Fla. Stat. 334.03 &#183; FHWA functional classification guidelines &#183; more in section 4</p>
 </div>
 
@@ -508,7 +508,7 @@ trafficRows:
     <div class="step"><span class="st">Construction</span><span class="sm">Funded {% fact "rangeland.schedule.cst-funded" %}</span></div>
   </div>
   <p>The county communicated that a route study and a PD&amp;E study are two versions of the same process, with this project running under Pasco County's code rather than federal law. A federal PD&amp;E study is not required because the project doesn't use federal money or have a federal nexus.</p>
-  <p>This is a big reason to comment before {% fact "rangeland.schedule.comments-due" %}. The study concludes in the fall and that is when an alternative gets chosen &#8212; the workshop and the comments that follow it are the input to that decision. Design money is programmed for {% fact "rangeland.schedule.design-funded" %} and construction for {% fact "rangeland.schedule.cst-funded" %}, though the project site says the construction date is TBD.</p>
+  <p>This is a big reason to comment before {% fact "rangeland.schedule.comments-due" %}. The study concludes in the fall and that is when an alternative gets chosen &#8212; the workshop and the comments that follow it are the input to that decision. Design money is programmed for {% fact "rangeland.schedule.design-funded" %} and construction for {% fact "rangeland.schedule.cst-funded" %}, though the project site says the construction date is TBD.{% src "rangeland.claim.construction-tbd" %}</p>
   <p class="foot">Pasco County Transportation Engineering &#183; county capital improvement plan</p>
 </div>
 

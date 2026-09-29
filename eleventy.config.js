@@ -123,6 +123,9 @@ function loadData() {
   }
   for (const d of definitions) {
     if (d.source && !sourceIds.has(d.source)) problems.push(`definitions.yaml: "${d.id}" names source "${d.source}", which is not in sources.yaml`);
+    for (const k of ["ai_checked", "verified"]) {
+      if (d[k] !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(String(d[k]))) problems.push(`definitions.yaml: "${d.id}" has ${k} "${d[k]}"; use a date like '2026-09-28'`);
+    }
   }
   if (problems.length) throw new Error("Data check failed:\n  " + problems.join("\n  "));
   const sourceById = Object.fromEntries(sources.map((s) => [s.id, s]));
@@ -163,7 +166,9 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addGlobalData("site", data.site);
   eleventyConfig.addGlobalData("sources", data.sources);
-  eleventyConfig.addGlobalData("definitions", data.definitions);
+  eleventyConfig.addGlobalData("definitions", data.definitions.map((d) => ({
+    ...d, src: d.source ? data.sourceById[d.source] : null, aiCheckedOn: when(d.ai_checked), verifiedOn: when(d.verified),
+  })));
   eleventyConfig.addGlobalData("facts", data.byId);
   eleventyConfig.addWatchTarget(DATA);
 
@@ -366,6 +371,17 @@ export default function (eleventyConfig) {
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
       };
     }
+    // Definitions open in the same box: {% src "def.collector" %}
+    for (const d of data.definitions) {
+      const src = d.source ? data.sourceById[d.source] : null;
+      const form = data.site.dispute_form;
+      out["def." + d.id] = {
+        s: "Definition: " + d.term, v: d.definition, st: "current",
+        loc: d.location, note: d.note, ai: d.ai_checked, vf: d.verified, def: 1,
+        r: `${form.url}?usp=pp_url&${form.field}=` + encodeURIComponent(`def.${d.id} — ${d.term}: ${d.definition}`),
+        src: src ? { t: src.title, p: src.publisher, d: src.date, url: src.url } : { t: "General explanation, not from one document" },
+      };
+    }
     const json = JSON.stringify({ root: "../".repeat(depth), facts: out }).replace(/</g, "\\u003c");
     return `<script type="application/json" id="fact-data">${json}</script>`;
   });
@@ -424,8 +440,10 @@ export default function (eleventyConfig) {
   // designation or quote, stored as a fact with unit "statement"). Tapping it opens
   // the same details box as a figure.
   eleventyConfig.addShortcode("src", (id) => {
-    get(id);
-    return `<button type="button" class="fact srcmark" data-fact="${id}" aria-label="Source for this statement"><sup>source</sup></button>`;
+    if (id.startsWith("def.")) {
+      if (!data.definitions.some((d) => "def." + d.id === id)) throw new Error(`Definition "${id.slice(4)}" is not in definitions.yaml`);
+    } else get(id);
+    return `<button type="button" class="fact srcmark" data-fact="${id}" aria-label="Source for this statement"><sup>\u2020</sup></button>`;
   });
   // {% diffClass "a", "b" %}  ->  "up", "down" or "flat", for colouring a table cell.
   eleventyConfig.addShortcode("diffClass", (a, b) => {

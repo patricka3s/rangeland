@@ -923,7 +923,7 @@
        no mark. --- */
   .fact.srcmark{border:0;background:none;padding:0 1px;margin:0;font:inherit;color:var(--accent);cursor:pointer;
     text-decoration:none;line-height:1}
-  .fact.srcmark sup{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.62em;font-weight:600;letter-spacing:.03em}
+  .fact.srcmark sup{font-family:Georgia,"Times New Roman",serif;font-size:.8em;font-weight:700;line-height:0}
   .fact.srcmark:hover sup,.fact.srcmark:focus-visible sup{text-decoration:underline}
   @media (pointer:coarse){ .fact.srcmark{padding:8px 3px;margin:-8px -1px} }
 

@@ -467,6 +467,7 @@
   as_of: '2026-09-24'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.design.median-standard
   statement: 'Median width, standard typical section (Alternative A throughout)'
@@ -666,6 +667,26 @@
   unit: statement
   source: pasco-2026-09-ted-letter
   location: 'section "04 How the Rangeland study fits into the larger Pasco plan"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.claim.construction-tbd
+  statement: 'When construction will happen, according to the project schedule board'
+  value: 'Construction is TBD'
+  unit: statement
+  source: pasco-2026-09-schedule
+  location: 'Notes: "Schedule is subject to change", "Construction is TBD"'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.claim.regional-collector
+  statement: 'What the county says connecting the corridor will make it'
+  value: 'By connecting the existing and planned segments of Rangeland Blvd, Bud Bexley Parkway, and Tower Road together, the corridor will serve as a regional collector that enhances connectivity to the surrounding areas.'
+  unit: statement
+  source: pasco-2026-09-ted-letter
+  location: 'section "01 Key Takeaways"'
   as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
@@ -1224,6 +1245,7 @@
   as_of: '2025-01-18'
   status: superseded
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'Build B was also rated High. Both build alternatives compared then had the same rating.'
 
 - id: rangeland.matrix.noise.2026-09
@@ -1236,6 +1258,7 @@
   status: current
   replaces: rangeland.matrix.noise.2025-01
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'Footnote 3 on the matrix: "Two noise impacted areas were identified on the corridor."'
 
 - id: rangeland.matrix.noise-nobuild.2026-09
@@ -1247,6 +1270,7 @@
   as_of: '2026-09-24'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'The January 2025 matrix also rated the no-build None.'
 
 - id: rangeland.matrix.contamination.2025-01

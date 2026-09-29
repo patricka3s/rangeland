@@ -48,8 +48,9 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   `moved: {from, to}`, which the build adds to the title and the Timeline shows
   with the old date struck through. The site rebuilds every morning so
   "today" moves on by itself.
-- `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms (not yet
-  shown on the site). `data/site.yaml` — the error-report form's address.
+- `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms, listed
+  under Definitions on Figures and sources; a page marks a term with
+  `{% src "def.<id>" %}`, the same dagger (†) used for claims. `data/site.yaml` — the error-report form's address.
 - `src/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
   page (highlights only, "Full detail" disabled, until more is published). `src/_includes/project-bar.njk` — the
   project links at the top of every page. `src/facts.njk` — Figures and sources page

@@ -49,6 +49,7 @@ eleventyExcludeFromCollections: true
   {% for p in factGroups %}<a href="#{{ p.id }}">{{ p.short or p.name }}</a>
   {% endfor %}<span class="sep" aria-hidden="true"></span>
   {% if changeGroups.length %}<a href="#changes">What&#8217;s changed</a>{% endif %}
+  <a href="#definitions">Definitions</a>
   <a href="#sources">The documents</a>
 </nav>
 
@@ -125,6 +126,24 @@ eleventyExcludeFromCollections: true
   {% endfor %}
 </section>
 {% endfor %}
+
+<section class="fsources" id="definitions">
+  <h2><span>Definitions</span></h2>
+  <p>Terms the site uses. Where a definition is quoted from a document, it names the document; a word marked with a small dagger (&#8224;) on a project page opens its definition here.</p>
+  <ul class="flist">
+    {% for d in definitions %}
+    <li class="fitem" id="def.{{ d.id }}">
+      <div class="fhead"><span class="fstat"><strong>{{ d.term }}</strong></span></div>
+      <p class="fnote" style="border:0;padding:0;margin:4px 0 0;font-size:.95rem;color:var(--ink)">{{ d.definition }}</p>
+      <p class="fmeta">
+        {%- if d.src %}{% if d.src.url %}<a href="{{ d.src.url }}" rel="noopener" target="_blank">{{ d.src.title }}</a>{% else %}{{ d.src.title }}{% endif %}{% if d.location %} &#183; {{ d.location }}{% endif %}{% else %}General explanation, not from one document{% endif %}
+        {% if d.source %}&#183; {{ checks(d) }}{% endif %}
+      </p>
+      {% if d.note %}<p class="fnote">{{ d.note }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
 
 <section class="fsources" id="sources">
   <h2><span>The documents</span></h2>
