@@ -51,7 +51,9 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
 - `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms, listed
   under Definitions on Figures and sources; a page marks a term with
   `{% src "def.<id>" %}`, the same dagger (†) used for claims. `data/site.yaml` — the reader-check script's address.
-- `src/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
+- `src/index.njk` — the home page (introduction, coming up, a card per project
+  from `projects.yaml`, checking progress, how to get involved; old `/#section`
+  links are forwarded to `/rangeland/`). `src/rangeland/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
   page (highlights only, "Full detail" disabled, until more is published). `src/_includes/project-bar.njk` — the
   project links at the top of every page. `src/facts.njk` — Figures and sources page
   (all projects, built entirely from data). `src/app.js.njk`, `src/styles.css`.
@@ -122,10 +124,11 @@ Patrick decides. In short:
    project; if a project needs something new, add it as a shared style that every
    page can use and ask Patrick first. Each project also gets a tag shade
    (`.pj-<project-id>`) for the Timeline.
-4. Site structure (decided with Patrick, 28 Sep 2026): new projects at
-   `/<project-id>/` with a project bar on every page; after 8 Oct 2026 the
-   Rangeland guide moves to `/rangeland/`, the home page becomes a projects page,
-   and old `/#section` links are forwarded.
+4. Site structure: every project at `/<project-id>/` with the project bar on every
+   page; the home page lists the projects (done 29 Sep 2026 - the Rangeland guide
+   moved to `/rangeland/`, and old `/#section` links are forwarded there). Give
+   a new project `stage`, `about` and `page: true` in `projects.yaml` and its card
+   appears on the home page by itself.
 
 ## Workflow
 

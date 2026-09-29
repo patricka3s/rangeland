@@ -1,0 +1,1299 @@
+---
+# Page layout data. The FIGURES live in data/facts/rangeland.yaml; this only
+# sets the order rows appear in and the name each row is shown under.
+#   [fact key, name on the page]
+losRows:
+  - [rg-gunn,    Rangeland Blvd at Gunn Hwy]
+  - [bvd-rndbt,  Bexley Village Dr roundabout]
+  - [sr-sunc-e,  SR 54 at Suncoast ramps (east)]
+  - [sr-sunc-w,  SR 54 at Suncoast ramps (west)]
+  - [sr-sbranch, SR 54 at S Branch Blvd]
+  - [sr-ballan,  SR 54 at Ballantrae Blvd]
+  - [bb-ballan,  Bud Bexley Pkwy at Ballantrae Blvd]
+  - [sr-bvd,     SR 54 at Bexley Village Dr]
+  - [sr-gunn,    SR 54 at Gunn Hwy]
+  - [sr-sunlake, SR 54 at Sunlake Blvd]
+  - [rg-cattle,  Rangeland Blvd at Cattle Gap Trl]
+trafficRows:
+  - [bvd-sr54,     "Bexley Village Dr — toward SR 54"]
+  - [ballantrae-s, "Ballantrae Blvd — toward SR 54"]
+  - [bvd-rndbt,    "Bexley Village Dr — by the roundabout"]
+  - [bvd-north,    "Bexley Village Dr — north leg"]
+  - [broadporch,   Broad Porch Run]
+  - [budbexley,    Bud Bexley Pkwy]
+---
+{#- TEMPLATE NOTE (not copied into the built page)
+    Wording is written here as before. FIGURES that come from the county's
+    documents are pulled in from data/facts/rangeland.yaml with tags like
+        {% fact "rangeland.aadt.gunn.2023" %}
+    To change such a number, edit it in the facts file - every place on the
+    page that uses it updates together. The build stops with an error if a
+    tag names a fact that doesn't exist.
+    Other tags: {% diff a, b %} is b minus a; {% perMile cost, length %} is a
+    cost per mile. Both are worked out from the facts when the site is built. -#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bexley Guide to Rangeland Blvd Study</title>
+<meta name="description" content="A plain-language guide to the Rangeland Boulevard Route Study for Bexley neighbors: what is proposed, how it fits Pasco County's larger plan, what the traffic forecasts show, and what has not been answered. Written comments are due Thursday 8 October 2026.">
+<meta name="author" content="Patrick">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://patricka3s.github.io/rangeland/rangeland/">
+
+<!-- Social preview -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bexley Guide to Rangeland Blvd Study">
+<meta property="og:title" content="Bexley Guide to Rangeland Blvd Study">
+<meta property="og:description" content="A plain-language guide to the Rangeland Boulevard Route Study for Bexley neighbors: what is proposed, how it fits Pasco County's larger plan, what the traffic forecasts show, and what has not been answered. Written comments are due Thursday 8 October 2026.">
+<meta property="og:url" content="https://patricka3s.github.io/rangeland/rangeland/">
+<meta property="og:image" content="https://patricka3s.github.io/rangeland/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bexley Guide to Rangeland Blvd Study">
+<meta name="twitter:description" content="A plain-language guide to the Rangeland Boulevard Route Study for Bexley neighbors: what is proposed, how it fits Pasco County's larger plan, what the traffic forecasts show, and what has not been answered. Written comments are due Thursday 8 October 2026.">
+<meta name="twitter:image" content="https://patricka3s.github.io/rangeland/og-image.png">
+
+{% set root = "../" %}{% include "shared-head.njk" %}
+<!-- Not deferred on purpose: it sets the reading mode before anything paints. -->
+<script src="../app.js"></script>
+</head>
+<body>
+
+<!-- ==========================================================================
+     EDITING THIS PAGE
+
+     All the wording is in this file (src/index.njk). Figures taken from the
+     county's documents are not: they live in data/facts/rangeland.yaml and are
+     pulled in by "fact" tags when the site is built, so a figure changed
+     there changes everywhere it appears. Styling is in src/styles.css;
+     behaviour is in src/app.js.njk. The README explains the whole layout.
+
+     The page has two reading modes, and some wording exists twice:
+       - the DECK  - div class "hlt", id "deck"  - is the Highlights view
+       - the GUIDE - div id "doc", class "det"   - is the Full detail view
+     If you reword something in one, check whether the other repeats it.
+     Numbers written out in words ("ten thousand", "six of the eleven") are
+     not linked to the facts file - check those by hand when a figure changes.
+
+     Regions below are fenced with banner comments like this one. The charts are
+     SVG and are fenced separately - skip past them unless a number changed.
+     ========================================================================== -->
+
+<a class="skip" href="#s1">Skip to contents</a>
+<div class="wrap">
+{% set current = "rangeland" %}{% include "project-bar.njk" %}
+
+<!-- ==========================================================================
+     PAGE HEADER
+     Title, standfirst, and the "Updated" date.
+     ========================================================================== -->
+<header>
+  <p class="eyebrow">A guide for Bexley neighbors · Updated September 26, 2026</p>
+  <h1>What Bexley Residents Should Know About the Rangeland Boulevard Study
+  </h1>
+  <p class="standfirst">Hello, I'm Patrick. I put this guide together from public documents on the Pasco county site. I'm not affiliated with Pasco County or the MPO, I'm not on the HOA or CDD. While personally, I don't want this road to be built, my aim is not to convince you one way or the other. Instead, I aim to keep my neighbors informed and encourage them to attend the workshop. Every figure, and every statement marked with a small &#8224;, can be tapped to see the document it comes from and to tell me whether it matches, and I'll do my best to fix anything that's wrong.</p>
+</header>
+
+<!-- ==========================================================================
+     MEETING BOX
+     Has .pre and .post copy; app.js swaps them after the workshop.
+     ========================================================================== -->
+<div class="meeting" id="meetingbox">
+  <p class="k pre">Public Workshop #3 is your next chance to be heard</p>
+  <p class="k post">The workshop has happened &#8212; comments are still open</p>
+  <p class="d pre">Thursday, September 24<br>5:00 &#8211; 7:00 p.m.</p>
+  <p class="w pre">Starkey Ranch Theatre Library Cultural Center<br>12118 Lake Blanche Drive, Odessa, FL 33556</p>
+  <!--<p class="w post">Everything shown on the night is posted at mypas.co/TED. You can read the boards and comment on them without having been there.</p>-->
+  <p class="dl pre"><strong>Written comments are due Thursday, October 8, 2026.</strong> Details in section 9.</p>
+  <p class="dl post"><strong>Comments received by Thursday 8 October go into the study record.</strong> Three ways to send one:<br>
+    Online &#183; <a href="https://pasco.rja.revize.com/forms/11000">pasco.rja.revize.com/forms/11000</a><br>
+    Email &#183; <a href="mailto:pkontses@mypasco.net">pkontses@mypasco.net</a><br>
+    Post &#183; Panos Kontses, P.E., Pasco County, 5418 Sunset Road, New Port Richey, FL 34652</p>
+</div>
+
+<!-- ==========================================================================
+     NETWORK MAP
+     Markup only. Styling is the ".netmap" block in src/styles.css; the tab
+     behaviour is the "NETWORK MAP" block in src/app.js.njk. The traffic
+     figures and grades come from data/facts/rangeland.yaml - to change a
+     number, edit it there, not here or in app.js.
+     ========================================================================== -->
+<section class="netmap" id="netmap">
+  <p>The county published several traffic boards for this study: what these streets carry now, what they carry in 2050 if the Rangeland extension is not built, and what they carry if it is. Switch between them below. Colour and thickness are daily traffic; the letters are intersection grades at the evening peak; the percentages compare each view with the one to its left.</p>
+
+  <div class="nmviews" id="nm-views" role="group" aria-label="Which future to show">
+    <button type="button" data-view="today" aria-pressed="true">
+      <span class="t">Today</span>
+      <span class="s">county&#8217;s existing-traffic board &#183; 2023 counts</span>
+    </button>
+    <button type="button" data-view="notbuilt" aria-pressed="false">
+      <span class="t"><span class="tl">2050 &#183; Rangeland extension not built</span><span class="ts">2050 &#183; not built</span></span>
+      <span class="s">county&#8217;s &#8220;no-build&#8221; &#183; everything else in the plan is built</span>
+    </button>
+    <button type="button" data-view="built" aria-pressed="false">
+      <span class="t"><span class="tl">2050 &#183; Rangeland extension built</span><span class="ts">2050 &#183; built</span></span>
+      <span class="s">county&#8217;s alternative A &#183; D and E forecast the same</span>
+    </button>
+  </div>
+
+  {#- On phones the map shows small, fitted to the screen, with a button that
+      opens it full screen (the "FULL-SCREEN MAP" block in app.js). -#}
+  <button type="button" class="nmopen" id="nm-open" hidden>Open the map full screen</button>
+
+  <figure id="nm-fig">
+    <div class="nmfullbar">
+      <span class="nmrotate">Turn your phone sideways for a bigger map</span>
+      <button type="button" class="nmclose" id="nm-close">Close map</button>
+    </div>
+    <svg viewBox="0 0 1080 660" role="img" id="nm-map" aria-label="Schematic map of the Bexley street network. Four named roads form one intended corridor running diagonally from south-west to north-east: Rangeland Boulevard, Bud Bexley Parkway, Tower Road and Caliente Boulevard, from Gunn Highway and Cattle Gap Trail up to Ehren Cutoff. State Road 54 runs horizontally below the corridor and Ridge Road horizontally above it. Cross streets, from west to east, are Gunn Highway, Cattle Gap Trail, South Branch Boulevard, the Suncoast Parkway, Bexley Village Drive, Ballantrae Boulevard, Sunlake Boulevard and US 41. Each street is shaded by its published daily traffic in the selected view, left hollow where no figure has been published, and drawn as a faint dashed line where the road is not open to traffic in that view. Eleven intersections carry their level-of-service grade as a letter. The same figures are in the tables below the map.">
+
+      <!-- ===== RIDGE ROAD ===== -->
+      <g class="nmseg" data-street="ridge" data-seg="ridge-w">
+        <path class="arw-head" d="M138 90 L156 82.5 L156 97.5 Z"/>
+        <line class="base" x1="154" y1="90" x2="780" y2="90"/>
+        <line class="top"  x1="154" y1="90" x2="780" y2="90"/>
+        <line class="hit"  x1="154" y1="90" x2="780" y2="90"/>
+      </g>
+      <g class="nmseg" data-street="ridge" data-seg="ridge-p2">
+        <line class="base" x1="780" y1="90" x2="940" y2="90"/>
+        <line class="top"  x1="780" y1="90" x2="940" y2="90"/>
+        <line class="hit"  x1="780" y1="90" x2="940" y2="90"/>
+      </g>
+      <text class="rd-lbl lbl" data-street="ridge" x="166" y="74">Ridge Road</text>
+
+      <!-- ===== THE CORRIDOR, south-west to north-east ===== -->
+      <g class="nmseg" data-street="rangeland" data-seg="rangeland-w">
+        <line class="base" x1="80" y1="470" x2="130" y2="453"/>
+        <line class="top"  x1="80" y1="470" x2="130" y2="453"/>
+        <line class="hit"  x1="80" y1="470" x2="130" y2="453"/>
+      </g>
+      <g class="nmseg" data-street="rangeland" data-seg="rangeland-new">
+        <line class="base" x1="130" y1="453" x2="540" y2="313.4"/>
+        <line class="top"  x1="130" y1="453" x2="540" y2="313.4"/>
+        <line class="hit"  x1="130" y1="453" x2="540" y2="313.4"/>
+      </g>
+      <text class="rd-lbl lbl" data-street="rangeland" x="196" y="422" transform="rotate(-18.8 196 422)">Rangeland Blvd</text>
+
+      <g class="nmseg" data-street="budbexley" data-seg="budbexley-main">
+        <line class="base" x1="540" y1="313.4" x2="680" y2="265.6"/>
+        <line class="top"  x1="540" y1="313.4" x2="680" y2="265.6"/>
+        <line class="hit"  x1="540" y1="313.4" x2="680" y2="265.6"/>
+      </g>
+      <g class="nmseg" data-street="budbexley" data-seg="budbexley-east">
+        <line class="base" x1="680" y1="265.6" x2="820" y2="218.4"/>
+        <line class="top"  x1="680" y1="265.6" x2="820" y2="218.4"/>
+        <line class="hit"  x1="680" y1="265.6" x2="820" y2="218.4"/>
+      </g>
+      <g class="nmseg" data-street="budbexley" data-seg="budbexley-gap">
+        <line class="base" x1="820" y1="218.4" x2="880" y2="198"/>
+        <line class="top"  x1="820" y1="218.4" x2="880" y2="198"/>
+        <line class="hit"  x1="820" y1="218.4" x2="880" y2="198"/>
+      </g>
+      <text class="rd-lbl lbl" data-street="budbexley" x="590" y="318" transform="rotate(-18.8 590 318)">Bud Bexley Pkwy</text>
+
+      <g class="nmseg" data-street="tower" data-seg="tower">
+        <line class="base" x1="880" y1="198" x2="940" y2="177.6"/>
+        <line class="top"  x1="880" y1="198" x2="940" y2="177.6"/>
+        <line class="hit"  x1="880" y1="198" x2="940" y2="177.6"/>
+      </g>
+      <text class="rd-sub lbl" data-street="tower" x="884" y="182" transform="rotate(-18.8 884 182)">Tower Rd</text>
+
+      <g class="nmseg" data-street="caliente" data-seg="caliente">
+        <line class="base" x1="940" y1="177.6" x2="1020" y2="150.4"/>
+        <line class="top"  x1="940" y1="177.6" x2="1020" y2="150.4"/>
+        <line class="hit"  x1="940" y1="177.6" x2="1020" y2="150.4"/>
+      </g>
+      <text class="rd-sub lbl" data-street="caliente" x="948" y="194" transform="rotate(-18.8 948 194)">Caliente Blvd</text>
+
+      <!-- ===== SR 54 ===== -->
+      <g class="nmseg" data-street="sr54" data-seg="sr54">
+        <line class="base" x1="60" y1="545" x2="1000" y2="545"/>
+        <line class="top"  x1="60" y1="545" x2="1000" y2="545"/>
+        <line class="hit"  x1="60" y1="545" x2="1000" y2="545"/>
+      </g>
+      <text class="rd-lbl lbl" data-street="sr54" x="120" y="604">State Road 54</text>
+
+      <!-- ===== CROSS STREETS, west to east ===== -->
+      <g class="nmseg" data-street="gunn" data-seg="gunn">
+        <line class="base" x1="80" y1="470" x2="80" y2="545"/>
+        <line class="top"  x1="80" y1="470" x2="80" y2="545"/>
+        <line class="hit"  x1="80" y1="470" x2="80" y2="545"/>
+      </g>
+      <g class="nmseg" data-street="gunn" data-seg="gunn-s">
+        <line class="base" x1="80" y1="545" x2="80" y2="616"/>
+        <line class="top"  x1="80" y1="545" x2="80" y2="616"/>
+        <line class="hit"  x1="80" y1="545" x2="80" y2="616"/>
+      </g>
+      <text class="rd-sub lbl" data-street="gunn" x="64" y="486" text-anchor="end" transform="rotate(-90 64 486)">Gunn Hwy</text>
+
+      <g class="nmseg" data-street="cattlegap" data-seg="cattlegap">
+        <line class="base" x1="130" y1="418" x2="130" y2="490"/>
+        <line class="top"  x1="130" y1="418" x2="130" y2="490"/>
+        <line class="hit"  x1="130" y1="418" x2="130" y2="490"/>
+      </g>
+      <text class="rd-sub lbl" data-street="cattlegap" x="130" y="508" text-anchor="middle">Cattle Gap Trl</text>
+
+      <g class="nmseg" data-street="sbranch" data-seg="sbranch">
+        <line class="base" x1="320" y1="388.4" x2="320" y2="545"/>
+        <line class="top"  x1="320" y1="388.4" x2="320" y2="545"/>
+        <line class="hit"  x1="320" y1="388.4" x2="320" y2="545"/>
+      </g>
+      <text class="rd-sub lbl" data-street="sbranch" x="304" y="400" text-anchor="end" transform="rotate(-90 304 400)">S Branch Blvd</text>
+
+      <g class="nmseg" data-street="suncoast" data-seg="suncoast-n">
+        <line class="base" x1="400" y1="50" x2="400" y2="348"/>
+        <line class="top"  x1="400" y1="50" x2="400" y2="348"/>
+        <line class="hit"  x1="400" y1="50" x2="400" y2="348"/>
+      </g>
+      <g class="nmseg" data-street="suncoast" data-seg="suncoast-m">
+        <line class="base" x1="400" y1="374" x2="400" y2="545"/>
+        <line class="top"  x1="400" y1="374" x2="400" y2="545"/>
+        <line class="hit"  x1="400" y1="374" x2="400" y2="545"/>
+      </g>
+      <g class="nmseg" data-street="suncoast" data-seg="suncoast-s">
+        <line class="base" x1="400" y1="545" x2="400" y2="616"/>
+        <line class="top"  x1="400" y1="545" x2="400" y2="616"/>
+        <line class="hit"  x1="400" y1="545" x2="400" y2="616"/>
+      </g>
+      <text class="rd-sub lbl" data-street="suncoast" x="384" y="112" text-anchor="end" transform="rotate(-90 384 112)">Suncoast Pkwy</text>
+
+      <g class="nmseg" data-street="bexleyvillage" data-seg="bvd-sr54">
+        <line class="base" x1="540" y1="430" x2="540" y2="545"/>
+        <line class="top"  x1="540" y1="430" x2="540" y2="545"/>
+        <line class="hit"  x1="540" y1="430" x2="540" y2="545"/>
+      </g>
+      <g class="nmseg" data-street="bexleyvillage" data-seg="bvd-rndbt">
+        <line class="base" x1="540" y1="313.4" x2="540" y2="430"/>
+        <line class="top"  x1="540" y1="313.4" x2="540" y2="430"/>
+        <line class="hit"  x1="540" y1="313.4" x2="540" y2="430"/>
+      </g>
+      <g class="nmseg" data-street="bexleyvillage" data-seg="bvd-ne-lo">
+        <line class="base" x1="540" y1="313.4" x2="590" y2="201.7"/>
+        <line class="top"  x1="540" y1="313.4" x2="590" y2="201.7"/>
+        <line class="hit"  x1="540" y1="313.4" x2="590" y2="201.7"/>
+      </g>
+      <g class="nmseg" data-street="bexleyvillage" data-seg="bvd-ne-hi">
+        <line class="base" x1="590" y1="201.7" x2="640" y2="90"/>
+        <line class="top"  x1="590" y1="201.7" x2="640" y2="90"/>
+        <line class="hit"  x1="590" y1="201.7" x2="640" y2="90"/>
+      </g>
+      <text class="rd-sub lbl" data-street="bexleyvillage" x="524" y="372" text-anchor="end" transform="rotate(-90 524 372)">Bexley Village Dr</text>
+
+      <g class="nmseg" data-street="broadporch" data-seg="broadporch">
+        <line class="base" x1="540" y1="313.4" x2="455" y2="250"/>
+        <line class="top"  x1="540" y1="313.4" x2="455" y2="250"/>
+        <line class="hit"  x1="540" y1="313.4" x2="455" y2="250"/>
+      </g>
+      <text class="rd-sub lbl" data-street="broadporch" x="458" y="236">Broad Porch Run</text>
+
+      <g class="nmseg" data-street="ballantrae" data-seg="ballantrae-m">
+        <line class="base" x1="680" y1="265.6" x2="680" y2="405"/>
+        <line class="top"  x1="680" y1="265.6" x2="680" y2="405"/>
+        <line class="hit"  x1="680" y1="265.6" x2="680" y2="405"/>
+      </g>
+      <g class="nmseg" data-street="ballantrae" data-seg="ballantrae-s">
+        <line class="base" x1="680" y1="405" x2="680" y2="545"/>
+        <line class="top"  x1="680" y1="405" x2="680" y2="545"/>
+        <line class="hit"  x1="680" y1="405" x2="680" y2="545"/>
+      </g>
+      <g class="nmseg" data-street="ballantrae" data-seg="ballantrae-n">
+        <line class="base" x1="680" y1="195" x2="680" y2="265.6"/>
+        <line class="top"  x1="680" y1="195" x2="680" y2="265.6"/>
+        <line class="hit"  x1="680" y1="195" x2="680" y2="265.6"/>
+      </g>
+      <text class="rd-sub lbl" data-street="ballantrae" x="664" y="344" text-anchor="end" transform="rotate(-90 664 344)">Ballantrae Blvd</text>
+
+      <g class="nmseg" data-street="sunlake" data-seg="sunlake-s">
+        <line class="base" x1="780" y1="232" x2="780" y2="545"/>
+        <line class="top"  x1="780" y1="232" x2="780" y2="545"/>
+        <line class="hit"  x1="780" y1="232" x2="780" y2="545"/>
+      </g>
+      <g class="nmseg" data-street="sunlake" data-seg="sunlake-n">
+        <line class="base" x1="780" y1="90" x2="780" y2="232"/>
+        <line class="top"  x1="780" y1="90" x2="780" y2="232"/>
+        <line class="hit"  x1="780" y1="90" x2="780" y2="232"/>
+      </g>
+      <text class="rd-sub lbl" data-street="sunlake" x="764" y="256" text-anchor="end" transform="rotate(-90 764 256)">Sunlake Blvd</text>
+
+      <g class="nmseg" data-street="us41" data-seg="us41">
+        <line class="base" x1="940" y1="90" x2="940" y2="545"/>
+        <line class="top"  x1="940" y1="90" x2="940" y2="545"/>
+        <line class="hit"  x1="940" y1="90" x2="940" y2="545"/>
+      </g>
+      <text class="rd-sub lbl" data-street="us41" x="924" y="268" text-anchor="end" transform="rotate(-90 924 268)">US 41</text>
+
+      <!-- ===== STATIONS + GRADES (letters written by script) ===== -->
+      <g id="nm-stations">
+        <circle class="stn" data-int="rg-gunn"    cx="80"   cy="470"   r="6"/>
+        <circle class="stn" data-int="rg-cattle"  cx="130"  cy="453"   r="10"/>
+        <circle class="stn"                       cx="130"  cy="453"   r="4.5"/>
+        <circle class="stn"                       cx="320"  cy="388.4" r="6"/>
+        <circle class="stn"                       cx="400"  cy="90"    r="6"/>
+        <circle class="stn"                       cx="400"  cy="545"   r="6"/>
+        <circle class="stn" data-int="bvd-rndbt"  cx="540"  cy="313.4" r="10"/>
+        <circle class="stn"                       cx="540"  cy="313.4" r="4.5"/>
+        <circle class="stn" data-int="bb-ballan"  cx="680"  cy="265.6" r="6"/>
+        <circle class="stn"                       cx="780"  cy="232"   r="6"/>
+        <circle class="stn"                       cx="780"  cy="90"    r="6"/>
+        <circle class="stn" id="nm-stn-us41ridge"    cx="940"  cy="90"    r="6"/>
+        <circle class="stn"                       cx="940"  cy="177.6" r="6"/>
+        <circle class="stn"                       cx="1020" cy="150.4" r="6"/>
+        <circle class="stn" data-int="sr-gunn"    cx="80"   cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-sbranch" cx="320"  cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-sunc-w"  cx="378"  cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-sunc-e"  cx="422"  cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-bvd"     cx="540"  cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-ballan"  cx="680"  cy="545"   r="6"/>
+        <circle class="stn" data-int="sr-sunlake" cx="780"  cy="545"   r="6"/>
+        <circle class="stn"                       cx="940"  cy="545"   r="6"/>
+      </g>
+      <g id="nm-deltas">
+        <text class="delta lbl" data-street="sr54"          data-seg="sr54"            x="905" y="528" text-anchor="end"></text>
+        <text class="delta lbl" data-street="gunn"          data-seg="gunn-s"          x="66"  y="596" text-anchor="end"></text>
+        <text class="delta lbl" data-street="sbranch"       data-seg="sbranch"         x="336" y="470"></text>
+        <text class="delta lbl" data-street="bexleyvillage" data-seg="bvd-sr54"        x="556" y="500"></text>
+        <text class="delta lbl" data-street="bexleyvillage" data-seg="bvd-rndbt"       x="556" y="400"></text>
+        <text class="delta lbl" data-street="bexleyvillage" data-seg="bvd-ne-lo"       x="600" y="250"></text>
+        <text class="delta lbl" data-street="broadporch"    data-seg="broadporch"      x="458" y="222"></text>
+        <text class="delta lbl" data-street="budbexley"     data-seg="budbexley-main"  x="602" y="274"></text>
+        <text class="delta lbl" data-street="ballantrae"    data-seg="ballantrae-m"    x="696" y="300"></text>
+        <text class="delta lbl" data-street="ballantrae"    data-seg="ballantrae-s"    x="696" y="470"></text>
+      </g>
+      <g id="nm-grades">
+        <text class="grade" data-int="rg-gunn"    x="80"  y="450" text-anchor="middle"></text>
+        <text class="grade" data-int="rg-cattle"  x="152" y="434"></text>
+        <text class="grade" data-int="bvd-rndbt"  x="524" y="338" text-anchor="end"></text>
+        <text class="grade" data-int="bb-ballan"  x="698" y="250"></text>
+        <text class="grade" data-int="sr-gunn"    x="80"  y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-sbranch" x="320" y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-sunc-w"  x="378" y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-sunc-e"  x="422" y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-bvd"     x="540" y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-ballan"  x="680" y="574" text-anchor="middle"></text>
+        <text class="grade" data-int="sr-sunlake" x="780" y="574" text-anchor="middle"></text>
+      </g>
+    </svg>
+
+    <div class="nmlegend">
+      <span><i class="nmkey k1"></i>under 5k</span>
+      <span><i class="nmkey k2"></i>5&#8211;15k</span>
+      <span><i class="nmkey k3"></i>15&#8211;25k</span>
+      <span><i class="nmkey k4"></i>25&#8211;40k</span>
+      <span><i class="nmkey k5"></i>40k+ a day</span>
+      <i class="nmsep"></i>
+      <span><i class="nmkey kh"></i>no figure for this year</span>
+      <span><i class="nmkey ko"></i>not numbered, any year</span>
+      <span><i class="nmkey kd"></i>not open in this view</span>
+      <i class="nmsep"></i>
+      <span>&#177;% vs the view to the left, where it moves 10% or 2,000 a day</span>
+    </div>
+
+    <!-- One caption per tab. The script shows the matching one and hides the
+         others; the first is visible before the script runs. Ordinary prose -
+         edit freely, entities and <strong> work as everywhere else. -->
+    <figcaption id="nm-cap">
+      <p data-view="today" class="on">Based on the county&#8217;s existing-traffic board with data from 2023. The board doesn&#8217;t number the Suncoast Parkway or US 41, so those two use FDOT&#8217;s own counts from 2025: the Suncoast at {% fact "rangeland.aadt.suncoast-south.2025" %} a day south of SR 54 and {% fact "rangeland.aadt.suncoast-north.2025" %} north of it, and US 41 at {% fact "rangeland.aadt.us41-fdot.2025" %}.</p>
+      <p data-view="notbuilt">The county calls this the no-build option, though it isn't really an option. These projections do not represent nothing being built &#8212; the model includes every project in the long range plan, Bud Bexley Parkway among them, so the corridor still joins up. Only the Rangeland extension is missing from this projection.</p>
+      <p data-view="built">Based on the county&#8217;s design boards for Alternatives A, D and E, which all have the same traffic estimates.</p>
+    </figcaption>
+  </figure>
+  <p class="src">County traffic boards shown at Public Workshop #3, 24 September 2026, read from the boards themselves, and FDOT&#8217;s 2025 traffic counts for the Suncoast Parkway and US 41 (Today view only). Streets and stretches drawn in grey have no figure on any of the county&#8217;s boards.</p>
+</section>
+
+<!-- ==========================================================================
+     UPDATES - "What's happened lately"
+     Built from data/events.yaml: this project's upcoming events, then its five
+     latest. To add an entry, add an event there - it appears here and on the
+     Timeline page.
+     ========================================================================== -->
+<details class="upd">
+  <summary>What's happened lately</summary>
+  <div class="bd">
+    {% if recentEvents.rangeland.upcoming.length %}<h4>Still ahead</h4>
+    <ol>
+      {% for e in recentEvents.rangeland.upcoming %}<li><span class="dt">{{ e.shown }}</span><span><a href="../timeline/#{{ e.id }}">{{ e.title }}</a></span></li>
+      {% endfor %}
+    </ol>{% endif %}
+    <h4>Already happened</h4>
+    <ol class="past">
+      {% for e in recentEvents.rangeland.past %}<li><span class="dt">{{ e.shown }}</span><span><a href="../timeline/#{{ e.id }}">{{ e.title }}</a>{% if e.about %} <span class="updabout">&#183; {{ e.about }}</span>{% endif %}</span></li>
+      {% endfor %}
+    </ol>
+    <p class="updmore"><a href="../timeline/#rangeland">See the full timeline, including every change order and what&#8217;s planned &#8594;</a></p>
+  </div>
+</details>
+
+<!-- ==========================================================================
+     MODE TOGGLE
+     Structural. Nothing to edit here.
+     ========================================================================== -->
+<div class="modebar">
+  <span class="lab">Reading mode</span>
+  <div class="seg" role="group" aria-label="How much detail to show">
+    <button type="button" data-mode="brief" aria-pressed="true">Highlights</button>
+    <button type="button" data-mode="full" aria-pressed="false">Full detail</button>
+  </div>
+  <span id="modenote">Read the highlights or dive into the details</span>
+</div>
+<p class="factnote">Figures with a dotted underline come straight from the county&#8217;s documents. Tap one to see which document, or to tell me it&#8217;s wrong. The box also says whether the figure has been checked by AI or verified by a human. <a href="../facts/">See every figure and its source &#8594;</a></p>
+
+<!-- ==========================================================================
+     DECK - the Highlights view
+     Eight slides. Each opens with <p class="sn">NN - Title</p>.
+     ========================================================================== -->
+<div class="hlt" id="deck">
+
+<div class="slide">
+  <p class="sn">01 &nbsp;·&nbsp; What the Rangeland Blvd project will build</p>
+  <h2>The Rangeland project covers a mostly new, {% fact "rangeland.length-miles" %} mile four-lane divided road with an overpass across the Suncoast Parkway.</h2>
+  <div class="stats">
+    <div class="stat"><div class="v">{% fact "rangeland.length-miles" %}</div><div class="k">Miles, Cattle Gap Trl to Bexley Village Dr</div></div>
+    <div class="stat"><div class="v">{% fact "rangeland.design.lanes" %}</div><div class="k">Lanes, divided</div></div>
+    <div class="stat"><div class="v">{% fact "rangeland.schedule.cst-funded" %}</div><div class="k">Construction funded in the county plan</div></div>
+  </div>
+  <p>Three alternatives remain &#8212; A, D and E. All three are four-lane divided roadways. D leaves room to expand the road to 6 lanes at some later date to accommodate an interchange at the Suncoast. E adds the extra room and one extra pedestrian underpass.</p>
+  <p class="foot">Pasco County Workshop #3 mailer</p>
+</div>
+
+<div class="slide">
+  <p class="sn">02 &nbsp;·&nbsp; The bigger picture</p>
+  <h2>This is the first segment of a {% calc "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente" %}{% sum "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente", 0 %}{% endcalc %}-mile corridor that runs all the way to Ehren Cutoff.</h2>
+  <div role="img" aria-label="A single bar showing the {% sum "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente", 2 %}-mile route in three segments: Rangeland Blvd from Cattle Gap Trail to Bexley Village Drive, Bud Bexley Parkway from Bexley Village Drive to US 41, and Caliente Boulevard from US 41 to Ehren Cutoff. Segment widths are proportional to length.">
+    <div class="sbar">
+      <div class="sseg me" style="width:{% share "rangeland.length-miles", "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente" %}%"><span>Rangeland Blvd</span></div>
+      <div class="sseg other" style="width:{% share "rangeland.length-miles.budbexley", "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente" %}%"><span>Bud Bexley Pkwy</span></div>
+      <div class="sseg other tiny" style="width:{% share "rangeland.length-miles.caliente", "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente" %}%"><span>Caliente</span></div>
+    </div>
+    <div class="snodes">
+      <i class="a" style="left:0"></i><span class="a" style="left:0">Cattle Gap Trl</span>
+      <i class="b" style="left:{% share "rangeland.length-miles", "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente" %}%"></i><span class="b" style="left:{% share "rangeland.length-miles", "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente" %}%;transform:translateX(-50%)">Bexley Village Dr</span>
+      {%- set us41 %}{% share "rangeland.length-miles.caliente", "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente" %}{% endset -%}
+      <i class="a" style="right:{{ us41 }}%"></i><span class="a" style="right:{{ us41 }}%;transform:translateX(-50%)">US 41</span>
+      <i class="b" style="right:0"></i><span class="b" style="right:0">Ehren Cutoff</span>
+    </div>
+  </div>
+  <p>All three segments are four-lane roads, listed together on the county's <strong>Freight Priority Network</strong>. Pasco's description is that connecting them turns Rangeland Boulevard, Bud Bexley Parkway and Tower Road from isolated, local traffic only roads into a
+    <strong>regional collector</strong>.{% src "rangeland.claim.regional-collector" %} The next section defines a collector road vs other types.</p>
+  <p>According to Pasco county, the freight designation does not imply heavy truck use; however, the road is designed for <strong>{% fact "rangeland.design.design-vehicle" %} vehicles</strong>. A WB-40 is the design standards&#8217; &#8220;intermediate semitrailer&#8221;: a <strong>{% fact "rangeland.design.wb40-wheelbase" %}-foot</strong> wheelbase and {% fact "rangeland.design.wb40-length" %} feet long overall.</p>
+  <p>Trucks are about <strong>{% fact "rangeland.trucks.corridor-existing" %}</strong> of daily traffic on the existing segments here against <strong>{% fact "rangeland.trucks.sr54" %}</strong> on SR 54. The county expects the share to rise once the existing segments are connected, but to stay below SR 54&#8217;s.{% src "rangeland.claim.truck-share-outlook" %}</p>
+  <p class="foot">Pasco MPO 2050 LRTP &#183; projects 114.2, 114.3, 114.4, 118.1</p>
+</div>
+
+<div class="slide">
+  <p class="sn">03 &nbsp;&#183;&nbsp; What kind of road</p>
+  <h2>It is unclear if this is a collector or arterial roadway.</h2>
+  <div class="steps">
+    <div class="step"><span class="st">Local road</span><span class="sm">Short trips, reaching the properties on it{% src "def.local-road" %}</span></div>
+    <div class="step now"><span class="st">Collector</span><span class="sm">Moderate volume, trips and speed{% src "def.collector" %}</span></div>
+    <div class="step now"><span class="st">Minor arterial</span><span class="sm">Feeds and augments a principal arterial{% src "def.minor-arterial" %}</span></div>
+    <div class="step"><span class="st">Principal arterial</span><span class="sm">The highest-volume corridors{% src "def.principal-arterial" %}</span></div>
+  </div>
+  <p>Florida law sorts roads by how they behave rather than how big they are. A <strong>collector</strong> carries "relatively moderate" volume, trip length and speed.{% src "def.collector" %} An <strong>arterial</strong> is "relatively continuous," higher volume, longer trips.{% src "def.arterial" %} Federal guidance splits arterials further: a <strong>principal</strong> arterial serves "the highest traffic volume corridors"{% src "def.principal-arterial" %} &#8212; here that is SR 54 and the Suncoast Parkway.</p>
+  <p>The label is not cosmetic. It decides which design standards apply, and under Pasco's access management code, how far apart driveways and median openings have to be and where turn lanes are required.</p>
+  <p>The county describes this corridor as a collector;{% src "rangeland.claim.regional-collector" %} however, a new four-lane road carrying <strong>{% fact "rangeland.aadt.rangeland-new.2050-build" %} vehicles a day</strong>, bridging the Suncoast Parkway and completing a continuous {% calc "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente" %}{% sum "rangeland.length-miles", "rangeland.length-miles.budbexley", "rangeland.length-miles.caliente", 0 %}{% endcalc %}-mile route sounds a lot more like a minor arterial. I don't know if the designation can change after it is built, but that is something I'd like to ask.</p>
+  <p class="foot">Fla. Stat. 334.03 &#183; FHWA functional classification guidelines &#183; more in section 4</p>
+</div>
+
+<div class="slide">
+  <p class="sn">04 &nbsp;·&nbsp; Process</p>
+  <h2>We are currently in the route study; money for construction has been set aside.</h2>
+  <div class="steps">
+    <div class="step"><span class="st">In county plans</span><span class="sm">Since {% fact "rangeland.schedule.comp-plan-since" %}</span></div>
+    <div class="step now"><span class="st">Route study</span><span class="sm">Now &#183; Workshop #3</span></div>
+    <div class="step"><span class="st">Design</span><span class="sm">Funded {% fact "rangeland.schedule.design-funded" %}</span></div>
+    <div class="step"><span class="st">Right of way</span><span class="sm">Funded {% fact "rangeland.schedule.row-funded" %}</span></div>
+    <div class="step"><span class="st">Construction</span><span class="sm">Funded {% fact "rangeland.schedule.cst-funded" %}</span></div>
+  </div>
+  <p>The county communicated that a route study and a PD&amp;E study are two versions of the same process, with this project running under Pasco County's code rather than federal law. A federal PD&amp;E study is not required because the project doesn't use federal money or have a federal nexus.</p>
+  <p>This is a big reason to comment before {% fact "rangeland.schedule.comments-due" %}. The study concludes in the fall and that is when an alternative gets chosen &#8212; the workshop and the comments that follow it are the input to that decision. Design money is programmed for {% fact "rangeland.schedule.design-funded" %} and construction for {% fact "rangeland.schedule.cst-funded" %}, though the project site says the construction date is TBD.{% src "rangeland.claim.construction-tbd" %}</p>
+  <p class="foot">Pasco County Transportation Engineering &#183; county capital improvement plan</p>
+</div>
+
+<div class="slide">
+  <p class="sn">05 &nbsp;·&nbsp; Growth creates traffic</p>
+  <h2>Population growth creates more traffic; this road seems designed to absorb it.</h2>
+  <div class="stats">
+    <div class="stat"><div class="v hot">{% calc "rangeland.los.*" %}{% losWorse "rangeland.los", "2023", "2050-nobuild" %}<span style="font-size:.55em"> / {% losTotal "rangeland.los" %}</span>{% endcalc %}</div><div class="k">Intersections worse in 2050 than today without the road &#8212; {% losWorse "rangeland.los", "2023", "2050-build" %} with it</div></div>
+    <div class="stat"><div class="v good">{% calc "rangeland.aadt.bvd-sr54.2050-nobuild", "rangeland.aadt.bvd-sr54.2050-build" %}{% diff "rangeland.aadt.bvd-sr54.2050-nobuild", "rangeland.aadt.bvd-sr54.2050-build" %}{% endcalc %}</div><div class="k">Fewer vehicles on Bexley Village Dr toward SR 54 compared to the no-build option</div></div>
+    <div class="stat"><div class="v acc">{% calc "rangeland.los.*" %}{% losCount "rangeland.los", "2050-nobuild", "F" %} &#8594; {% losCount "rangeland.los", "2050-build", "F" %}{% endcalc %}</div><div class="k">Intersections at grade F in 2050: without the road &#8594; with it</div></div>
+  </div>
+  <p>As Pasco's population grows and Bexley expands north to Ridge road, traffic inside and outside our neighborhood is only going to get worse. The expanded road will relieve congestion at the expense of routing traffic through Bexley.</p>
+  <details class="xp">
+    <summary>See all {% losTotal "rangeland.los" %} intersections</summary>
+    <p style="margin:12px 0 0;font-size:.98rem">The following table shows how Pasco grades intersections on an A to F scale, at the evening peak. The three columns show today, 2050 with nothing built, and 2050 with Alternative A. Alternative A is better than doing nothing at {% losWorse "rangeland.los", "2050-build", "2050-nobuild" %} of the {% losTotal "rangeland.los" %}, the same at {% losSame "rangeland.los", "2050-nobuild", "2050-build" %}, and worse at {% losWorse "rangeland.los", "2050-nobuild", "2050-build" %}.</p>
+    <div class="viz">
+{%- for r in losRows %}
+    <div class="lrow"><span class="lnm">{{ r[1] }}</span><span class="grades"><span class="g now">{% fact "rangeland.los." + r[0] + ".2023" %}</span><span class="g nob">{% fact "rangeland.los." + r[0] + ".2050-nobuild" %}</span><span class="g bld">{% fact "rangeland.los." + r[0] + ".2050-build" %}</span></span></div>
+{%- endfor %}
+    <div class="lkey"><span><i class="dot now"></i>Today (2023)</span><span><i class="dot nob"></i>2050 no-build</span><span><i class="dot bld"></i>2050 Alternative A</span><span>A is free-flowing &#183; F cannot clear the queue</span></div>
+    </div>
+  </details>
+  <p>What the project changes is <em>where</em> the traffic goes. It pulls about {% calc "rangeland.aadt.bvd-sr54.2050-nobuild", "rangeland.aadt.bvd-sr54.2050-build" %}{% diff "rangeland.aadt.bvd-sr54.2050-nobuild", "rangeland.aadt.bvd-sr54.2050-build", "abs" %}{% endcalc %} vehicles a day off Bexley Village Drive toward SR 54 but adds {% fact "rangeland.aadt.rangeland-new.2050-build" %} onto the new road.</p>
+  <p class="foot">County traffic boards shown at Public Workshop #3, 24 September 2026 &#8212; existing (2023 counts), 2050 no-build and 2050 build &#183; evening peak</p>
+</div>
+
+<div class="slide">
+  <p class="sn">06 &nbsp;·&nbsp; Noise</p>
+  <h2>Two stretches are marked noise impacted. One of them may get a barrier.</h2>
+  <p>The workshop boards label <strong>two noise impacted areas</strong> along the corridor: one behind the homes at <strong>The Preserve</strong>, and one in <strong>Bexley near the Bexley Village Drive roundabout</strong>. Mitigation was found reasonable and feasible at the roundabout location.</p>
+  <p>Both areas are short, but the Bexley area is very close to homes. The county has changed the overall noise impact from {% fact "rangeland.matrix.noise.2025-01" %} to <strong>{% fact "rangeland.matrix.noise.2026-09" %}</strong>, since the original assessment in January 2025. </p>
+  <p>Under the federal procedure the county has chosen to follow, a barrier must be both feasible and reasonable &#8212; in practice largely a cost-per-home test. Failing that test does not mean a location is quiet. If sound levels were modelled at individual homes, which I understand from the design firm that they were, those results have not been published.</p>
+  <p class="foot">Pasco County workshop boards and evaluation criteria board, 24 September 2026</p>
+</div>
+
+<div class="slide">
+  <p class="sn">07 &nbsp;&#183;&nbsp; The interchange</p>
+  <h2>The Suncoast interchange is suspended, but not dead.</h2>
+  <div class="quote">Advancement of the Rangeland Boulevard interchange to the design and construction phases has been suspended until Pasco County demonstrates stakeholder support and confirms that the Bud Bexley Parkway and Bexley Village Drive intersection will operate acceptably with the interchange through the year 2050.<span class="attr">Gregory Moore, PE, Project Manager for the Turnpike&#8217;s Suncoast Parkway study (a consultant to Florida&#8217;s Turnpike Enterprise), email of 28 August 2025{% src "rangeland.claim.interchange-suspended" %}</span></div>
+  <p>It is neither cancelled nor approved. If it is built, the county says a <strong>six-lane</strong> segment would be required from South Branch Boulevard to west of Bexley Village Drive. Options D and E include space for this expansion. Option A does not. </p>
+  <p class="foot">Florida's Turnpike Enterprise &#183; Pasco County project overview</p>
+</div>
+
+<div class="slide">
+  <p class="sn">08 &nbsp;·&nbsp; What to do</p>
+  <h2>Things I'm still curious about</h2>
+  <ol class="qlist">
+    <li><b>Where were the noise receptors, and what levels were modelled at each?</b> Mitigation was found reasonable and feasible for one short segment near the roundabout in Bexley. Everywhere else, which test did the location fail &#8212; reasonableness or feasibility &#8212; and by how much?</li>
+    <li><b>What truck percentage does the 2050 forecast assume</b> for the finished corridor? Existing counts are about {% fact "rangeland.trucks.corridor-existing" %} here and {% fact "rangeland.trucks.sr54" %} on SR 54; the design-year number has not been published.</li>
+    <li><b>Four of the five stated goals have no published measurement.</b> Connectivity, congestion relief, evacuation, secondary access and safety. Which will be measured before an alternative is chosen, and how?</li>
+    <li><b>Design money was appropriated for a fiscal year that ends 30 September,</b> while this study has not yet chosen between A, D and E. Did design work begin before an alternative was selected, or did the money go unspent?</li>
+    <li><b>Which Board of County Commissioners votes have authorised money for this project, and on what dates?</b> And what is the {% fact "rangeland.funding.state-request", "words" %} state appropriation for &#8212; has the county executed a grant agreement to accept it?</li>
+    <li><b>Why does the adopted regional plan fund only a study in 2041&#8211;2050</b> while the county plans to build in 2029 &#8212; and has the state TRIP grant been awarded?</li>
+    <li><b>Is the county pursuing the Suncoast interchange,</b> and what counts as demonstrating stakeholder support? Has the Bud Bexley Pkwy / Bexley Village Dr intersection been tested with it through 2050?</li>
+    <li><b>What acreage is the wetland mitigation cost based on?</b> At {% fact "rangeland.cost.wetland-mitigation-rate" %} an acre, {% fact "rangeland.matrix.wetlands.2026-09" %} acres of wetland comes to about ${% product "rangeland.cost.wetland-mitigation-rate", "rangeland.matrix.wetlands.2026-09", 0.000001, 1 %} million; the matrix shows {% fact "rangeland.cost.a.wetland-mitigation", "words" %}.</li>
+  </ol>
+  <p class="foot">Comments due {% fact "rangeland.schedule.comments-due" %} &#183; pkontses@mypasco.net &#183; pasco.rja.revize.com/forms/11000</p>
+</div>
+</div><!-- /#deck -->
+
+<!-- ==========================================================================
+     GUIDE - the Full detail view
+     Sections 01-10, then "check things yourself", then the corrections.
+     ========================================================================== -->
+<div id="doc" class="det">
+
+<div class="toc">
+  <p>What's in here</p>
+  <ol>
+    <li><a href="#s1">Key takeaways</a></li>
+    <li><a href="#s2">Project overview</a></li>
+    <li><a href="#s3">Where it is in the process</a></li>
+    <li><a href="#s4">How the Rangeland study fits into the larger Pasco plan</a></li>
+    <li><a href="#s5">Traffic increases no matter what</a></li>
+    <li><a href="#s6">Trucks and noise</a></li>
+    <li><a href="#s7">What it costs</a></li>
+    <li><a href="#s8">How these numbers are generated</a></li>
+    <li><a href="#s9">How to get involved</a></li>
+    <li><a href="#s10">Where this comes from</a></li>
+  </ol>
+</div>
+
+<section id="s1">
+  <h2><span class="num">01</span><span>Key takeaways</span></h2>
+  <ul>
+     <li>Pasco county is growing. A lot. Traffic in our area is going to get worse, no matter what happens with the Rangeland study.</li>
+    <li>Pasco County is planning to extend <strong>Rangeland Boulevard</strong> 3.4 miles from Cattle Gap Trail to Bexley Village Drive, as a <strong>four-lane divided road</strong> with bike lanes, a sidewalk, a multi-use trail, and a new overpass across the Suncoast Parkway.</li>
+    <li>It is one segment of a roughly 10-mile route on the county's <strong>Freight Priority Network</strong> in <a href="https://www.pascocountyfl.gov/services/mpo/plans.php#Doc2212">Pasco County's 2050 plan</a>, continuing east as Bud Bexley Parkway to US 41 and then as Caliente Boulevard to Ehren Cutoff.</li>
+    <li><strong>Traffic here roughly triples by 2050 whether or not this road is built.</strong> Bexley Village Drive by the roundabout goes from {% fact "rangeland.aadt.bvd-rndbt.2023" %} vehicles a day to {% fact "rangeland.aadt.bvd-rndbt.2050-nobuild" %} in the county's <em>no-build</em> forecast, primarily due to Bexley expanding north to Ridge Road. Growth, not the project, is doing most of that.</li>
+    <li>Three build alternatives remain — <strong>A, D and E</strong> — all are four-lane divided roadways. (Alternatives B and C were dropped after strong public pushback.)</li>
+    <li>Design, right-of-way and <strong>construction money are already programmed</strong> in the county's capital plan for 2026, 2027 and 2029.</li>
+  </ul>
+
+  <div class="callout">
+    <h3>What is a Freight Priority Network?</h3>
+    <p style="margin-bottom:10px">Pasco's long range transportation plan designates a <strong>Freight Priority Network</strong>, the roads the county plans for the movement of goods. Rangeland Boulevard, Bud Bexley Parkway and Caliente Boulevard are all part of that plan, and the plan draws its freight goals from the state's <strong>Florida Mobility and Trade Plan</strong>. The county notes it has no freight plan of its own yet.</p>
+    <p style="margin-bottom:10px">The designation earns the project a point in the 2050 plan's project scoring &#8212; the rule reads "project falls along the freight priority network &#8212; 1 point." The road is also designed for a <strong>{% fact "rangeland.design.design-vehicle" %}</strong> vehicle, a medium-sized semitrailer, meaning one can make the turns without leaving the pavement.</p>
+    <p style="margin-bottom:0">The county's view is that the designation does not imply heavy truck use, and that many state and county roads carry it. They report about <strong>{% fact "rangeland.trucks.corridor-existing" %}</strong> of daily traffic is trucks on the existing segments of this corridor against about <strong>{% fact "rangeland.trucks.sr54" %}</strong> on the parallel stretch of SR 54, and expect the corridor's share to rise once the segments connect but stay below SR 54's{% src "rangeland.claim.truck-share-outlook" %} &#8212; and above the local street network.{% src "rangeland.claim.truck-volume-outlook" %} A design-year truck percentage for the finished corridor still has not been published.</p>
+  </div>
+</section>
+
+<section id="s2">
+  <h2><span class="num">02</span><span>Project overview</span></h2>
+  <p>The Rangeland study covers 3.4 miles between Cattle Gap Trail and Bexley Village Drive. The county's workshop mailer sets out two cross-sections, both four lanes divided — the difference is the width of the median, and therefore the total width of land the road occupies.</p>
+
+  <figure>
+    <!-- chart: SVG below, skip unless a value changed -->
+    <svg viewBox="0 0 920 330" role="img" aria-label="Two road cross-sections drawn to scale. The first, from Cattle Gap Trail to South Branch Boulevard, is 93 feet of elements: a 12-foot multi-use path, a 5-foot bike lane, two 11-foot travel lanes, a 22-foot median, two more 11-foot travel lanes, a 5-foot bike lane and a 5-foot sidewalk, within a right-of-way of 124 to 170 feet. The second, from South Branch Boulevard to west of Bexley Village Drive, is 115 feet of elements with a 44-foot median instead of 22, within a right-of-way of 146 to 170 feet.">
+      <text class="x-t" x="10" y="26">Cattle Gap Trail → South Branch Blvd</text>
+      <text class="x-s" x="10" y="44">93 FT OF ROAD ELEMENTS · RIGHT-OF-WAY 124–170 FT</text>
+      <g>
+        <rect class="x-path"   x="70"    y="58" width="81.6"  height="34"/><text class="x-w-d" x="110.8" y="79" text-anchor="middle">12′</text>
+        <rect class="x-bike"   x="151.6" y="58" width="34"    height="34"/><text class="x-w"   x="168.6" y="79" text-anchor="middle">5′</text>
+        <rect class="x-travel" x="185.6" y="58" width="74.8"  height="34"/><text class="x-w"   x="223"   y="79" text-anchor="middle">11′</text>
+        <rect class="x-travel" x="260.4" y="58" width="74.8"  height="34"/><text class="x-w"   x="297.8" y="79" text-anchor="middle">11′</text>
+        <rect class="x-median" x="335.2" y="58" width="149.6" height="34"/><text class="x-w"   x="410"   y="79" text-anchor="middle">22′ median</text>
+        <rect class="x-travel" x="484.8" y="58" width="74.8"  height="34"/><text class="x-w"   x="522.2" y="79" text-anchor="middle">11′</text>
+        <rect class="x-travel" x="559.6" y="58" width="74.8"  height="34"/><text class="x-w"   x="597"   y="79" text-anchor="middle">11′</text>
+        <rect class="x-bike"   x="634.4" y="58" width="34"    height="34"/><text class="x-w"   x="651.4" y="79" text-anchor="middle">5′</text>
+        <rect class="x-path"   x="668.4" y="58" width="34"    height="34"/><text class="x-w-d" x="685.4" y="79" text-anchor="middle">5′</text>
+      </g>
+      <path class="x-rw" d="M 70 104 V 112 H 702.4 V 104"/>
+      <text class="x-s" x="386" y="128" text-anchor="middle">ROAD ELEMENTS — THE RIGHT-OF-WAY IS WIDER STILL</text>
+
+      <text class="x-t" x="10" y="180">South Branch Blvd → west of Bexley Village Dr</text>
+      <text class="x-s" x="10" y="198">115 FT OF ROAD ELEMENTS · RIGHT-OF-WAY 146–170 FT</text>
+      <g>
+        <rect class="x-path"   x="70"    y="212" width="34"    height="34"/><text class="x-w-d" x="87"    y="233" text-anchor="middle">5′</text>
+        <rect class="x-bike"   x="104"   y="212" width="34"    height="34"/><text class="x-w"   x="121"   y="233" text-anchor="middle">5′</text>
+        <rect class="x-travel" x="138"   y="212" width="74.8"  height="34"/><text class="x-w"   x="175.4" y="233" text-anchor="middle">11′</text>
+        <rect class="x-travel" x="212.8" y="212" width="74.8"  height="34"/><text class="x-w"   x="250.2" y="233" text-anchor="middle">11′</text>
+        <rect class="x-median" x="287.6" y="212" width="299.2" height="34"/><text class="x-w"   x="437.2" y="233" text-anchor="middle">44′ median</text>
+        <rect class="x-travel" x="586.8" y="212" width="74.8"  height="34"/><text class="x-w"   x="624.2" y="233" text-anchor="middle">11′</text>
+        <rect class="x-travel" x="661.6" y="212" width="74.8"  height="34"/><text class="x-w"   x="699"   y="233" text-anchor="middle">11′</text>
+        <rect class="x-bike"   x="736.4" y="212" width="34"    height="34"/><text class="x-w"   x="753.4" y="233" text-anchor="middle">5′</text>
+        <rect class="x-path"   x="770.4" y="212" width="81.6"  height="34"/><text class="x-w-d" x="811.2" y="233" text-anchor="middle">12′</text>
+      </g>
+      <path class="x-rw" d="M 70 258 V 266 H 852 V 258"/>
+
+      <g>
+        <rect class="x-travel" x="10" y="296" width="14" height="14"/><text class="x-key" x="30" y="307">Travel lane</text>
+        <rect class="x-bike"   x="130" y="296" width="14" height="14"/><text class="x-key" x="150" y="307">Bike lane</text>
+        <rect class="x-median" x="240" y="296" width="14" height="14"/><text class="x-key" x="260" y="307">Median</text>
+        <rect class="x-path"   x="340" y="296" width="14" height="14"/><text class="x-key" x="360" y="307">Sidewalk / multi-use path</text>
+      </g>
+    </svg>
+    <!-- end chart -->
+    <figcaption>Based on the dimensions in the county's Workshop #3 mailer. The 12-foot multi-use path is planned as part of the Orange Belt Trail, a 37-mile route across Pasco County, with a possible connection to the Suncoast Trail. A new overpass across the Suncoast Parkway is included in the project.</figcaption>
+  </figure>
+
+  <p>For a sense of width: 124 to 170 feet is the land a six- to eight-lane highway corridor typically occupies once you count medians, paths and drainage. The driving surface is a smaller part of it than most people expect.</p>
+  <p>One thing the drawings leave out, which the county pointed out and which I had misread: the cross-sections exclude the grassed strip between the sidewalks and shared-use paths and the right-of-way line. That strip is <em>narrower</em> in the wide-median section, which means <strong>the median can widen without the total right-of-way widening.</strong> A 44-foot median does not, by itself, mean the county takes more land. See correction 10.</p>
+
+
+  <h3>The Suncoast interchange, and what would trigger six lanes</h3>
+  <p>The project overview notes that if Florida's Turnpike Enterprise builds a Rangeland Boulevard interchange with the Suncoast Parkway, a <strong>six-lane</strong> segment would be required from South Branch Boulevard to west of Bexley Village Drive. The Turnpike ran a PD&amp;E study from 2023 to mid-2025 that evaluated exactly that interchange.</p>
+  <p>Two organisations have said something about this, and they are answering different questions. Pasco County's position, in September 2026: <strong>"No interchange or six-lane section is currently being considered for approval in the Rangeland Blvd Route Study."</strong>{% src "rangeland.claim.no-interchange-in-study" %} The county adds that no probability of a future interchange or widening can be estimated, that the wider median is being considered only because it is a low-cost way to make later widening cheaper, and that whether any of that happens is for future county leaders to decide, whichever alternative is chosen.</p>
+  <p>Florida's Turnpike, which is the agency that would actually build the interchange, is more specific:</p>
+  <div class="quote">Advancement of the Rangeland Boulevard interchange to the design and construction phases has been suspended until Pasco County demonstrates stakeholder support and confirms that the Bud Bexley Parkway and Bexley Village Drive intersection will operate acceptably with the interchange through the year 2050.<span class="attr">Gregory Moore, PE, Project Manager for the Turnpike&#8217;s Suncoast Parkway study (a consultant to Florida&#8217;s Turnpike Enterprise), email of 28 August 2025{% src "rangeland.claim.interchange-suspended" %}</span></div>
+  <p>Two conditions sit in that sentence, and both are worth reading closely.</p>
+  <p><strong>"Demonstrates stakeholder support."</strong> The interchange is neither cancelled nor approved. It is waiting on evidence of public support, and the county's route study is the process that would produce that evidence. This cuts in every direction: if you want the interchange, this is where you say so; if you don't, the same is true. Alternatives B and C were dropped from this study for lack of public support for a Suncoast interchange, so the mechanism is not hypothetical.</p>
+  <p><strong>"Will operate acceptably &#8230; through the year 2050."</strong> The intersection named appears to be the Bexley Village Drive roundabout, which the county's published forecast already shows falling from <strong>A today to D in 2050</strong> &#8212; and that is with the road built and <em>no</em> interchange. (Without the road at all it is forecast at F.) The Turnpike is asking the county to show the intersection still works with interchange traffic added on top of the build case. No such analysis has been published.</p>
+
+  <div class="callout">
+    <h3>Worth asking the BCC</h3>
+    <p style="margin-bottom:0">Is the county pursuing the Suncoast interchange, and what would count as demonstrating stakeholder support? Has the Bud Bexley Parkway / Bexley Village Drive intersection been tested with the interchange in place through 2050, and can we see it? And if six lanes are triggered, how much wider does the corridor get &#8212; no cross-section or right-of-way width has been published for that case.</p>
+  </div>
+
+  <!-- Parked for now: land / water / wetlands detail from the alternatives matrix.
+       Uncomment to restore.
+  <h3>What it takes: land, water and wetlands</h3>
+  <p>The route study's own evaluation matrix quantifies this. For the build alternative it assessed:</p>
+  <div class="tw"><table>
+    <thead><tr><th>What the project needs</th><th class="n">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Right-of-way for the roadway</td><td class="n">25.26 acres</td></tr>
+      <tr><td><strong>Right-of-way for stormwater ponds</strong></td><td class="n">46.34 acres</td></tr>
+      <tr><td>Parcels affected</td><td class="n">19</td></tr>
+      <tr><td>Homes or businesses relocated</td><td class="n">0</td></tr>
+      <tr><td>Wetlands affected</td><td class="n">24.11 acres</td></tr>
+      <tr><td>Surface waters affected</td><td class="n">0 acres</td></tr>
+    </tbody>
+  </table></div>
+  <p>Two things stand out. <strong>The drainage ponds need almost twice as much land as the road does</strong> — 46 acres against 25 — which is a big part of why a 3.4-mile road takes 72 acres. And <strong>nobody is relocated</strong>: 19 parcels are affected, but the matrix records no displacements.</p>
+  -->
+
+</section>
+
+<section id="s3">
+  <h2><span class="num">03</span><span>Where we are in the overall process</span></h2>
+  <p>This is an old project. It has been in the <strong>Pasco County Comprehensive Plan since {% fact "rangeland.schedule.comp-plan-since" %}</strong>, and in long range transportation plans adopted by the county's MPO before 2024. It is now in the route study stage, which is choosing between Alternatives A, D and E. After that come design, right-of-way purchase and construction &#8212; and money for all three is already set aside in the county's capital plan.</p>
+  <p>Different studies happen at different stages, which matters if you want to know when a particular concern gets examined. Here is where each one lands.</p>
+
+  <figure>
+    <!-- chart: SVG below, skip unless a value changed -->
+    <svg viewBox="0 0 920 268" role="img" aria-label="Timeline of the project's stages showing which studies happen at each. The project has been in county plans since 2006. The route study, happening now, is the same process as a PD and E study run under Pasco County's own code rather than federal law; it covers traffic forecasts, noise analysis under Federal Highway Administration procedures, wetlands and species, right-of-way and preliminary cost. Design is funded for fiscal year 2026, right of way for 2027, and construction for 2029.">
+      <defs><marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><polygon class="ah" points="0,0 10,5 0,10"/></marker></defs>
+
+      <rect class="p-box" x="6" y="44" width="160" height="54"/>
+      <text class="p-t" x="86" y="67" text-anchor="middle">In county plans</text>
+      <text class="p-d" x="86" y="85" text-anchor="middle">SINCE 2006</text>
+      <text class="p-d" x="8" y="126">&#183; comprehensive plan</text>
+      <text class="p-d" x="8" y="141">&#183; long range plans</text>
+      <text class="p-d" x="8" y="156">&#183; congestion scoring</text>
+
+      <line class="p-arrow" x1="168" y1="71" x2="186" y2="71" marker-end="url(#pa)"/>
+
+      <rect class="p-box-now" x="188" y="38" width="160" height="66"/>
+      <text class="p-t" x="268" y="62" text-anchor="middle">Route study</text>
+      <text class="p-d" x="268" y="79" text-anchor="middle">NOW &#8212; WORKSHOP #3</text>
+      <text class="p-d" x="268" y="94" text-anchor="middle">SAME PROCESS AS A PD&amp;E</text>
+      <text class="p-here" x="268" y="24" text-anchor="middle">WE ARE HERE</text>
+      <line class="s-brace" x1="268" y1="28" x2="268" y2="36"/>
+      <text class="p-d" x="190" y="126">&#183; traffic forecasts</text>
+      <text class="p-d" x="190" y="141">&#183; noise, FHWA procedures</text>
+      <text class="p-d" x="190" y="156">&#183; wetlands, species</text>
+      <text class="p-d" x="190" y="171">&#183; right-of-way</text>
+      <text class="p-d" x="190" y="186">&#183; preliminary cost</text>
+
+      <line class="p-arrow" x1="350" y1="71" x2="368" y2="71" marker-end="url(#pa)"/>
+
+      <rect class="p-box" x="370" y="44" width="160" height="54"/>
+      <text class="p-t" x="450" y="67" text-anchor="middle">Design</text>
+      <text class="p-d" x="450" y="85" text-anchor="middle">FUNDED FY 2026</text>
+      <text class="p-d" x="372" y="126">&#183; final geometry</text>
+      <text class="p-d" x="372" y="141">&#183; construction plans</text>
+
+      <line class="p-arrow" x1="532" y1="71" x2="550" y2="71" marker-end="url(#pa)"/>
+
+      <rect class="p-box" x="552" y="44" width="160" height="54"/>
+      <text class="p-t" x="632" y="67" text-anchor="middle">Right of way</text>
+      <text class="p-d" x="632" y="85" text-anchor="middle">FUNDED FY 2027</text>
+      <text class="p-d" x="554" y="126">&#183; appraisals</text>
+      <text class="p-d" x="554" y="141">&#183; acquisition</text>
+
+      <line class="p-arrow" x1="714" y1="71" x2="732" y2="71" marker-end="url(#pa)"/>
+
+      <rect class="p-box" x="734" y="44" width="160" height="54"/>
+      <text class="p-t" x="814" y="67" text-anchor="middle">Construction</text>
+      <text class="p-d" x="814" y="85" text-anchor="middle">FUNDED FY 2029</text>
+
+      <text class="s-mark" x="6" y="228">Study began March 2023 &#183; Workshop #1 Jan 2025 &#183; Workshop #2 May 2025 &#183; Workshop #3 Sep 2026 &#183; study complete Fall 2026 (anticipated)</text>
+      <text class="s-mark" x="6" y="248">"Funded" means money is set aside in the county's Capital Improvement Plan, not that the work has started.</text>
+    </svg>
+    <!-- end chart -->
+    <figcaption>An earlier version of this diagram showed a PD&amp;E study as a separate, unfunded step after the route study. That was wrong, and the county corrected it: a route study and a PD&amp;E study are two versions of the same process &#8212; the first run under Pasco County's own code and standards, the second under federal law where federal money or federal involvement is in play. See correction 5.</figcaption>
+  </figure>
+
+  <div class="callout">
+    <h3>Worth asking the BCC</h3>
+    <p style="margin-bottom:10px">The project lists five goals: regional connectivity, easing congestion, evacuation and emergency response, secondary access, and safety. Traffic has been analysed and published, and environmental effects &#8212; noise, wetlands, species, contamination, historic sites &#8212; are screened in the alternatives matrix. But <strong>safety, evacuation and connectivity have no row in that matrix and no published analysis</strong>, even though safety is one of the five stated goals.</p>
+    <p style="margin-bottom:0">Evacuation is normally measured with clearance times, safety with crash data, connectivity with detour distances. How were the three alternatives compared on those, and can that comparison be published?</p>
+    <p style="margin-bottom:0;margin-top:10px">Four of the five goals have no published measurement of any kind. Congestion has been analysed and published. Connectivity, evacuation, secondary access and safety have not. Which of them will be measured before an alternative is chosen, and how?</p>
+  </div>
+</section>
+
+<section id="s4">
+  <h2><span class="num">04</span><span>How the Rangeland study fits into the larger Pasco plan</span></h2>
+  <p>While most of the Bexley discussion has been about a specific 3.4 mile segment, the adopted long range plan contains two more segments that continue straight on from it, all with four lanes and the same freight network designation, connecting Rangeland to US 41 and Ehren Cutoff.</p>
+<p>The figure below lists related project numbers from Pasco's plan.</p>
+  <figure>
+    <!-- chart: SVG below, skip unless a value changed -->
+    <svg viewBox="0 0 920 210" role="img" aria-label="Diagram of the corridor. Project 114.2, Rangeland Boulevard, runs 3.41 miles from Cattle Gap Trail to Bexley Village Drive, crossing South Branch Boulevard and the Suncoast Parkway, and is the segment covered by this study. Project 114.3, Bud Bexley Parkway, continues 5.43 miles to US 41. Project 114.4, Caliente Boulevard, continues 1.47 miles to County Road 583. Total roughly 10.3 miles.">
+      <line class="s-seg s-this" x1="60" y1="104" x2="330" y2="104"/>
+      <line class="s-seg s-other" x1="330" y1="104" x2="760" y2="104"/>
+      <line class="s-seg s-other" x1="760" y1="104" x2="876" y2="104"/>
+      <text class="s-lab" x="195" y="82" text-anchor="middle">114.2 Rangeland Blvd</text>
+      <text class="s-len" x="195" y="140" text-anchor="middle">3.41 MILES · NEW 4-LANE</text>
+      <text class="s-lab" x="545" y="82" text-anchor="middle">114.3 Bud Bexley Pkwy</text>
+      <text class="s-len" x="545" y="140" text-anchor="middle">5.43 MILES · NEW 4-LANE</text>
+      <text class="s-lab" x="818" y="82" text-anchor="middle">114.4 Caliente</text>
+      <text class="s-len" x="818" y="140" text-anchor="middle">1.47 MI</text>
+      <g class="s-tick">
+        <line x1="60" y1="96" x2="60" y2="164"/><line x1="200" y1="112" x2="200" y2="164"/>
+        <line x1="252" y1="112" x2="252" y2="164"/><line x1="330" y1="96" x2="330" y2="164"/>
+        <line x1="760" y1="96" x2="760" y2="164"/><line x1="876" y1="96" x2="876" y2="164"/>
+      </g>
+      <text class="s-mark" x="60" y="180" text-anchor="middle">Cattle Gap Trl</text>
+      <text class="s-mark" x="200" y="180" text-anchor="middle">S Branch Blvd</text>
+      <text class="s-mark" x="256" y="196" text-anchor="middle">Suncoast Pkwy (new overpass)</text>
+      <text class="s-mark" x="336" y="180" text-anchor="middle">Bexley Village Dr</text>
+      <text class="s-mark" x="760" y="180" text-anchor="middle">US 41</text>
+      <text class="s-mark" x="876" y="180" text-anchor="middle">CR 583</text>
+      <path class="s-brace" d="M 60 60 V 50 H 330 V 60"/>
+      <text class="s-brlab" x="195" y="40" text-anchor="middle">THIS STUDY</text>
+    </svg>
+    <!-- end chart -->
+    <figcaption>All three segments are described in the long range plan as new four-lane roadways on the county's Freight Priority Network.</figcaption>
+  </figure>
+
+  <div class="system">
+    <div class="hd">Rangeland is one part of a bigger system</div>
+    <div class="bd">
+      <div class="tw"><table>
+        <tbody>
+          <tr class="me"><td class="id">114.2</td><td>Rangeland Blvd &#8212; Cattle Gap Trl to Bexley Village Dr &#183; new 4-lane &#183; <em>this study</em><span class="stg live">Route study &#183; Workshop #3 on 24 Sept 2026</span></td></tr>
+          <tr><td class="id">114.3</td><td>Bud Bexley Pkwy &#8212; Bexley Village Dr to US 41 &#183; new 4-lane<span class="stg live">Route study underway since Jan 2025 &#8212; but the county is studying only east of Sunlake Blvd, about 2.6 of the plan&#8217;s 5.43 miles</span></td></tr>
+          <tr><td class="id">114.4</td><td>Caliente Blvd &#8212; US 41 to CR 583 (Ehren Cutoff) &#183; new 4-lane<span class="stg">No project page &#183; plan schedules its PD&amp;E for 2041&#8211;2050</span></td></tr>
+          <tr><td class="id">114.1</td><td>Rangeland Blvd &#8212; Starkey Blvd to Long Spur &#183; widen to 4 lanes<span class="stg">No project page &#183; plan schedules its PD&amp;E for 2025&#8211;2030</span></td></tr>
+          <tr><td class="id">118.1</td><td>Suncoast Pkwy &#8212; SR 52 to Rangeland Blvd &#183; widen to <strong>6 lanes</strong><span class="stg live">PD&amp;E study by Florida&#8217;s Turnpike, 2023 to mid-2025 &#8212; it evaluated a new interchange at Rangeland Blvd, now suspended pending public support (section 2)</span></td></tr>
+          <tr><td class="id">124.1</td><td>Bexley Ranch Blvd &#8212; Rangeland Blvd to Sunlake Blvd &#183; new 4-lane<span class="stg">No project page found</span></td></tr>
+          <tr><td class="id">126.1</td><td>Bexley Village Dr &#8212; Mentmore Blvd to Rangeland Blvd<span class="stg">No project page found</span></td></tr>
+          <tr><td class="id">127.1</td><td>Meadowbrook Dr &#8212; Mentmore Blvd to SR 54 &#183; widen to 4 lanes<span class="stg">No project page found</span></td></tr>
+          <tr><td class="id">131.1</td><td>Drexel Rd &#8212; Rangeland Blvd to Lake Patience Dr &#183; new 2-lane<span class="stg">No project page found</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <p><strong>Only three of the nine have a public project page.</strong> Rangeland Boulevard and Bud Bexley Parkway each have one on the county's site, and both are route studies running right now. The Suncoast Parkway widening has a Florida's Turnpike page, and its PD&amp;E study &#8212; which evaluated a new interchange at Rangeland Boulevard &#8212; finished in mid-2025. For the remaining six I could not find a project page at all, so the only stage information available is what the long range plan schedules.</p>
+  <p>Oddly, the adopted plan schedules the PD&amp;E study for Bud Bexley Parkway in <strong>2041&#8211;2050</strong>, and for Rangeland Boulevard in the same band. Both are being studied today instead. Whatever the reason, the corridor is moving considerably faster than the regional plan said it will. I don't know why.</p>
+
+  <p>None of this is secret, but it isn't really spelled out in the workshop mailer either, and it changes how the study should be read. The county's own description is that connecting the existing and planned segments of Rangeland Boulevard, Bud Bexley Parkway and <strong>Tower Road</strong> turns them into a <em>regional collector</em>. The existing Bud Bexley segments, they note, are isolated today and carry local traffic only.</p>
+
+  <h3>Collector or arterial?</h3>
+  <p>That phrase stuck with me, so I went looking for what a "regional collector" actually is. The phrase "regional collector" does not appear in Florida statute, in the Federal Highway Administration's classification system, or in Pasco's own land development code. The word "collector" on its own is defined, though, along with two other categories. Florida Statutes 334.03 sorts roads by how they behave rather than by how big they are:</p>
+  <ul>
+    <li><strong>Arterial</strong> &#8212; a route that is "relatively continuous and of relatively high traffic volume, long average trip length, high operating speed, and high mobility importance."</li>
+    <li><strong>Collector</strong> &#8212; a route of "relatively moderate average traffic volume, moderately average trip length, and moderately average operating speed."</li>
+    <li><strong>Local</strong> &#8212; a route of "relatively low average traffic volume, short average trip length or minimal through-traffic movements, and high land access for abutting property."</li>
+  </ul>
+  <p>Those don't seem like particularly useful definitions, but the federal system uses the same ladder, splitting collectors into major and minor.</p>
+  <p>A road's classification decides which design standards apply to it and &#8212; under Pasco's own access management code &#8212; how far apart driveways and median openings have to be and where turn lanes are required. It is one of the more consequential labels a road can carry.</p>
+  <p>All of that to say, it is worth asking why this project is designated as a collector and not arterial. A collector is supposed to be moderate in volume, trip length and speed. What section 5 describes is 3.4 miles of new four-lane road carrying <strong>{% fact "rangeland.aadt.rangeland-new.2050-build" %} vehicles a day</strong>, bridging the Suncoast Parkway, completing a continuous ten-mile route out to US 41 and Ehren Cutoff, and listed on the freight priority network. That sounds more like the arterial definition than the collector one.</p>
+  <p>Though if it is an arterial, it is a minor one. Florida separates a <strong>principal</strong> arterial &#8212; one serving "the major centers of activity of an urban area, the highest traffic volume corridors, and the longest trip purpose" &#8212; from a <strong>minor</strong> arterial that "interconnects with and augments" one of those and carries shorter trips. At {% fact "rangeland.aadt.rangeland-new.2050-build" %} vehicles a day this is nowhere near the highest-volume corridors here. SR 54 runs 63,500 to 93,000 and the Suncoast Parkway 75,500 to 93,000. This road would feed them, not be one of them.</p>
+  <p>But I don't think the choice is arbitrary. I imagine functional classification is assigned through a formal process, not by whoever writes the project description. I may well be wrong about it. But it seems a fair thing to ask: what classification will Rangeland Boulevard carry once it is built, who decides that, and has it been decided already?</p>
+  <p>What it would not change is the money. In an urban area collectors are already eligible for federal highway funds, so moving up a rung unlocks nothing, and it triggers no environmental review either, because that attaches to federal decisions and there are none here. Nor can anyone force a change: reclassification goes through FDOT with the county and the MPO both signing on and the Federal Highway Administration approving, which makes the county one of the parties whose agreement is needed to reclassify its own road. What the label does carry is intent. Classification is meant to record what a road actually does &#8212; so if the county expects an arterial, that is a statement about the road it expects to have in 2050.</p>
+
+  <div class="callout">
+    <h3>Answered since this page went up</h3>
+    <p style="margin-bottom:10px">This section used to ask which of these projects were in the modelled 2050 network behind the traffic numbers. The county has answered it: the Tampa Bay Regional Planning Model <strong>"incorporates all roadway projects in the MPO's long range plan,"</strong> naming Bud Bexley Parkway specifically.</p>
+    <p style="margin-bottom:0">So the forecasts in section 5 are not the effect of a 3.4-mile road. They are what these streets carry once the <em>whole corridor</em> exists, alongside every other project in the adopted plan. That is the right way to read them, and it is worth holding on to when someone quotes a single number at you. See correction 8.</p>
+  </div>
+</section>
+
+<section id="s5">
+  <h2><span class="num">05</span><span>Traffic Increases No Matter What; the Build May Help</span></h2>
+
+  <div class="callout">
+    <h3>Key Term: AADT</h3>
+    <p style="margin-bottom:10px"><strong>Average Annual Daily Traffic</strong> — the number of vehicles that pass a point on the road in a typical day, counting both directions together. It is the figure printed beside each street on the county's traffic boards.</p>
+    <p style="margin-bottom:0">Because it is an average across the whole year, it smooths out the differences between weekdays and weekends and between seasons. A street with an AADT of 16,500 carries more than that on a busy Thursday and less on a quiet Sunday; more in the summer than in the winter. It also says nothing about the peak hours, which is when traffic is actually felt. That aspect is only included in the LOS ratings for intersections.</p>
+  </div>
+
+  <p>Initially, I could only show you two columns: what these streets carry today, and what they are forecast to carry in 2050 if the road is built. That comparison mixes twenty-five years of ordinary growth in with the project's own effect, and there was no way to separate them.</p>
+  <p>The county has now supplied the third column &#8212; the <strong>no-build</strong> forecast, which is what 2050 looks like if nothing is built at all.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>Street</th><th class="n">Today</th><th class="n">2050<br>no-build</th><th class="n">2050<br>Alt A</th><th class="n">Build vs<br>no-build</th></tr></thead>
+    <tbody>
+{%- for r in trafficRows %}{% set k = "rangeland.aadt." + r[0] %}
+      <tr><td>{{ r[1] }}</td><td class="n now">{% fact k + ".2023" %}</td><td class="n nob">{% fact k + ".2050-nobuild" %}</td><td class="n bld">{% fact k + ".2050-build" %}</td><td class="n dif {% diffClass k + ".2050-nobuild", k + ".2050-build" %}">{% diff k + ".2050-nobuild", k + ".2050-build" %}</td></tr>
+{%- endfor %}
+      <tr><td>Rangeland Blvd (the new road)</td><td class="n now">—</td><td class="n nob">—</td><td class="n bld">{% fact "rangeland.aadt.rangeland-new.2050-build" %}</td><td class="n dif up">new road</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src" style="margin:0 0 20px">All three columns are read from the county's traffic boards shown at Public Workshop #3 on 24 September 2026: existing traffic (2023 counts), 2050 no-build, and 2050 build covering Alternatives A, D and E together. In the no-build there is no new road &#8212; the existing stub east of Gunn Highway carries about 2,000 a day.</p>
+
+  <p><strong>Traffic roughly triples on these streets either way.</strong> Bexley Village Drive by the roundabout goes from {% fact "rangeland.aadt.bvd-rndbt.2023" %} today to {% fact "rangeland.aadt.bvd-rndbt.2050-nobuild" %} in 2050 <em>with no project at all</em>. Nearly all of the increase this page has been describing happens whether or not Rangeland Boulevard is extended. The county said as much.</p>
+  <p>Bexley Village Drive toward SR 54 carries {% fact "rangeland.aadt.bvd-sr54.2050-nobuild" %} a day in the no-build and {% fact "rangeland.aadt.bvd-sr54.2050-build" %} with the road built &#8212; ten thousand fewer vehicles. Ballantrae drops seven thousand. What the project does is move that traffic onto the new road. That is essentially the case the county is making for building it.</p>
+  <p>The trade is visible in the same data. Rangeland Boulevard carries {% fact "rangeland.aadt.rangeland-new.2050-build" %} vehicles a day that are not there today, and Bud Bexley Parkway goes from {% fact "rangeland.aadt.budbexley.2050-nobuild" %} in the no-build to {% fact "rangeland.aadt.budbexley.2050-build" %}. So this is redistribution plus growth &#8212; not traffic conjured out of nothing, but not relief either. The question is not whether there will be more traffic. It is <em>which streets carry it</em>.</p>
+
+  <h3>Ten of eleven intersections get worse — with or without the road</h3>
+  <div class="callout">
+    <h3>Key Term: LOS</h3>
+    <p style="margin-bottom:10px"><strong>Level of Service</strong> — a letter grade from A to F describing how much delay you experience at an intersection. A is free-flowing and each step down means a longer wait. <strong>F</strong> means the intersection cannot clear the vehicles arriving at it during the peak: the queue builds faster than it empties.</p>
+    <p style="margin-bottom:0">The county grades each intersection twice, once for the morning peak and once for the evening, and usually writes them together as one letter with the other in parentheses — so "D (F)" means D in the morning and F in the evening. This page shows the evening grade throughout.</p>
+  </div>
+
+  <p>Every intersection in the study area is graded with a Level of Service. Eleven appear in all three cases. Of those, <strong>ten are worse in 2050 than they are today, whether or not the road is built.</strong> Only the Cattle Gap Trail roundabout holds its grade, and it holds either way.</p>
+  <p>Set the two 2050 cases against each other and it reads differently again. <strong>Alternative A is better than the no-build at six of the eleven, the same at five, and worse at none.</strong> Two of those six are large: Rangeland Boulevard at Gunn Highway is F in the evening peak if nothing is built and C if this is, and the Bexley Village Drive roundabout is F without the project and D with it.</p>
+
+  <figure>
+    <!-- chart: SVG below. The eleven rows are drawn from the grades in
+         data/facts/rangeland.yaml (the "losChartRow" tag); their order and
+         names are at the top of this file. The aria-label below describes the
+         chart in words and does not update itself - check it if a grade changes. -->
+    <svg viewBox="0 0 920 414" role="img" aria-label="Chart comparing evening peak level of service at eleven intersections in three cases: today, the 2050 no-build forecast, and the 2050 Alternative A forecast. Ten of the eleven are worse in 2050 than today, whether or not the road is built. Alternative A is better than the no-build at six intersections and worse at none. The largest differences are Rangeland Boulevard at Gunn Highway, F in the no-build and C with the project, and the Bexley Village Drive roundabout, F in the no-build and D with the project.">
+      <g class="l-grid">
+<line x1="400" y1="52" x2="400" y2="368"/>
+<line x1="495" y1="52" x2="495" y2="368"/>
+<line x1="590" y1="52" x2="590" y2="368"/>
+<line x1="685" y1="52" x2="685" y2="368"/>
+<line x1="780" y1="52" x2="780" y2="368"/>
+<line x1="875" y1="52" x2="875" y2="368"/>
+</g>
+      <text class="l-axis" x="400" y="42" text-anchor="middle">A</text>
+      <text class="l-axis" x="495" y="42" text-anchor="middle">B</text>
+      <text class="l-axis" x="590" y="42" text-anchor="middle">C</text>
+      <text class="l-axis" x="685" y="42" text-anchor="middle">D</text>
+      <text class="l-axis" x="780" y="42" text-anchor="middle">E</text>
+      <text class="l-axis" x="875" y="42" text-anchor="middle">F</text>
+      <text class="l-note" x="400" y="22">BETTER</text>
+      <text class="l-note" x="875" y="22" text-anchor="end">WORSE</text>
+{%- for r in losRows %}
+      {% losChartRow r[0], loop.index0, r[1] %}
+{%- endfor %}
+      <g>
+        <circle class="l-now" cx="404" cy="394" r="8"/><text class="l-leg" x="418" y="398">TODAY (2023)</text>
+        <circle class="l-nob" cx="524" cy="394" r="8"/><text class="l-leg" x="538" y="398">2050 NO-BUILD</text>
+        <circle class="l-bld" cx="660" cy="394" r="8"/><text class="l-leg" x="674" y="398">2050 ALTERNATIVE A</text>
+      </g>
+    </svg>
+    <!-- end chart -->
+    <figcaption>Evening peak level of service. All three columns now follow the county&#8217;s 24 September 2026 workshop boards, read from the boards themselves; they supersede the April 2025 boards and, where they differ, the county&#8217;s 14 September letter. The county publishes each grade as a morning and evening pair; only the evening is shown here, and corrections 2 and 3 explain where that caused an error. The grade letter is printed inside each marker, so the chart reads without relying on colour.</figcaption>
+  </figure>
+
+  <p>Three intersections sit at grade F with the project. <strong>Six sit at F without it.</strong> Grade F means the intersection cannot clear the vehicles arriving during the peak &#8212; the queue builds faster than it empties &#8212; this detail is important.</p>
+  <div class="callout">
+    <h3>Worth asking the BCC</h3>
+    <p style="margin-bottom:10px"><strong>Where does the traffic that leaves Bexley Village Drive actually go?</strong> Ten thousand vehicles a day come off that street in the build case and onto the new road. Which neighborhoods sit alongside the road that receives them, and have those residents been shown the same comparison?</p>
+    <p style="margin-bottom:0"><strong>And can we see the no-build boards for the intersections too?</strong> The county supplied the 2050 no-build traffic and level-of-service figures in September 2026, after I asked. They should be on a board at the workshop next to the build figures, because without them none of the build numbers mean anything.</p>
+  </div>
+</section>
+
+<section id="s6">
+  <h2><span class="num">06</span><span>Trucks and noise</span></h2>
+  <p>If this is a freight route, does that mean lots of trucks? Heavy trucks dominate road noise even when they are a small share of the traffic, so how a road sounds depends more on the truck percentage than on the total number of vehicles.</p>
+
+  <h3>What is known about trucks</h3>
+  <p>An earlier version of this page said no truck figures had been published for this corridor. The county has since supplied some. About <strong>4&#37;</strong> of daily traffic is trucks on the existing segments of the Rangeland Boulevard corridor, against about <strong>12&#37;</strong> on the parallel stretch of SR 54. They expect the corridor's share to rise once the segments are connected, but to stay below SR 54's &#8212; and, in their words, above the local roadway network. The road is designed for a <strong>WB-40</strong> vehicle, a medium-sized semitrailer.</p>
+  <p>What still has not been published is a number: the truck percentage the 2050 forecast actually assumes for the finished corridor. Existing counts on a disconnected road are not the same thing as a design-year assumption for a connected one, and the noise analysis depends on it. That is a question worth asking the BCC.</p>
+
+  <h3>Pasco did analyze noise</h3>
+  <p>The route study's alternatives evaluation matrix scores "potential impacts to noise conditions" as <strong>{% fact "rangeland.matrix.noise-nobuild.2026-09" %}</strong> for the no-build option and originally (in January 2025) scored <strong>{% fact "rangeland.matrix.noise.2025-01" %}</strong> for both build alternatives it compared, A and B. The September 2026 matrix rates all three remaining alternatives &#8212; A, D and E &#8212; <strong>{% fact "rangeland.matrix.noise.2026-09" %}</strong>, noting two noise-impacted areas on the corridor.</p>
+  <p>The county explained the High rating simply: no roadway exists there today, so any road raises noise levels along the whole corridor from a baseline of essentially nothing. The justification that I heard for changing it to Medium was that "only two small areas are affected." The county has chosen to follow the <strong>Federal Highway Administration's procedures</strong> for measuring and predicting highway traffic noise, and under those procedures, noise mitigation measures were only found to be reasonable and feasible for one short segment of the project near the Bexley roundabout.</p>
+ <p>I don't know what the underlying numbers are: which homes were modelled as receptors, what sound levels they were predicted to experience, and which test each location failed. Again, worth asking about.</p>
+
+  <div class="callout">
+    <h3>Worth asking the BCC</h3>
+    <p style="margin-bottom:10px"><strong>Where are the noise receptors, and what were the modelled levels at each?</strong> Mitigation was found reasonable and feasible for one short segment. For everywhere else, which test did the location fail &#8212; reasonableness or feasibility &#8212; and by how much?</p>
+    <p style="margin-bottom:0">What truck percentage does the 2050 forecast assume for the completed corridor? The September matrix gives A, D and E the same Medium noise rating &#8212; were they modelled separately, and do the predicted levels at any homes differ between them?</p>
+  </div>
+</section>
+
+<section id="s7">
+  <h2><span class="num">07</span><span>What it costs</span></h2>
+  <p>The county presented updated estimates at Workshop #3 on 24 September. They are higher than the figures this page carried before, and for the first time all three surviving alternatives are priced.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>September 2026 estimate</th><th class="n">Construction</th><th class="n">Total</th><th class="n">Per mile</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Alternative A</strong></td><td class="n">{% fact "rangeland.cost.a.construction" %}</td><td class="n">{% fact "rangeland.cost.a.total" %}</td><td class="n">{% perMile "rangeland.cost.a.total", "rangeland.length-miles" %}</td></tr>
+      <tr><td>Alternative D</td><td class="n">{% fact "rangeland.cost.d.construction" %}</td><td class="n">{% fact "rangeland.cost.d.total" %}</td><td class="n">{% perMile "rangeland.cost.d.total", "rangeland.length-miles" %}</td></tr>
+      <tr><td>Alternative E</td><td class="n">{% fact "rangeland.cost.e.construction" %}</td><td class="n">{% fact "rangeland.cost.e.total" %}</td><td class="n">{% perMile "rangeland.cost.e.total", "rangeland.length-miles" %}</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>So D's wider median costs about <strong>$1.5 million</strong> more than A, and E's wider median plus its extra pedestrian underpass about <strong>$7.8 million</strong> more. That is the first published price on the difference between the three, and it is worth having before anyone is asked which they prefer.</p>
+
+  <h3>Where the money goes</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Alternative A, September 2026</th><th class="n">Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Construction</td><td class="n">{% fact "rangeland.cost.a.construction" %}</td></tr>
+      <tr><td>Design (10&#37;)</td><td class="n">{% fact "rangeland.cost.a.design" %}</td></tr>
+      <tr><td>Construction engineering and inspection (8&#37;)</td><td class="n">{% fact "rangeland.cost.a.cei" %}</td></tr>
+      <tr><td>Land for the roadway</td><td class="n">{% fact "rangeland.cost.a.row-road" %}</td></tr>
+      <tr><td>Land for stormwater ponds</td><td class="n">{% fact "rangeland.cost.a.row-ponds" %}</td></tr>
+      <tr><td>Land for floodplain compensation</td><td class="n">{% fact "rangeland.cost.a.row-flood" %}</td></tr>
+      <tr><td>Wetland mitigation</td><td class="n">{% fact "rangeland.cost.a.wetland-mitigation" %}</td></tr>
+      <tr><td><strong>Total</strong></td><td class="n"><strong>{% fact "rangeland.cost.a.total" %}</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>Land now comes to <strong>$23.3 million</strong>, about 16&#37; of the total, up from roughly 10&#37; in January. The board notes right-of-way costs were re-estimated in September 2026.</p>
+
+  <h3>Comparing this to January is harder than it looks</h3>
+  <p>The January 2025 matrix put Build A at <strong>{% fact "rangeland.cost.build-a.2025-01.total", "words" %}</strong>. It would be easy to say the estimate has risen by a third, and I am not going to say that, because the two totals may not be counting the same things.</p>
+  <p>January's printed total is exactly equal to its construction, design and inspection lines added together. Add its other listed components &#8212; land acquisition and wetland mitigation &#8212; and you get $129.53 million. September's total includes all of those and adds up exactly. So either January's "Total" left the land out, or one of the two boards has an arithmetic problem. Measured like for like the rise is nearer <strong>16&#37;</strong>; taking the printed totals at face value it is <strong>34&#37;</strong>.</p>
+
+  <h3>A lot changed in the matrix between January 2025 and Public Workshop 3</h3>
+  <p>Two of the matrix's qualitative ratings were lowered between January and September. Noise went from <strong>{% fact "rangeland.matrix.noise.2025-01" %} to {% fact "rangeland.matrix.noise.2026-09" %}</strong>, and contamination from <strong>{% fact "rangeland.matrix.contamination.2025-01" %} to {% fact "rangeland.matrix.contamination.2026-09" %}</strong>. At the workshop I was told the noise change followed from mitigation being warranted at only two short sections, and that the qualitative rating is ultimately the county's to set. No explanation for the contamination change has been published.</p>
+  <p>Every figure in the same matrix that can be counted moved the other way:</p>
+  <ul>
+    <li><strong>Wetlands: {% fact "rangeland.matrix.wetlands.2025-01" %} &#8594; {% fact "rangeland.matrix.wetlands.2026-09" %} acres</strong></li>
+    <li><strong>Surface waters: {% fact "rangeland.matrix.surface-waters.2025-01" %} &#8594; {% fact "rangeland.matrix.surface-waters.2026-09" %} acres</strong>, having previously been recorded as none</li>
+    <li><strong>Parcels impacted: {% fact "rangeland.matrix.parcels.2025-01" %} &#8594; {% fact "rangeland.matrix.parcels.2026-09" %}</strong></li>
+    <li><strong>Construction: {% fact "rangeland.cost.build-a.2025-01.construction" %} &#8594; {% fact "rangeland.cost.a.construction" %}</strong></li>
+  </ul>
+  <p>The wetlands figure matters beyond the cost. A Section 404 permit from the Army Corps of Engineers is the one step in this project that is genuinely federal, and it turns on the acreage of wetland impact. That acreage is now <strong>41&#37; larger</strong> than the number this page has been carrying. Potential relocations are still zero.</p>
+
+  <h3>How it compares to the rest of the plan</h3>
+  <p>{% fact "rangeland.cost.a.total", "words" %} over {% fact "rangeland.length-miles" %} miles is <strong>{% perMile "rangeland.cost.a.total", "rangeland.length-miles", "words" %} a mile</strong>. That is worth a second look, because it is the same figure I had already worked out from the long range plan's year-of-expenditure total. The route study has now arrived at it independently, from a different direction.</p>
+  <p>Set against the other road projects in the same plan, that puts this segment <strong>eighth of forty</strong>, where the median is $10.38 million a mile. The next segment of the same corridor, Bud Bexley Parkway, comes to $14.83 million a mile in the same document. The county says the comparison is unfair:</p>
+  <div class="quote">The per mile cost comparison to the area-wide averages are misleading because this project includes an entirely new roadway with new bridges spanning the Suncoast Parkway and the Anclote River (along with one alternative that also includes an additional pedestrian underpass).<span class="attr">Pasco County Transportation Engineering Department, September 2026</span></div>
+  <p>That is a disagreement about what the number means rather than a claim that the arithmetic is wrong, so the figure stays and their objection sits beside it. It is a fair point as far as it goes: structures are expensive, and a road carrying two of them should cost more per mile than one carrying none. What would settle it is knowing how many of the other thirty-nine projects carry structures of their own, and several of them cross water or rail. <strong>I have not done that count</strong>, and I am not going to promise it before the comment deadline. Until somebody does, treat the ranking as a question rather than an answer.</p>
+
+  <div class="callout">
+    <h3>The $77 million figure</h3>
+    <p style="margin-bottom:0">On 14 September the <em>Tampa Bay Beacon</em> reported the project at <strong>$77 million</strong> &#8212; $38.5 million from the county and $38.5 million sought from the state. Against the county's own September estimate of $150 million, that is not the cost of this project; it looks more like the TRIP request counted twice. The gap is the part worth holding on to: the $4.5 million state appropriation and the $38.5 million TRIP request together cover under a third of the estimate, and the rest has to come from somewhere.</p>
+  </div>
+
+  <h3>What is actually funded, and by whom</h3>
+  <p>Four separate pots of money point at this road, and they do not describe the same project or the same timetable. Taking them in order of how settled they are:</p>
+
+  <div class="tw fund"><table>
+    <colgroup><col class="c1"><col class="c2"><col class="c3"></colgroup>
+    <thead><tr><th>Source</th><th class="n">Amount</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td><strong>State appropriation</strong> &#8212; LFIR&nbsp;1718, Sen. Hooper</td><td class="n bld">$4.5M</td><td>Signed into law, not vetoed. Available since 1 July 2026.</td></tr>
+      <tr><td><strong>County capital plan</strong> &#8212; design</td><td class="n">FY&nbsp;2026</td><td>Appropriated. First year of an adopted CIP is the capital budget.</td></tr>
+      <tr><td><strong>County capital plan</strong> &#8212; right-of-way 2027, construction 2029</td><td class="n">&#8212;</td><td>Programmed, not appropriated. Out-years are estimates.</td></tr>
+      <tr><td><strong>TRIP request</strong> &#8212; state, 50&#37; county match</td><td class="n">$38.5M</td><td>Requested. Added to the MPO's priority list 3 Sept 2026. Not awarded.</td></tr>
+      <tr><td><strong>Regional plan</strong> &#8212; cost-feasible, PD&amp;E only</td><td class="n">$2.79M</td><td>Scheduled for 2041&#8211;2050. Twenty years behind the county.</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Senator Hooper filed a Local Funding Initiative Request &#8212; Senate form 1718, House form 2969 &#8212; for the Rangeland Boulevard Extension. The House and Senate agreed it at the full $4,500,000 in conference on 24 May 2026, under the Department of Transportation's Local Transportation Projects line. It is <strong>not on the Governor's 2026 veto list</strong>, so it survived into law and has been available since the state's fiscal year began on 1 July. What it pays for &#8212; design, land, or construction &#8212; has not been published, and the county still has to accept it through a grant agreement.</p>
+
+  <p><strong>"Funded in the CIP" is doing more work than it looks.</strong> The years above come from the MPO's 2025 List of Project Priorities, which records "Design funded FY 2026 in CIP, ROW funded FY 2027 in CIP, CST Funded in FY 2029 in CIP." That is the MPO restating what the county told it, not the county's adopted budget. And Pasco's own capital plan explains the difference: <em>"Upon adoption of the CIP, funds are appropriated for those projects identified in the first year of the plan"</em> &#8212; the remaining years are estimates. So the design money is a real appropriation. The right-of-way and construction money is a plan.</p>
+
+  <p><strong>The county&#8217;s capital plan puts a figure on each year.</strong> Pasco&#8217;s adopted FY 2026 budget carries a line for the road, printed as &#8220;Rangeland Bl (E of Gunn Hwy to Bexl&#8221;, with an amount for every year to 2030 and beyond:</p>
+  <div class="tw"><table>
+    <thead><tr><th>County capital plan, Rangeland Blvd</th><th class="n">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>FY 2026 &#8212; adopted</td><td class="n">{% fact "rangeland.funding.cip.fy2026" %}</td></tr>
+      <tr><td>FY 2027 &#8212; proposed</td><td class="n">{% fact "rangeland.funding.cip.fy2027" %}</td></tr>
+      <tr><td>FY 2028 &#8212; proposed</td><td class="n">{% fact "rangeland.funding.cip.fy2028" %}</td></tr>
+      <tr><td>FY 2029 &#8212; proposed</td><td class="n">{% fact "rangeland.funding.cip.fy2029" %}</td></tr>
+      <tr><td>FY 2030 &#8212; proposed</td><td class="n">{% fact "rangeland.funding.cip.fy2030" %}</td></tr>
+      <tr><td>Future years, after FY 2030</td><td class="n">{% fact "rangeland.funding.cip.future" %}</td></tr>
+      <tr><td><strong>All years</strong></td><td class="n"><strong>{% sumM "rangeland.funding.cip.fy2026", "rangeland.funding.cip.fy2027", "rangeland.funding.cip.fy2028", "rangeland.funding.cip.fy2029", "rangeland.funding.cip.fy2030", "rangeland.funding.cip.future" %}</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>Only the first year is appropriated; the rest are the county&#8217;s planned amounts and can change each budget cycle. The line isn&#8217;t broken down by phase, so it doesn&#8217;t say which years pay for design, land or construction. The all-years total compares with the September 2026 estimate of {% fact "rangeland.cost.a.total", "words" %} for Alternative A.</p>
+
+  <p><strong>The regional plan funds a study, in the 2040s.</strong> In the 2050 plan's cost-feasible table &#8212; the list of what the region expects to be able to afford &#8212; project 114.2 receives <strong>$2,788,496</strong>, all of it for a PD&amp;E study, in the <strong>2041&#8211;2050</strong> band. The design, right-of-way and construction columns are blank. The $150.1 million above comes from a different table, the needs list, which prices projects whether or not the money exists. Since the county says the route study <em>is</em> that process (correction 5), the county is running it roughly two decades ahead of the schedule the adopted plan sets and funds. Probably a good reason for that, but I don't know what it is.</p>
+
+  <h3>No federal money has been obligated to this road</h3>
+  <p>Federal law requires every state to publish an annual listing of federal funds obligated by MPO area. FDOT publishes Pasco's. The current one covers FY 2025 and lists <strong>30 highway projects and 2 planning projects totalling $29,942,324</strong>. Rangeland Boulevard is not among them, and neither is its project number, 454569-1. It does not appear in FDOT's inventory of Pasco County projects either.</p>
+  <p>Three words get used interchangeably and shouldn't. <em>Programmed</em> means it sits in a plan. <em>Committed</em> means someone intends to pay. <em>Obligated</em> means the federal government has formally authorised the money and it is legally encumbered. Only the third creates federal duties.</p>
+  <p>One qualification: In the long range plan the project's fund source is <strong>"P"</strong>, which the key defines as "STBG, CRP, Other Roads, Local Capital" &#8212; a blended bucket that does contain federal programmes. But the only thing drawn from it is the $2.79 million study allocation in the 2040s, and being programmed against a mixed bucket in a twenty-five-year plan is not an obligation. The neighbouring fund source "D" is the one carrying the classic federal 80/20 split, and this project is not in it.</p>
+  <p>Why it matters: federal money or a federal approval is what triggers a federal environmental review. Without one, there is no federal decision to appeal and no federal agency with a say. The exception is wetlands &#8212; the matrix records <strong>33.93 acres</strong> affected, and filling wetlands needs a permit from the U.S. Army Corps of Engineers, which is a federal decision with its own public process. That is the one federal lever in this project.</p>
+
+  <div class="callout">
+    <h3>Worth asking the BCC</h3>
+    <p style="margin-bottom:10px">What do the updated construction estimates come to, and how much of the cost is the two bridges? What is the $4.5 million state appropriation for, and has the county executed a grant agreement to accept it?</p>
+    <p style="margin-bottom:0">Design money was appropriated for a fiscal year that ends on 30 September, while this study has not yet chosen between A, D and E. Did design work begin before an alternative was selected, or did the money go unspent? And which Board of County Commissioners votes have authorised money for this project, on what dates?</p>
+    <p style="margin-bottom:0;margin-top:10px">The matrix prices wetland mitigation at {% fact "rangeland.cost.wetland-mitigation-rate" %} an acre. At {% fact "rangeland.matrix.wetlands.2026-09" %} acres of wetland that comes to about ${% product "rangeland.cost.wetland-mitigation-rate", "rangeland.matrix.wetlands.2026-09", 0.000001, 1 %} million, but the matrix shows {% fact "rangeland.cost.a.wetland-mitigation", "words" %}. What acreage is the mitigation cost based on &#8212; does it include the {% fact "rangeland.matrix.surface-waters.2026-09" %} acres of surface waters?</p>
+  </div>
+</section>
+
+<section id="s8">
+  <h2><span class="num">08</span><span>How the county comes up with its numbers</span></h2>
+  <p>The traffic forecasts in section 5 come from a computer model &#8212; the Tampa Bay Regional Planning Model. It was developed by the region's metropolitan planning organizations with the Florida Department of Transportation, its results are put through a validation process, and it is updated as plans change. It is not a Pasco County invention and it is not unusual; every metropolitan area in the country forecasts traffic this way.</p>
+  <p>It works in four steps, and knowing them helps you understand what the data can and can't tell you.</p>
+  <ul>
+    <li><strong>How many trips?</strong> The county divides itself into zones and estimates how many households and jobs each will hold in 2050. Households generate trips.</li>
+    <li><strong>Where do they go?</strong> Trips get matched to destinations, with closer and easier ones more likely.</li>
+    <li><strong>How do people travel?</strong> Mostly by car here.</li>
+    <li><strong>Which roads?</strong> Trips are loaded onto the road network, and the model shuffles them until no one could get there faster by a different route.</li>
+  </ul>
+  <p>Two things follow from that structure.</p>
+  <p><strong>The estimated number of households in 2050 is likely the primary input.</strong> The number of new houses drives the amount of traffic. The model can show you how traffic <em>redistributes</em> when a road is added, but it can't show whether the road itself brings more development than was assumed, which would in turn increase traffic.</p>
+  <p><strong>The population forecast used by Pasco is on the high side.</strong> Florida planning normally uses the University of Florida's medium projection, which puts Pasco at about 815,800 people in 2050. The plan uses a county-produced figure of <strong>1,018,698</strong> — slightly above UF's <em>high</em> projection. The county explains it as a correction for a Census undercount plus its own growth modelling, and Pasco has genuinely grown fast for decades.</p>
+<h3>What the model doesn't answer</h3>
+  <p>The model does one job &#8212; forecasting how many vehicles end up on each road &#8212; and it does that reasonably well. But several of the project's five stated goals are outside what it can measure. On top of the two limits above, here is what it never addresses:</p>
+  <ul>
+    <li><strong>Whether new capacity generates new driving.</strong> How many trips a household makes is set by what kind of household it is, not by how easy driving has become. Add a road and the model will move trips onto it and shift where some of them go &#8212; but the total number of trips does not change. That is exactly the mechanism the induced-demand research argues is real, and the model has no way to represent it.</li>
+    <li><strong>How long the rush hour lasts.</strong> The output is a daily total, converted to a peak-hour grade using standard factors. It says nothing about whether the one bad hour becomes two or three bad hours, which is how congestion is usually experienced.</li>
+    <li><strong>Anything about crashes.</strong> A travel demand model produces volumes. Predicting safety outcomes takes different methods and actual crash data, done as separate work. Safety is one of the five goals.</li>
+    <li><strong>Anything about noise or air quality.</strong> Those take traffic volumes as an input and run them through separate models. The noise rating in section 6 came from a screening checklist, not from a detailed analysis.</li>
+    <li><strong>Evacuation performance.</strong> Clearance times assume a hurricane &#8212; it again requires a different model entirely. Evacuation is also one of the five goals.</li>
+    <li><strong>What happens on the smallest streets.</strong> A regional model codes arterials and collectors. Streets below that size are often not in the network at all, so cut-through routing inside a neighborhood is finer than the tool can resolve.</li>
+    <li><strong>How uncertain a 2050 number is.</strong> Every figure is published as a single number, as if it were absolute. Any projection 25 years out will have a wide margin of error.</li>
+  </ul>
+  <p>The boards only measure congestion. Safety, evacuation, noise, pollution, truck volume... all of these are unaddressed.</p>
+  
+  <div class="callout">
+    <h3>Pasco is growing and traffic will get worse</h3>
+    <p style="margin-bottom:10px">Pasco's population is forecast to roughly <strong>double</strong> between 2019 and 2050 — from about 562,000 to over a million people. Under any of these projections, low or high, <strong>traffic in our area gets substantially worse over the next 25 years whether or not Rangeland Boulevard is built.</strong></p>
+    <p style="margin-bottom:0">So the choice isn't between more or less traffic. It's about <em>where</em> the additional traffic goes, which streets carry it, and what gets built to move it. Arguing that this road will bring more cars is true but incomplete; the harder question is what the alternative arrangement would be, and that's what the no-build comparison at Workshop #3 should show.</p>
+  </div>
+  <div class="callout">
+    <h3>Worth asking the BCC</h3>
+    <p style="margin-bottom:0">The 2050 household and job totals are an input to the model, identical in every alternative, and the population figure behind them sits above the University of Florida's <em>high</em> projection. What would these forecasts look like using UF's medium projection instead, and how sensitive are the volumes on our streets to that choice?</p>
+  </div>
+</section>
+
+<section id="s9">
+  <h2><span class="num">09</span><span>How to get involved</span></h2>
+  <p>Each section above ends with the questions I could not answer from the public documents. Several may well be answered on 24 September; the rest are worth putting on the record.</p>
+  <p>Workshop #3 is open-house format with a video on loop — arrive any time between 5 and 7, look at the boards, and talk to the project team directly. Materials go online the same day at <strong>mypas.co/TED</strong>, so if you cannot make it on the night you can still read everything that was shown and comment on it. <strong>The comment deadline is what matters most, and it runs to 8 October whether or not you were there.</strong></p>
+
+  <h3>Comments — due Thursday, October 8, 2026</h3>
+  <p>To be included in the workshop record, comments must be received, or postmarked if mailed, by that date. Three ways:</p>
+  <ul>
+    <li><strong>Form:</strong> pasco.rja.revize.com/forms/11000</li>
+    <li><strong>Email:</strong> pkontses@mypasco.net</li>
+    <li><strong>Mail:</strong> Panos Kontses, P.E., Project Manager, Pasco County, 5418 Sunset Road, New Port Richey, FL 34652</li>
+  </ul>
+
+  <div class="callout">
+    <h3>Those three channels are the ones that count</h3>
+    <p style="margin-bottom:10px">Comments sent to the project team above go into the <strong>route study record</strong>, which is the file the county has to respond to when it documents this study. Email to general county addresses, posts on Facebook and signatures on third-party petitions do not enter that record. They may be worth doing for other reasons &#8212; they are not the same thing, and only one of them obliges anyone to answer.</p>
+    <p style="margin-bottom:0">If you want to reach the Commissioners as well, that is a separate and also useful act: the Board meets every other Tuesday at 10 a.m., alternating between the West Pasco Government Center in New Port Richey and the Historic Courthouse in Dade City, and takes public comment.</p>
+  </div>
+
+  <h3>What makes a comment count</h3>
+  <p>Be specific about your questions and concerns. A question that names a document or a number has to be answered on the record; a statement of opposition gets logged as a statement of opposition.</p>
+
+  <div class="callout">
+    <strong>It has worked before, and it is still working.</strong> Alternatives B and C both included a Suncoast Parkway interchange. The county's own mailer says they "are no longer being considered" because they "did not have sufficient public support to move forward." And the interchange itself is now suspended by Florida's Turnpike until the county demonstrates stakeholder support &#8212; which means the question is still open, and this workshop is where it gets answered. Whatever you think about this road, showing up changes what gets built here.
+  </div>
+</section>
+
+<section id="s10">
+  <h2><span class="num">10</span><span>Where this comes from</span></h2>
+  <p class="src">
+    <a href="https://www.pascocountyfl.gov/services/engineering/rangeland_blvd.php">Rangeland Blvd Extension Route Study — Pasco County</a><br>
+    <a href="https://www.pascocountyfl.gov/services/engineering/bud_bexley_pkwy.php">Bud Bexley Pkwy Route Study — Pasco County</a><br>
+    <a href="https://floridasturnpike.com/turnpike-projects/featured-projects/widen-suncoast-parkway-sr-589-pde/">Widen Suncoast Parkway (SR 589) PD&amp;E — Florida's Turnpike</a><br>
+    <a href="https://cms1files.revize.com/pasco/Documents/Services/Transportation%20and%20Engineering/RangelandBlvd_PublicMtg_Newsletter.pdf">Rangeland Boulevard PD&amp;E Study public meeting newsletter</a>, Pasco County, September 2024<br>
+    Public Workshop #3 mailer, Pasco County, September 2026<br>
+    <a href="https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Matrix.pdf">Alternatives evaluation matrix</a>, Public Workshop #3 &#8212; Pasco County, September 2026<br>
+    <a href="https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Schedule.pdf">Project schedule board</a> and <a href="https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland_PW3_Newsletter_final.pdf">Public Workshop #3 newsletter</a> &#8212; Pasco County, September 2026<br>
+    Traffic boards &#8212; <a href="https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Existing%20Traffic.pdf">existing</a> &#183; <a href="https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20No-Build%20Traffic.pdf">2050 no-build</a> &#183; <a href="https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Build%20Traffic.pdf">2050 build</a> &#8212; Pasco County, September 2026<br>
+    Concept boards &#8212; <a href="https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Concept-A.pdf">Alternative A</a> &#183; <a href="https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Concept-D.pdf">Alternative D</a> &#183; <a href="https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Concept-E.pdf">Alternative E</a> &#183; <a href="https://www.pascocountyfl.gov/Documents/Services/Transportation%20and%20Engineering/Rangeland/Rangeland%20Blvd_Typical%20Sections.pdf">typical sections</a> &#8212; Pasco County<br>
+    Workshop boards dated 30 April 2025, shown at Public Workshop #2 on 1 May 2025<br>
+    <a href="https://cms1files.revize.com/pasco/Documents/Services/Transportation%20and%20Engineering/Rangeland/01.18.2025%20Rangeland%20Blvd%20Matrix.pdf">Rangeland Blvd alternatives evaluation matrix</a>, 18 January 2025<br>
+    <a href="https://www.pascocountyfl.gov/services/mpo/plans.php">Pasco MPO 2050 Long Range Transportation Plan</a> — projects 114.1–114.4, 118.1, 124.1, 126.1, 127.1, 131.1; Appendix B project sheets; Appendix F socioeconomic forecast<br>
+    <a href="https://www.pascocountyfl.gov/services/mpo/plans.php">MPO Transportation Improvement Program FY 2027–2031</a> — priority list item 10, project 454569-1; state and federal fund code table<br>
+    <a href="https://tdaappsprod.dot.state.fl.us/fto/">FDOT Florida Traffic Online</a> — published traffic counts<br>
+    <a href="https://www.flsenate.gov/Laws/Statutes/2023/334.03">Florida Statutes 334.03</a> — definitions of arterial, collector and local roads<br>
+    <a href="https://cms1files.revize.com/pasco/Documents/Services/Planning%20And%20Development/Land%20Development%20Code%20Amendments/12-%20ldc901.3accessmanagement%202-15-24.pdf">Pasco County Land Development Code 901.3</a> — access management standards by road class<br>
+    FHWA, <em>Highway Functional Classification: Concepts, Criteria and Procedures</em>, 2023 edition
+  </p>
+</section>
+
+</div><!-- /#doc -->
+
+
+<!-- ==========================================================================
+     WHERE TO CHECK THINGS YOURSELF
+     Outside #doc, so it shows in both reading modes.
+     ========================================================================== -->
+<section id="check">
+  <h2><span class="num">&#8212;</span><span>Where to check things yourself</span></h2>
+  <p>A lot is being said about this project at the moment, some of it mine. Several claims that circulated this month turned out to attach a real-sounding remedy to a real-sounding procedure in a way that does not survive a look at the source. I am not going to relitigate them here and I am not naming anyone &#8212; people are worried and that is fair enough. But everything below is free, public and searchable, and you do not have to take my word or anybody else's.</p>
+
+  <h3>The documents that settle most arguments</h3>
+  <ul>
+    <li><strong>Does this road have federal money?</strong> FDOT publishes an annual listing of federal funds obligated by MPO area, required by federal law. <a href="https://www.fdot.gov/workprogram/federal/fa-mpo-obligdet.shtm">The index is here</a> and <a href="https://fdotewp1.dot.state.fl.us/FMsupportApps/Documents/Federal/FA_MPO_OBLIGDET/PASCOMPO.PDF">Pasco's report is here</a>. Search it for "Rangeland" or 454569.</li>
+    <li><strong>Did a state appropriation survive?</strong> The Governor publishes a veto list with every line he struck. <a href="https://www.flgov.com/eog/sites/default/files/shared/2026/06/2026%20Veto%20List.pdf">The 2026 list is here.</a> If a project is not on it, it was not vetoed.</li>
+    <li><strong>What did the legislature actually agree?</strong> Every member's funding request is published with a form number, and the conference offers show the negotiation. <a href="https://www.flsenate.gov/Session/Appropriations/FY2026-27/LocalFundingRequests">The FY 2026-27 request list is here.</a></li>
+    <li><strong>What is on a Board of County Commissioners agenda?</strong> Pasco's agenda portal is at <strong>pascocofl.portal.civicclerk.com</strong>. It is searchable, it holds past minutes, and it will tell you whether an item exists before you rearrange your morning around it.</li>
+    <li><strong>What does the corridor plan actually say?</strong> The <a href="https://www.pascocountyfl.gov/services/mpo/plans.php">MPO's 2050 long range plan and its List of Project Priorities</a> are where the project numbers, costs and schedules live.</li>
+    <li><strong>What does this study say?</strong> <a href="https://www.pascocountyfl.gov/services/engineering/rangeland_blvd.php">The county's project page</a> carries the newsletters and the workshop boards.</li>
+  </ul>
+
+</section>
+
+<!-- ==========================================================================
+     CORRECTIONS C1-C14
+     Numbered automatically by CSS. Reorder freely; the numbers follow.
+     ========================================================================== -->
+<section id="notes">
+  <h2><span class="num">&#8212;</span><span>Corrections and clarifications</span></h2>
+  <p>In September 2026 the Pasco County Transportation Engineering Department wrote to me about this page, section by section, with corrections and clarifications. I have applied them. Below is each one: what this page said before, and what is correct. Where the county disagrees with a <em>reading</em> rather than a fact, I have said so and left the reading in place with their objection beside it.</p>
+  <p>Two of them, numbers 2 and 3, I then got wrong in the other direction &#8212; and the county's own workshop board showed me up four days later. Those entries record the round trip rather than quietly reading as though they had been right all along.</p>
+  <p class="src">Source for every item below, unless it says otherwise: William Poon, P.E., Interim Transportation Engineering Director, Pasco County Transportation Engineering Department, by email, 14 September 2026.</p>
+
+  <details class="upd">
+    <summary>Show all fifteen corrections</summary>
+    <div class="bd">
+    <div class="notes">
+
+    <div class="note">
+      <h4>Existing traffic at the Bexley Village Drive roundabout</h4>
+      <p><span class="lab">Was</span>9,100 vehicles a day.</p>
+      <p><span class="lab">Correct</span><strong>6,100</strong> vehicles a day. Fixed in section 5.</p>
+    </div>
+
+    <div class="note">
+      <h4>Level of service at the SR 54 / Suncoast Parkway ramps</h4>
+      <p><span class="lab">Was</span>C in 2023 to D in 2050 at the east ramps. On 18 September I changed the 2050 value to <strong>E</strong>, because the county wrote that "SR 54 at Suncoast ramps should show LOS C in 2023 to LOS E for Alt A in 2050."</p>
+      <p><span class="lab">Correct</span><strong>Back to D, and the mistake was mine.</strong> The county publishes every grade as a morning and evening pair; this chart shows the evening only. Their workshop board of 24 September gives <strong>E (D)</strong> at both ramp terminals &#8212; E in the morning, D in the evening. Their letter was the morning value and I put it in an evening column. The evening grade was right before I touched it.</p>
+    </div>
+
+    <div class="note">
+      <h4>Level of service at SR 54 and Ballantrae Boulevard</h4>
+      <p><span class="lab">Was</span>C in 2023 to D in 2050. On 18 September I changed it to <strong>D to E</strong>, because the county wrote that "the SR 54 at Ballantrae LOS should go from LOS D to LOS E."</p>
+      <p><span class="lab">Correct</span>Back to <strong>C in 2023 and D in 2050</strong>, which is where it started. I have now read all three of the county's workshop boards directly: the existing-traffic board gives <strong>C (C)</strong> and the build board gives <strong>D (D)</strong>. Neither peak on either board is E.</p>
+      <p><span class="lab">Unresolved</span>So the county's letter of 14 September and the county's boards dated 24 September disagree about this intersection at <em>both</em> ends, not just one. The page follows the boards, because they are the more recent documents and the ones that were on display at the workshop. I have asked which is right and will publish the answer here.</p>
+    </div>
+
+    <div class="note">
+      <h4>When the project entered the plans</h4>
+      <p><span class="lab">Was</span>"The project entered the county's adopted long range plan in December 2024."</p>
+      <p><span class="lab">Correct</span>It was in long range plans adopted by the Pasco County MPO <strong>before 2024</strong>, and has been in the <strong>Pasco County Comprehensive Plan since 2006</strong>. This is a much older project than I had it.</p>
+    </div>
+
+    <div class="note">
+      <h4>The route study and the PD&amp;E study are the same process</h4>
+      <p><span class="lab">Was</span>The process diagram showed a PD&amp;E study as a separate step after the route study, drawn dashed because it was not in the county's funding request &#8212; and the page argued that a step was missing.</p>
+      <p><span class="lab">Correct</span>"These are two versions of the same process." A route study follows Pasco County's own code and standards; a PD&amp;E study is the same process run under federal law, where federal money or federal involvement is in play. The diagram has been rebuilt and <strong>the missing-step argument is withdrawn.</strong></p>
+      <p>Confirmed independently: the county's own public meeting newsletter of <a href="https://cms1files.revize.com/pasco/Documents/Services/Transportation%20and%20Engineering/RangelandBlvd_PublicMtg_Newsletter.pdf">September 2024</a> is titled "Rangeland Boulevard PD&amp;E Study" and covers the same 3.4 miles. Both names have been in use for this study since 2024.</p>
+    </div>
+
+    <div class="note">
+      <h4>Noise &#8212; a claim withdrawn</h4>
+      <p><span class="lab">Was</span>A slide headed "There's no funding to study the noise impact," and text saying the detailed noise work happens later, after an alternative is chosen.</p>
+      <p><span class="lab">Correct</span>The county has chosen to follow the <strong>FHWA procedures</strong> for measuring and predicting highway traffic noise, and that evaluation has already been done: under those procedures, mitigation was found <strong>reasonable and feasible for one short segment of the project near the Preserve community</strong>. The county keeps full discretion over what mitigation actually gets built. This page had it wrong and the claim is gone.</p>
+    </div>
+
+    <div class="note">
+      <h4>Trucks</h4>
+      <p><span class="lab">Was</span>"No truck forecast has been published for any of the three segments."</p>
+      <p><span class="lab">Correct</span>About <strong>4%</strong> of daily traffic is trucks on the existing segments of the Rangeland Boulevard corridor, and about <strong>12%</strong> on the parallel stretch of SR 54. The county expects the corridor's truck share to rise once the segments are connected, but to stay below SR 54's &#8212; and above the local street network. A design-year truck percentage for the completed corridor still has not been published, and I have reworded the question to ask for that specifically.</p>
+    </div>
+
+    <div class="note">
+      <h4>Which projects are in the traffic model</h4>
+      <p><span class="lab">Was</span>An open question: is Bud Bexley Parkway already in the modelled 2050 network behind these numbers?</p>
+      <p><span class="lab">Answered</span>Yes. The Tampa Bay Regional Planning Model "incorporates all roadway projects in the MPO's long range plan (including the Bud Bexley Parkway project currently being evaluated in a separate study)." The question is retired. The answer confirms that these figures describe the whole corridor, not one segment of it.</p>
+    </div>
+
+    <div class="note">
+      <h4>Whether Alternatives A, D and E carry different traffic</h4>
+      <p><span class="lab">Was</span>An open question.</p>
+      <p><span class="lab">Answered</span>They do not. "Build Alternatives A, D, and E have the same traffic forecasts." The county's workshop board for 24 September is headed <strong>"PREDICTED TRAFFIC &#8212; ALTERNATIVE A, D &amp; E"</strong> over a single set of numbers, so this is now published rather than just stated in a letter.</p>
+    </div>
+
+    <div class="note">
+      <h4>What the cross-section drawings leave out</h4>
+      <p><span class="lab">Was</span>This page treated the drawn cross-section as the whole corridor, and read the wider median as meaning a wider corridor.</p>
+      <p><span class="lab">Correct</span>The drawings exclude the grassed area between the sidewalks and shared-use paths and the right-of-way line. That strip changes width between the narrow-median and wide-median sections, so <strong>the median can widen without the total right-of-way widening.</strong> Noted on the figure in section 2.</p>
+    </div>
+
+    <div class="note">
+      <h4>What the freight designation means</h4>
+      <p><span class="lab">Was</span>This page read the Freight Priority Network listing as meaning the road is intended to carry trucks.</p>
+      <p><span class="lab">County's reading</span>"The designation of a freight corridor does not mean that it will have heavy truck use," and many state and county roads carry the designation. The plan citation stands &#8212; the corridor is listed &#8212; but the county's reading of what that implies is now printed beside it, along with the truck percentages in note 7.</p>
+    </div>
+
+    <div class="note">
+      <h4>The interchange and a six-lane section</h4>
+      <p><span class="lab">Added</span>"No interchange or six-lane section is currently being considered for approval in the Rangeland Blvd Route Study," and the county says no probability of a future interchange or widening can be estimated. The wider median is a low-cost option that would make future widening cheaper, and whether that ever happens is for future county leaders to decide, whichever alternative is chosen. This sits <em>beside</em> Florida's Turnpike's statement that the interchange is suspended pending demonstrated stakeholder support, not instead of it. Both are in section 2.</p>
+    </div>
+
+    <div class="note">
+      <h4>Reading morning grades into an evening chart</h4>
+      <p><span class="lab">Was</span>Two level-of-service values changed on 18 September on the strength of the county's letter, which gave single letters with no peak hour named.</p>
+      <p><span class="lab">Correct</span>Both are reverted above. The lesson is worth recording rather than burying: the county's published boards give <strong>AM (PM)</strong> for every intersection, this page shows the evening peak only, and a bare letter in an email cannot safely be dropped into one column or the other. Where the two disagree from here on, the page follows the published board and says so.</p>
+    </div>
+
+    <div class="note">
+      <h4>The WB-40&#8217;s wheelbase</h4>
+      <p><span class="lab">Was</span>&#8220;A WB-40 truck is a design vehicle classification representing a medium-to-large truck with a 40-foot wheelbase.&#8221; (Slide 02.)</p>
+      <p><span class="lab">Correct</span>The design standards list the WB-40 as an &#8220;intermediate semitrailer&#8221; with a <strong>{% fact "rangeland.design.wb40-wheelbase" %}-foot</strong> wheelbase and an overall length of {% fact "rangeland.design.wb40-length" %} feet. Found on 29 September 2026 while linking every figure to a source; not from the county&#8217;s letter. Source: FDOT&#8217;s Florida Greenbook, Table 3-2, which reproduces the national AASHTO design-vehicle table.</p>
+    </div>
+
+    <div class="note">
+      <h4>Cost per mile &#8212; a disagreement, not a correction</h4>
+      <p><span class="lab">County's objection</span>The per-mile comparison to area-wide averages is misleading, because this is an entirely new roadway with new bridges spanning the Suncoast Parkway and the Anclote River, and one alternative adds a pedestrian underpass. The construction estimates are also being updated and will be presented at the workshop.</p>
+      <p><span class="lab">What I did</span>This is a disagreement with a reading rather than a factual error, so under the policy at the foot of this page I have published it beside the figure rather than removing the figure. I am still checking whether the other projects in the comparison set carry structures of their own. If they do not, the objection is a strong one and I will say so.</p>
+    </div>
+
+    </div>
+    </div>
+  </details>
+</section>
+
+<!-- ==========================================================================
+     FOOTER
+     Corrections policy, AI disclosure, counter disclosure.
+     ========================================================================== -->
+<footer>
+  <p style="margin:0 0 10px"><strong>Corrections policy.</strong> If a fact here doesn't match its source document, tap the figure and use the link in the box, or let me know and I will do my best to fix it within 72 hours.</p>
+  <p style="margin:0 0 10px">If you disagree with a reading, an interpretation or an opinion &#8212; what a number means, or what its absence implies &#8212; let me know and I will consider how best to address it. That might mean publishing it as an alternative viewpoint, linking to another site that argues it, choosing not to address it, or something else. Message me on Facebook.</p>
+  <p style="margin:0 0 10px"><strong>How this is made.</strong> I use AI tools for the code behind this site, to help dig through the documents, and for first drafts of the writing. I read and check everything before it goes up, and every figure is sourced so you can check it without taking my word for it.</p>
+  <p style="margin:0 0 10px">Not sure whether something you have read about this project is right? <a href="#check">Here is where to look it up yourself.</a> Every figure on this page is also listed, with its source, on <a href="../facts/">Figures and sources</a>.</p>
+  <p style="margin:0 0 10px"><strong>Visit counter.</strong> This page counts visits using GoatCounter. It sets no cookies, stores nothing on your device and does not identify you. I can see how many times a page was opened and which site a visit came from. That is all I collect and all I want.</p>
+  {% include "share.njk" %}
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
+</footer>
+
+</div>
+
+<!-- Every figure on the page, with its source, for the details box. Built
+     from data/facts/ - edit the figures there, not here. -->
+{% factData %}
+
+<!-- Visit counter. Disclosed in the footer. Not included in the claude.ai copy. -->
+<script data-goatcounter="https://patricka3s.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

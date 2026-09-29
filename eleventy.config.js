@@ -169,6 +169,7 @@ export default function (eleventyConfig) {
   const readerChecksUrl = process.env.READER_CHECKS_URL || (data.site.reader_checks && data.site.reader_checks.url) || "";
   eleventyConfig.addGlobalData("readerChecks", readerChecksUrl);
   eleventyConfig.addGlobalData("sources", data.sources);
+  eleventyConfig.addGlobalData("projects", data.projects);
   eleventyConfig.addGlobalData("definitions", data.definitions.map((d) => ({
     ...d, src: d.source ? data.sourceById[d.source] : null, aiCheckedOn: when(d.ai_checked), verifiedOn: when(d.verified),
   })));
@@ -330,6 +331,11 @@ export default function (eleventyConfig) {
     return { ...p, topics };
   }).filter((p) => p.topics.length);
   eleventyConfig.addGlobalData("factGroups", groups);
+  // Per project, for the home page cards: figures listed, and how many a human has verified.
+  eleventyConfig.addGlobalData("projectChecks", Object.fromEntries(groups.map((p) => {
+    const fs = p.topics.flatMap((t) => t.facts);
+    return [p.id, { total: fs.length, human: fs.filter((f) => f.verified).length }];
+  })));
   // How many of the listed figures a human has verified, and how many only AI has checked.
   const listed = groups.flatMap((p) => p.topics.flatMap((t) => t.facts));
   eleventyConfig.addGlobalData("checkCounts", {

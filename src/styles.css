@@ -686,6 +686,8 @@
   .projbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;
     padding:12px 0;border-bottom:1px solid var(--rule)}
   .pb-projects{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .pb-home{font-family:Archivo,sans-serif;font-weight:800;font-size:15px;letter-spacing:-.01em;color:var(--ink);text-decoration:none;margin-right:4px}
+  .pb-home:hover,.pb-home[aria-current="page"]{color:var(--accent)}
   .pb-lab{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;font-weight:600;letter-spacing:.13em;
     text-transform:uppercase;color:var(--ink-3)}
   .pb-seg{display:inline-flex;border:1px solid var(--rule);background:var(--surface)}
@@ -999,3 +1001,44 @@
 /* A claim's value is a quotation: it goes under its description and wraps. */
   .fitem.is-claim .fhead{display:block}
   .fitem.is-claim .fval{display:block;white-space:normal;text-align:left;font-family:inherit;font-weight:400;font-style:italic;margin-top:4px}
+
+/* ==========================================================================
+   HOME PAGE (src/index.njk): introduction, what the site is, coming up,
+   a card per project, how figures are checked, how to get involved.
+   ========================================================================== */
+  .homepage h1{margin-bottom:10px}
+  .hwhat{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;margin:6px 0 36px;
+    background:var(--rule-soft);border:1px solid var(--rule-soft)}
+  .hpoint{background:var(--surface);padding:14px 16px}
+  .hpoint h2{display:block;font-family:Archivo,sans-serif;font-weight:800;font-size:1rem;margin:0 0 4px;color:var(--ink)}
+  .hpoint p{margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-2)}
+  .hh{display:block;font-family:Archivo,sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-.01em;margin:36px 0 12px}
+  .homepage section{scroll-margin-top:20px}
+  .hup{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+  .hup li{display:grid;grid-template-columns:7.5em 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule-soft);margin:0}
+  .hup li::before{content:none}
+  .hup .dt{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.8rem;font-weight:700;color:var(--accent)}
+  .hup a{color:var(--ink)}
+  .homepage .pjtag{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+  .hmore{margin:10px 0 0;font-size:.92rem}
+  .hmore a,#checks a,#involved a{color:var(--accent)}
+  .hcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+  .hcard{display:flex;flex-direction:column;gap:8px;padding:18px 18px 16px;background:var(--surface);border:1px solid var(--rule);
+    box-shadow:var(--shadow);color:inherit;text-decoration:none;transition:border-color .12s}
+  .hcard:hover{border-color:var(--accent)}
+  .hcard:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .hc-name .pjtag{margin-left:0}
+  .hc-title{font-family:Archivo,sans-serif;font-weight:800;font-size:1.15rem;line-height:1.25;color:var(--ink)}
+  .hc-stage{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--accent)}
+  .hc-about{font-size:.95rem;line-height:1.5;color:var(--ink-2)}
+  .hc-rows{display:grid;gap:6px;border-top:1px solid var(--rule-soft);padding-top:10px;font-size:.88rem;line-height:1.45;color:var(--ink-2)}
+  .hc-row{display:grid;grid-template-columns:4.6em 1fr;gap:8px}
+  .hc-k{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);padding-top:2px}
+  .hc-go{margin-top:auto;padding-top:6px;font-family:Archivo,sans-serif;font-weight:700;font-size:.95rem;color:var(--accent)}
+  #checks .fkey{margin-bottom:12px}
+  #involved ul{margin:0}
+  @media (max-width:560px){
+    .hup li{grid-template-columns:1fr;gap:2px}
+  }

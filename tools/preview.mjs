@@ -36,6 +36,7 @@ for (const f of files) {
     let s = fs.readFileSync(f, "utf8");
     s = s.replace(/href="([^"]*)"/g, (m, u) => `href="${fixLink(u)}"`);
     s = s.replace(/<script data-goatcounter[^>]*>\s*<\/script>/g, "");
+    s = s.replace('location.replace("rangeland/" + location.hash)', 'location.replace("rangeland/index.html" + location.hash)');
     s = s.replace(/(<body[^>]*>)/, `$1\n${banner}`);
     fs.writeFileSync(f, s);
   } else if (f.endsWith("app.js")) {

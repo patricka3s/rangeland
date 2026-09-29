@@ -23,7 +23,7 @@ eleventyExcludeFromCollections: true
 {% set current = "facts" %}{% include "project-bar.njk" %}
 
 <header>
-  <p class="eyebrow"><a href="../">&#8592; Back to the guide</a></p>
+  <p class="eyebrow"><a href="../">&#8592; Home</a></p>
   <h1>Figures and sources</h1>
   <p class="standfirst">Every figure the guide takes from a public document, with the document it comes from. Click a source to read it yourself. Each one says whether it has been checked against that document, and by whom (see the key below). If you have checked a figure against its source, use <strong>Check this</strong> beside it to say whether it matches.</p>
 </header>
@@ -37,10 +37,7 @@ eleventyExcludeFromCollections: true
 
 <div class="fkey" aria-label="Key">
   <p class="pb-lab">How the {{ checkCounts.total }} figures have been checked</p>
-  <div class="ckbar" role="img" aria-label="{% for b in checkCounts.bar %}{{ b.label }}: {{ b.pct }}% ({{ b.count }}){% if not loop.last %}; {% endif %}{% endfor %}">
-    {%- for b in checkCounts.bar %}{% if b.count %}<span class="ckseg ck-{{ b.k }}" style="flex-grow:{{ b.count }}" title="{{ b.label }}: {{ b.count }} of {{ checkCounts.total }} ({{ b.pct }}%)"></span>{% endif %}{% endfor -%}
-  </div>
-  <p class="cklabels" aria-hidden="true">{% for b in checkCounts.bar %}<span class="ckl ck-{{ b.k }}"><i></i>{{ b.label }} <b>{{ b.pct }}%</b></span>{% endfor %}</p>
+{% include "checkbar.njk" %}
   <p class="pb-lab" style="margin-top:12px">Key</p>
   <ul>
     <li><span class="vtag human">Verified by a human</span> Patrick has compared the figure with the document himself, on the date shown. <span class="kcount">{{ checkCounts.human }} of {{ checkCounts.total }}</span></li>
@@ -166,7 +163,7 @@ eleventyExcludeFromCollections: true
 </section>
 
 <footer>
-  <p style="margin:0 0 10px">This page is built from the same data files as the guide, so it always shows exactly the figures the guide uses. <a href="../#notes">Corrections made so far</a> are listed in the guide.</p>
+  <p style="margin:0 0 10px">This page is built from the same data files as the guide, so it always shows exactly the figures the guide uses. <a href="../rangeland/#notes">Corrections made so far</a> are listed in the guide.</p>
   {% include "share.njk" %}
   <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
 </footer>

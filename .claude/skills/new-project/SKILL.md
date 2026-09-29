@@ -139,6 +139,7 @@ Then publish the preview (see Workflow in CLAUDE.md) and give Patrick the link.
 ## Site structure (decided 28 Sep 2026)
 
 - New projects go at `/<project-id>/` now, with a project bar on every page.
-- After 8 Oct 2026: move the Rangeland guide to `/rangeland/`, turn the home page
-  into a projects page (one card per project: stage, next date), and add a script
-  on the home page that forwards old `/#section` links to `/rangeland/#section`.
+- Done 29 Sep 2026: the Rangeland guide is at `/rangeland/`, the home page lists
+  every project (a card built from `projects.yaml`: give the new project `stage`,
+  `about` and `page: true`), and old `/#section` links forward to `/rangeland/`.
+  Add the project to the project bar too.

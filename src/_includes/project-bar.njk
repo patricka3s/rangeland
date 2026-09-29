@@ -1,12 +1,13 @@
-{#- The navigation at the top of every page: the projects on the left (styled
-    like the guide's reading-mode toggle), and the site-wide pages on the right.
-    Set "root" ("" on the home page, "../" one folder down) and "current" (the
-    page's id) before including. Add a project here when it gets a page. -#}
+{#- The navigation at the top of every page: the site's name (a link to the home
+    page), the projects (styled like the guide's reading-mode toggle), and the
+    site-wide pages on the right. Set "root" ("" on the home page, "../" one
+    folder down) and "current" (the page's id) before including. Add a project
+    here when it gets a page. -#}
 <nav class="projbar" aria-label="Site">
   <div class="pb-projects">
-    <span class="pb-lab" id="pb-lab">Projects</span>
-    <span class="pb-seg" role="group" aria-labelledby="pb-lab">
-      <a href="{{ root or './' }}"{% if current == "rangeland" %} aria-current="page"{% endif %}>Rangeland Blvd</a><a href="{{ root }}sunlake/"{% if current == "sunlake" %} aria-current="page"{% endif %}>Sunlake Blvd</a>
+    <a class="pb-home" href="{{ root or './' }}"{% if current == "home" %} aria-current="page"{% endif %}>Pasco Road Projects</a>
+    <span class="pb-seg" role="group" aria-label="Projects">
+      <a href="{{ root }}rangeland/"{% if current == "rangeland" %} aria-current="page"{% endif %}>Rangeland Blvd</a><a href="{{ root }}sunlake/"{% if current == "sunlake" %} aria-current="page"{% endif %}>Sunlake Blvd</a>
     </span>
   </div>
   <div class="pb-site">
