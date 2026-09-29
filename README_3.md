@@ -22,6 +22,7 @@ figure on it is stored once, cites the document it came from, and can be checked
 | `data/events.yaml` | The **timeline**: each project's workshops, Commission actions, contracts, change orders, plan documents, deadlines and planned phases, each with its source. |
 | `tools/preview.mjs` | Makes the private preview copy (`npm run preview`) that Claude publishes so you can look before merging. Not part of the live site. |
 | `src/timeline/index.njk` | The **Timeline** page at `/timeline/`, built from `events.yaml`. The guide's "What's happened lately" box is built from it too. |
+| `src/_includes/share.njk` | The **Share this page** button in every page's footer (it opens the phone's share menu, or copies the link on a computer). |
 | `src/_includes/project-bar.njk` | The bar at the top of every page: projects on the left, Timeline and All figures & sources on the right. Add a project link to the left-hand group when a project gets a page. |
 | `src/facts.njk` | The **Figures and sources** page (`/facts/`): every fact, grouped, with its source and a report link. Built entirely from the data files. |
 | `src/_includes/shared-head.njk` | Head tags both pages share: icon, fonts, stylesheet. |
