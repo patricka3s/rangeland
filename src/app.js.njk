@@ -337,13 +337,19 @@ eleventyExcludeFromCollections: true
         var body = JSON.stringify({fact: id, statement: f.s, value: f.v, verdict: verdict,
           says: says.value, page: page.value, name: name.value, email: email.value,
           credit: credit.checked, website: trap.value, pageUrl: location.href.split("#")[0]});
-        fetch(data.rc, {method: "POST", mode: "no-cors", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: body})
-          .then(function(){
+        /* The script answers {"ok": true} once the row is in Patrick's Sheet, so
+           "received" is only said when it really was. (A plain-text POST needs
+           no extra permission from Google, and its reply can be read.) */
+        function failed(msg){ send.disabled = false; status.textContent = msg; }
+        fetch(data.rc, {method: "POST", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: body})
+          .then(function(r){ return r.json(); })
+          .then(function(res){
+            if (!res || res.ok !== true) { failed("It didn\u2019t go through \u2014 please try again in a minute."); return; }
             wrap.textContent = "";
-            wrap.appendChild(el("p", "rck-done", "Thank you \u2014 sent to Patrick. " + (verdict === "matches" ? "It helps to know a figure has been checked." : "He will check it against the document.")));
-          }, function(){
-            send.disabled = false;
-            status.textContent = "That didn\u2019t send (are you offline?). You can use the report form below instead.";
+            wrap.appendChild(el("p", "rck-done", "\u2713 Received \u2014 thank you. " + (verdict === "matches" ? "It helps to know a figure has been checked." : "Patrick will check it against the document.")));
+          })
+          .catch(function(){
+            failed("Couldn\u2019t confirm it arrived. Please check your connection and try again; if it keeps happening, message Patrick on Facebook.");
           });
       });
       return wrap;

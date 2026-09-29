@@ -27,6 +27,13 @@ It replaced the old "Think this is wrong? Tell me" link to a Google Form.
 - The page sends each answer with a plain `fetch` POST (body `text/plain`, so the
   browser asks Google for nothing else). **No Google script runs on the page and
   no cookies are set** - the footer's promise stays true.
+- The form reads the script's reply and says **"Received"** only when the script
+  answers `{"ok": true}` - i.e. the row is in the Sheet. Otherwise it says it
+  couldn't confirm, and the reader can try again. (Added 29 Sep 2026 after the
+  first deployment silently dropped two answers.)
+- If the address in a browser shows "Script function not found: doGet", the
+  deployed version isn't this script: paste it in, Save, then Deploy -> Manage
+  deployments -> pencil -> Version: New version -> Deploy.
 - Built into the site on 29 Sep 2026: the form in every figure's details box, a
   **Check this** button on each figure on Figures and sources, and the filter
   "Only figures not yet verified by a human" (a link to `facts/#help-check`
