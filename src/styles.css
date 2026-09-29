@@ -966,3 +966,36 @@
   .ckl.ck-none i{background:repeating-linear-gradient(135deg,var(--ink-3) 0 2px,transparent 2px 6px);box-shadow:inset 0 0 0 1px var(--ink-3)}
   .ckl b{color:var(--ink);font-weight:600}
   @media (forced-colors:active){ .ckseg,.ckl i{forced-color-adjust:none;border:1px solid CanvasText} }
+
+/* --- Reader checks: the "Matches / Doesn't match" form in the details box --- */
+  .rck{margin:12px 0 0;padding:12px 0 0;border-top:1px solid var(--rule-soft)}
+  .rck-q{font-family:Archivo,sans-serif;font-weight:700;font-size:.92rem;margin:0 0 8px}
+  .rck-row{display:flex;gap:8px}
+  .rck-v{flex:1 1 0;min-height:44px;font-family:Archivo,sans-serif;font-weight:600;font-size:.92rem;cursor:pointer;
+    border:1px solid var(--accent);border-radius:6px;background:var(--surface);color:var(--accent)}
+  .rck-v[aria-pressed="true"]{background:var(--accent);color:#fff}
+  :root[data-theme="dark"] .rck-v[aria-pressed="true"]{color:#12161D}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .rck-v[aria-pressed="true"]{color:#12161D} }
+  .rck-more{margin:10px 0 0;display:grid;gap:8px}
+  .rck-more[hidden],.rck-f[hidden]{display:none}
+  .rck-f{display:grid;gap:3px;font-size:.85rem;color:var(--ink-2)}
+  .rck-f input,.rck-f textarea{font:inherit;font-size:1rem;padding:8px 10px;border:1px solid var(--rule);border-radius:6px;
+    background:var(--paper);color:var(--ink);width:100%;box-sizing:border-box}
+  .rck-c{font-size:.85rem;color:var(--ink-2);display:flex;align-items:center;gap:6px}
+  .rck-trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .rck-send{justify-self:start;min-height:44px;padding:8px 22px;font-family:Archivo,sans-serif;font-weight:700;font-size:.95rem;
+    border:0;border-radius:6px;background:var(--accent);color:#fff;cursor:pointer}
+  .rck-send:disabled{opacity:.6;cursor:default}
+  :root[data-theme="dark"] .rck-send{color:#12161D}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .rck-send{color:#12161D} }
+  .rck-note{font-size:.78rem;color:var(--ink-3);margin:0}
+  .rck-status{font-size:.85rem;color:var(--ink-2);margin:6px 0 0}
+  .rck-status:empty{display:none}
+  .rck-done{font-size:.92rem;color:var(--ink);margin:0}
+  .fmeta .frc{margin-left:10px;border:0;background:none;padding:0;font:inherit;font-family:Archivo,sans-serif;font-weight:600;
+    color:var(--accent);cursor:pointer;text-decoration:none;white-space:nowrap}
+  .factpop{max-height:80vh}
+
+/* A claim's value is a quotation: it goes under its description and wraps. */
+  .fitem.is-claim .fhead{display:block}
+  .fitem.is-claim .fval{display:block;white-space:normal;text-align:left;font-family:inherit;font-weight:400;font-style:italic;margin-top:4px}

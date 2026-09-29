@@ -165,6 +165,9 @@ export default function (eleventyConfig) {
   };
 
   eleventyConfig.addGlobalData("site", data.site);
+  // The reader-checks address (data/site.yaml); READER_CHECKS_URL overrides it for local testing.
+  const readerChecksUrl = process.env.READER_CHECKS_URL || (data.site.reader_checks && data.site.reader_checks.url) || "";
+  eleventyConfig.addGlobalData("readerChecks", readerChecksUrl);
   eleventyConfig.addGlobalData("sources", data.sources);
   eleventyConfig.addGlobalData("definitions", data.definitions.map((d) => ({
     ...d, src: d.source ? data.sourceById[d.source] : null, aiCheckedOn: when(d.ai_checked), verifiedOn: when(d.verified),
@@ -396,7 +399,7 @@ export default function (eleventyConfig) {
         src: src ? { t: src.title, p: src.publisher, d: src.date, url: src.url } : { t: "General explanation, not from one document" },
       };
     }
-    const json = JSON.stringify({ root: "../".repeat(depth), facts: out }).replace(/</g, "\\u003c");
+    const json = JSON.stringify({ root: "../".repeat(depth), rc: readerChecksUrl || undefined, facts: out }).replace(/</g, "\\u003c");
     return `<script type="application/json" id="fact-data">${json}</script>`;
   });
 

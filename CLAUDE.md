@@ -192,8 +192,8 @@ Decided: the site shows evening-peak grades only, and says so where grades appea
 
 ## Later
 
-- **Reader checks** (agreed 29 Sep 2026): a small in-page form on each figure -
-  "Matches / Doesn't match the document" - that writes straight to Patrick's Google
-  Sheet through an Apps Script, with no Google Form page and no third-party script
-  on the site. Design, rules and a script sketch: `docs/reader-checks.md`.
+- **Reader checks** are built (29 Sep 2026) but switched off until Patrick
+  deploys the Apps Script and its address goes in `data/site.yaml`
+  (`reader_checks: url:`). Script, set-up steps and rules: `docs/reader-checks.md`.
+  Answers are claims to check, like error reports; Patrick decides.
 

@@ -81,6 +81,7 @@ eleventyExcludeFromCollections: true
   <label for="fq">Find a figure</label>
   <input id="fq" type="search" placeholder="e.g. Ballantrae, 2050, cost" autocomplete="off">
   {% if changeCount %}<label class="fonly"><input type="checkbox" id="fchanged"> Only figures that have changed ({{ changeCount }})</label>{% endif %}
+  <label class="fonly"><input type="checkbox" id="funverified"> Only figures not yet verified by a human ({{ checkCounts.total - checkCounts.human }}){% if readerChecks %} &#8212; help check them{% endif %}</label>
   <p id="fq-none" class="fnone" hidden>No figures match.</p>
 </div>
 
@@ -92,7 +93,7 @@ eleventyExcludeFromCollections: true
     <summary><h3>{{ t.label }} <span class="fcount">{{ t.facts | length }}</span></h3></summary>
     <ul class="flist">
       {% for f in t.facts %}
-      <li class="fitem{% if f.status != 'current' %} is-{{ f.status }}{% endif %}" id="{{ f.id }}"{% if f.revised %} data-changed="1"{% endif %}>
+      <li class="fitem{% if f.status != 'current' %} is-{{ f.status }}{% endif %}{% if f.unit == 'statement' %} is-claim{% endif %}" id="{{ f.id }}"{% if f.revised %} data-changed="1"{% endif %}{% if not f.verified %} data-unverified="1"{% endif %}>
         <div class="fhead">
           <span class="fstat">{{ f.statement }}</span>
           <span class="fval">{{ f.withUnit }}</span>
@@ -102,6 +103,7 @@ eleventyExcludeFromCollections: true
           {%- if f.src.url %}<a href="{{ f.src.url }}" rel="noopener" target="_blank">{{ f.src.title }}</a>{% else %}{{ f.src.title }}{% endif -%}
           {%- if f.location %} &#183; {{ f.location }}{% endif %} &#183; <span class="fdate">{{ f.asOf }}</span>
           &#183; {{ checks(f) }}
+          {% if readerChecks %}<button type="button" class="fact frc" data-fact="{{ f.id }}">Check this</button>{% endif %}
           <a class="frep" href="{{ f.report }}" rel="noopener" target="_blank">Report an error</a>
         </p>
         {% if f.note %}<p class="fnote">{{ f.note }}</p>{% endif %}
@@ -171,28 +173,30 @@ eleventyExcludeFromCollections: true
 </footer>
 
 </div>
+{% factData %}
 
 <script>
 /* Filter the list as you type, and by "only figures that have changed".
    Without JavaScript the full list shows. */
 (function(){
-  var q = document.getElementById("fq"), only = document.getElementById("fchanged"), none = document.getElementById("fq-none");
+  var q = document.getElementById("fq"), only = document.getElementById("fchanged"), unv = document.getElementById("funverified"), none = document.getElementById("fq-none");
   var items = document.querySelectorAll(".fitem"), groups = document.querySelectorAll(".fgroup, .fproject");
   function filter(){
     var words = q.value.toLowerCase().split(/\s+/).filter(Boolean), shown = 0, i;
     for (i = 0; i < items.length; i++){
-      var t = items[i].textContent.toLowerCase(), ok = !(only && only.checked) || items[i].hasAttribute("data-changed");
+      var t = items[i].textContent.toLowerCase(), ok = (!(only && only.checked) || items[i].hasAttribute("data-changed")) && (!(unv && unv.checked) || items[i].hasAttribute("data-unverified"));
       for (var w = 0; ok && w < words.length; w++) if (t.indexOf(words[w]) < 0) ok = false;
       items[i].hidden = !ok;
       if (ok) shown++;
     }
     for (i = 0; i < groups.length; i++) groups[i].hidden = !groups[i].querySelector(".fitem:not([hidden])");
     /* while searching, open every group that has a match */
-    if (words.length || (only && only.checked)) for (i = 0; i < folds.length; i++) if (!folds[i].hidden) folds[i].open = true;
+    if (words.length || (only && only.checked) || (unv && unv.checked)) for (i = 0; i < folds.length; i++) if (!folds[i].hidden) folds[i].open = true;
     none.hidden = shown > 0;
   }
   q.addEventListener("input", filter);
   if (only) only.addEventListener("change", filter);
+  if (unv) unv.addEventListener("change", filter);
 
   /* On a phone each kind of figure starts folded up, with its count showing,
      so the page is a short list to open rather than a very long scroll. */
@@ -215,6 +219,8 @@ eleventyExcludeFromCollections: true
     if (opened) el.scrollIntoView();
   }
   openTarget();
+  /* a link to facts/#help-check opens with "not yet verified by a human" ticked */
+  if (location.hash === "#help-check" && unv) { unv.checked = true; filter(); }
   window.addEventListener("hashchange", openTarget);
 })();
 </script>

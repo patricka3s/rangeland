@@ -1,6 +1,6 @@
-# Reader checks - design for a later update
+# Reader checks
 
-Not built yet. Agreed with Patrick on 29 Sep 2026 as the next way to get help
+Built into the site on 29 Sep 2026 (switched on once the address below is set). Agreed with Patrick on 29 Sep 2026 as the next way to get help
 checking the site: readers check a figure against its document from inside the
 page, and their answer lands in Patrick's Google Sheet without a Google Form page
 in between.
@@ -20,37 +20,78 @@ The same form replaces today's "Think this is wrong? Tell me" link.
 
 ## How it gets to the Sheet
 
-- A small **Google Apps Script** attached to Patrick's Sheet (Extensions -> Apps
-  Script), deployed as a web app ("Execute as: me", "Who has access: anyone").
-- The page sends the answer with a plain `fetch` POST (body as `text/plain`, so the
-  browser needs no special permission from Google). **No Google script runs on the
-  page and no cookies are set** - the footer's promise stays true.
-- The web app's address goes in `data/site.yaml` next to the form address.
+- A small **Google Apps Script** attached to Patrick's Sheet, deployed as a web
+  app ("Execute as: me", "Who has access: anyone"). Its address goes in
+  `data/site.yaml` under `reader_checks: url:`. While that is empty the form
+  stays hidden and readers see the Google Form link as before.
+- The page sends each answer with a plain `fetch` POST (body `text/plain`, so the
+  browser asks Google for nothing else). **No Google script runs on the page and
+  no cookies are set** - the footer's promise stays true.
+- Built into the site on 29 Sep 2026: the form in every figure's details box, a
+  **Check this** button on each figure on Figures and sources, and the filter
+  "Only figures not yet verified by a human" (a link to `facts/#help-check`
+  opens with it ticked).
 
-Sketch of the script (to be finished and tested when this is built):
+### The script (paste this whole thing into Apps Script)
 
 ```js
-// Apps Script, bound to the error-reports Sheet.
+// Reader checks for patricka3s.github.io/rangeland - receives the
+// "Matches / Doesn't match" answers and adds one row per answer to the
+// "Reader checks" tab (created, with headings, if it isn't there).
 const SHEET = "Reader checks";
+const HEADINGS = ["Received", "Fact id", "What the figure is", "Value shown", "Answer",
+  "What the document says", "Page or board", "Name", "Email", "May credit by name", "Page it came from"];
+
 function doPost(e) {
-  const d = JSON.parse(e.postData.contents || "{}");
-  if (d.website) return out({ ok: true });                  // hidden trap field: bots fill it
-  const cache = CacheService.getScriptCache();               // at most ~20 a minute overall
+  let d;
+  try { d = JSON.parse((e && e.postData && e.postData.contents) || "{}"); } catch (err) { return reply(false); }
+  if (d.website) return reply(true);                        // hidden trap field: only bots fill it
+  const verdict = d.verdict === "matches" ? "Matches" : d.verdict === "differs" ? "Doesn't match" : "";
+  if (!verdict || !d.fact) return reply(false);
+  const cache = CacheService.getScriptCache();               // at most 30 answers a minute in total
   const n = Number(cache.get("n") || 0);
-  if (n > 20) return out({ ok: false, error: "busy" });
+  if (n >= 30) return reply(false);
   cache.put("n", String(n + 1), 60);
-  const clip = (v, max) => String(v || "").slice(0, max);
-  SpreadsheetApp.getActive().getSheetByName(SHEET).appendRow([
-    new Date(), clip(d.fact, 120), clip(d.verdict, 20), clip(d.says, 1000),
-    clip(d.page, 100), clip(d.name, 100), clip(d.email, 200), d.credit === true,
-    clip(d.pageUrl, 300),
-  ]);
-  return out({ ok: true });
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const book = SpreadsheetApp.getActiveSpreadsheet();
+    let sheet = book.getSheetByName(SHEET);
+    if (!sheet) { sheet = book.insertSheet(SHEET); sheet.appendRow(HEADINGS); sheet.setFrozenRows(1); }
+    const clip = (v, max) => String(v == null ? "" : v).slice(0, max).replace(/^[=+\-@]/, "'$&");
+    sheet.appendRow([new Date(), clip(d.fact, 120), clip(d.statement, 300), clip(d.value, 200), verdict,
+      clip(d.says, 1000), clip(d.page, 200), clip(d.name, 100), clip(d.email, 200),
+      d.credit === true ? "Yes" : "No", clip(d.pageUrl, 300)]);
+  } finally { lock.releaseLock(); }
+  return reply(true);
 }
-function out(o) {
-  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+function doGet() { return reply(true); }                     // lets you check the address works
+function reply(ok) {
+  return ContentService.createTextOutput(JSON.stringify({ ok: ok })).setMimeType(ContentService.MimeType.JSON);
 }
 ```
+
+(The `clip` line also stops anyone slipping a spreadsheet formula into a cell:
+text starting with `=`, `+`, `-` or `@` is stored as plain text.)
+
+### Patrick's one-time set-up
+
+1. Open the Google Sheet your error reports already go to.
+2. Menu **Extensions -> Apps Script**. A new tab opens with a code editor.
+3. Delete what's in the editor, paste the whole script above, and click the
+   **Save** icon. Name the project "Reader checks" if asked.
+4. Click **Deploy -> New deployment**. Click the gear next to "Select type" and
+   choose **Web app**.
+5. Set **Execute as: Me** and **Who has access: Anyone**. Click **Deploy**.
+6. Google asks you to authorise it: **Authorize access** -> choose your account ->
+   you'll see "Google hasn't verified this app" (it's your own script) ->
+   **Advanced** -> **Go to Reader checks (unsafe)** -> **Allow**.
+7. Copy the **Web app URL** (it ends in `/exec`) and send it to Claude.
+8. Optional check: paste that address into a browser tab - it should show
+   `{"ok":true}`.
+
+If you ever change the script: **Deploy -> Manage deployments -> pencil -> Version:
+New version -> Deploy**, so the same address keeps working.
 
 ## Rules (from CLAUDE.md, "Error reports")
 
@@ -68,7 +109,3 @@ function out(o) {
 Hidden trap field; a per-minute limit in the script; length limits on every field;
 nothing reaches the page without Patrick.
 
-## Patrick's one-time set-up (when built)
-
-Create the "Reader checks" tab, paste the script, deploy as a web app, and send
-Claude the web app address. Click-by-click steps to be written then.
