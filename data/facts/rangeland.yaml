@@ -485,6 +485,7 @@
   as_of: '2026-09-24'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.design.median-wide
   statement: 'Median width, wider typical section (Alternatives D and E, South Branch Blvd to Bexley Village Dr)'
@@ -495,6 +496,7 @@
   as_of: '2026-09-24'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.length-miles.budbexley
   statement: 'Length of LRTP project 114.3, Bud Bexley Pkwy, Bexley Village Dr to US 41'
@@ -506,6 +508,7 @@
   status: current
   decimals: 2
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.length-miles.caliente
   statement: 'Length of LRTP project 114.4, Caliente Blvd, US 41 to CR 583 (Ehren Cutoff)'
@@ -517,6 +520,7 @@
   status: current
   decimals: 2
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.schedule.design-funded
   statement: 'Design: fiscal year funded in the county capital plan, per the MPO priority list'
@@ -527,6 +531,7 @@
   as_of: '2026-06-11'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.schedule.row-funded
   statement: 'Right-of-way: fiscal year funded in the county capital plan, per the MPO priority list'
@@ -537,6 +542,7 @@
   as_of: '2026-06-11'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.schedule.cst-funded
   statement: 'Construction: fiscal year funded in the county capital plan, per the MPO priority list'
@@ -547,6 +553,7 @@
   as_of: '2026-06-11'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.schedule.comments-due
   statement: 'Workshop #3 comments due: received, or postmarked if mailed, to be in the workshop record'
@@ -557,6 +564,7 @@
   as_of: '2026-09-24'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.schedule.lfir-cst-start
   statement: 'Estimated start of construction, as given in the state funding request'
@@ -567,6 +575,7 @@
   as_of: '2025-11-03'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
   note: 'Later than the county capital plan, which the MPO priority list records as funding construction in FY 2029 (which starts 1 Oct 2028).'
 
 - id: rangeland.schedule.lfir-cst-end
@@ -602,6 +611,7 @@
   as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 - id: rangeland.trucks.corridor-existing
   statement: 'Trucks as a share of daily traffic, existing segments of the Rangeland Blvd corridor'
@@ -655,6 +665,7 @@
   status: current
   decimals: 1
   ai_checked: '2026-09-29'
+  verified: '2026-09-29'
 
 # ---- Statements (claims): marked with a superscript "source" on the page
 
