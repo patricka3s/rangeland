@@ -42,7 +42,7 @@ It replaced the old "Think this is wrong? Tell me" link to a Google Form.
 ### The script (paste this whole thing into Apps Script)
 
 ```js
-// Reader checks for patricka3s.github.io/rangeland - receives the
+// Reader checks for pascoroadmap.info - receives the
 // "Matches / Doesn't match" answers and adds one row per answer to the
 // "Reader checks" tab (created, with headings, if it isn't there).
 const SHEET = "Reader checks";

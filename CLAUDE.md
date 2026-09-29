@@ -1,6 +1,6 @@
 # Instructions for Claude
 
-This repository is **Pasco Roadmap**, a plain-language guide to Pasco County, Florida road projects,
+This repository is **Pasco Roadmap** (https://pascoroadmap.info/), a plain-language guide to Pasco County, Florida road projects,
 written by Patrick for his neighbors. It started with the Rangeland Blvd route
 study and is meant to grow to cover more projects. Patrick is not a developer:
 explain things in plain English, and give GitHub steps click by click.
