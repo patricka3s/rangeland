@@ -26,6 +26,7 @@ const TOPICS = {
   funding: "Funding (county capital improvement plan)",
   design: "Road design",
   schedule: "Schedule and process",
+  trucks: "Trucks",
   related: "Related studies",
   claim: "Statements, designations and quotes",
 };
@@ -214,6 +215,7 @@ export default function (eleventyConfig) {
     if (f.unit === "grade") return "Grade " + d;
     if (f.unit === "rating") return d + " (rating)";
     if (f.unit === "date" || f.unit === "classification" || f.unit === "phase") return d;
+    if (f.unit === "percent") return d + "%";
     if (f.unit === "statement") return "\u201C" + d + "\u201D";
     return d + " " + f.unit;
   }

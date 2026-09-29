@@ -477,8 +477,8 @@ trafficRows:
   </div>
   <p>All three segments are four-lane roads, listed together on the county's <strong>Freight Priority Network</strong>. Pasco's description is that connecting them turns Rangeland Boulevard, Bud Bexley Parkway and Tower Road from isolated, local traffic only roads into a
     <strong>regional collector</strong>. The next section defines a collector road vs other types.</p>
-  <p>According to Pasco county, the freight designation does not imply heavy truck use; however, the road is designed for <strong>WB-40 vehicles</strong>. A WB-40 truck is a design vehicle classification representing a medium-to-large truck with a <strong>40-foot wheelbase</strong>.</p>
-  <p>Trucks are about <strong>4&#37;</strong> of daily traffic on the existing segments here against <strong>12&#37;</strong> on SR 54. Pasco expects truck traffic on this project to be between 4 and 12 percent.</p>
+  <p>According to Pasco county, the freight designation does not imply heavy truck use; however, the road is designed for <strong>{% fact "rangeland.design.design-vehicle" %} vehicles</strong>. A WB-40 truck is a design vehicle classification representing a medium-to-large truck with a <strong>40-foot wheelbase</strong>.</p>
+  <p>Trucks are about <strong>{% fact "rangeland.trucks.corridor-existing" %}</strong> of daily traffic on the existing segments here against <strong>{% fact "rangeland.trucks.sr54" %}</strong> on SR 54. Pasco expects truck traffic on this project to be between 4 and 12 percent.</p>
   <p class="foot">Pasco MPO 2050 LRTP &#183; projects 114.2, 114.3, 114.4, 118.1</p>
 </div>
 
@@ -501,7 +501,7 @@ trafficRows:
   <p class="sn">04 &nbsp;·&nbsp; Process</p>
   <h2>We are currently in the route study; money for construction has been set aside.</h2>
   <div class="steps">
-    <div class="step"><span class="st">In county plans</span><span class="sm">Since 2006</span></div>
+    <div class="step"><span class="st">In county plans</span><span class="sm">Since {% fact "rangeland.schedule.comp-plan-since" %}</span></div>
     <div class="step now"><span class="st">Route study</span><span class="sm">Now &#183; Workshop #3</span></div>
     <div class="step"><span class="st">Design</span><span class="sm">Funded {% fact "rangeland.schedule.design-funded" %}</span></div>
     <div class="step"><span class="st">Right of way</span><span class="sm">Funded {% fact "rangeland.schedule.row-funded" %}</span></div>
@@ -557,7 +557,7 @@ trafficRows:
   <h2>Things I'm still curious about</h2>
   <ol class="qlist">
     <li><b>Where were the noise receptors, and what levels were modelled at each?</b> Mitigation was found reasonable and feasible for one short segment near the roundabout in Bexley. Everywhere else, which test did the location fail &#8212; reasonableness or feasibility &#8212; and by how much?</li>
-    <li><b>What truck percentage does the 2050 forecast assume</b> for the finished corridor? Existing counts are about 4&#37; here and 12&#37; on SR 54; the design-year number has not been published.</li>
+    <li><b>What truck percentage does the 2050 forecast assume</b> for the finished corridor? Existing counts are about {% fact "rangeland.trucks.corridor-existing" %} here and {% fact "rangeland.trucks.sr54" %} on SR 54; the design-year number has not been published.</li>
     <li><b>Four of the five stated goals have no published measurement.</b> Connectivity, congestion relief, evacuation, secondary access and safety. Which will be measured before an alternative is chosen, and how?</li>
     <li><b>Design money was appropriated for a fiscal year that ends 30 September,</b> while this study has not yet chosen between A, D and E. Did design work begin before an alternative was selected, or did the money go unspent?</li>
     <li><b>Which Board of County Commissioners votes have authorised money for this project, and on what dates?</b> And what is the {% fact "rangeland.funding.state-request", "words" %} state appropriation for &#8212; has the county executed a grant agreement to accept it?</li>
@@ -605,8 +605,8 @@ trafficRows:
   <div class="callout">
     <h3>What is a Freight Priority Network?</h3>
     <p style="margin-bottom:10px">Pasco's long range transportation plan designates a <strong>Freight Priority Network</strong>, the roads the county plans for the movement of goods. Rangeland Boulevard, Bud Bexley Parkway and Caliente Boulevard are all part of that plan, and the plan draws its freight goals from the state's <strong>Florida Mobility and Trade Plan</strong>. The county notes it has no freight plan of its own yet.</p>
-    <p style="margin-bottom:10px">The designation earns the project a point in the 2050 plan's project scoring &#8212; the rule reads "project falls along the freight priority network &#8212; 1 point." The road is also designed for a <strong>WB-40</strong> vehicle, a medium-sized semitrailer, meaning one can make the turns without leaving the pavement.</p>
-    <p style="margin-bottom:0">The county's view is that the designation does not imply heavy truck use, and that many state and county roads carry it. They report about <strong>4&#37;</strong> of daily traffic is trucks on the existing segments of this corridor against about <strong>12&#37;</strong> on the parallel stretch of SR 54, and expect the corridor's share to rise once the segments connect but stay below SR 54's &#8212; and above the local street network. A design-year truck percentage for the finished corridor still has not been published.</p>
+    <p style="margin-bottom:10px">The designation earns the project a point in the 2050 plan's project scoring &#8212; the rule reads "project falls along the freight priority network &#8212; 1 point." The road is also designed for a <strong>{% fact "rangeland.design.design-vehicle" %}</strong> vehicle, a medium-sized semitrailer, meaning one can make the turns without leaving the pavement.</p>
+    <p style="margin-bottom:0">The county's view is that the designation does not imply heavy truck use, and that many state and county roads carry it. They report about <strong>{% fact "rangeland.trucks.corridor-existing" %}</strong> of daily traffic is trucks on the existing segments of this corridor against about <strong>{% fact "rangeland.trucks.sr54" %}</strong> on the parallel stretch of SR 54, and expect the corridor's share to rise once the segments connect but stay below SR 54's &#8212; and above the local street network. A design-year truck percentage for the finished corridor still has not been published.</p>
   </div>
 </section>
 
@@ -699,7 +699,7 @@ trafficRows:
 
 <section id="s3">
   <h2><span class="num">03</span><span>Where we are in the overall process</span></h2>
-  <p>This is an old project. It has been in the <strong>Pasco County Comprehensive Plan since 2006</strong>, and in long range transportation plans adopted by the county's MPO before 2024. It is now in the route study stage, which is choosing between Alternatives A, D and E. After that come design, right-of-way purchase and construction &#8212; and money for all three is already set aside in the county's capital plan.</p>
+  <p>This is an old project. It has been in the <strong>Pasco County Comprehensive Plan since {% fact "rangeland.schedule.comp-plan-since" %}</strong>, and in long range transportation plans adopted by the county's MPO before 2024. It is now in the route study stage, which is choosing between Alternatives A, D and E. After that come design, right-of-way purchase and construction &#8212; and money for all three is already set aside in the county's capital plan.</p>
   <p>Different studies happen at different stages, which matters if you want to know when a particular concern gets examined. Here is where each one lands.</p>
 
   <figure>

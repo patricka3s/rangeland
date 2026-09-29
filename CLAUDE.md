@@ -91,7 +91,8 @@ project, or a fact is missing a field — keep it that way; don't weaken the che
   red/green for up/down — a figure rising is not good or bad.
 - Units in use: `vehicles per day`, `grade`, `rating` (the matrix's None / Low / Medium /
   High), `USD million`, `USD per acre`, `acres`, `parcels`, `miles`, `date`, `feet`, `lanes`,
-  `mph`, `classification` and `phase` (both shown as plain text).
+  `mph`, `classification` and `phase` (both shown as plain text), `percent`, and
+  `statement` (a claim, shown in quotes and marked with `{% src "id" %}`, kind `claim`).
   Ranges are `value: {low: …, high: …}`.
 - Level-of-service grades are the **evening peak**. The county publishes "AM (PM)"
   pairs — never drop a bare letter from a letter or email into a PM field (see

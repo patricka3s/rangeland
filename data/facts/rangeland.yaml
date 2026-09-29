@@ -582,6 +582,51 @@
   ai_checked: '2026-09-29'
   note: 'The request gives local matching funds of $7.8 million and a total of $12.3 million for FY 2026-27.'
 
+# ---- From the county's letter to Patrick (Transportation Engineering, William
+# Poon), as pasted by Patrick on 29 Sep 2026.
+
+- id: rangeland.design.design-vehicle
+  statement: 'Design vehicle the proposed Rangeland Blvd is designed to accommodate'
+  value: WB-40
+  unit: classification
+  source: pasco-2026-09-ted-letter
+  location: 'section "04 How the Rangeland study fits into the larger Pasco plan": "designed to accommodate a WB-40 vehicle ... a medium sized semitrailer"'
+  as_of: '2026-09-18'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.trucks.corridor-existing
+  statement: 'Trucks as a share of daily traffic, existing segments of the Rangeland Blvd corridor'
+  value: 4
+  unit: percent
+  source: pasco-2026-09-ted-letter
+  location: 'sections "01 Key Takeaways" and "06 Trucks and noise": "About 4% of the daily traffic volumes are trucks"'
+  as_of: '2026-09-18'
+  status: current
+  ai_checked: '2026-09-29'
+  note: 'The letter says "about". It expects the share to rise once the segments are connected, but to stay below SR 54.'
+
+- id: rangeland.trucks.sr54
+  statement: 'Trucks as a share of daily traffic, the parallel segment of SR 54'
+  value: 12
+  unit: percent
+  source: pasco-2026-09-ted-letter
+  location: 'sections "01 Key Takeaways" and "06 Trucks and noise": "About 12% of the traffic along the parallel segment of SR 54 are trucks"'
+  as_of: '2026-09-18'
+  status: current
+  ai_checked: '2026-09-29'
+  note: 'The letter says "about".'
+
+- id: rangeland.schedule.comp-plan-since
+  statement: 'Year since which the project has been in the Pasco County Comprehensive Plan'
+  value: '2006'
+  unit: date
+  source: pasco-2026-09-ted-letter
+  location: 'section "03 Where we are in the overall process": "included in the Pasco County Comprehensive Plan since 2006"'
+  as_of: '2026-09-18'
+  status: current
+  ai_checked: '2026-09-29'
+
 # ---- Level of service, evening peak
 
 - id: rangeland.los.rg-gunn.2023
