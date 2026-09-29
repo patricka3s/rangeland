@@ -332,10 +332,21 @@ export default function (eleventyConfig) {
   }).filter((p) => p.topics.length);
   eleventyConfig.addGlobalData("factGroups", groups);
   // Per project, for the home page cards: figures listed, and how many a human has verified.
-  eleventyConfig.addGlobalData("projectChecks", Object.fromEntries(groups.map((p) => {
+  const projectChecks = Object.fromEntries(groups.map((p) => {
     const fs = p.topics.flatMap((t) => t.facts);
     return [p.id, { total: fs.length, human: fs.filter((f) => f.verified).length }];
-  })));
+  }));
+  eleventyConfig.addGlobalData("projectChecks", projectChecks);
+  // Publishing rule (Patrick, 29 Sep 2026): a new project goes live (page: true in
+  // projects.yaml) only once Patrick has verified at least this share of its figures.
+  const PUBLISH_THRESHOLD = 90;
+  eleventyConfig.addGlobalData("publishThreshold", PUBLISH_THRESHOLD);
+  for (const p of data.projects) {
+    if (!p.page || p.published_before_rule) continue;
+    const ck = projectChecks[p.id] || { total: 0, human: 0 };
+    const pct = ck.total ? Math.floor(ck.human / ck.total * 100) : 0;
+    if (pct < PUBLISH_THRESHOLD) throw new Error(`Publishing rule: project "${p.id}" has page: true but Patrick has verified only ${ck.human} of its ${ck.total} figures (${pct}%). New projects need ${PUBLISH_THRESHOLD}% before they are published - see data/projects.yaml.`);
+  }
   // How many of the listed figures a human has verified, and how many only AI has checked.
   const listed = groups.flatMap((p) => p.topics.flatMap((t) => t.facts));
   eleventyConfig.addGlobalData("checkCounts", {

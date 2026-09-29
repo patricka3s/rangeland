@@ -86,6 +86,11 @@ Give Patrick the list of new facts in document order (what you read, where, and
 how confident you are - flag anything read off a map or graphic). He spot-checks
 them against the originals and adds his own `verified` dates.
 
+**Publishing rule:** the project is published (`page: true` in `projects.yaml`,
+which puts its card on the home page) only once Patrick has verified at least
+90% of its figures. The build stops otherwise. Until then keep the page on its
+branch and show it to Patrick in the preview.
+
 ## 6. Build the page
 
 Project pages live at `/<project-id>/` (`src/<project-id>/index.njk`), and every

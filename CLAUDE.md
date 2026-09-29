@@ -113,6 +113,12 @@ Patrick decides. In short:
    writing anything (checkpoint 1).
 2. Register sources, add the project and its facts using the same kinds and
    scenarios as Rangeland; Patrick spot-checks the facts (checkpoint 2).
+   **Publishing rule (Patrick, 29 Sep 2026): a new project goes live only once
+   Patrick has verified at least 90% of its figures** (`verified` dates). Build the
+   page on a branch; set `page: true` in `projects.yaml` only when that's met - the
+   build stops otherwise. Rangeland and Sunlake were live before the rule
+   (`published_before_rule: true`). Patrick adds projects as time allows; don't
+   promise readers otherwise.
 3. Build the page at `/<project-id>/` with the standard sections, in the standard
    order - sections with nothing published say so rather than disappearing.
    **Every project page looks the same.** Copy the layout of an existing page (the
