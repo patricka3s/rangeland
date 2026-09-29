@@ -84,7 +84,7 @@
 - id: pasco-2026-09-ted-letter
   title: Corrections and clarifications to this guide, by email
   publisher: Pasco County Transportation Engineering Department (William Poon, P.E., Interim Director)
-  date: 2026-09-18
+  date: 2026-09-14
   note: Private correspondence; its contents are summarised in the corrections section of the guide.
 
 # ---- Rangeland Blvd route study, earlier
@@ -293,3 +293,12 @@
   date: 2025-11-03
   url: https://www.flsenate.gov/PublishedContent/Session/FiscalYear/FY2026-27/LocalFundingInitiativeRequests/FY2026-27_S1718.PDF
   note: "Filed by Sen. Ed Hooper. A request, not the appropriation itself; the Senate's list of all requests is at fl-senate-lfir-2026-27."
+
+# ---- Design references
+
+- id: fdot-florida-greenbook-2016
+  title: "Manual of Uniform Minimum Standards for Design, Construction and Maintenance for Streets and Highways (Florida Greenbook), 2016 edition"
+  publisher: Florida Department of Transportation
+  date: 2016-04
+  url: https://www.fdot.gov/docs/default-source/roadway/floridagreenbook/2016FloridaGreenbookFINAL.pdf
+  note: "Table 3-2, Design Vehicles, reproduces the 2011 AASHTO Green Book's Table 2-1b. A 2023 edition exists, but is hosted where this site's research tools cannot reach."

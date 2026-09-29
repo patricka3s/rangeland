@@ -591,7 +591,7 @@
   unit: classification
   source: pasco-2026-09-ted-letter
   location: 'section "04 How the Rangeland study fits into the larger Pasco plan": "designed to accommodate a WB-40 vehicle ... a medium sized semitrailer"'
-  as_of: '2026-09-18'
+  as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
 
@@ -601,7 +601,7 @@
   unit: percent
   source: pasco-2026-09-ted-letter
   location: 'sections "01 Key Takeaways" and "06 Trucks and noise": "About 4% of the daily traffic volumes are trucks"'
-  as_of: '2026-09-18'
+  as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
   note: 'The letter says "about". It expects the share to rise once the segments are connected, but to stay below SR 54.'
@@ -612,7 +612,7 @@
   unit: percent
   source: pasco-2026-09-ted-letter
   location: 'sections "01 Key Takeaways" and "06 Trucks and noise": "About 12% of the traffic along the parallel segment of SR 54 are trucks"'
-  as_of: '2026-09-18'
+  as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
   note: 'The letter says "about".'
@@ -623,7 +623,50 @@
   unit: date
   source: pasco-2026-09-ted-letter
   location: 'section "03 Where we are in the overall process": "included in the Pasco County Comprehensive Plan since 2006"'
-  as_of: '2026-09-18'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.design.wb40-wheelbase
+  statement: 'Wheelbase of the WB-40 design vehicle ("intermediate semitrailer"), the two wheelbases added together'
+  value: 38
+  unit: feet
+  source: fdot-florida-greenbook-2016
+  location: 'Chapter 3, Table 3-2 Design Vehicles (page 3-13, PDF page 77): WB-40, wheelbase 12.5 + 25.5 = 38'
+  as_of: '2016-04'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.design.wb40-length
+  statement: 'Overall length of the WB-40 design vehicle ("intermediate semitrailer")'
+  value: 45.5
+  unit: feet
+  source: fdot-florida-greenbook-2016
+  location: 'Chapter 3, Table 3-2 Design Vehicles (PDF page 77): WB-40, overall length 45.5'
+  as_of: '2016-04'
+  status: current
+  decimals: 1
+  ai_checked: '2026-09-29'
+
+# ---- Statements (claims): marked with a superscript "source" on the page
+
+- id: rangeland.claim.truck-share-outlook
+  statement: 'What the county expects of the corridor''s truck share once the segments are connected'
+  value: 'It is anticipated that the truck percentage along the Rangeland Blvd. corridor will increase after the existing segments are connected but remain below the parallel SR 54 corridor.'
+  unit: statement
+  source: pasco-2026-09-ted-letter
+  location: 'sections "01 Key Takeaways" and "06 Trucks and noise"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+
+- id: rangeland.claim.truck-volume-outlook
+  statement: 'Where the county expects the corridor''s future truck volumes to sit'
+  value: 'The future truck volumes are likely to remain below the parallel segment of SR 54, but above the local roadway network.'
+  unit: statement
+  source: pasco-2026-09-ted-letter
+  location: 'section "04 How the Rangeland study fits into the larger Pasco plan"'
+  as_of: '2026-09-14'
   status: current
   ai_checked: '2026-09-29'
 
@@ -938,7 +981,7 @@
   status: current
   ai_checked: '2026-09-28'
   verified: '2026-09-26'
-  note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
+  note: The county's 14 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-ballan.2050-nobuild
   statement: Level of service, evening peak, SR 54 at Ballantrae Blvd, 2050 no-build
@@ -950,7 +993,7 @@
   status: current
   ai_checked: '2026-09-28'
   verified: '2026-09-26'
-  note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
+  note: The county's 14 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-ballan.2050-build
   statement: Level of service, evening peak, SR 54 at Ballantrae Blvd, 2050 build, Alternatives A, D and E
@@ -962,7 +1005,7 @@
   status: current
   ai_checked: '2026-09-28'
   verified: '2026-09-26'
-  note: The county's 18 September letter gives different grades; this follows the boards. See correction 3.
+  note: The county's 14 September letter gives different grades; this follows the boards. See correction 3.
 
 - id: rangeland.los.sr-sunlake.2023
   statement: Level of service, evening peak, SR 54 at Sunlake Blvd, today (2023 counts)
