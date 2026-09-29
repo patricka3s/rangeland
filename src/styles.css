@@ -1025,7 +1025,7 @@
   .sh-track::before{content:"";position:absolute;left:50%;top:-5px;bottom:-5px;border-left:1px solid var(--ink-3)}
   .sh-axis .sh-track{height:auto;display:flex}
   .sh-axis .sh-track::before{top:0;bottom:-4px}
-  .sh-lab{flex:1 1 50%;font:600 10.5px/1.3 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .sh-lab{flex:1 1 50%;font:600 11px/1.3 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
   .sh-lab.neg{text-align:right;padding-right:10px} .sh-lab.pos{padding-left:10px}
   .sh-bar{position:absolute;top:6px;height:14px;background:var(--mk)}
   .sh-neg .sh-bar{right:50%;border-radius:4px 0 0 4px} .sh-pos .sh-bar{left:50%;border-radius:0 4px 4px 0}
