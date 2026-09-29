@@ -33,9 +33,12 @@ eleventyExcludeFromCollections: true
     <button type="button" class="chip" data-project="all" aria-pressed="true">All projects</button>
     {% for p in timeline.projects %}<button type="button" class="chip" data-project="{{ p.id }}" aria-pressed="false">{{ p.name }}</button>{% endfor %}
   </div>
-  <div class="tlrow" role="group" aria-label="Kind of entry">
-    {% for t in timeline.types %}<button type="button" class="chip small" data-type="{{ t.k }}" aria-pressed="true"><i class="shp s-{{ t.k }}" aria-hidden="true"></i>{{ t.label }}</button>{% endfor %}
-  </div>
+  <details class="tlkinds" id="tlkinds" open>
+    <summary>Kinds of entry <span id="tlkcount">all shown</span></summary>
+    <div class="tlrow" role="group" aria-label="Kind of entry">
+      {% for t in timeline.types %}<button type="button" class="chip small" data-type="{{ t.k }}" aria-pressed="true"><i class="shp s-{{ t.k }}" aria-hidden="true"></i>{{ t.label }}</button>{% endfor %}
+    </div>
+  </details>
   <p id="tl-none" class="fnone" hidden>No entries match.</p>
 </div>
 
@@ -120,6 +123,8 @@ eleventyExcludeFromCollections: true
     var bands = document.querySelectorAll(".tlband");
     for (i = 0; i < bands.length; i++) bands[i].hidden = !bands[i].querySelector(".tle:not([hidden])");
     none.hidden = shown > 0;
+    var all = box.querySelectorAll("[data-type]").length, now = Object.keys(on).length;
+    document.getElementById("tlkcount").textContent = now === all ? "all shown" : now + " of " + all + " shown";
   }
   function setProject(p){
     project = p;
@@ -146,6 +151,8 @@ eleventyExcludeFromCollections: true
       el.scrollIntoView();
     }
   }
+  /* On a phone the kinds start folded away, so the entries come first. */
+  if (window.matchMedia && matchMedia("(max-width:560px)").matches) document.getElementById("tlkinds").open = false;
   fromHash();
   window.addEventListener("hashchange", fromHash);
 })();
