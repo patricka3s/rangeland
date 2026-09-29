@@ -691,6 +691,27 @@
   status: current
   ai_checked: '2026-09-29'
 
+- id: rangeland.claim.interchange-suspended
+  statement: 'Status of a Suncoast Parkway interchange at Rangeland Blvd, from the Turnpike study''s project manager'
+  value: 'Advancement of the Rangeland Boulevard interchange to the design and construction phases has been suspended until Pasco County demonstrates stakeholder support and confirms that the Bud Bexley Parkway and Bexley Village Drive intersection will operate acceptably with the interchange through the year 2050.'
+  unit: statement
+  source: turnpike-moore-email-2025-08
+  location: 'second paragraph'
+  as_of: '2025-08-28'
+  status: current
+  ai_checked: '2026-09-29'
+  note: 'The next sentence reads: "Once support is demonstrated and funding is identified for the interchange, the interchange will be reevaluated."'
+
+- id: rangeland.claim.no-interchange-in-study
+  statement: 'Whether an interchange or six-lane section is part of the Rangeland route study, according to the county'
+  value: 'No interchange or six-lane section is currently being considered for approval in the Rangeland Blvd Route Study.'
+  unit: statement
+  source: pasco-2026-09-ted-letter
+  location: 'section "02 Project Overview"'
+  as_of: '2026-09-14'
+  status: current
+  ai_checked: '2026-09-29'
+
 # ---- Level of service, evening peak
 
 - id: rangeland.los.rg-gunn.2023
