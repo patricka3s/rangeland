@@ -59,7 +59,7 @@ eleventyExcludeFromCollections: true
   {%- set ups = timeline.upcoming | reverse %}
   {% if ups.length %}
   <ol class="hup">
-    {% for e in ups %}<li><span class="dt">{{ e.shown }}</span><span><a href="timeline/#{{ e.id }}">{{ e.title }}</a>{% for n in e.projectTags %} <span class="pjtag pj-{{ n.id }}">{{ n.name }}</span>{% endfor %}</span></li>
+    {% for e in ups %}<li><span class="dt">{{ e.shown }}</span><span class="hup-body"><span class="hup-tags">{% for n in e.projectTags %}<span class="pjtag pj-{{ n.id }}">{{ n.name }}</span>{% endfor %}</span><a href="timeline/#{{ e.id }}">{{ e.title }}</a></span></li>
     {% endfor %}
   </ol>
   {% else %}

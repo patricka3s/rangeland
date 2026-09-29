@@ -1042,3 +1042,16 @@
   @media (max-width:560px){
     .hup li{grid-template-columns:1fr;gap:2px}
   }
+
+/* Coming up: the project tag sits on the first line, level with the date, so
+   readers can scan down the tags for the projects they follow. */
+  .hup li{align-items:start}
+  .hup .dt{line-height:18px}
+  .hup-body{display:flex;flex-direction:column;gap:4px}
+  .hup-tags{display:flex;flex-wrap:wrap;gap:4px;line-height:18px}
+  .hup-tags .pjtag{margin-left:0;line-height:16px}
+  @media (max-width:560px){
+    .hup li{grid-template-columns:auto 1fr;column-gap:10px;row-gap:4px}
+    .hup-body{display:contents}
+    .hup-body > a{grid-column:1 / -1}
+  }
