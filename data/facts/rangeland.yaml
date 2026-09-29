@@ -434,6 +434,7 @@
   as_of: '2025-11'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
 
 - id: rangeland.aadt.suncoast-north.2050-turnpike
   statement: 'Daily traffic (AADT), Suncoast Pkwy between SR 54 and Ridge Rd, 2050 forecast in the Turnpike''s widening study (parkway widened, no Rangeland Blvd interchange)'
@@ -444,6 +445,7 @@
   as_of: '2025-11'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'With a Rangeland Blvd interchange, the next sheet (PDF page 38) gives 87,800 between SR 54 and Rangeland Blvd and 75,800 between Rangeland Blvd and Ridge Rd.'
 
 - id: rangeland.aadt.sr54-suncoast.2050-turnpike
@@ -457,6 +459,7 @@
   as_of: '2025-11'
   status: current
   ai_checked: '2026-09-28'
+  verified: '2026-09-29'
   note: 'With a Rangeland Blvd interchange, the next sheet gives 76,400 west and 72,400 east.'
 
 # ---- Added 29 Sep 2026: figures the guide's Highlights typed in by hand, now
