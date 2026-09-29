@@ -247,7 +247,7 @@ eleventyExcludeFromCollections: true
    FACT DETAILS
    Figures taken from the county's documents are printed as small buttons.
    Tapping one opens a box saying what the figure is, which document it comes
-   from, and a link to the error-report form with the figure already filled in.
+   from, how it has been checked, and the reader-check form (READER CHECKS).
    The details are in the page as JSON (#fact-data).
    ========================================================================== */
 (function(){
@@ -290,6 +290,65 @@ eleventyExcludeFromCollections: true
       a.target = "_blank";
       return a;
     }
+    /* READER CHECKS: "I checked this against the document" - Matches / Doesn't
+       match - sent straight to Patrick's Google Sheet through his Apps Script
+       (data/site.yaml -> reader_checks). A plain POST: no Google code runs on
+       this page and nothing is stored in the reader's browser. Hidden until
+       that address is set. Design and rules: docs/reader-checks.md. */
+    function checkForm(id, f){
+      var wrap = el("div", "rck"), verdict = "";
+      wrap.appendChild(el("p", "rck-q", "I checked this against the document:"));
+      var row = el("div", "rck-row");
+      var yes = el("button", "rck-v", "Matches"), no = el("button", "rck-v", "Doesn\u2019t match");
+      yes.type = no.type = "button";
+      row.appendChild(yes); row.appendChild(no); wrap.appendChild(row);
+      var more = el("form", "rck-more"); more.hidden = true; more.noValidate = true;
+      function field(label, name, type, rows){
+        var l = el("label", "rck-f"); l.appendChild(el("span", null, label));
+        var i = el(rows ? "textarea" : "input"); i.name = name; if (!rows) i.type = type || "text"; else i.rows = rows;
+        i.maxLength = rows ? 1000 : 200; l.appendChild(i); more.appendChild(l); return i;
+      }
+      var says = field("What does the document say?", "says", "text", 3);
+      var page = field("Which page or board?", "page");
+      var name = field("Your name (optional)", "name");
+      var email = field("Email, if you\u2019d like a reply (optional)", "email", "email");
+      var cl = el("label", "rck-c"), credit = el("input"); credit.type = "checkbox";
+      cl.appendChild(credit); cl.appendChild(document.createTextNode(" You may credit me by name")); more.appendChild(cl);
+      var trap = el("input"); trap.type = "text"; trap.name = "website"; trap.tabIndex = -1; trap.autocomplete = "off";
+      trap.className = "rck-trap"; trap.setAttribute("aria-hidden", "true"); more.appendChild(trap);
+      var send = el("button", "rck-send", "Send"); send.type = "submit"; more.appendChild(send);
+      more.appendChild(el("p", "rck-note", "Goes to a private Google Sheet that only Patrick can see. Name and email are optional and never published unless you tick the box."));
+      var status = el("p", "rck-status"); status.setAttribute("role", "status");
+      wrap.appendChild(more); wrap.appendChild(status);
+      function pick(v){
+        verdict = v;
+        yes.setAttribute("aria-pressed", v === "matches" ? "true" : "false");
+        no.setAttribute("aria-pressed", v === "differs" ? "true" : "false");
+        says.parentNode.hidden = page.parentNode.hidden = (v === "matches");
+        more.hidden = false;
+        (v === "differs" ? says : send).focus();
+      }
+      yes.addEventListener("click", function(){ pick("matches"); });
+      no.addEventListener("click", function(){ pick("differs"); });
+      more.addEventListener("submit", function(e){
+        e.preventDefault();
+        if (verdict === "differs" && !says.value.trim()) { status.textContent = "Please say what the document says."; says.focus(); return; }
+        send.disabled = true; status.textContent = "Sending\u2026";
+        var body = JSON.stringify({fact: id, statement: f.s, value: f.v, verdict: verdict,
+          says: says.value, page: page.value, name: name.value, email: email.value,
+          credit: credit.checked, website: trap.value, pageUrl: location.href.split("#")[0]});
+        fetch(data.rc, {method: "POST", mode: "no-cors", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: body})
+          .then(function(){
+            wrap.textContent = "";
+            wrap.appendChild(el("p", "rck-done", "Thank you \u2014 sent to Patrick. " + (verdict === "matches" ? "It helps to know a figure has been checked." : "He will check it against the document.")));
+          }, function(){
+            send.disabled = false;
+            status.textContent = "That didn\u2019t send (are you offline?). You can use the report form below instead.";
+          });
+      });
+      return wrap;
+    }
+
     function open(btn){
       var id = btn.getAttribute("data-fact"), f = data.facts[id];
       if (!f) return;
@@ -324,8 +383,8 @@ eleventyExcludeFromCollections: true
       box.appendChild(ck);
       if (f.note) box.appendChild(el("p", "fn", f.note));
 
+      if (data.rc) box.appendChild(checkForm(id, f));
       var p = el("p", "fa");
-      p.appendChild(link("Think this is wrong? Tell me →", f.r, "fd"));
       var all = el("a", "fall", "All figures and sources");
       all.href = (data.root || "") + "facts/#" + encodeURIComponent(id);
       p.appendChild(all);

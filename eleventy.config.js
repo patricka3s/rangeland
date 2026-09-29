@@ -165,6 +165,9 @@ export default function (eleventyConfig) {
   };
 
   eleventyConfig.addGlobalData("site", data.site);
+  // The reader-checks address (data/site.yaml); READER_CHECKS_URL overrides it for local testing.
+  const readerChecksUrl = process.env.READER_CHECKS_URL || (data.site.reader_checks && data.site.reader_checks.url) || "";
+  eleventyConfig.addGlobalData("readerChecks", readerChecksUrl);
   eleventyConfig.addGlobalData("sources", data.sources);
   eleventyConfig.addGlobalData("definitions", data.definitions.map((d) => ({
     ...d, src: d.source ? data.sourceById[d.source] : null, aiCheckedOn: when(d.ai_checked), verifiedOn: when(d.verified),
@@ -225,17 +228,11 @@ export default function (eleventyConfig) {
     return d + " " + f.unit;
   }
 
-  // Link to the error-report form with the first question filled in: the fact's
-  // id, what it states and its value - so a report always says which figure.
-  function reportUrl(f) {
-    const form = data.site.dispute_form;
-    return `${form.url}?usp=pp_url&${form.field}=` +
-      encodeURIComponent(`${f.id} — ${f.statement}: ${display(f)}`);
-  }
+
 
   // Everything a page needs to show one fact.
   function card(f) {
-    return { ...f, display: display(f), withUnit: withUnit(f), report: reportUrl(f), asOf: when(f.as_of), aiCheckedOn: when(f.ai_checked), verifiedOn: when(f.verified), src: data.sourceById[f.source] };
+    return { ...f, display: display(f), withUnit: withUnit(f), asOf: when(f.as_of), aiCheckedOn: when(f.ai_checked), verifiedOn: when(f.verified), src: data.sourceById[f.source] };
   }
   // A fact's earlier versions, oldest first ([] if it replaces nothing).
   function earlier(f) {
@@ -379,7 +376,7 @@ export default function (eleventyConfig) {
       const src = data.sourceById[f.source];
       out[f.id] = {
         s: f.statement, v: withUnit(f), asof: f.as_of, st: f.status,
-        loc: f.location, note: f.note, r: reportUrl(f), ai: f.ai_checked, vf: f.verified,
+        loc: f.location, note: f.note, ai: f.ai_checked, vf: f.verified,
         was: f.replaces ? withUnit(data.byId[f.replaces]) + " (" + when(data.byId[f.replaces].as_of) + ")" : undefined,
         now: data.replacedBy[f.id] ? withUnit(data.byId[data.replacedBy[f.id]]) + " (" + when(data.byId[data.replacedBy[f.id]].as_of) + ")" : undefined,
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
@@ -388,15 +385,13 @@ export default function (eleventyConfig) {
     // Definitions open in the same box: {% src "def.collector" %}
     for (const d of data.definitions) {
       const src = d.source ? data.sourceById[d.source] : null;
-      const form = data.site.dispute_form;
       out["def." + d.id] = {
         s: "Definition: " + d.term, v: d.definition, st: "current",
         loc: d.location, note: d.note, ai: d.ai_checked, vf: d.verified, def: 1,
-        r: `${form.url}?usp=pp_url&${form.field}=` + encodeURIComponent(`def.${d.id} — ${d.term}: ${d.definition}`),
         src: src ? { t: src.title, p: src.publisher, d: src.date, url: src.url } : { t: "General explanation, not from one document" },
       };
     }
-    const json = JSON.stringify({ root: "../".repeat(depth), facts: out }).replace(/</g, "\\u003c");
+    const json = JSON.stringify({ root: "../".repeat(depth), rc: readerChecksUrl || undefined, facts: out }).replace(/</g, "\\u003c");
     return `<script type="application/json" id="fact-data">${json}</script>`;
   });
 

@@ -1,10 +1,9 @@
 # Site-wide settings.
 
-# The Google Form readers use to report an error in a figure.
-# Every figure on the page links to it with the first question filled in.
-#   url    the form's address, ending in /viewform
-#   field  the code for the "Which fact or statement are you questioning?"
-#          question - from the form's ⋮ -> Get pre-filled link
-dispute_form:
-  url: https://docs.google.com/forms/d/e/1FAIpQLSe3-Zqz--IH2awPtqVExu1EkGQkrCcZ2Fz126mUN_ISZu6e9Q/viewform
-  field: entry.818409732
+# Reader checks: the "I checked this against the document - Matches / Doesn't
+# match" form in each figure's details box. Answers go straight to Patrick's
+# Google Sheet through the Apps Script in docs/reader-checks.md.
+#   url    the script's web app address, ending in /exec. Leave it empty ('')
+#          and the form stays hidden.
+reader_checks:
+  url: https://script.google.com/macros/s/AKfycbzFvgRN4BA9Fcy27ZZIQ67EgnzBY9TK8nLAWBuwSxTsomCpBKqr2-vKaE5bBvB-4VRB7w/exec

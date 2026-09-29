@@ -85,7 +85,7 @@ eleventyExcludeFromCollections: true
 </section>
 
 <footer>
-  <p style="margin:0 0 10px">Built from the same sourced data as the rest of the site, and rebuilt daily so &#8220;today&#8221; stays current. Something missing or wrong? <a href="{{ site.dispute_form.url }}">Tell me through the form.</a></p>
+  <p style="margin:0 0 10px">Built from the same sourced data as the rest of the site, and rebuilt daily so &#8220;today&#8221; stays current. Something missing or wrong? Message me on Facebook.</p>
   {% include "share.njk" %}
   <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
 </footer>
