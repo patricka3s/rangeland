@@ -16,14 +16,14 @@ sources, showing the figures not yet verified by a human):
 3. Optional: name, email, and a tick box "You may credit me by name".
 4. **Send** - a thank-you line replaces the form. The reader never leaves the page.
 
-The same form replaces today's "Think this is wrong? Tell me" link.
+It replaced the old "Think this is wrong? Tell me" link to a Google Form.
 
 ## How it gets to the Sheet
 
 - A small **Google Apps Script** attached to Patrick's Sheet, deployed as a web
   app ("Execute as: me", "Who has access: anyone"). Its address goes in
   `data/site.yaml` under `reader_checks: url:`. While that is empty the form
-  stays hidden and readers see the Google Form link as before.
+  stays hidden. (The Google Form it replaced was retired on 29 Sep 2026.)
 - The page sends each answer with a plain `fetch` POST (body `text/plain`, so the
   browser asks Google for nothing else). **No Google script runs on the page and
   no cookies are set** - the footer's promise stays true.

@@ -247,7 +247,7 @@ eleventyExcludeFromCollections: true
    FACT DETAILS
    Figures taken from the county's documents are printed as small buttons.
    Tapping one opens a box saying what the figure is, which document it comes
-   from, and a link to the error-report form with the figure already filled in.
+   from, how it has been checked, and the reader-check form (READER CHECKS).
    The details are in the page as JSON (#fact-data).
    ========================================================================== */
 (function(){
@@ -385,7 +385,6 @@ eleventyExcludeFromCollections: true
 
       if (data.rc) box.appendChild(checkForm(id, f));
       var p = el("p", "fa");
-      p.appendChild(link(data.rc ? "Or report something else →" : "Think this is wrong? Tell me →", f.r, "fd"));
       var all = el("a", "fall", "All figures and sources");
       all.href = (data.root || "") + "facts/#" + encodeURIComponent(id);
       p.appendChild(all);

@@ -15,7 +15,7 @@ figure on it is stored once, cites the document it came from, and can be checked
 | `data/sources.yaml` | Every document a fact can cite: title, publisher, date, link. |
 | `data/facts/rangeland.yaml` | Every figure the page shows from the county's documents — traffic, intersection grades, costs, matrix quantities — each with its source. |
 | `data/projects.yaml` | The road projects the site covers. Each facts file must match one. |
-| `data/site.yaml` | Site settings: the error-report form's address. |
+| `data/site.yaml` | Site settings: the reader-check script's address. |
 | `data/definitions.yaml` | Plain-language definitions of the terms the site uses. Not yet shown as a glossary. |
 | `src/index.njk` | The page. All the wording lives here; figures are pulled in from the facts file. |
 | `src/sunlake/index.njk` | The **Sunlake Blvd corridor** page at `/sunlake/`, laid out like Rangeland's Highlights: slides for the three pieces of the corridor, the planned road, the process and funding, with a plain "not yet published" wherever nothing is. "Full detail" is switched off until the county publishes a study or holds a workshop. |
@@ -90,9 +90,11 @@ in double quotes: `title: "Public Workshop #3 newsletter"`.
 
 Every figure pulled from the facts file shows with a dotted underline. Tapping it
 opens a small box with what the figure is, the document it comes from (with a
-link), and **"Think this is wrong? Tell me →"**. That link opens the Google Form
-with the first question already filled in with the fact's id, what it states and
-its value, so you know exactly which figure a report is about.
+link), how it has been checked, and the reader-check form: **"I checked this
+against the document — Matches / Doesn't match"**. Answers go straight to the
+"Reader checks" tab of your Google Sheet, with the figure's id, what it states and
+its value, so you know exactly which figure an answer is about. (The old Google
+Form was retired on 29 Sep 2026.)
 
 **When a newer document updates a figure**, don't overwrite the old one. Add the
 new fact with `replaces:` naming the old fact's id, and change the old one's
@@ -103,14 +105,13 @@ figures aren't measured the same way.
 
 The **Figures and sources** page (`/facts/`) lists every fact the same way —
 grouped by project and kind, searchable, each with its source link and a
-**Report an error** link — followed by every source document and how many
+**Check this** button — followed by every source document and how many
 figures cite it. It needs no editing: add or change a fact and it appears there.
 The guide links to it under the reading-mode toggle, in the footer, and from each
 figure's details box.
 
-The form's address and question code are in `data/site.yaml`. If you rebuild the
-form, get the new code from the form's **⋮ → Get pre-filled link** (type anything
-in the first question, then **Get link**; the code is the `entry.` number).
+The reader-check script's address is in `data/site.yaml`; the script itself and
+how to set it up again are in `docs/reader-checks.md`.
 
 ## Adding something to the timeline
 

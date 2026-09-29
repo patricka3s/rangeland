@@ -4,7 +4,7 @@ eleventyExcludeFromCollections: true
 ---
 {#- FIGURES AND SOURCES PAGE (not copied into the built page)
     Lists every fact in data/facts/, grouped by project and kind, each with its
-    source and a link to the error-report form. Nothing here needs editing when
+    source and a "Check this" button. Nothing here needs editing when
     a figure changes - it is all built from the data files. -#}
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@ eleventyExcludeFromCollections: true
 <header>
   <p class="eyebrow"><a href="../">&#8592; Back to the guide</a></p>
   <h1>Figures and sources</h1>
-  <p class="standfirst">Every figure the guide takes from a public document, with the document it comes from. Click a source to read it yourself. Each one says whether it has been checked against that document, and by whom (see the key below). If a figure doesn&#8217;t match its source, use <strong>Report an error</strong> beside it &#8212; the form opens with that figure already filled in.</p>
+  <p class="standfirst">Every figure the guide takes from a public document, with the document it comes from. Click a source to read it yourself. Each one says whether it has been checked against that document, and by whom (see the key below). If you have checked a figure against its source, use <strong>Check this</strong> beside it to say whether it matches.</p>
 </header>
 
 {#- How each figure has been checked. "verified" is set only by Patrick; "ai_checked" by Claude. -#}
@@ -104,7 +104,6 @@ eleventyExcludeFromCollections: true
           {%- if f.location %} &#183; {{ f.location }}{% endif %} &#183; <span class="fdate">{{ f.asOf }}</span>
           &#183; {{ checks(f) }}
           {% if readerChecks %}<button type="button" class="fact frc" data-fact="{{ f.id }}">Check this</button>{% endif %}
-          <a class="frep" href="{{ f.report }}" rel="noopener" target="_blank">Report an error</a>
         </p>
         {% if f.note %}<p class="fnote">{{ f.note }}</p>{% endif %}
         {% if f.history.length %}
@@ -114,7 +113,7 @@ eleventyExcludeFromCollections: true
             {% for h in f.history %}
             <li id="{{ h.id }}">
               <span class="fvval">{{ h.withUnit }}</span>
-              <span class="fvmeta">{% if h.src.url %}<a href="{{ h.src.url }}" rel="noopener" target="_blank">{{ h.src.title }}</a>{% else %}{{ h.src.title }}{% endif %}{% if h.location %} &#183; {{ h.location }}{% endif %} &#183; <span class="fdate">{{ h.asOf }}</span>{% if h.verified or h.ai_checked %} &#183; {{ checks(h) }}{% endif %} <a class="frep" href="{{ h.report }}" rel="noopener" target="_blank">Report an error</a></span>
+              <span class="fvmeta">{% if h.src.url %}<a href="{{ h.src.url }}" rel="noopener" target="_blank">{{ h.src.title }}</a>{% else %}{{ h.src.title }}{% endif %}{% if h.location %} &#183; {{ h.location }}{% endif %} &#183; <span class="fdate">{{ h.asOf }}</span>{% if h.verified or h.ai_checked %} &#183; {{ checks(h) }}{% endif %}</span>
               {% if h.note %}<span class="fvnote">{{ h.note }}</span>{% endif %}
             </li>
             {% endfor %}
