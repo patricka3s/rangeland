@@ -381,7 +381,7 @@
   location: 'sites 145119 (east of Gunn Hwy, 49,000), 145603 (west of the Suncoast Pkwy, 55,000), 145602 (0.5 mi east of the Suncoast Pkwy, 57,500), 145601 (0.5 mi east of Ballantrae Blvd, 65,500), 145600 (0.4 mi west of US 41, 60,000)'
   as_of: '2025'
   status: current
-  ai_checked: '2026-09-28'
+  ai_checked: '2026-09-29'
   note: 'FDOT counts, not the county''s board: the board''s 2023 figures for SR 54 are listed separately, for two segments.'
 
 - id: rangeland.aadt.suncoast-south.2025
@@ -392,7 +392,7 @@
   location: 'site 970340, main line 0.7 mi north of the Hillsborough County line'
   as_of: '2025'
   status: current
-  ai_checked: '2026-09-28'
+  ai_checked: '2026-09-29'
 
 - id: rangeland.aadt.suncoast-north.2025
   statement: 'Daily traffic (AADT), Suncoast Pkwy between SR 54 and Ridge Rd, FDOT count, 2025'
@@ -402,7 +402,7 @@
   location: 'site 970360, main line north of the Anclote toll plaza (mile marker 23.372)'
   as_of: '2025'
   status: current
-  ai_checked: '2026-09-28'
+  ai_checked: '2026-09-29'
   note: 'FDOT counts this stretch at one site, north of where Rangeland Blvd would cross, and applies the figure to the whole stretch from SR 54 northward.'
 
 - id: rangeland.aadt.us41-fdot.2025
@@ -415,7 +415,7 @@
   location: 'sites 145303 (north of SR 54, 48,000), 140029 (south of Ehren Cutoff, 45,000), 145500 (north of Ehren Cutoff, 44,000), 145511 (south of Sundance Lake Blvd, 33,000)'
   as_of: '2025'
   status: current
-  ai_checked: '2026-09-28'
+  ai_checked: '2026-09-29'
 
 # ---- The Turnpike's 2050 forecasts, from its Suncoast Parkway widening study.
 # Its own model and assumptions (parkway widened, no Rangeland Blvd interchange),
