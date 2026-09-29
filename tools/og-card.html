@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- The site-wide link-preview card (src/og-home.png), 1200 x 630.
+     Remake it with:  node tools/og-card.mjs
+     Colours match the Rangeland card (src/og-image.png). Keep the wording
+     free of dates so it never goes out of date. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body { background: #0F1218; border-left: 18px solid #5636C9; box-sizing: border-box; position: relative; }
+  .main { padding: 62px 66px 0; }
+  .eyebrow { font: 700 19px/1 "DejaVu Sans Mono", monospace; letter-spacing: .2em; color: #A78EFF; margin: 0 0 44px; }
+  h1 { font: 700 104px/1 "Liberation Sans", Arial, sans-serif; letter-spacing: -.035em; color: #fff; margin: 0 0 34px; }
+  .sub { font: 400 27px/1.45 "Liberation Serif", Georgia, serif; color: #9AA3B2; margin: 0; max-width: 760px; }
+  .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 93px; background: #5636C9;
+         display: flex; align-items: center; justify-content: space-between; padding: 0 66px; }
+  .bar b { font: 700 30px/1 "Liberation Sans", Arial, sans-serif; letter-spacing: -.01em; color: #fff; }
+  .bar span { font: 400 17px/1 "DejaVu Sans Mono", monospace; letter-spacing: .18em; color: #D9CCFF; }
+</style>
+</head>
+<body>
+  <div class="main">
+    <p class="eyebrow">PASCO COUNTY, FLORIDA &#183; ROAD PROJECTS</p>
+    <h1>Pasco Roadmap</h1>
+    <p class="sub">Plain-language guides to the road projects around Bexley, with every figure linked to the public document it comes from.</p>
+  </div>
+  <div class="bar"><b>pascoroadmap.info</b><span>SOURCED &#183; CHECKED &#183; CORRECTED IN PUBLIC</span></div>
+</body>
+</html>

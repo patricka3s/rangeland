@@ -530,7 +530,7 @@ export default function (eleventyConfig) {
     return s + "        </g>";
   });
 
-  eleventyConfig.addPassthroughCopy({ "src/styles.css": "styles.css", "src/og-image.png": "og-image.png" });
+  eleventyConfig.addPassthroughCopy({ "src/styles.css": "styles.css", "src/og-image.png": "og-image.png", "src/og-home.png": "og-home.png" });
 
   return {
     dir: { input: "src", output: "_site" },
