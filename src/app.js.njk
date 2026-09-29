@@ -8,6 +8,54 @@ eleventyExcludeFromCollections: true
     replaced by the fact's value when the site is built.
     Rows marked out:1 are drawn grey and their figures are never shown, so
     those few are still written in directly. -#}
+/* LIGHT/DARK: pages follow the phone or computer's own setting unless the
+   reader picks the other with the switch in the project bar. The choice is
+   kept on this device only (nothing is sent anywhere), and picking the same
+   as the device's setting goes back to following it. Runs before the page
+   is drawn, so there's no flash of the wrong colours. */
+(function(){
+  var KEY = "pasco-roadmap-theme", root = document.documentElement, saved = null;
+  var mq = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+  var BG = { light: "#F4F5F7", dark: "#0F1218" };
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  function device(){ return mq && mq.matches ? "dark" : "light"; }
+  function now(){ return root.getAttribute("data-theme") || device(); }
+  function paint(){
+    var t = now(), other = t === "dark" ? "light" : "dark", i;
+    var b = document.querySelectorAll(".pb-theme");
+    for (i = 0; i < b.length; i++){
+      b[i].hidden = false;
+      b[i].setAttribute("data-now", t);
+      b[i].setAttribute("aria-label", "Switch to " + other + " mode");
+      b[i].title = "Switch to " + other + " mode";
+    }
+    /* the phone's own bar above the page */
+    var m = document.querySelectorAll('meta[name="theme-color"]');
+    for (i = 0; i < m.length; i++){
+      var own = /dark/.test(m[i].getAttribute("media") || "") ? BG.dark : BG.light;
+      m[i].setAttribute("content", root.hasAttribute("data-theme") ? BG[t] : own);
+    }
+  }
+  function choose(t){
+    if (t === device()){
+      root.removeAttribute("data-theme");
+      try { localStorage.removeItem(KEY); } catch (e) {}
+    } else {
+      root.setAttribute("data-theme", t);
+      try { localStorage.setItem(KEY, t); } catch (e) {}
+    }
+    paint();
+  }
+  document.addEventListener("DOMContentLoaded", function(){
+    paint();
+    document.addEventListener("click", function(e){
+      if (e.target.closest && e.target.closest(".pb-theme")) choose(now() === "dark" ? "light" : "dark");
+    });
+  });
+  if (mq && mq.addEventListener) mq.addEventListener("change", paint);
+})();
+
 /* Rangeland guide - behaviour only. Three blocks:
    - reading mode and meeting box: the Highlights/Full detail toggle, opening
      the corrections from #notes links, and flipping the meeting box to the
