@@ -403,12 +403,51 @@ eleventyExcludeFromCollections: true
       return wrap;
     }
 
+    /* CONNECTED: the figure's place, other figures there (from any project or
+       document), groups the place belongs to, and linked statements - all from
+       data/places.yaml, groups.yaml and links.yaml. Tapping one of the other
+       figures opens it in this same box. */
+    function connected(cx){
+      var wrap = el("div", "fcx"), root = data.root || "", MAX = 6;
+      wrap.appendChild(el("p", "fcx-h", "Connected"));
+      function go(text, href){ var a = el("a", null, text); a.href = root + href; return a; }
+      if (cx.pl){
+        var pl = el("p", "fcx-pl"); pl.appendChild(document.createTextNode("Place: "));
+        pl.appendChild(go(cx.pl.n, cx.pl.h)); wrap.appendChild(pl);
+      }
+      if (cx.here && cx.here.length){
+        wrap.appendChild(el("p", "fcx-sub", "Also here"));
+        var ul = el("ul", "fcx-list");
+        cx.here.slice(0, MAX).forEach(function(id){
+          var g = data.facts[id]; if (!g) return;
+          var li = el("li"), b = el("button", "fact fcx-fact"); b.type = "button";
+          b.setAttribute("data-fact", id);
+          b.appendChild(el("span", "fcx-v", g.v)); b.appendChild(el("span", "fcx-s", g.s));
+          li.appendChild(b); ul.appendChild(li);
+        });
+        wrap.appendChild(ul);
+        if (cx.here.length > MAX && cx.pl) {
+          var more = el("p", "fcx-more"); more.appendChild(go("and " + (cx.here.length - MAX) + " more at this place \u2192", cx.pl.h)); wrap.appendChild(more);
+        }
+      }
+      (cx.gr || []).forEach(function(g){
+        var p = el("p", "fcx-pl"); p.appendChild(document.createTextNode("Part of: ")); p.appendChild(go(g.n, g.h)); wrap.appendChild(p);
+      });
+      (cx.lk || []).forEach(function(l){
+        var p = el("p", "fcx-pl"); p.appendChild(document.createTextNode(l.t + ": ")); p.appendChild(go(l.n, l.h)); wrap.appendChild(p);
+      });
+      return wrap;
+    }
+
     function open(btn){
       var id = btn.getAttribute("data-fact"), f = data.facts[id];
       if (!f) return;
-      if (opener) opener.setAttribute("aria-expanded", "false");
-      opener = btn;
-      btn.setAttribute("aria-expanded", "true");
+      var inside = box.contains(btn);           /* a connected figure tapped inside the box */
+      if (!inside) {
+        if (opener) opener.setAttribute("aria-expanded", "false");
+        opener = btn;
+        btn.setAttribute("aria-expanded", "true");
+      }
       box.textContent = "";
 
       var x = el("button", "x", "×");
@@ -436,6 +475,7 @@ eleventyExcludeFromCollections: true
       if (!f.vf && !f.ai) ck.appendChild(el("span", "vtag none", "Not yet checked against the source"));
       box.appendChild(ck);
       if (f.note) box.appendChild(el("p", "fn", f.note));
+      if (f.cx) box.appendChild(connected(f.cx));
 
       if (data.rc) box.appendChild(checkForm(id, f));
       var p = el("p", "fa");
@@ -451,7 +491,7 @@ eleventyExcludeFromCollections: true
       var t = e.target;
       while (t && t !== document && !(t.classList && t.classList.contains("fact"))) t = t.parentNode;
       if (t && t !== document) {
-        if (t === opener && !box.hidden) close(); else open(t);
+        if (t === opener && !box.hidden) close(); else { open(t); box.scrollTop = 0; }
         return;
       }
       if (!box.hidden && !box.contains(e.target)) close();
@@ -557,7 +597,7 @@ eleventyExcludeFromCollections: true
     var node = document.getElementById("fact-data"), data;
     if (!node) return;
     try { data = JSON.parse(node.textContent); } catch (e) { return; }
-    var slides = document.querySelectorAll(".slide"), i;
+    var slides = document.querySelectorAll(".slide,.xgroup"), i;   /* slides, and the groups on Explore */
     for (i = 0; i < slides.length; i++){
       var btns = slides[i].querySelectorAll("[data-fact],[data-calc]"), seen = {}, ids = [], j;
       for (j = 0; j < btns.length; j++){
@@ -573,7 +613,7 @@ eleventyExcludeFromCollections: true
       var box = document.createElement("details");
       box.className = "slsrc";
       var sum = document.createElement("summary");
-      sum.textContent = "Sources on this slide \u00b7 " + ids.length + (ids.length === 1 ? " item" : " items") +
+      sum.textContent = (slides[i].classList.contains("xgroup") ? "Sources for this group" : "Sources on this slide") + " \u00b7 " + ids.length + (ids.length === 1 ? " item" : " items") +
         " \u00b7 " + human + " verified by a human" + (ai ? ", " + ai + " checked by AI" : "") +
         (ids.length - human - ai ? ", " + (ids.length - human - ai) + " not yet checked" : "");
       box.appendChild(sum);
@@ -598,7 +638,7 @@ eleventyExcludeFromCollections: true
     document.addEventListener("click", function(e){
       var c = e.target.closest && e.target.closest(".calc");
       if (!c) return;
-      var s = c.closest(".slide"), box = s && s.querySelector(".slsrc");
+      var s = c.closest(".slide,.xgroup"), box = s && s.querySelector(".slsrc");
       if (box) { box.open = true; box.scrollIntoView({block: "nearest", behavior: "smooth"}); }
     });
   });

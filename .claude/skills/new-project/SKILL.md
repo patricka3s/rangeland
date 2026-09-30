@@ -91,7 +91,9 @@ them against the originals and adds his own `verified` dates.
 already on the site is at least 90% verified by Patrick. Check this before
 starting (the home page shows where each stands): if any is below 90%, tell
 Patrick first - the build will stop otherwise. Add the new project at the end of
-`projects.yaml`. When it gets `page: true`, add its tag shade (`.pj-<project-id>`)
+`projects.yaml`. Add the new facts to their places in `data/places.yaml` (a new
+road or intersection if none fits, named as the document describes it), so they
+connect to what other projects and documents say about the same place. When it gets `page: true`, add its tag shade (`.pj-<project-id>`)
 first and its `card:` wording (see the header of `projects.yaml`; copy the
 Sunlake card's pattern), then redraw the link-preview cards - the site card
 shows a tag per published project, and the project gets its own card:

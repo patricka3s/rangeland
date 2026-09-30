@@ -423,6 +423,115 @@ export default function (eleventyConfig) {
     r.wFar = +(far / shiftMax * 50).toFixed(2);       // to the far end of a range
   });
   eleventyConfig.addGlobalData("trafficShift", shiftRows);
+  // ---- Connections: places, groups and links (data/places.yaml, groups.yaml,
+  // links.yaml). Facts about the same place connect by themselves; a group or a
+  // link is a claim, so each names the document that makes it. The build stops
+  // on anything that doesn't resolve, and only adds up figures that are alike.
+  const conn = (() => {
+    const P = load(path.join(DATA, "places.yaml"));
+    const roads = P.roads || [], places = P.places || [];
+    const groups = load(path.join(DATA, "groups.yaml")), links = load(path.join(DATA, "links.yaml"));
+    const problems = [];
+    const roadById = Object.fromEntries(roads.map((r) => [r.id, r]));
+    const placeById = {}, placeOf = {};
+    for (const p of places) {
+      const where = `places.yaml: "${p.id}"`;
+      if (placeById[p.id]) problems.push(`${where} is listed twice`);
+      placeById[p.id] = p;
+      if (!["stretch", "intersection"].includes(p.kind)) problems.push(`${where} has kind "${p.kind}"; use stretch or intersection`);
+      if (!p.name) problems.push(`${where} has no name`);
+      for (const r of p.roads || []) if (!roadById[r]) problems.push(`${where} names road "${r}", which is not under roads:`);
+      p.factIds = [];
+      for (const pat of p.facts || []) {
+        const ids = pat.endsWith("*") ? data.facts.filter((f) => f.id.startsWith(pat.slice(0, -1))).map((f) => f.id)
+                                      : (data.byId[pat] ? [pat] : []);
+        if (!ids.length) problems.push(`${where} lists "${pat}", which matches no fact`);
+        for (const id of ids) {
+          if (placeOf[id] && placeOf[id] !== p.id) problems.push(`fact "${id}" is in two places: "${placeOf[id]}" and "${p.id}"`);
+          placeOf[id] = p.id;
+          if (!p.factIds.includes(id)) p.factIds.push(id);
+        }
+      }
+    }
+    const groupById = {};
+    for (const g of groups) {
+      const where = `groups.yaml: "${g.id}"`;
+      groupById[g.id] = g;
+      if (!data.sourceById[g.source]) problems.push(`${where} names source "${g.source}", which is not in sources.yaml`);
+      for (const m of g.members || []) if (!placeById[m]) problems.push(`${where} names place "${m}", which is not in places.yaml`);
+      for (const t of g.totals || []) {
+        const fs = t.facts.map((id) => data.byId[id]);
+        if (fs.some((f) => !f)) { problems.push(`${where}: total "${t.label}" names a fact that does not exist`); continue; }
+        if (new Set(fs.map((f) => f.unit)).size > 1 || new Set(fs.map((f) => f.source)).size > 1 || fs.some((f) => typeof f.value !== "number"))
+          problems.push(`${where}: total "${t.label}" adds figures with different units or documents, or that aren't single numbers - not like for like`);
+      }
+    }
+    const target = (to) => to.startsWith("road:") ? (roadById[to.slice(5)] && { kind: "road", id: to.slice(5), name: roadById[to.slice(5)].name })
+      : to.startsWith("group:") ? (groupById[to.slice(6)] && { kind: "group", id: to.slice(6), name: groupById[to.slice(6)].name })
+      : placeById[to] ? { kind: "place", id: to, name: placeById[to].name }
+      : data.byId[to] ? { kind: "fact", id: to, name: data.byId[to].statement } : null;
+    const LINK_TYPES = { "concerns": "Is about", "depends-on": "Depends on" };
+    for (const l of links) {
+      const where = `links.yaml: "${l.from}" -> "${l.to}"`;
+      if (!data.byId[l.from]) problems.push(`${where}: "${l.from}" is not a fact`);
+      if (!LINK_TYPES[l.type]) problems.push(`${where} has type "${l.type}"; use ${Object.keys(LINK_TYPES).join(", ")}`);
+      if (!data.sourceById[l.source]) problems.push(`${where} names source "${l.source}", which is not in sources.yaml`);
+      l.target = target(String(l.to));
+      if (!l.target) problems.push(`${where}: "${l.to}" is not a place, road:, group: or fact`);
+      l.label = LINK_TYPES[l.type];
+    }
+    if (problems.length) throw new Error("Connections check failed:\n  " + problems.join("\n  "));
+
+    const href = (t) => t.kind === "fact" ? `facts/#${t.id}` : t.kind === "road" ? `explore/#road-${t.id}` : `explore/#${t.id}`;
+    // For each fact: its place, the other current figures there, and any links into or out of it.
+    const factConn = {};
+    for (const f of data.facts) {
+      const pid = placeOf[f.id], p = pid && placeById[pid];
+      const out = links.filter((l) => l.from === f.id).map((l) => ({ t: l.label, n: l.target.name, h: href(l.target), src: data.sourceById[l.source].title }));
+      const inn = links.filter((l) => l.target.kind === "fact" && l.target.id === f.id)
+        .map((l) => ({ t: "Referred to by", n: data.byId[l.from].statement, h: `facts/#${l.from}` }));
+      const intoPlace = p ? links.filter((l) => l.target.kind === "place" && l.target.id === pid && l.from !== f.id) : [];
+      const gs = p ? groups.filter((g) => (g.members || []).includes(pid)) : [];
+      if (!p && !out.length && !inn.length) continue;
+      factConn[f.id] = {
+        pl: p ? { n: p.name, h: `explore/#${pid}` } : undefined,
+        here: p ? p.factIds.filter((id) => id !== f.id && data.byId[id].status !== "superseded") : [],
+        lk: out.concat(inn, intoPlace.map((l) => ({ t: "A statement about this place", n: data.byId[l.from].statement, h: `facts/#${l.from}` }))),
+        gr: gs.map((g) => ({ n: g.name, h: `explore/#group-${g.id}` })),
+      };
+    }
+    // For the Explore page.
+    const projOf = (id) => data.projects.find((p) => id.startsWith(p.id + "."));
+    const placeCards = places.map((p) => {
+      const fs = p.factIds.map((id) => card(data.byId[id]));
+      return {
+        ...p, roadNames: (p.roads || []).map((r) => roadById[r].name),
+        projects: [...new Set(p.factIds.map((id) => projOf(id)).filter(Boolean))],
+        facts: fs.sort((a, b) => (a.status === "superseded") - (b.status === "superseded")),
+        sources: [...new Set(fs.map((f) => f.source))].length,
+        links: links.filter((l) => l.target.kind === "place" && l.target.id === p.id)
+          .map((l) => ({ label: l.label, from: card(data.byId[l.from]), src: data.sourceById[l.source] })),
+        groups: groups.filter((g) => (g.members || []).includes(p.id)).map((g) => ({ id: g.id, name: g.name })),
+      };
+    });
+    const roadCards = roads.map((r) => ({
+      ...r, places: places.filter((p) => (p.roads || []).includes(r.id)).map((p) => p.id),
+      links: links.filter((l) => l.target.kind === "road" && l.target.id === r.id)
+        .map((l) => ({ label: l.label, from: card(data.byId[l.from]), src: data.sourceById[l.source] })),
+    }));
+    const groupCards = groups.map((g) => ({
+      ...g, src: data.sourceById[g.source],
+      memberCards: (g.members || []).map((m) => ({ id: m, name: placeById[m].name })),
+      totals: (g.totals || []).map((t) => {
+        const first = data.byId[t.facts[0]], sum = t.facts.reduce((s, id) => s + data.byId[id].value, 0);
+        return { ...t, value: withUnit({ ...first, value: +sum.toFixed(6), decimals: t.decimals ?? first.decimals }) };
+      }),
+    }));
+    return { factConn, placeCards, roadCards, groupCards,
+      counts: { places: places.length, placed: Object.keys(placeOf).length, groups: groups.length, links: links.length } };
+  })();
+  eleventyConfig.addGlobalData("explore", { places: conn.placeCards, roads: conn.roadCards, groups: conn.groupCards, counts: conn.counts });
+
   eleventyConfig.addGlobalData("sourceList", data.sources.map((s) => ({
     ...s, dateText: when(s.date), figures: data.facts.filter((f) => f.source === s.id).length,
   })));
@@ -451,6 +560,7 @@ export default function (eleventyConfig) {
         was: f.replaces ? withUnit(data.byId[f.replaces]) + " (" + when(data.byId[f.replaces].as_of) + ")" : undefined,
         now: data.replacedBy[f.id] ? withUnit(data.byId[data.replacedBy[f.id]]) + " (" + when(data.byId[data.replacedBy[f.id]].as_of) + ")" : undefined,
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
+        cx: conn.factConn[f.id],            // connections: place, figures there, groups, links
       };
     }
     // Definitions open in the same box: {% src "def.collector" %}
@@ -510,7 +620,7 @@ export default function (eleventyConfig) {
   // then includes the facts it was worked out from. "prefix*" means every current
   // fact whose id starts with prefix.
   eleventyConfig.addPairedShortcode("calc", (content, ...ids) => {
-    const all = ids.flatMap((id) => id.endsWith("*")
+    const all = ids.flat().flatMap((id) => id.endsWith("*")
       ? data.facts.filter((f) => f.id.startsWith(id.slice(0, -1)) && f.status === "current").map((f) => f.id)
       : [get(id).id]);
     return `<button type="button" class="calc" data-calc="${all.join(" ")}" title="Worked out from the figures listed under Sources on this slide">${content.trim()}</button>`;

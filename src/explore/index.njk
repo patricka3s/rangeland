@@ -1,0 +1,129 @@
+---
+permalink: explore/index.html
+eleventyExcludeFromCollections: true
+---
+{#- EXPLORE PAGE (not copied into the built page)
+    Built entirely from data/places.yaml, groups.yaml and links.yaml plus the
+    facts: every place with every figure about it, from any project or document.
+    A link to explore/#road-sr54 opens with that road chosen; explore/#<place id>
+    or #group-<id> scrolls to that card. Nothing here needs editing. -#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explore · Pasco Roadmap</title>
+<meta name="description" content="Every figure on Pasco Roadmap arranged by the road or intersection it is about, from every project and every document, with the groups the documents put together.">
+<meta name="author" content="Patrick">
+<link rel="canonical" href="https://pascoroadmap.info/explore/">
+{% set ogTitle = "Explore · Pasco Roadmap" %}{% set ogDesc = "Every figure arranged by the road or intersection it is about, from every project and every document." %}{% set ogPath = "explore/" %}{% include "social.njk" %}
+{% set root = "../" %}{% include "shared-head.njk" %}
+<script src="../app.js"></script>
+</head>
+<body class="xppage">
+<div class="wrap">
+{% set current = "explore" %}{% include "project-bar.njk" %}
+
+<header>
+  <h1>Explore the figures</h1>
+  <p class="standfirst">Every figure that is about a particular road or intersection, arranged by place: what the county&#8217;s boards, FDOT&#8217;s counts, the Turnpike&#8217;s study and the budget each say about it, side by side. Pick a road to see everything published about it. Tap any figure for its source.</p>
+  <p class="xp-count">{{ explore.counts.placed }} figures &#183; {{ explore.counts.places }} places &#183; {{ explore.counts.groups }} groups</p>
+</header>
+
+<section class="xp-groups" aria-labelledby="h-groups">
+  <h2 id="h-groups" class="hh">Groups</h2>
+  <p class="xp-note">Places a document puts together. Totals are worked out from the figures listed, and only figures from the same document with the same unit are added.</p>
+  {% for g in explore.groups %}
+  <div class="xgroup" id="group-{{ g.id }}">
+    <h3>{{ g.name }}</h3>
+    <p class="xp-about">{{ g.about }}</p>
+    <ol class="xg-members">{% for m in g.memberCards %}<li><a href="#{{ m.id }}">{{ m.name }}</a></li>{% endfor %}</ol>
+    {% for t in g.totals %}<p class="xg-total"><span>{{ t.label }}</span> <b>{% calc t.facts %}{{ t.value }}{% endcalc %}</b></p>{% endfor %}
+    <p class="xp-src">Grouped by: {% if g.src.url %}<a href="{{ g.src.url }}" rel="noopener" target="_blank">{{ g.src.title }}</a>{% else %}{{ g.src.title }}{% endif %}{% if g.location %} &#183; {{ g.location }}{% endif %}</p>
+  </div>
+  {% endfor %}
+</section>
+
+<section aria-labelledby="h-places">
+  <h2 id="h-places" class="hh">Places</h2>
+  <div class="tlfilters" id="xpfilters">
+    <div class="tlrow" role="group" aria-label="Road">
+      <button type="button" class="chip" data-road="all" aria-pressed="true">All roads</button>
+      {% for r in explore.roads %}<button type="button" class="chip" data-road="{{ r.id }}" id="road-{{ r.id }}" aria-pressed="false">{{ r.name }}</button>{% endfor %}
+    </div>
+  </div>
+  {% for r in explore.roads %}{% if r.links.length %}
+  <div class="xp-roadnote" data-road-note="{{ r.id }}" hidden>
+    {% for l in r.links %}<p><b>{{ l.label }} {{ r.name }}:</b> &#8220;{{ l.from.value }}&#8221;{% src l.from.id %} <span class="xp-src">&#8212; {{ l.src.title }}</span></p>{% endfor %}
+  </div>
+  {% endif %}{% endfor %}
+
+  <div class="xp-places">
+  {% for p in explore.places %}
+    <article class="xplace" id="{{ p.id }}" data-roads="{{ p.roads | join(' ') }}">
+      <p class="xp-kind">{% if p.kind == "intersection" %}Intersection{% else %}Stretch of road{% endif %}{% for pj in p.projects %} <span class="pjtag pj-{{ pj.id }}">{{ pj.short }}</span>{% endfor %}</p>
+      <h3>{{ p.name }}</h3>
+      <p class="xp-meta">{{ p.facts.length }} figure{% if p.facts.length != 1 %}s{% endif %} from {{ p.sources }} document{% if p.sources != 1 %}s{% endif %}{% for g in p.groups %} &#183; part of <a href="#group-{{ g.id }}">{{ g.name }}</a>{% endfor %}</p>
+      <ul class="xp-facts">
+        {% for f in p.facts %}
+        <li{% if f.status == "superseded" %} class="is-superseded"{% endif %}>
+          <span class="xpf-v">{% fact f.id %}</span>
+          <span class="xpf-s">{{ f.statement }}{% if f.status == "superseded" %} <em>(replaced by a newer document)</em>{% endif %}</span>
+          <span class="xpf-src">{{ f.src.title }}{% if f.verified %} &#183; <span class="vtag human">Verified by a human</span>{% elif f.ai_checked %} &#183; <span class="vtag ai">Checked by AI</span>{% endif %}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% for l in p.links %}
+      <p class="xp-link"><b>A statement about this place:</b> &#8220;{{ l.from.value }}&#8221;{% src l.from.id %} <span class="xp-src">&#8212; {{ l.src.title }}</span></p>
+      {% endfor %}
+    </article>
+  {% endfor %}
+  </div>
+  <p id="xp-none" class="fnone" hidden>No places on this road yet.</p>
+</section>
+
+<footer>
+  <p style="margin:0 0 10px">Built from the same sourced data as the rest of the site. Which place a figure is about comes from the figure&#8217;s own document; groups and links each name the document that makes the connection. Something missing or wrong? Message me on Facebook.</p>
+  {% include "share.njk" %}
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
+</footer>
+</div>
+
+{% factData %}
+<script>
+/* Road filter: one road (or all). explore/#road-sr54 opens with SR 54 chosen;
+   explore/#<place> or #group-<id> shows everything and scrolls there.
+   Without JavaScript every place shows. */
+(function(){
+  var box = document.getElementById("xpfilters"), none = document.getElementById("xp-none");
+  var cards = document.querySelectorAll(".xplace"), notes = document.querySelectorAll("[data-road-note]");
+  function setRoad(r){
+    var b = box.querySelectorAll("[data-road]"), shown = 0, i;
+    for (i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", b[i].getAttribute("data-road") === r ? "true" : "false");
+    for (i = 0; i < cards.length; i++){
+      var ok = r === "all" || (" " + cards[i].getAttribute("data-roads") + " ").indexOf(" " + r + " ") >= 0;
+      cards[i].hidden = !ok; if (ok) shown++;
+    }
+    for (i = 0; i < notes.length; i++) notes[i].hidden = notes[i].getAttribute("data-road-note") !== r;
+    none.hidden = shown > 0;
+  }
+  box.addEventListener("click", function(e){
+    var t = e.target.closest("[data-road]"); if (!t) return;
+    var r = t.getAttribute("data-road"); setRoad(r);
+    try { history.replaceState(null, "", r === "all" ? location.pathname : "#road-" + r); } catch (err) {}
+  });
+  function fromHash(){
+    var h = decodeURIComponent(location.hash.slice(1));
+    if (!h) return;
+    if (h.indexOf("road-") === 0 && box.querySelector('[data-road="' + h.slice(5) + '"]')) { setRoad(h.slice(5)); box.scrollIntoView(); return; }
+    var el = document.getElementById(h);
+    if (el) { setRoad("all"); el.scrollIntoView(); el.classList.add("xp-hit"); setTimeout(function(){ el.classList.remove("xp-hit"); }, 1600); }
+  }
+  fromHash();
+  window.addEventListener("hashchange", fromHash);
+})();
+</script>
+<script data-goatcounter="https://patricka3s.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
