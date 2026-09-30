@@ -733,6 +733,7 @@
     .pb-long{display:none}
     .pb-short{display:inline}
   }
+  @media (max-width:350px){ .pb-site a{letter-spacing:.03em;padding:5px 4px;margin:0 -2px} }   /* the narrowest phones */
   .projbar + header{padding-top:28px}
   .cardtag{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
     letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle}
@@ -1094,8 +1095,8 @@
   .xp-meta{font-size:.9rem;color:var(--ink-3);margin:0 0 8px}
   .xp-meta a{color:var(--accent)}
   .xp-facts{list-style:none;margin:0;padding:0}
-  .xp-facts li{display:grid;grid-template-columns:minmax(6.5rem,auto) minmax(0,1fr);gap:2px 14px;padding:8px 0;border-top:1px solid var(--rule-soft)}
-  .xpf-v{grid-row:span 2;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;font-weight:600;white-space:nowrap}
+  .xp-facts li{display:grid;grid-template-columns:minmax(0,10.5rem) minmax(0,1fr);gap:2px 14px;padding:8px 0;border-top:1px solid var(--rule-soft)}
+  .xpf-v{grid-row:span 2;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;font-weight:600;line-height:1.45}
   .xpf-s{font-size:.95rem;line-height:1.4;color:var(--ink)}
   .xpf-src{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;line-height:1.5;color:var(--ink-3)}
   .xpf-src .vtag{font-size:11px}

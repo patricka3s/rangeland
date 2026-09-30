@@ -518,8 +518,9 @@ export default function (eleventyConfig) {
   // source and a link to report an error in it (see FACT DETAILS in app.js).
   // {% fact "id", "words" %} writes money out as "$150.0 million".
   // {% fact "id", "plain" %} prints the bare text - for use inside JavaScript.
+  // {% fact "id", "unit" %} adds the unit: "3.41 miles", "4 lanes", "Grade D".
   eleventyConfig.addShortcode("fact", (id, style) => {
-    const f = get(id), text = display(f, style === "words");
+    const f = get(id), text = style === "unit" ? withUnit(f) : display(f, style === "words");
     if (style === "plain") return text;
     return `<button type="button" class="fact" data-fact="${id}">${text}</button>`;
   });
