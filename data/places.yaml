@@ -1,0 +1,226 @@
+# Places - the roads, road stretches and intersections the facts are about, so
+# figures from different projects and different documents that describe the same
+# place are connected automatically (the "Connected" part of a figure's details
+# box, and the Explore page).
+#
+# roads:   id, name. The order here is the order of the road filters on Explore.
+# places:
+#   id     road.something for a stretch, x.something for an intersection
+#   kind   stretch | intersection
+#   name   how the documents describe it - name only what a document says
+#          (a stretch is "between X and Y" only if a source puts it that way)
+#   roads  the road(s) it is on; an intersection lists every road that meets there
+#   facts  the facts about this place: exact ids, or a prefix ending in * for
+#          every fact starting with it (e.g. all three scenarios of one count)
+#
+# The build stops if a road, place or fact named here doesn't exist, a pattern
+# matches no fact, or one fact is given two places. Facts that aren't about a
+# place (schedules, costs of the whole project, definitions of vehicles) have none.
+
+roads:
+  - { id: rangeland,  name: Rangeland Blvd }
+  - { id: budbexley,  name: Bud Bexley Pkwy }
+  - { id: caliente,   name: Caliente Blvd }
+  - { id: bvd,        name: Bexley Village Dr }
+  - { id: sr54,       name: SR 54 }
+  - { id: suncoast,   name: Suncoast Pkwy }
+  - { id: us41,       name: US 41 }
+  - { id: gunn,       name: Gunn Hwy }
+  - { id: ballantrae, name: Ballantrae Blvd }
+  - { id: sbranch,    name: S Branch Blvd }
+  - { id: broadporch, name: Broad Porch Run }
+  - { id: cattlegap,  name: Cattle Gap Trl }
+  - { id: sunlake,    name: Sunlake Blvd }
+
+places:
+  # ---- Rangeland Blvd
+  - id: rangeland.new
+    kind: stretch
+    name: Rangeland Blvd, Cattle Gap Trl to Bexley Village Dr (the new road, LRTP 114.2)
+    roads: [rangeland]
+    facts: [rangeland.length-miles, rangeland.aadt.rangeland-new.*, rangeland.design.lanes, rangeland.design.median-*, rangeland.design.design-vehicle]
+  - id: rangeland.cip
+    kind: stretch
+    name: Rangeland Blvd, east of Gunn Hwy to Bexley Village Dr (the county capital plan's line)
+    roads: [rangeland]
+    facts: [rangeland.funding.cip.*]
+  - id: x.rangeland-cattlegap
+    kind: intersection
+    name: Rangeland Blvd at Cattle Gap Trl
+    roads: [rangeland, cattlegap]
+    facts: [rangeland.los.rg-cattle.*]
+  - id: x.rangeland-gunn
+    kind: intersection
+    name: Rangeland Blvd at Gunn Hwy
+    roads: [rangeland, gunn]
+    facts: [rangeland.los.rg-gunn.*]
+
+  # ---- Bud Bexley Pkwy and Caliente Blvd (the rest of the LRTP corridor)
+  - id: budbexley.rndbt-ballantrae
+    kind: stretch
+    name: Bud Bexley Pkwy, Bexley Village Dr roundabout to Ballantrae Blvd
+    roads: [budbexley]
+    facts: [rangeland.aadt.budbexley.*]
+  - id: budbexley.lrtp
+    kind: stretch
+    name: Bud Bexley Pkwy, Bexley Village Dr to US 41 (LRTP 114.3)
+    roads: [budbexley]
+    facts: [rangeland.length-miles.budbexley]
+  - id: caliente.lrtp
+    kind: stretch
+    name: Caliente Blvd, US 41 to CR 583 (Ehren Cutoff) (LRTP 114.4)
+    roads: [caliente]
+    facts: [rangeland.length-miles.caliente]
+  - id: x.bvd-budbexley
+    kind: intersection
+    name: Bexley Village Dr roundabout (Bexley Village Dr at Bud Bexley Pkwy)
+    roads: [bvd, budbexley]
+    facts: [rangeland.los.bvd-rndbt.*]
+  - id: x.budbexley-ballantrae
+    kind: intersection
+    name: Bud Bexley Pkwy at Ballantrae Blvd
+    roads: [budbexley, ballantrae]
+    facts: [rangeland.los.bb-ballan.*]
+
+  # ---- Bexley Village Dr and the neighborhood streets
+  - id: bvd.toward-sr54
+    kind: stretch
+    name: Bexley Village Dr, just north of SR 54
+    roads: [bvd]
+    facts: [rangeland.aadt.bvd-sr54.*]
+  - id: bvd.by-rndbt
+    kind: stretch
+    name: Bexley Village Dr, just south of the roundabout
+    roads: [bvd]
+    facts: [rangeland.aadt.bvd-rndbt.*]
+  - id: bvd.north
+    kind: stretch
+    name: Bexley Village Dr, north leg (north-east of the roundabout)
+    roads: [bvd]
+    facts: [rangeland.aadt.bvd-north.*]
+  - id: broadporch.by-rndbt
+    kind: stretch
+    name: Broad Porch Run, next to the roundabout
+    roads: [broadporch]
+    facts: [rangeland.aadt.broadporch.*]
+  - id: ballantrae.toward-sr54
+    kind: stretch
+    name: Ballantrae Blvd, just north of SR 54
+    roads: [ballantrae]
+    facts: [rangeland.aadt.ballantrae-s.*]
+  - id: ballantrae.south-of-budbexley
+    kind: stretch
+    name: Ballantrae Blvd, just south of Bud Bexley Pkwy
+    roads: [ballantrae]
+    facts: [rangeland.aadt.ballantrae-n.*]
+  - id: sbranch.rangeland-sr54
+    kind: stretch
+    name: S Branch Blvd, between Rangeland Blvd and SR 54
+    roads: [sbranch]
+    facts: [rangeland.aadt.sbranch.*]
+  - id: gunn.south-of-sr54
+    kind: stretch
+    name: Gunn Hwy, south of SR 54
+    roads: [gunn]
+    facts: [rangeland.aadt.gunn.*]
+
+  # ---- SR 54
+  - id: sr54.boards
+    kind: stretch
+    name: SR 54, the two segments labelled on the county's traffic boards
+    roads: [sr54]
+    facts: [rangeland.aadt.sr54.2023, rangeland.aadt.sr54.2050-nobuild, rangeland.aadt.sr54.2050-build]
+  - id: sr54.gunn-us41
+    kind: stretch
+    name: SR 54, Gunn Hwy to US 41 (FDOT's count sites)
+    roads: [sr54]
+    facts: [rangeland.aadt.sr54-fdot.2025]
+  - id: sr54.at-suncoast
+    kind: stretch
+    name: SR 54, either side of the Suncoast Pkwy (the Turnpike's study)
+    roads: [sr54]
+    facts: [rangeland.aadt.sr54-suncoast.2050-turnpike]
+  - id: sr54.parallel
+    kind: stretch
+    name: SR 54, the segment parallel to the Rangeland Blvd corridor (the county's letter)
+    roads: [sr54]
+    facts: [rangeland.trucks.sr54]
+  - id: x.sr54-gunn
+    kind: intersection
+    name: SR 54 at Gunn Hwy
+    roads: [sr54, gunn]
+    facts: [rangeland.los.sr-gunn.*]
+  - id: x.sr54-sbranch
+    kind: intersection
+    name: SR 54 at S Branch Blvd
+    roads: [sr54, sbranch]
+    facts: [rangeland.los.sr-sbranch.*]
+  - id: x.sr54-suncoast-w
+    kind: intersection
+    name: SR 54 at the Suncoast Pkwy ramps, west
+    roads: [sr54, suncoast]
+    facts: [rangeland.los.sr-sunc-w.*]
+  - id: x.sr54-suncoast-e
+    kind: intersection
+    name: SR 54 at the Suncoast Pkwy ramps, east
+    roads: [sr54, suncoast]
+    facts: [rangeland.los.sr-sunc-e.*]
+  - id: x.sr54-bvd
+    kind: intersection
+    name: SR 54 at Bexley Village Dr
+    roads: [sr54, bvd]
+    facts: [rangeland.los.sr-bvd.*]
+  - id: x.sr54-ballantrae
+    kind: intersection
+    name: SR 54 at Ballantrae Blvd
+    roads: [sr54, ballantrae]
+    facts: [rangeland.los.sr-ballan.*]
+  - id: x.sr54-sunlake
+    kind: intersection
+    name: SR 54 at Sunlake Blvd
+    roads: [sr54, sunlake]
+    facts: [rangeland.los.sr-sunlake.*]
+
+  # ---- Suncoast Pkwy and US 41
+  - id: suncoast.county-line-sr54
+    kind: stretch
+    name: Suncoast Pkwy, Hillsborough County line to SR 54 (FDOT's count site)
+    roads: [suncoast]
+    facts: [rangeland.aadt.suncoast-south.2025]
+  - id: suncoast.lutz-lake-fern-sr54
+    kind: stretch
+    name: Suncoast Pkwy, W Lutz Lake Fern Rd to SR 54 (the Turnpike's study)
+    roads: [suncoast]
+    facts: [rangeland.aadt.suncoast-south.2050-turnpike]
+  - id: suncoast.sr54-ridge
+    kind: stretch
+    name: Suncoast Pkwy, SR 54 to Ridge Rd
+    roads: [suncoast]
+    facts: [rangeland.aadt.suncoast-north.*]
+  - id: us41.sr54-sundance
+    kind: stretch
+    name: US 41, SR 54 to Sundance Lake Blvd (FDOT's count sites)
+    roads: [us41]
+    facts: [rangeland.aadt.us41-fdot.2025]
+
+  # ---- Sunlake Blvd
+  - id: sunlake.design-project
+    kind: stretch
+    name: Sunlake Blvd, Center Village Dr to south of Appenzeller Blvd (the design project)
+    roads: [sunlake]
+    facts: [sunlake.length-miles.south, sunlake.design.south.*]
+  - id: sunlake.cip-south
+    kind: stretch
+    name: Sunlake Blvd, north of Bud Bexley Pkwy to south of the Angeline line (capital plan line)
+    roads: [sunlake]
+    facts: [sunlake.funding.south.*]
+  - id: sunlake.cip-angeline
+    kind: stretch
+    name: Sunlake Blvd, south of the Angeline line to south of Wilton Way (capital plan line)
+    roads: [sunlake]
+    facts: [sunlake.funding.angeline.*]
+  - id: sunlake.cip-north
+    kind: stretch
+    name: Sunlake Blvd, south of Wilton Way to Anchor Dune Dr (capital plan line)
+    roads: [sunlake]
+    facts: [sunlake.funding.north.*]
