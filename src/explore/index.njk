@@ -64,7 +64,7 @@ eleventyExcludeFromCollections: true
         <li{% if f.status == "superseded" %} class="is-superseded"{% endif %}>
           <span class="xpf-v">{% fact f.id, "unit" %}</span>
           <span class="xpf-s">{{ f.statement }}{% if f.status == "superseded" %} <em>(replaced by a newer document)</em>{% endif %}</span>
-          <span class="xpf-src">{{ f.src.title }}{% if f.verified %} &#183; <span class="vtag human">Verified by a human</span>{% elif f.ai_checked %} &#183; <span class="vtag ai">Checked by AI</span>{% endif %}</span>
+          <span class="xpf-src">{{ f.src.title }}{% if f.verified %} &#183; <span class="vtag human">Verified by a human</span>{% elif f.ai_checked %} &#183; <span class="vtag ai">Checked by AI</span>{% else %} &#183; <span class="vtag none">Not yet checked</span>{% endif %}</span>
         </li>
         {% endfor %}
       </ul>
