@@ -3,20 +3,20 @@ permalink: explore/index.html
 eleventyExcludeFromCollections: true
 ---
 {#- EXPLORE PAGE (not copied into the built page)
-    Built entirely from data/places.yaml, groups.yaml and links.yaml plus the
-    facts: every place with every figure about it, from any project or document.
+    Built entirely from data/places.yaml and links.yaml plus the facts: every
+    stretch and intersection with every figure about it, from any project or document.
     A link to explore/#road-sr54 opens with that road chosen; explore/#<place id>
-    or #group-<id> scrolls to that card. Nothing here needs editing. -#}
+    scrolls to that card. Nothing here needs editing. -#}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Explore · Pasco Roadmap</title>
-<meta name="description" content="Every figure on Pasco Roadmap arranged by the road or intersection it is about, from every project and every document, with the groups the documents put together.">
+<title>Explore by Road · Pasco Roadmap</title>
+<meta name="description" content="Every figure on Pasco Roadmap arranged by the road or intersection it is about, from every project and every document.">
 <meta name="author" content="Patrick">
 <link rel="canonical" href="https://pascoroadmap.info/explore/">
-{% set ogTitle = "Explore · Pasco Roadmap" %}{% set ogDesc = "Every figure arranged by the road or intersection it is about, from every project and every document." %}{% set ogPath = "explore/" %}{% include "social.njk" %}
+{% set ogTitle = "Explore by Road · Pasco Roadmap" %}{% set ogDesc = "Every figure arranged by the road or intersection it is about, from every project and every document." %}{% set ogPath = "explore/" %}{% include "social.njk" %}
 {% set root = "../" %}{% include "shared-head.njk" %}
 <script src="../app.js"></script>
 </head>
@@ -25,27 +25,13 @@ eleventyExcludeFromCollections: true
 {% set current = "explore" %}{% include "project-bar.njk" %}
 
 <header>
-  <h1>Explore the figures</h1>
-  <p class="standfirst">Every figure that is about a particular road or intersection, arranged by where it is: what the county&#8217;s boards, FDOT&#8217;s counts, the Turnpike&#8217;s study and the budget each say about it, side by side. Pick a road to see everything published about it, and a second road to go straight to where they meet. Tap any figure for its source.</p>
-  <p class="xp-count">{{ explore.counts.placed }} figures &#183; {{ explore.roads.length }} roads &#183; {{ explore.counts.places }} stretches and intersections &#183; {{ explore.counts.groups }} corridors</p>
+  <h1>Explore by Road</h1>
+  <p class="standfirst">Pick a road to see every figure published about it, from every project and every document: the county&#8217;s traffic boards, FDOT&#8217;s counts, the Turnpike&#8217;s study and the county budget, side by side. Pick a second road to go straight to where the two meet. Tap any figure to see its source.</p>
+  <p class="xp-count">{{ explore.counts.placed }} figures &#183; {{ explore.roads.length }} roads &#183; {{ explore.counts.places }} stretches and intersections</p>
 </header>
 
-<section class="xp-groups" aria-labelledby="h-groups">
-  <h2 id="h-groups" class="hh">Corridors</h2>
-  <p class="xp-note">Stretches of road a document puts together. Totals are worked out from the figures listed, and only figures from the same document with the same unit are added.</p>
-  {% for g in explore.groups %}
-  <div class="xgroup" id="group-{{ g.id }}">
-    <h3>{{ g.name }}</h3>
-    <p class="xp-about">{{ g.about }}</p>
-    <ol class="xg-members">{% for m in g.memberCards %}<li><a href="#{{ m.id }}">{{ m.name }}</a></li>{% endfor %}</ol>
-    {% for t in g.totals %}<p class="xg-total"><span>{{ t.label }}</span> <b>{% calc t.facts %}{{ t.value }}{% endcalc %}</b></p>{% endfor %}
-    <p class="xp-src">Grouped by: {% if g.src.url %}<a href="{{ g.src.url }}" rel="noopener" target="_blank">{{ g.src.title }}</a>{% else %}{{ g.src.title }}{% endif %}{% if g.location %} &#183; {{ g.location }}{% endif %}</p>
-  </div>
-  {% endfor %}
-</section>
-
 <section aria-labelledby="h-places">
-  <h2 id="h-places" class="hh">Roads</h2>
+  <h2 id="h-places" class="visually-hidden">Roads</h2>
   <div class="xp-pick" id="xppick">
     <label class="xp-sel"><span>Road</span>
       <select id="xp-road1">
@@ -72,7 +58,7 @@ eleventyExcludeFromCollections: true
     <article class="xplace" id="{{ p.id }}" data-roads="{{ p.roads | join(' ') }}" data-kind="{{ p.kind }}">
       <p class="xp-kind">{% if p.kind == "intersection" %}Intersection{% else %}Stretch of road{% endif %}{% for pj in p.projects %} <span class="pjtag pj-{{ pj.id }}">{{ pj.short }}</span>{% endfor %}</p>
       <h3>{{ p.name }}</h3>
-      <p class="xp-meta">{{ p.facts.length }} figure{% if p.facts.length != 1 %}s{% endif %} from {{ p.sources }} document{% if p.sources != 1 %}s{% endif %}{% for g in p.groups %} &#183; part of <a href="#group-{{ g.id }}">{{ g.name }}</a>{% endfor %}</p>
+      <p class="xp-meta">{{ p.facts.length }} figure{% if p.facts.length != 1 %}s{% endif %} from {{ p.sources }} document{% if p.sources != 1 %}s{% endif %}</p>
       <ul class="xp-facts">
         {% for f in p.facts %}
         <li{% if f.status == "superseded" %} class="is-superseded"{% endif %}>
@@ -92,7 +78,7 @@ eleventyExcludeFromCollections: true
 </section>
 
 <footer>
-  <p style="margin:0 0 10px">Built from the same sourced data as the rest of the site. Which place a figure is about comes from the figure&#8217;s own document; groups and links each name the document that makes the connection. Something missing or wrong? Message me on Facebook.</p>
+  <p style="margin:0 0 10px">Built from the same sourced data as the rest of the site. Which road or intersection a figure is about comes from the figure&#8217;s own document; a statement linked to a road names the document that makes the connection. Something missing or wrong? Message me on Facebook.</p>
   {% include "share.njk" %}
   <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
 </footer>
@@ -103,7 +89,7 @@ eleventyExcludeFromCollections: true
 /* Two menus: a road, then (optionally) a road it meets. The second menu lists
    only the roads the first crosses at an intersection that has figures.
    explore/#road-sr54 opens with SR 54 chosen; #road-sr54~gunn with SR 54 at
-   Gunn Hwy; #<place id> or #group-<id> shows everything and scrolls there.
+   Gunn Hwy; #<place id> shows everything and scrolls there.
    Without JavaScript every place shows. */
 (function(){
   var roads = JSON.parse(document.getElementById("xp-roads").textContent), byId = {};

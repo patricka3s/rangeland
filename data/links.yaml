@@ -1,11 +1,11 @@
-# Links - connections a shared place or group can't express: a statement that is
+# Links - connections a shared place can't express: a statement that is
 # about another place, a condition that depends on another figure. A link is a
 # claim too, so it names the document that makes the connection.
 #
 #   from      a fact id (usually a quoted statement)
-#   type      concerns   - the statement is about that place, road or group
+#   type      concerns   - the statement is about that place or road
 #             depends-on - what the statement describes depends on that fact
-#   to        a place id, "road:<id>", "group:<id>", or a fact id
+#   to        a place id, "road:<id>", or a fact id
 #   source, location   where the document makes the connection
 #   note      optional, shown with the link
 #

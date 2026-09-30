@@ -62,15 +62,14 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   `projects.yaml` and shaded in its tag colour. All are drawn from `tools/og-card.html` by
   `node tools/og-card.mjs`; the build stops if a project is published, or its `card:` changed,
   without redrawing. Keep dates off cards unless someone will change them when they pass.
-- **Connections** (the Explore page, `src/explore/index.njk`, and "Connected" in each
-  figure's details box): `data/places.yaml` names roads, stretches and intersections
-  and lists the facts about each (a place is named only as its facts' documents
-  describe it - never infer geography); facts at the same place connect by
-  themselves. `data/groups.yaml` - places a document puts together (e.g. the LRTP
-  corridor), each with its source; totals add only figures with the same unit from
-  the same document. `data/links.yaml` - typed, sourced connections a place can't
-  express (a statement about a place or road). A link or group is a claim: never
-  add one a document doesn't make. New facts about a place go into its `facts:`
+- **Connections** (the Explore by Road page, `src/explore/index.njk`, and "Connected"
+  in each figure's details box): `data/places.yaml` names roads, stretches and
+  intersections and lists the facts about each (a place is named only as its facts'
+  documents describe it - never infer geography); facts at the same place connect by
+  themselves, and the page's second menu lists the roads each road meets at an
+  intersection with figures. `data/links.yaml` - typed, sourced connections a place
+  can't express (a statement about a place or road). A link is a claim: never add
+  one a document doesn't make. New facts about a place go into its `facts:`
   list; the build stops on anything that doesn't resolve.
 - `eleventy.config.js` — loads and validates the data; defines the shortcodes.
 

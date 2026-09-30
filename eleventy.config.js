@@ -423,14 +423,13 @@ export default function (eleventyConfig) {
     r.wFar = +(far / shiftMax * 50).toFixed(2);       // to the far end of a range
   });
   eleventyConfig.addGlobalData("trafficShift", shiftRows);
-  // ---- Connections: places, groups and links (data/places.yaml, groups.yaml,
-  // links.yaml). Facts about the same place connect by themselves; a group or a
-  // link is a claim, so each names the document that makes it. The build stops
-  // on anything that doesn't resolve, and only adds up figures that are alike.
+  // ---- Connections: places and links (data/places.yaml, links.yaml). Facts
+  // about the same place connect by themselves; a link is a claim, so it names
+  // the document that makes it. The build stops on anything that doesn't resolve.
   const conn = (() => {
     const P = load(path.join(DATA, "places.yaml"));
     const roads = P.roads || [], places = P.places || [];
-    const groups = load(path.join(DATA, "groups.yaml")), links = load(path.join(DATA, "links.yaml"));
+    const links = load(path.join(DATA, "links.yaml"));
     const problems = [];
     const roadById = Object.fromEntries(roads.map((r) => [r.id, r]));
     const placeById = {}, placeOf = {};
@@ -453,21 +452,7 @@ export default function (eleventyConfig) {
         }
       }
     }
-    const groupById = {};
-    for (const g of groups) {
-      const where = `groups.yaml: "${g.id}"`;
-      groupById[g.id] = g;
-      if (!data.sourceById[g.source]) problems.push(`${where} names source "${g.source}", which is not in sources.yaml`);
-      for (const m of g.members || []) if (!placeById[m]) problems.push(`${where} names place "${m}", which is not in places.yaml`);
-      for (const t of g.totals || []) {
-        const fs = t.facts.map((id) => data.byId[id]);
-        if (fs.some((f) => !f)) { problems.push(`${where}: total "${t.label}" names a fact that does not exist`); continue; }
-        if (new Set(fs.map((f) => f.unit)).size > 1 || new Set(fs.map((f) => f.source)).size > 1 || fs.some((f) => typeof f.value !== "number"))
-          problems.push(`${where}: total "${t.label}" adds figures with different units or documents, or that aren't single numbers - not like for like`);
-      }
-    }
     const target = (to) => to.startsWith("road:") ? (roadById[to.slice(5)] && { kind: "road", id: to.slice(5), name: roadById[to.slice(5)].name })
-      : to.startsWith("group:") ? (groupById[to.slice(6)] && { kind: "group", id: to.slice(6), name: groupById[to.slice(6)].name })
       : placeById[to] ? { kind: "place", id: to, name: placeById[to].name }
       : data.byId[to] ? { kind: "fact", id: to, name: data.byId[to].statement } : null;
     const LINK_TYPES = { "concerns": "Is about", "depends-on": "Depends on" };
@@ -477,7 +462,7 @@ export default function (eleventyConfig) {
       if (!LINK_TYPES[l.type]) problems.push(`${where} has type "${l.type}"; use ${Object.keys(LINK_TYPES).join(", ")}`);
       if (!data.sourceById[l.source]) problems.push(`${where} names source "${l.source}", which is not in sources.yaml`);
       l.target = target(String(l.to));
-      if (!l.target) problems.push(`${where}: "${l.to}" is not a place, road:, group: or fact`);
+      if (!l.target) problems.push(`${where}: "${l.to}" is not a place, road: or fact`);
       l.label = LINK_TYPES[l.type];
     }
     if (problems.length) throw new Error("Connections check failed:\n  " + problems.join("\n  "));
@@ -491,13 +476,11 @@ export default function (eleventyConfig) {
       const inn = links.filter((l) => l.target.kind === "fact" && l.target.id === f.id)
         .map((l) => ({ t: "Referred to by", n: data.byId[l.from].statement, h: `facts/#${l.from}` }));
       const intoPlace = p ? links.filter((l) => l.target.kind === "place" && l.target.id === pid && l.from !== f.id) : [];
-      const gs = p ? groups.filter((g) => (g.members || []).includes(pid)) : [];
       if (!p && !out.length && !inn.length) continue;
       factConn[f.id] = {
         pl: p ? { n: p.name, h: `explore/#${pid}` } : undefined,
         here: p ? p.factIds.filter((id) => id !== f.id && data.byId[id].status !== "superseded") : [],
         lk: out.concat(inn, intoPlace.map((l) => ({ t: "A statement about this place", n: data.byId[l.from].statement, h: `facts/#${l.from}` }))),
-        gr: gs.map((g) => ({ n: g.name, h: `explore/#group-${g.id}` })),
       };
     }
     // For the Explore page.
@@ -511,7 +494,6 @@ export default function (eleventyConfig) {
         sources: [...new Set(fs.map((f) => f.source))].length,
         links: links.filter((l) => l.target.kind === "place" && l.target.id === p.id)
           .map((l) => ({ label: l.label, from: card(data.byId[l.from]), src: data.sourceById[l.source] })),
-        groups: groups.filter((g) => (g.members || []).includes(p.id)).map((g) => ({ id: g.id, name: g.name })),
       };
     });
     const roadCards = roads.map((r) => ({
@@ -523,18 +505,10 @@ export default function (eleventyConfig) {
       links: links.filter((l) => l.target.kind === "road" && l.target.id === r.id)
         .map((l) => ({ label: l.label, from: card(data.byId[l.from]), src: data.sourceById[l.source] })),
     }));
-    const groupCards = groups.map((g) => ({
-      ...g, src: data.sourceById[g.source],
-      memberCards: (g.members || []).map((m) => ({ id: m, name: placeById[m].name })),
-      totals: (g.totals || []).map((t) => {
-        const first = data.byId[t.facts[0]], sum = t.facts.reduce((s, id) => s + data.byId[id].value, 0);
-        return { ...t, value: withUnit({ ...first, value: +sum.toFixed(6), decimals: t.decimals ?? first.decimals }) };
-      }),
-    }));
-    return { factConn, placeCards, roadCards, groupCards,
-      counts: { places: places.length, placed: Object.keys(placeOf).length, groups: groups.length, links: links.length } };
+    return { factConn, placeCards, roadCards,
+      counts: { places: places.length, placed: Object.keys(placeOf).length, links: links.length } };
   })();
-  eleventyConfig.addGlobalData("explore", { places: conn.placeCards, roads: conn.roadCards, groups: conn.groupCards, counts: conn.counts });
+  eleventyConfig.addGlobalData("explore", { places: conn.placeCards, roads: conn.roadCards, counts: conn.counts });
 
   eleventyConfig.addGlobalData("sourceList", data.sources.map((s) => ({
     ...s, dateText: when(s.date), figures: data.facts.filter((f) => f.source === s.id).length,
@@ -564,7 +538,7 @@ export default function (eleventyConfig) {
         was: f.replaces ? withUnit(data.byId[f.replaces]) + " (" + when(data.byId[f.replaces].as_of) + ")" : undefined,
         now: data.replacedBy[f.id] ? withUnit(data.byId[data.replacedBy[f.id]]) + " (" + when(data.byId[data.replacedBy[f.id]].as_of) + ")" : undefined,
         src: { t: src.title, p: src.publisher, d: src.date, url: src.url },
-        cx: conn.factConn[f.id],            // connections: place, figures there, groups, links
+        cx: conn.factConn[f.id],            // connections: place, figures there, links
       };
     }
     // Definitions open in the same box: {% src "def.collector" %}

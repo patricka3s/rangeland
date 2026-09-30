@@ -404,8 +404,7 @@ eleventyExcludeFromCollections: true
     }
 
     /* CONNECTED: the figure's place, other figures there (from any project or
-       document), groups the place belongs to, and linked statements - all from
-       data/places.yaml, groups.yaml and links.yaml. Tapping one of the other
+       document), and linked statements - from data/places.yaml and links.yaml. Tapping one of the other
        figures opens it in this same box. */
     function connected(cx){
       var wrap = el("div", "fcx"), root = data.root || "", MAX = 6;
@@ -430,9 +429,6 @@ eleventyExcludeFromCollections: true
           var more = el("p", "fcx-more"); more.appendChild(go("and " + (cx.here.length - MAX) + " more at this place \u2192", cx.pl.h)); wrap.appendChild(more);
         }
       }
-      (cx.gr || []).forEach(function(g){
-        var p = el("p", "fcx-pl"); p.appendChild(document.createTextNode("Part of: ")); p.appendChild(go(g.n, g.h)); wrap.appendChild(p);
-      });
       (cx.lk || []).forEach(function(l){
         var p = el("p", "fcx-pl"); p.appendChild(document.createTextNode(l.t + ": ")); p.appendChild(go(l.n, l.h)); wrap.appendChild(p);
       });
@@ -597,7 +593,7 @@ eleventyExcludeFromCollections: true
     var node = document.getElementById("fact-data"), data;
     if (!node) return;
     try { data = JSON.parse(node.textContent); } catch (e) { return; }
-    var slides = document.querySelectorAll(".slide,.xgroup"), i;   /* slides, and the groups on Explore */
+    var slides = document.querySelectorAll(".slide"), i;
     for (i = 0; i < slides.length; i++){
       var btns = slides[i].querySelectorAll("[data-fact],[data-calc]"), seen = {}, ids = [], j;
       for (j = 0; j < btns.length; j++){
@@ -613,7 +609,7 @@ eleventyExcludeFromCollections: true
       var box = document.createElement("details");
       box.className = "slsrc";
       var sum = document.createElement("summary");
-      sum.textContent = (slides[i].classList.contains("xgroup") ? "Sources for this group" : "Sources on this slide") + " \u00b7 " + ids.length + (ids.length === 1 ? " item" : " items") +
+      sum.textContent = "Sources on this slide \u00b7 " + ids.length + (ids.length === 1 ? " item" : " items") +
         " \u00b7 " + human + " verified by a human" + (ai ? ", " + ai + " checked by AI" : "") +
         (ids.length - human - ai ? ", " + (ids.length - human - ai) + " not yet checked" : "");
       box.appendChild(sum);
@@ -638,7 +634,7 @@ eleventyExcludeFromCollections: true
     document.addEventListener("click", function(e){
       var c = e.target.closest && e.target.closest(".calc");
       if (!c) return;
-      var s = c.closest(".slide,.xgroup"), box = s && s.querySelector(".slsrc");
+      var s = c.closest(".slide"), box = s && s.querySelector(".slsrc");
       if (box) { box.open = true; box.scrollIntoView({block: "nearest", behavior: "smooth"}); }
     });
   });
