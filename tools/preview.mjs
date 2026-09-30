@@ -38,6 +38,8 @@ for (const f of files) {
     s = s.replace(/<script data-goatcounter[^>]*>\s*<\/script>/g, "");
     s = s.replace('location.replace("rangeland/" + location.hash)', 'location.replace("rangeland/index.html" + location.hash)');
     s = s.replace(/(<body[^>]*>)/, `$1\n${banner}`);
+    // links inside the figures' data (the details box's "Connected" part)
+    s = s.replace(/"h":"(explore|facts)\/#/g, '"h":"$1/index.html#');
     fs.writeFileSync(f, s);
   } else if (f.endsWith("app.js")) {
     let s = fs.readFileSync(f, "utf8");
