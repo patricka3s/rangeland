@@ -26,13 +26,13 @@ eleventyExcludeFromCollections: true
 
 <header>
   <h1>Explore the figures</h1>
-  <p class="standfirst">Every figure that is about a particular road or intersection, arranged by place: what the county&#8217;s boards, FDOT&#8217;s counts, the Turnpike&#8217;s study and the budget each say about it, side by side. Pick a road to see everything published about it. Tap any figure for its source.</p>
-  <p class="xp-count">{{ explore.counts.placed }} figures &#183; {{ explore.counts.places }} places &#183; {{ explore.counts.groups }} groups</p>
+  <p class="standfirst">Every figure that is about a particular road or intersection, arranged by where it is: what the county&#8217;s boards, FDOT&#8217;s counts, the Turnpike&#8217;s study and the budget each say about it, side by side. Pick a road to see everything published about it, and a second road to go straight to where they meet. Tap any figure for its source.</p>
+  <p class="xp-count">{{ explore.counts.placed }} figures &#183; {{ explore.roads.length }} roads &#183; {{ explore.counts.places }} stretches and intersections &#183; {{ explore.counts.groups }} corridors</p>
 </header>
 
 <section class="xp-groups" aria-labelledby="h-groups">
-  <h2 id="h-groups" class="hh">Groups</h2>
-  <p class="xp-note">Places a document puts together. Totals are worked out from the figures listed, and only figures from the same document with the same unit are added.</p>
+  <h2 id="h-groups" class="hh">Corridors</h2>
+  <p class="xp-note">Stretches of road a document puts together. Totals are worked out from the figures listed, and only figures from the same document with the same unit are added.</p>
   {% for g in explore.groups %}
   <div class="xgroup" id="group-{{ g.id }}">
     <h3>{{ g.name }}</h3>
@@ -45,13 +45,22 @@ eleventyExcludeFromCollections: true
 </section>
 
 <section aria-labelledby="h-places">
-  <h2 id="h-places" class="hh">Places</h2>
-  <div class="tlfilters" id="xpfilters">
-    <div class="tlrow" role="group" aria-label="Road">
-      <button type="button" class="chip" data-road="all" aria-pressed="true">All roads</button>
-      {% for r in explore.roads %}<button type="button" class="chip" data-road="{{ r.id }}" id="road-{{ r.id }}" aria-pressed="false">{{ r.name }}</button>{% endfor %}
-    </div>
+  <h2 id="h-places" class="hh">Roads</h2>
+  <div class="xp-pick" id="xppick">
+    <label class="xp-sel"><span>Road</span>
+      <select id="xp-road1">
+        <option value="all">All roads</option>
+        {% for r in explore.roads %}<option value="{{ r.id }}">{{ r.name }}</option>{% endfor %}
+      </select>
+    </label>
+    <label class="xp-sel"><span>Where it meets</span>
+      <select id="xp-road2" disabled>
+        <option value="">Pick a road</option>
+      </select>
+    </label>
   </div>
+  <p class="xp-showing" id="xp-showing" role="status" aria-live="polite"></p>
+  <script type="application/json" id="xp-roads">{{ explore.roads | dump | safe }}</script>
   {% for r in explore.roads %}{% if r.links.length %}
   <div class="xp-roadnote" data-road-note="{{ r.id }}" hidden>
     {% for l in r.links %}<p><b>{{ l.label }} {{ r.name }}:</b> &#8220;{{ l.from.value }}&#8221;{% src l.from.id %} <span class="xp-src">&#8212; {{ l.src.title }}</span></p>{% endfor %}
@@ -60,7 +69,7 @@ eleventyExcludeFromCollections: true
 
   <div class="xp-places">
   {% for p in explore.places %}
-    <article class="xplace" id="{{ p.id }}" data-roads="{{ p.roads | join(' ') }}">
+    <article class="xplace" id="{{ p.id }}" data-roads="{{ p.roads | join(' ') }}" data-kind="{{ p.kind }}">
       <p class="xp-kind">{% if p.kind == "intersection" %}Intersection{% else %}Stretch of road{% endif %}{% for pj in p.projects %} <span class="pjtag pj-{{ pj.id }}">{{ pj.short }}</span>{% endfor %}</p>
       <h3>{{ p.name }}</h3>
       <p class="xp-meta">{{ p.facts.length }} figure{% if p.facts.length != 1 %}s{% endif %} from {{ p.sources }} document{% if p.sources != 1 %}s{% endif %}{% for g in p.groups %} &#183; part of <a href="#group-{{ g.id }}">{{ g.name }}</a>{% endfor %}</p>
@@ -79,7 +88,7 @@ eleventyExcludeFromCollections: true
     </article>
   {% endfor %}
   </div>
-  <p id="xp-none" class="fnone" hidden>No places on this road yet.</p>
+  <p id="xp-none" class="fnone" hidden>Nothing here yet.</p>
 </section>
 
 <footer>
@@ -91,33 +100,59 @@ eleventyExcludeFromCollections: true
 
 {% factData %}
 <script>
-/* Road filter: one road (or all). explore/#road-sr54 opens with SR 54 chosen;
-   explore/#<place> or #group-<id> shows everything and scrolls there.
+/* Two menus: a road, then (optionally) a road it meets. The second menu lists
+   only the roads the first crosses at an intersection that has figures.
+   explore/#road-sr54 opens with SR 54 chosen; #road-sr54~gunn with SR 54 at
+   Gunn Hwy; #<place id> or #group-<id> shows everything and scrolls there.
    Without JavaScript every place shows. */
 (function(){
-  var box = document.getElementById("xpfilters"), none = document.getElementById("xp-none");
+  var roads = JSON.parse(document.getElementById("xp-roads").textContent), byId = {};
+  roads.forEach(function(r){ byId[r.id] = r; });
+  var r1 = document.getElementById("xp-road1"), r2 = document.getElementById("xp-road2");
+  var showing = document.getElementById("xp-showing"), none = document.getElementById("xp-none");
   var cards = document.querySelectorAll(".xplace"), notes = document.querySelectorAll("[data-road-note]");
-  function setRoad(r){
-    var b = box.querySelectorAll("[data-road]"), shown = 0, i;
-    for (i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", b[i].getAttribute("data-road") === r ? "true" : "false");
-    for (i = 0; i < cards.length; i++){
-      var ok = r === "all" || (" " + cards[i].getAttribute("data-roads") + " ").indexOf(" " + r + " ") >= 0;
-      cards[i].hidden = !ok; if (ok) shown++;
-    }
-    for (i = 0; i < notes.length; i++) notes[i].hidden = notes[i].getAttribute("data-road-note") !== r;
-    none.hidden = shown > 0;
+  function fill2(a){
+    r2.textContent = "";
+    function opt(v, t){ var o = document.createElement("option"); o.value = v; o.textContent = t; r2.appendChild(o); }
+    if (a === "all") { opt("", "Pick a road"); r2.disabled = true; return; }
+    var x = byId[a].crosses;
+    if (!x.length) { opt("", "None yet"); r2.disabled = true; return; }
+    opt("", "Anywhere");
+    x.forEach(function(o){ opt(o.id, o.name); });
+    r2.disabled = false;
   }
-  box.addEventListener("click", function(e){
-    var t = e.target.closest("[data-road]"); if (!t) return;
-    var r = t.getAttribute("data-road"); setRoad(r);
-    try { history.replaceState(null, "", r === "all" ? location.pathname : "#road-" + r); } catch (err) {}
-  });
+  function apply(keepUrl){
+    var a = r1.value, b = r2.value, shown = 0, st = 0, xs = 0, i;
+    for (i = 0; i < cards.length; i++){
+      var rs = " " + cards[i].getAttribute("data-roads") + " ", isX = cards[i].getAttribute("data-kind") === "intersection";
+      var ok = a === "all" || (rs.indexOf(" " + a + " ") >= 0 && (!b || (isX && rs.indexOf(" " + b + " ") >= 0)));
+      cards[i].hidden = !ok;
+      if (ok) { shown++; if (isX) xs++; else st++; }
+    }
+    for (i = 0; i < notes.length; i++) notes[i].hidden = !(a !== "all" && !b && notes[i].getAttribute("data-road-note") === a);
+    var what = [];
+    if (st) what.push(st + (st === 1 ? " stretch" : " stretches"));
+    if (xs) what.push(xs + (xs === 1 ? " intersection" : " intersections"));
+    showing.textContent = a === "all" ? "Showing every road: " + what.join(" and ") + "."
+      : b ? "Showing " + byId[a].name + " at " + byId[b].name + "."
+      : "Showing " + byId[a].name + ": " + what.join(" and ") + ".";
+    none.hidden = shown > 0;
+    if (!keepUrl) try { history.replaceState(null, "", a === "all" ? location.pathname : "#road-" + a + (b ? "~" + b : "")); } catch (e) {}
+  }
+  r1.addEventListener("change", function(){ fill2(r1.value); apply(); });
+  r2.addEventListener("change", function(){ apply(); });
+  /* scroll once the page has finished loading, or the browser's own jump to the link wins */
+  function goTo(el){ var f = function(){ el.scrollIntoView(); }; if (document.readyState === "complete") f(); else window.addEventListener("load", f, {once: true}); }
   function fromHash(){
-    var h = decodeURIComponent(location.hash.slice(1));
-    if (!h) return;
-    if (h.indexOf("road-") === 0 && box.querySelector('[data-road="' + h.slice(5) + '"]')) { setRoad(h.slice(5)); box.scrollIntoView(); return; }
-    var el = document.getElementById(h);
-    if (el) { setRoad("all"); el.scrollIntoView(); el.classList.add("xp-hit"); setTimeout(function(){ el.classList.remove("xp-hit"); }, 1600); }
+    var h = decodeURIComponent(location.hash.slice(1)), m = /^road-([\w-]+)(?:~([\w-]+))?$/.exec(h);
+    if (m && byId[m[1]]) {
+      r1.value = m[1]; fill2(m[1]);
+      if (m[2] && byId[m[1]].crosses.some(function(o){ return o.id === m[2]; })) r2.value = m[2];
+      apply(true); goTo(document.getElementById("h-places")); return;
+    }
+    var el = h && document.getElementById(h);
+    if (el) { r1.value = "all"; fill2("all"); apply(true); goTo(el); el.classList.add("xp-hit"); setTimeout(function(){ el.classList.remove("xp-hit"); }, 1600); return; }
+    fill2(r1.value); apply(true);
   }
   fromHash();
   window.addEventListener("hashchange", fromHash);

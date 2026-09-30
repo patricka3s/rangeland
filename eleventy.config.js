@@ -516,6 +516,10 @@ export default function (eleventyConfig) {
     });
     const roadCards = roads.map((r) => ({
       ...r, places: places.filter((p) => (p.roads || []).includes(r.id)).map((p) => p.id),
+      // the roads it meets at an intersection that has figures, in the roads: order
+      crosses: roads.filter((o) => o.id !== r.id && places.some((p) => p.kind === "intersection"
+        && (p.roads || []).includes(r.id) && (p.roads || []).includes(o.id))).map((o) => ({ id: o.id, name: o.name }))
+        .sort((x, y) => x.name.localeCompare(y.name)),
       links: links.filter((l) => l.target.kind === "road" && l.target.id === r.id)
         .map((l) => ({ label: l.label, from: card(data.byId[l.from]), src: data.sourceById[l.source] })),
     }));
