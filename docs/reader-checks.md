@@ -51,14 +51,18 @@ added 9 Oct 2026): those arrive with `kind: "message"` and go to a "Messages" ta
 // Each tab is created, with headings, if it isn't there.
 const SHEET = "Reader checks";
 const HEADINGS = ["Received", "Fact id", "What the figure is", "Value shown", "Answer",
-  "What the document says", "Page or board", "Name", "Email", "May credit by name", "Page it came from"];
+  "What the document says", "Page or board", "Name", "Email", "May credit by name", "Page it came from",
+  "Possible spam"];
 const MESSAGES = "Messages";
-const MESSAGE_HEADINGS = ["Received", "Message", "Name", "Email", "Page it came from"];
+const MESSAGE_HEADINGS = ["Received", "Message", "Name", "Email", "Page it came from", "Possible spam"];
 
 function doPost(e) {
   let d;
   try { d = JSON.parse((e && e.postData && e.postData.contents) || "{}"); } catch (err) { return reply(false); }
-  if (d.website) return reply(true);                        // hidden trap field: only bots fill it
+  // Hidden trap field: people can't see it, so anything in it is probably a bot.
+  // Saved anyway, marked "Possible spam", because a browser's autofill can fill
+  // it too - a real message must never be lost. ("website" was its old name.)
+  const spam = d.trap || d.website ? "Yes" : "";
   const email = String(d.email || "").trim();               // optional, but if given it must look complete
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return reply(false);
   const isMessage = d.kind === "message";
@@ -75,16 +79,18 @@ function doPost(e) {
     const tab = (name, headings) => {
       let sheet = book.getSheetByName(name);
       if (!sheet) { sheet = book.insertSheet(name); sheet.appendRow(headings); sheet.setFrozenRows(1); }
+      const last = sheet.getRange(1, headings.length);           // a tab made before a heading was added
+      if (!last.getValue()) last.setValue(headings[headings.length - 1]);
       return sheet;
     };
     const clip = (v, max) => String(v == null ? "" : v).slice(0, max).replace(/^[=+\-@]/, "'$&");
     if (isMessage) {
       tab(MESSAGES, MESSAGE_HEADINGS).appendRow([new Date(), clip(d.message, 3000), clip(d.name, 100),
-        clip(email, 200), clip(d.pageUrl, 300)]);
+        clip(email, 200), clip(d.pageUrl, 300), spam]);
     } else {
       tab(SHEET, HEADINGS).appendRow([new Date(), clip(d.fact, 120), clip(d.statement, 300), clip(d.value, 200), verdict,
         clip(d.says, 1000), clip(d.page, 200), clip(d.name, 100), clip(email, 200),
-        d.credit === true ? "Yes" : "No", clip(d.pageUrl, 300)]);
+        d.credit === true ? "Yes" : "No", clip(d.pageUrl, 300), spam]);
     }
   } finally { lock.releaseLock(); }
   return reply(true);
@@ -148,6 +154,8 @@ A "Messages" tab appears in the Sheet with the first message.
 
 ## Protection against junk
 
-Hidden trap field; a per-minute limit in the script; length limits on every field;
-nothing reaches the page without Patrick.
+Hidden trap field (anything in it marks the row "Possible spam" - saved, not
+dropped, since a browser's autofill can fill it; renamed from "website" on 9 Oct
+2026 after it silently ate a real test message); a per-minute limit in the script;
+length limits on every field; nothing reaches the page without Patrick.
 
