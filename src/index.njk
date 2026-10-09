@@ -63,7 +63,8 @@ eleventyExcludeFromCollections: true
 </section>
 
 <section id="projects" aria-labelledby="h-projects">
-  <h2 id="h-projects" class="hh">The projects</h2>
+  <h2 id="h-projects" class="hh">Projects covered here</h2>
+  <p class="hlead">Each of these has its own guide: every figure is sourced and checked against its document, and I keep it up to date.</p>
   <div class="hcards">
   {% for p in projects %}{% if p.page %}
     {%- set lately = recentEvents[p.id] %}{% set ck = projectChecks[p.id] %}
@@ -81,6 +82,7 @@ eleventyExcludeFromCollections: true
     </a>
   {% endif %}{% endfor %}
   </div>
+  <p class="hmore"><a href="projects/">Other Pasco road projects: {{ projectList.otherCount }} more, listed from official lists &#8594;</a></p>
 </section>
 
 <section id="checks" aria-labelledby="h-checks">

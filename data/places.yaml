@@ -3,7 +3,9 @@
 # place are connected automatically (the "Connected" part of a figure's details
 # box, and the Explore page).
 #
-# roads:   id, name. The order here is the order of the road filters on Explore.
+# roads:   id, name. The order here is the order of the road filters on Explore
+#          (roads with figures first; roads named only in data/project-list.yaml
+#          follow, in their own group).
 # places:
 #   id     road.something for a stretch, x.something for an intersection
 #   kind   stretch | intersection
@@ -31,6 +33,33 @@ roads:
   - { id: broadporch, name: Broad Porch Run }
   - { id: cattlegap,  name: Cattle Gap Trl }
   - { id: sunlake,    name: Sunlake Blvd }
+  # Roads named only in listed projects (data/project-list.yaml), with no
+  # figures yet. Named as the MPO's 2026 priority list or FDOT's project list
+  # names them.
+  - { id: bbd,        name: Bruce B. Downs Blvd }
+  - { id: collier,    name: Collier Pkwy }
+  - { id: cr52,       name: CR 52 }
+  - { id: cr54,       name: CR 54 }
+  - { id: cr578,      name: CR 578 (County Line Rd) }
+  - { id: eiland,     name: Eiland Blvd }
+  - { id: geiger,     name: Geiger Rd }
+  - { id: grand,      name: Grand Blvd }
+  - { id: i75,        name: I-75 }
+  - { id: i275,       name: I-275 }
+  - { id: marine,     name: Marine Pkwy }
+  - { id: olddixie,   name: Old Dixie Hwy }
+  - { id: oldpasco,   name: Old Pasco Rd }
+  - { id: sr52,       name: SR 52 }
+  - { id: sr56,       name: SR 56 }
+  - { id: us19,       name: US 19 }
+  - { id: us98,       name: US 98 }
+  - { id: us301,      name: US 301 }
+  - { id: wire,       name: Wire Rd }
+  - { id: altus19,    name: Alt US 19 }
+  - { id: ayers,      name: Ayers Rd }
+  - { id: lakepatience, name: Lake Patience Rd }
+  - { id: louis,      name: Louis Ave }
+  - { id: sr39,       name: SR 39 }
 
 places:
   # ---- Rangeland Blvd

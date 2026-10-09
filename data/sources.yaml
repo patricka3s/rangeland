@@ -194,6 +194,13 @@
 
 # ---- Sunlake Blvd corridor
 
+- id: fdot-d7-pasco-current
+  title: "FDOT District 7 - Pasco County: All Current Projects (with its Study, Design and Construction lists)"
+  publisher: Florida Department of Transportation, District 7
+  date: '2026-10-09'
+  url: https://www.fdottampabay.com/projects/county/pasco/all
+  note: A web page that changes as projects start and finish; the date is when it was read.
+
 - id: mpo-lopp-2026
   title: Pasco MPO 2026 Multimodal Transportation List of Project Priorities (LOPP)
   publisher: Pasco MPO

@@ -1,0 +1,11 @@
+{#- One project from data/project-list.yaml, as a list item - used on the Other
+    Pasco Road Projects page (projects/) and on Explore by Road ("Projects on this road"). Set "r" (the row) and "root" first. Covered projects link to their
+    page; listed-only ones link to their official page, if any, and to the list
+    they're copied from. The data- attributes feed that page's filters. -#}
+<li class="lrow{% if r.cover %} is-covered{% endif %}" data-list="{{ r.list }}" data-phase="{{ r.phase or '' }}" data-agencies="|{{ r.agencies | join('|') }}|" data-roads=" {{ (r.roads or []) | join(' ') }} ">
+  <span class="lr-tag">{% if r.cover %}<span class="pjtag pj-{{ r.cover.id }}">Covered</span>{% else %}<span class="lr-only">Listed only</span>{% endif %}{% if r.phase %} <span class="lr-phase">FDOT phase: {{ r.phase }}</span>{% endif %}</span>
+  <span class="lr-name">{{ r.name }}{% if r.where %} <span class="lr-where">{{ r.where }}</span>{% endif %}</span>
+  <span class="lr-meta">{% if r.description %}{{ r.description }} &#183; {% endif %}{{ r.agency or "Agency not stated" }}{% if r.status %} &#183; status as listed: {{ r.status }}{% endif %}</span>
+  <span class="lr-links">{% if r.cover %}<a href="{{ root }}{{ r.cover.href }}">Read the {{ r.cover.short }} guide &#8594;</a>{% elif r.link %}<a href="{{ r.link }}" rel="noopener">FDOT project page &#8599;</a>{% endif %}
+    <a class="lr-src" href="{{ r.srcUrl }}" rel="noopener">{{ r.srcTitle }}, {{ r.location }} &#8599;</a></span>
+</li>

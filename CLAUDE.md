@@ -64,6 +64,28 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   `projects.yaml` and shaded in its tag colour. All are drawn from `tools/og-card.html` by
   `node tools/og-card.mjs`; the build stops if a project is published, or its `card:` changed,
   without redrawing. Keep dates off cards unless someone will change them when they pass.
+- **Project list** (`data/project-list.yaml`, 9 Oct 2026): every project on an
+  official list, covered or not - the Other Pasco Road Projects page
+  (`src/projects/index.njk`, `/projects/`: the listed-only ones, linked in the
+  project bar beside Timeline and Explore by Road, and under the home page's cards;
+  never call it "all projects" - it isn't what Patrick covers) and Explore by Road's
+  "Projects on this road"
+  (`src/_includes/listed-row.njk`).
+  Rows are copied from their source *as written* (like events: sourced records,
+  not facts, never reworded or worked out) and labelled **Listed only**; the
+  site's own projects are marked `covered:` and labelled **Covered**. A row's
+  `roads` are only the roads named in the project's own name (each must be a road
+  in `places.yaml`; roads with no figures go in their own group there). `link` is
+  the project's official page (FDOT's page with the same project number). Built
+  from two lists: the MPO's 2026 List of Project Priorities (every row) and FDOT
+  District 7's Pasco "All Current Projects" page (the projects not on the MPO list;
+  `phase` is FDOT's own Study / Design / Construction for every project on its list,
+  matched only by project number). When a newer list replaces one, swap its rows
+  rather than editing them. The Other Pasco Road Projects page filters the list by agency (as the lists
+  name it), list, FDOT phase and road - only things the documents state; no
+  regions, communities, kinds or cost tiers of our own. Listed rows don't count
+  toward the 90% publishing rule; they aren't checked or kept current, and the
+  pages say so.
 - **Connections** (the Explore by Road page, `src/explore/index.njk`, and "Connected"
   in each figure's details box): `data/places.yaml` names roads, stretches and
   intersections and lists the facts about each (a place is named only as its facts'

@@ -1,0 +1,99 @@
+---
+permalink: projects/index.html
+eleventyExcludeFromCollections: true
+---
+{#- OTHER PASCO ROAD PROJECTS (not copied into the built page)
+    The listed-only projects in data/project-list.yaml, with filters, after a
+    line pointing to the projects the site covers. Built entirely from the data - nothing
+    here needs editing when the list changes. -#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Other Pasco Road Projects · Pasco Roadmap</title>
+<meta name="description" content="Road projects in Pasco County from the MPO's priority list and FDOT's current projects list, listed with links to their official pages. They are not covered or checked on this site.">
+<meta name="author" content="Patrick">
+<link rel="canonical" href="https://pascoroadmap.info/projects/">
+{% set ogTitle = "Other Pasco Road Projects · Pasco Roadmap" %}{% set ogDesc = "Road projects from the MPO's priority list and FDOT's current Pasco list, listed with links to their official pages." %}{% set ogPath = "projects/" %}{% include "social.njk" %}
+{% set root = "../" %}{% include "shared-head.njk" %}
+<script src="../app.js"></script>
+</head>
+<body class="homepage plpage">
+<div class="wrap">
+{% set current = "projects" %}{% include "project-bar.njk" %}
+
+<header>
+  <h1>Other Pasco Road Projects</h1>
+  <p class="standfirst">The other road projects on the official lists this site follows. They are <strong>listed only</strong>, not covered: one line each, copied as written from the official list, with links to it. They aren&#8217;t checked or kept up to date here, so follow the links for the latest.</p>
+  <p class="hlead">The projects this site covers, with their own guides, every figure sourced and checked and kept up to date, are {% for c in projectList.covered %}<a href="../{{ c.href }}">the {{ c.short }}</a>{% if not loop.last %} and {% endif %}{% endfor %}.</p>
+</header>
+
+<section id="listed" aria-label="Listed projects">
+    <p class="hlead">{{ projectList.otherCount }} projects, from {% for s in projectList.sources %}{{ s.title }}{% if s.dateText %} ({{ s.dateText }}){% endif %}{% if not loop.last %} and {% endif %}{% endfor %}. <a href="../explore/">Explore by Road</a> shows them road by road.</p>
+  {%- set F = projectList.filters %}
+  <div class="plfilters" id="plfilters" hidden>
+    <label class="xp-sel"><span>Agency</span><select data-f="agency"><option value="">Any</option>{% for o in F.agencies %}<option value="{{ o.v }}">{{ o.v }} ({{ o.n }})</option>{% endfor %}</select></label>
+    <label class="xp-sel"><span>List</span><select data-f="list"><option value="">Any</option>{% for g in projectList.groups %}{% if g.rows.length %}<option value="{{ g.k }}">{{ g.label }} ({{ g.rows.length }})</option>{% endif %}{% endfor %}</select></label>
+    <label class="xp-sel"><span>FDOT phase</span><select data-f="phase"><option value="">Any</option>{% for o in F.phases %}<option value="{{ o.v }}">{{ o.v }} ({{ o.n }})</option>{% endfor %}<option value="-">Not on FDOT&#8217;s list</option></select></label>
+    <label class="xp-sel"><span>Road</span><select data-f="road"><option value="">Any</option>{% for o in F.roads %}<option value="{{ o.v }}">{{ o.name }} ({{ o.n }})</option>{% endfor %}<option value="-">No road named</option></select></label>
+  </div>
+  <p class="plshowing" id="plshowing" role="status" aria-live="polite" hidden></p>
+  {% for g in projectList.groups %}{% if g.rows.length %}
+  <details class="plgroup" data-group="{{ g.k }}">
+    <summary>{{ g.label }} <span class="plcount" data-total="{{ g.rows.length }}">{{ g.rows.length }}</span></summary>
+    <ul class="plist">{% for r in g.rows %}{% include "listed-row.njk" %}{% endfor %}</ul>
+  </details>
+  {% endif %}{% endfor %}
+</section>
+
+<footer>
+  <p style="margin:0 0 10px">Built from the same data as the rest of the site: the projects are copied as written from their official lists, which the site checks weekly for changes. Something missing or wrong? <a href="../about/#contact">Send me a message</a>.</p>
+  {% include "share.njk" %}
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }} &#183; <a href="{{ root }}about/">How this site is built</a></p>
+</footer>
+</div>
+
+<script>
+/* Listed only: four filters - agency, list, FDOT phase, road - over
+   the listed rows (data- attributes from listed-row.njk). Choosing any opens the
+   groups that still have rows and shows "x of y" on each; groups with none are
+   hidden. Without JavaScript the filters stay hidden and every row shows. */
+(function(){
+  var box = document.getElementById("plfilters"); if (!box) return;
+  var sels = box.querySelectorAll("select"), groups = document.querySelectorAll("#listed .plgroup");
+  var showing = document.getElementById("plshowing");
+  box.hidden = false;
+  function match(li, f, v){
+    if (!v) return true;
+    if (f === "agency") return li.getAttribute("data-agencies").indexOf("|" + v + "|") >= 0;
+    if (f === "list") return li.getAttribute("data-list") === v;
+    if (f === "phase") return v === "-" ? !li.getAttribute("data-phase") : li.getAttribute("data-phase") === v;
+    if (f === "road") return v === "-" ? !li.getAttribute("data-roads").trim() : li.getAttribute("data-roads").indexOf(" " + v + " ") >= 0;
+    return true;
+  }
+  function apply(){
+    var active = false, total = 0, i, j;
+    for (i = 0; i < sels.length; i++) if (sels[i].value) active = true;
+    for (i = 0; i < groups.length; i++){
+      var rows = groups[i].querySelectorAll(".lrow"), n = 0, cnt = groups[i].querySelector(".plcount");
+      for (j = 0; j < rows.length; j++){
+        var ok = true;
+        for (var k = 0; k < sels.length; k++) if (!match(rows[j], sels[k].getAttribute("data-f"), sels[k].value)) ok = false;
+        rows[j].hidden = !ok; if (ok) n++;
+      }
+      total += n;
+      groups[i].hidden = active && !n;
+      cnt.textContent = active ? n + " of " + cnt.getAttribute("data-total") : cnt.getAttribute("data-total");
+      if (active) groups[i].open = n > 0;
+    }
+    showing.hidden = !active;
+    showing.textContent = active ? (total ? total + (total === 1 ? " listed project matches." : " listed projects match.") : "No listed projects match these choices.") : "";
+  }
+  for (var i = 0; i < sels.length; i++) sels[i].addEventListener("change", apply);
+})();
+</script>
+<script data-goatcounter="https://patricka3s.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

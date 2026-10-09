@@ -627,6 +627,10 @@
     letter-spacing:.08em;text-transform:uppercase;color:var(--hot)}
   .fitem.is-superseded .fval{color:var(--ink-3)}
 
+  /* lists are grids (see ul above): keep the track to the page width and let a long
+     web address in a note break, or the whole page scrolls sideways on phones */
+  .slist,.plist{grid-template-columns:minmax(0,1fr)}
+  .slist li,.plist li{overflow-wrap:anywhere}
   .slist li{padding:10px 0;border-bottom:1px solid var(--rule-soft);font-size:.95rem;line-height:1.45}
   .slist a{color:var(--accent)}
   .smeta,.snote{display:block;font-size:.82rem;color:var(--ink-3)}
@@ -720,14 +724,15 @@
   .pb-theme .i-sun circle{fill:currentColor;stroke:none}
   .pb-theme[data-now="light"] .i-sun,.pb-theme[data-now="dark"] .i-moon{display:none}
   /* Project bar on phones: row 1 is the site name and the light/dark switch,
-     row 2 the site pages (Timeline, Explore, Figures), row 3 the projects, full width. */
+     rows 2-3 the site pages, two to a row (Timeline, Explore by Road / Other projects,
+     Figures), then the projects, full width. */
   @media (max-width:560px){
     .projbar{gap:6px 14px;justify-content:flex-start}
     .projbar::before{content:"";order:3;flex-basis:100%;height:0}
     .pb-projects,.pb-site{display:contents}
     .pb-home{order:1;margin-right:auto}
     .pb-theme{order:2;margin-left:0}
-    .pb-site a{order:4;padding:5px 7px;margin:0 -3px}
+    .pb-site a{order:4;padding:5px 7px;margin:0 -3px;flex:1 1 40%;text-align:center}
     .pb-seg{order:5;flex:1 0 100%}
     .pb-seg a{flex:1 1 0;text-align:center;padding:9px 6px}
     .pb-long{display:none}
@@ -1182,6 +1187,48 @@
   @media (max-width:560px){
     .hup li{grid-template-columns:1fr;gap:2px}
   }
+
+/* Project list (src/_includes/listed-row.njk, data/project-list.yaml): the home
+   page's "Other projects in Pasco" and Explore's "Projects on this road".
+   "Covered" uses the project's own tag; "Listed only" is a plain dashed tag, so
+   the two read differently without any colour meaning good or bad. */
+  .hlead{margin:0 0 14px;font-size:.98rem;line-height:1.55;color:var(--ink-2)}
+  .hlead a{color:var(--accent)}
+  .plfilters{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:8px 12px;margin:0 0 12px}
+  .plfilters[hidden],.plshowing[hidden],.plgroup[hidden],.plist li[hidden]{display:none}
+  .plshowing{margin:0 0 10px;font-size:.92rem;color:var(--ink-2)}
+  .plgroup{border-top:1px solid var(--rule)}
+  .plgroup:last-of-type{border-bottom:1px solid var(--rule)}
+  .plgroup summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 0;cursor:pointer;list-style:none;
+    font-family:Archivo,sans-serif;font-weight:700;font-size:1rem;color:var(--ink)}
+  .plgroup summary::-webkit-details-marker{display:none}
+  /* a plus in a circle that turns to a minus when the group is open, so it's
+     plain the heading opens (a flex summary loses the browser's own triangle) */
+  .plgroup summary::after{content:"+";margin-left:auto;flex:none;width:24px;height:24px;border:1.5px solid var(--accent);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-family:Archivo,sans-serif;font-size:18px;font-weight:700;line-height:1;color:var(--accent)}
+  .plgroup[open] summary::after{content:"\2212"}
+  .plgroup summary:hover::after{background:var(--band)}
+  .plgroup summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .plcount{white-space:nowrap;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;color:var(--ink-3);
+    border:1px solid var(--rule);border-radius:3px;padding:0 5px;line-height:1.5}
+  .plist{list-style:none;margin:0 0 10px;padding:0}
+  .plist li{display:grid;gap:3px;margin:0;padding:10px 0;border-top:1px solid var(--rule-soft)}
+  .plist li::before{content:none}
+  .lr-tag .pjtag,.lr-only{display:inline-block;margin-left:0;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+    letter-spacing:.06em;text-transform:uppercase;line-height:1.5;padding:0 5px;border-radius:3px}
+  .lr-only{border:1px dashed var(--ink-3);color:var(--ink-3)}
+  .lr-phase{display:inline-block;margin-left:6px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;line-height:1.5;color:var(--ink-2)}
+  .lr-name{font-family:Archivo,sans-serif;font-weight:700;font-size:.98rem;line-height:1.35;color:var(--ink)}
+  .lr-where{display:block;font-family:inherit;font-weight:400;font-size:.9rem;color:var(--ink-2)}
+  .lr-meta{font-size:.88rem;line-height:1.45;color:var(--ink-2)}
+  .lr-links{display:flex;flex-wrap:wrap;gap:2px 14px;font-size:.85rem;line-height:1.5}
+  .lr-links a{color:var(--accent)}
+  .lr-links a.lr-src{color:var(--ink-3)}
+  .xp-listed{margin:0 0 22px}
+  .xp-listed h3{font-family:Archivo,sans-serif;font-weight:800;font-size:1.05rem;margin:0 0 4px}
+  .pl-note{font-size:.82rem;line-height:1.5;color:var(--ink-3);margin:8px 0 0}
+  .pl-note a{color:var(--accent)}
 
 /* Coming up: the project tag sits on the first line, level with the date, so
    readers can scan down the tags for the projects they follow. */
