@@ -1183,6 +1183,34 @@
     .hup li{grid-template-columns:1fr;gap:2px}
   }
 
+/* Project list (src/_includes/listed-row.njk, data/project-list.yaml): the home
+   page's "Other projects in Pasco" and Explore's "Projects on this road".
+   "Covered" uses the project's own tag; "Listed only" is a plain dashed tag, so
+   the two read differently without any colour meaning good or bad. */
+  .hlead{margin:0 0 14px;font-size:.98rem;line-height:1.55;color:var(--ink-2)}
+  .hlead a{color:var(--accent)}
+  .plgroup{border-top:1px solid var(--rule)}
+  .plgroup:last-of-type{border-bottom:1px solid var(--rule)}
+  .plgroup summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 0;cursor:pointer;
+    font-family:Archivo,sans-serif;font-weight:700;font-size:1rem;color:var(--ink)}
+  .plcount{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;color:var(--ink-3);
+    border:1px solid var(--rule);border-radius:3px;padding:0 5px;line-height:1.5}
+  .plist{list-style:none;margin:0 0 10px;padding:0}
+  .plist li{display:grid;gap:3px;margin:0;padding:10px 0;border-top:1px solid var(--rule-soft)}
+  .plist li::before{content:none}
+  .lr-tag .pjtag,.lr-only{display:inline-block;margin-left:0;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+    letter-spacing:.06em;text-transform:uppercase;line-height:1.5;padding:0 5px;border-radius:3px}
+  .lr-only{border:1px dashed var(--ink-3);color:var(--ink-3)}
+  .lr-name{font-family:Archivo,sans-serif;font-weight:700;font-size:.98rem;line-height:1.35;color:var(--ink)}
+  .lr-where{display:block;font-family:inherit;font-weight:400;font-size:.9rem;color:var(--ink-2)}
+  .lr-meta{font-size:.88rem;line-height:1.45;color:var(--ink-2)}
+  .lr-links{display:flex;flex-wrap:wrap;gap:2px 14px;font-size:.85rem;line-height:1.5}
+  .lr-links a{color:var(--accent)}
+  .lr-links a.lr-src{color:var(--ink-3)}
+  .xp-listed{margin:0 0 22px}
+  .xp-listed h3{font-family:Archivo,sans-serif;font-weight:800;font-size:1.05rem;margin:0 0 4px}
+  .pl-note{font-size:.82rem;line-height:1.5;color:var(--ink-3);margin:8px 0 0}
+
 /* Coming up: the project tag sits on the first line, level with the date, so
    readers can scan down the tags for the projects they follow. */
   .hup li{align-items:start}

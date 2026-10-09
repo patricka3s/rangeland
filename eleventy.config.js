@@ -508,6 +508,46 @@ export default function (eleventyConfig) {
     return { factConn, placeCards, roadCards,
       counts: { places: places.length, placed: Object.keys(placeOf).length, links: links.length } };
   })();
+  // Project list (data/project-list.yaml): every project on an official list,
+  // covered by the site or not - "Other projects in Pasco" on the home page and
+  // "Projects on this road" on Explore. Rows are copied from their source as
+  // written, so the build checks only that they resolve: a real source, known
+  // roads, a known covered project, and the fields every row needs.
+  const projectList = (() => {
+    const file = load(path.join(DATA, "project-list.yaml")) || {}, rows = file.projects || [], names = file.source_names || {};
+    const roadIds = new Set(conn.roadCards.map((r) => r.id)), seen = new Set(), problems = [];
+    for (const r of rows) {
+      const where = `project-list.yaml: "${r.id}"`;
+      for (const k of ["id", "list", "name", "source", "location"]) if (!r[k]) problems.push(`${where} is missing "${k}"`);
+      if (seen.has(r.id)) problems.push(`${where} is listed twice`);
+      seen.add(r.id);
+      if (!["funded", "priority"].includes(r.list)) problems.push(`${where} has list "${r.list}"; use funded or priority`);
+      if (r.source && !data.sourceById[r.source]) problems.push(`${where} names source "${r.source}", which is not in sources.yaml`);
+      for (const rd of r.roads || []) if (!roadIds.has(rd)) problems.push(`${where} names road "${rd}", which is not under roads: in places.yaml`);
+      const pj = r.covered && data.projects.find((p) => p.id === r.covered);
+      if (r.covered && !(pj && pj.page)) problems.push(`${where} is covered by "${r.covered}", which is not a published project in projects.yaml`);
+      const src = data.sourceById[r.source] || {};
+      r.cover = pj ? { id: pj.id, short: pj.short, href: `${pj.id}/` } : null;
+      r.srcUrl = src.url;
+      r.srcTitle = names[r.source] || src.title;
+      r.where = [r.from, r.to].filter(Boolean).join(" to ");
+    }
+    if (problems.length) throw new Error("Project list check failed:\n  " + problems.join("\n  "));
+    for (const rd of conn.roadCards) {
+      rd.listed = rows.filter((r) => (r.roads || []).includes(rd.id));
+      rd.hasFigures = rd.places.length > 0;
+    }
+    const other = rows.filter((r) => !r.cover);
+    return {
+      rows, sources: [...new Set(rows.map((r) => r.source))].map((id) => ({ ...data.sourceById[id], dateText: when(data.sourceById[id].date) })),
+      groups: [
+        { k: "funded", label: "Funded through construction", rows: other.filter((r) => r.list === "funded") },
+        { k: "priority", label: "Priorities without construction funding", rows: other.filter((r) => r.list === "priority") },
+      ],
+      otherCount: other.length,
+    };
+  })();
+  eleventyConfig.addGlobalData("projectList", projectList);
   eleventyConfig.addGlobalData("explore", { places: conn.placeCards, roads: conn.roadCards, counts: conn.counts });
 
   eleventyConfig.addGlobalData("sourceList", data.sources.map((s) => ({

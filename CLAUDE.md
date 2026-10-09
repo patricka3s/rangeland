@@ -64,6 +64,19 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   `projects.yaml` and shaded in its tag colour. All are drawn from `tools/og-card.html` by
   `node tools/og-card.mjs`; the build stops if a project is published, or its `card:` changed,
   without redrawing. Keep dates off cards unless someone will change them when they pass.
+- **Project list** (`data/project-list.yaml`, 9 Oct 2026): every project on an
+  official list, covered or not - the home page's "Other projects in Pasco" and
+  Explore by Road's "Projects on this road" (`src/_includes/listed-row.njk`).
+  Rows are copied from their source *as written* (like events: sourced records,
+  not facts, never reworded or worked out) and labelled **Listed only**; the
+  site's own projects are marked `covered:` and labelled **Covered**. A row's
+  `roads` are only the roads named in the project's own name (each must be a road
+  in `places.yaml`; roads with no figures go in their own group there). `link` is
+  the project's official page (FDOT's page with the same project number). First
+  built from the MPO's 2026 List of Project Priorities (every row) - when a newer
+  list replaces it, swap the rows rather than editing them. Listed rows don't count
+  toward the 90% publishing rule; they aren't checked or kept current, and the
+  pages say so.
 - **Connections** (the Explore by Road page, `src/explore/index.njk`, and "Connected"
   in each figure's details box): `data/places.yaml` names roads, stretches and
   intersections and lists the facts about each (a place is named only as its facts'

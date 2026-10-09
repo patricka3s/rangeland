@@ -63,7 +63,8 @@ eleventyExcludeFromCollections: true
 </section>
 
 <section id="projects" aria-labelledby="h-projects">
-  <h2 id="h-projects" class="hh">The projects</h2>
+  <h2 id="h-projects" class="hh">Projects covered here</h2>
+  <p class="hlead">Each of these has its own guide: every figure is sourced and checked against its document, and I keep it up to date.</p>
   <div class="hcards">
   {% for p in projects %}{% if p.page %}
     {%- set lately = recentEvents[p.id] %}{% set ck = projectChecks[p.id] %}
@@ -81,6 +82,17 @@ eleventyExcludeFromCollections: true
     </a>
   {% endif %}{% endfor %}
   </div>
+</section>
+
+<section id="other-projects" aria-labelledby="h-other">
+  <h2 id="h-other" class="hh">Other projects in Pasco</h2>
+  <p class="hlead">These are <strong>listed only</strong>, not covered: {{ projectList.otherCount }} more projects, one line each, copied as written from {% for s in projectList.sources %}{{ s.title }}{% if s.dateText %} ({{ s.dateText }}){% endif %}{% if not loop.last %} and {% endif %}{% endfor %}, with links to the official pages. They aren&#8217;t checked or kept up to date here, so follow the links for the latest. <a href="explore/">Explore by Road</a> shows them road by road.</p>
+  {% for g in projectList.groups %}{% if g.rows.length %}
+  <details class="plgroup">
+    <summary>{{ g.label }} <span class="plcount">{{ g.rows.length }}</span></summary>
+    <ul class="plist">{% for r in g.rows %}{% include "listed-row.njk" %}{% endfor %}</ul>
+  </details>
+  {% endif %}{% endfor %}
 </section>
 
 <section id="checks" aria-labelledby="h-checks">

@@ -26,6 +26,7 @@ figure on it is stored once, cites the document it came from, and can be checked
 | `src/timeline/index.njk` | The **Timeline** page at `/timeline/`, built from `events.yaml`. The guide's "What's happened lately" box is built from it too. |
 | `src/_includes/share.njk` | The **Share this page** button in every page's footer (it opens the phone's share menu, or copies the link on a computer). |
 | `src/_includes/project-bar.njk` | The bar at the top of every page: projects on the left, Timeline and All figures & sources on the right. Add a project link to the left-hand group when a project gets a page. |
+| `data/project-list.yaml` | The **project list**: every project on an official list (first, the MPO's 2026 priority list), one line each, copied as written. Covered projects are marked; the rest show as "Listed only" on the home page and on Explore by Road. Its header explains the fields. |
 | `src/about/index.njk` | **How this site is built** (`/about/`): where figures come from, how they're checked and corrected, how the site keeps up, the part AI plays, and a link to the code. Linked from the version line at the foot of every page. Its counts come from the data. |
 | `src/facts.njk` | The **Figures and sources** page (`/facts/`): every fact, grouped, with its source and a report link. Built entirely from the data files. |
 | `src/_includes/shared-head.njk` | Head tags both pages share: icon, fonts, stylesheet. |
