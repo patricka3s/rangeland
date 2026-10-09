@@ -357,11 +357,10 @@ eleventyExcludeFromCollections: true
       var page = field("Which page or board?", "page");
       var name = field("Your name (optional)", "name");
       var email = field("Email, if you\u2019d like a reply (optional)", "email", "email");
-      email.autocomplete = "email";
       email.addEventListener("input", function(){ email.removeAttribute("aria-invalid"); });
       var cl = el("label", "rck-c"), credit = el("input"); credit.type = "checkbox";
       cl.appendChild(credit); cl.appendChild(document.createTextNode(" You may credit me by name")); more.appendChild(cl);
-      var trap = el("input"); trap.type = "text"; trap.name = "website"; trap.tabIndex = -1; trap.autocomplete = "off";
+      var trap = el("input"); trap.type = "text"; trap.name = "xq_extra"; trap.tabIndex = -1; trap.autocomplete = "off";
       trap.className = "rck-trap"; trap.setAttribute("aria-hidden", "true"); more.appendChild(trap);
       var send = el("button", "rck-send", "Send"); send.type = "submit"; more.appendChild(send);
       more.appendChild(el("p", "rck-note", "Goes to a private Google Sheet that only Patrick can see. Name and email are optional and never published unless you tick the box."));
@@ -384,7 +383,7 @@ eleventyExcludeFromCollections: true
         send.disabled = true; status.textContent = "Sending\u2026";
         var body = JSON.stringify({fact: id, statement: f.s, value: f.v, verdict: verdict,
           says: says.value, page: page.value, name: name.value, email: email.value.trim(),
-          credit: credit.checked, website: trap.value, pageUrl: location.href.split("#")[0]});
+          credit: credit.checked, trap: trap.value, pageUrl: location.href.split("#")[0]});
         /* The script answers {"ok": true} once the row is in Patrick's Sheet, so
            "received" is only said when it really was. (A plain-text POST needs
            no extra permission from Google, and its reply can be read.) */
@@ -663,7 +662,7 @@ eleventyExcludeFromCollections: true
       if (badEmail(val("email"))) { status.textContent = "That email address doesn\u2019t look complete. Please check it, or leave it blank."; emailBox.setAttribute("aria-invalid", "true"); emailBox.focus(); return; }
       send.disabled = true; status.textContent = "Sending\u2026";
       var body = JSON.stringify({kind: "message", message: val("message"), name: val("name"), email: val("email").trim(),
-        website: val("website"), pageUrl: location.href.split("#")[0]});
+        trap: val("xq_extra"), pageUrl: location.href.split("#")[0]});
       fetch(url, {method: "POST", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: body})
         .then(function(r){ return r.json(); })
         .then(function(res){

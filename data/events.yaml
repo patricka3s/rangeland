@@ -197,10 +197,10 @@
   date: '2026-09-09'
   project: rangeland
   about: Orange Belt Trail PD&E study (US 41 and Caliente Blvd to Dade City)
-  type: meeting
-  title: 'County Commission meeting: Orange Belt Trail study on the agenda (item R41), with a resolution approving alternatives 1, 2A, 3A, 4A and 5A'
-  detail: 'The minutes of this meeting had not been published on the county''s meeting portal as of 30 September 2026 (only the agenda and agenda packet), so the outcome is not recorded here.'
-  source: pasco-bcc-2026-09-09-agenda
+  type: decision
+  title: 'Commission approves the staff recommendation on the Orange Belt Trail study (item R41): a resolution approving alternatives 1, 2A, 3A, 4A and 5A'
+  detail: 'The minutes, published 6 October 2026, record "Approved Staff''s recommendation." The alternatives are named in the resolution on the meeting agenda; the minutes do not repeat them.'
+  source: pasco-bcc-2026-09-09-minutes
   facts: [rangeland.related.orange-belt-trail.pde-agenda]
 
 - id: rl-county-letter

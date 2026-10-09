@@ -92,9 +92,9 @@ eleventyExcludeFromCollections: true
   {% if readerChecks %}
   <form class="rck-more contactform" data-url="{{ readerChecks }}" novalidate hidden>
     <label class="rck-f"><span>Your message</span><textarea name="message" rows="6" maxlength="3000"></textarea></label>
-    <label class="rck-f"><span>Your name (optional)</span><input type="text" name="name" maxlength="100" autocomplete="name"></label>
-    <label class="rck-f"><span>Email, if you&#8217;d like a reply (optional)</span><input type="email" name="email" maxlength="200" autocomplete="email"></label>
-    <input class="rck-trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label class="rck-f"><span>Your name (optional)</span><input type="text" name="name" maxlength="100"></label>
+    <label class="rck-f"><span>Email, if you&#8217;d like a reply (optional)</span><input type="email" name="email" maxlength="200"></label>
+    <input class="rck-trap" type="text" name="xq_extra" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button class="rck-send" type="submit">Send</button>
     <p class="rck-note">Goes to a private Google Sheet that only Patrick can see. Messages are never published, and your name and email are only used to reply to you.</p>
     <p class="rck-status" role="status"></p>
