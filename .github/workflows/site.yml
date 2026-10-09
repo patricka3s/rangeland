@@ -12,7 +12,7 @@ name: Build and publish site
 on:
   push:
     branches: [main]
-  # Rebuild every morning so the timeline's "today" line and the guide's
+  # Rebuild once a day so the timeline's "today" line and the guide's
   # "still ahead" list move on by themselves (asked for 6:23 a.m. Eastern;
   # GitHub often runs scheduled jobs several hours late).
   schedule:
