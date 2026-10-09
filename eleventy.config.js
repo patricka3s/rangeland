@@ -516,12 +516,21 @@ export default function (eleventyConfig) {
   const projectList = (() => {
     const file = load(path.join(DATA, "project-list.yaml")) || {}, rows = file.projects || [], names = file.source_names || {};
     const roadIds = new Set(conn.roadCards.map((r) => r.id)), seen = new Set(), problems = [];
+    const LISTS = { funded: "MPO list: funded through construction", priority: "MPO list: priorities without construction funding",
+      fdot: "FDOT’s current projects not on the MPO list" };
+    const PHASES = ["Study", "Design", "Construction"];
+    // Agencies as the lists name them, for the filter. A row naming two ("Dade City
+    // Pasco County") shows under both. Longest names first, so "New Port Richey"
+    // isn't also counted as "Port Richey".
+    const AGENCIES = ["City of New Port Richey", "New Port Richey", "Port Richey", "Dade City", "Pasco County", "Hernando County",
+      "FDOT", "GOPASCO", "Pasco MPO"];
     for (const r of rows) {
       const where = `project-list.yaml: "${r.id}"`;
       for (const k of ["id", "list", "name", "source", "location"]) if (!r[k]) problems.push(`${where} is missing "${k}"`);
       if (seen.has(r.id)) problems.push(`${where} is listed twice`);
       seen.add(r.id);
-      if (!["funded", "priority"].includes(r.list)) problems.push(`${where} has list "${r.list}"; use funded or priority`);
+      if (!LISTS[r.list]) problems.push(`${where} has list "${r.list}"; use ${Object.keys(LISTS).join(", ")}`);
+      if (r.phase && !PHASES.includes(r.phase)) problems.push(`${where} has phase "${r.phase}"; use ${PHASES.join(", ")}`);
       if (r.source && !data.sourceById[r.source]) problems.push(`${where} names source "${r.source}", which is not in sources.yaml`);
       for (const rd of r.roads || []) if (!roadIds.has(rd)) problems.push(`${where} names road "${rd}", which is not under roads: in places.yaml`);
       const pj = r.covered && data.projects.find((p) => p.id === r.covered);
@@ -531,6 +540,10 @@ export default function (eleventyConfig) {
       r.srcUrl = src.url;
       r.srcTitle = names[r.source] || src.title;
       r.where = [r.from, r.to].filter(Boolean).join(" to ");
+      let rest = String(r.agency || ""); r.agencies = [];
+      for (const a of AGENCIES) if (rest.includes(a)) { r.agencies.push(a === "City of New Port Richey" ? "New Port Richey" : a); rest = rest.replace(a, ""); }
+      r.agencies = [...new Set(r.agencies)];
+      if (r.agency && !r.agencies.length) problems.push(`${where} names agency "${r.agency}", which the filter doesn't know - add it to AGENCIES`);
     }
     if (problems.length) throw new Error("Project list check failed:\n  " + problems.join("\n  "));
     for (const rd of conn.roadCards) {
@@ -538,12 +551,17 @@ export default function (eleventyConfig) {
       rd.hasFigures = rd.places.length > 0;
     }
     const other = rows.filter((r) => !r.cover);
+    const count = (k) => { const n = {}; for (const r of other) for (const v of k(r)) n[v] = (n[v] || 0) + 1; return n; };
+    const agencyN = count((r) => r.agencies), roadN = count((r) => r.roads || []);
+    const roadName = Object.fromEntries(conn.roadCards.map((r) => [r.id, r.name]));
     return {
       rows, sources: [...new Set(rows.map((r) => r.source))].map((id) => ({ ...data.sourceById[id], dateText: when(data.sourceById[id].date) })),
-      groups: [
-        { k: "funded", label: "Funded through construction", rows: other.filter((r) => r.list === "funded") },
-        { k: "priority", label: "Priorities without construction funding", rows: other.filter((r) => r.list === "priority") },
-      ],
+      groups: Object.entries(LISTS).map(([k, label]) => ({ k, label, rows: other.filter((r) => r.list === k) })),
+      filters: {
+        agencies: Object.keys(agencyN).sort((a, b) => agencyN[b] - agencyN[a] || a.localeCompare(b)).map((a) => ({ v: a, n: agencyN[a] })),
+        phases: PHASES.map((p) => ({ v: p, n: other.filter((r) => r.phase === p).length })),
+        roads: Object.keys(roadN).sort((a, b) => roadName[a].localeCompare(roadName[b])).map((id) => ({ v: id, name: roadName[id], n: roadN[id] })),
+      },
       otherCount: other.length,
     };
   })();

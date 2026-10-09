@@ -72,9 +72,14 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   site's own projects are marked `covered:` and labelled **Covered**. A row's
   `roads` are only the roads named in the project's own name (each must be a road
   in `places.yaml`; roads with no figures go in their own group there). `link` is
-  the project's official page (FDOT's page with the same project number). First
-  built from the MPO's 2026 List of Project Priorities (every row) - when a newer
-  list replaces it, swap the rows rather than editing them. Listed rows don't count
+  the project's official page (FDOT's page with the same project number). Built
+  from two lists: the MPO's 2026 List of Project Priorities (every row) and FDOT
+  District 7's Pasco "All Current Projects" page (the projects not on the MPO list;
+  `phase` is FDOT's own Study / Design / Construction for every project on its list,
+  matched only by project number). When a newer list replaces one, swap its rows
+  rather than editing them. The home page filters the list by agency (as the lists
+  name it), list, FDOT phase and road - only things the documents state; no
+  regions, communities, kinds or cost tiers of our own. Listed rows don't count
   toward the 90% publishing rule; they aren't checked or kept current, and the
   pages say so.
 - **Connections** (the Explore by Road page, `src/explore/index.njk`, and "Connected"

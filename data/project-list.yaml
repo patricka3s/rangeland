@@ -15,8 +15,12 @@
 #   - When a newer list replaces this one, add its rows and remove these.
 #
 #   id        unique; lopp-2026-... for the MPO's 2026 list
-#   list      funded (programmed through construction) | priority (construction unfunded)
+#   list      funded (MPO list: programmed through construction) | priority (MPO list:
+#             construction unfunded) | fdot (FDOT's current projects, not on the MPO list)
 #   priority  the list's priority number (priority rows only)
+#   phase     FDOT's own phase - Study | Design | Construction - from the Study,
+#             Design and Construction lists on its Pasco projects page. Only for
+#             projects on FDOT's list; never inferred for others.
 #   covered   a project id from projects.yaml, if the site covers it
 #   source, location   where it's listed (sources.yaml id; page and row)
 #   link      optional - the project's own official page. For FDOT projects, the
@@ -30,6 +34,7 @@
 # A short name for each source, used on every row (the full title is shown once).
 source_names:
   mpo-lopp-2026: MPO 2026 priority list
+  fdot-d7-pasco-current: FDOT's Pasco project list
 
 projects:
 
@@ -59,6 +64,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 26, funded list, row 2'
   link: 'https://www.fdottampabay.com/project/885/443368-3-52-01'
+  phase: Construction
 
 - id: lopp-2026-funded-03
   list: funded
@@ -86,6 +92,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 26, funded list, row 4'
   link: 'https://www.fdottampabay.com/project/607/439832-5-52-01'
+  phase: Design
 
 - id: lopp-2026-funded-05
   list: funded
@@ -100,6 +107,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 26, funded list, row 5'
   link: 'https://www.fdottampabay.com/project/874/447536-2-52-01'
+  phase: Construction
 
 - id: lopp-2026-funded-06
   list: funded
@@ -114,6 +122,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 26, funded list, row 6'
   link: 'https://www.fdottampabay.com/project/877/449315-1-52-01'
+  phase: Construction
 
 - id: lopp-2026-funded-07
   list: funded
@@ -128,6 +137,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 26, funded list, row 7'
   link: 'https://www.fdottampabay.com/project/878/449316-1-52-01'
+  phase: Construction
 
 - id: lopp-2026-funded-08
   list: funded
@@ -155,6 +165,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 26, funded list, row 9'
   link: 'https://www.fdottampabay.com/project/1028/449169-1-52-01-449170-1-52-01'
+  phase: Construction
 
 - id: lopp-2026-funded-10
   list: funded
@@ -169,6 +180,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 26, funded list, row 10'
   link: 'https://www.fdottampabay.com/project/789/256334-3-52-01'
+  phase: Design
 
 - id: lopp-2026-funded-11
   list: funded
@@ -183,6 +195,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 26, funded list, row 11'
   link: 'https://www.fdottampabay.com/project/374/256334-1-52-01'
+  phase: Design
 
 - id: lopp-2026-funded-12
   list: funded
@@ -222,6 +235,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 26, funded list, row 14'
   link: 'https://www.fdottampabay.com/project/1090/455145-1-52-01'
+  phase: Construction
 
 - id: lopp-2026-funded-15
   list: funded
@@ -262,6 +276,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 27, priority 2'
   link: 'https://www.fdottampabay.com/project/1130/256334-2-52-01'
+  phase: Design
 
 - id: lopp-2026-p03
   list: priority
@@ -277,6 +292,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 27, priority 3'
   link: 'https://www.fdottampabay.com/project/954/430573-2-430573-3'
+  phase: Design
 
 - id: lopp-2026-p04
   list: priority
@@ -413,6 +429,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 27, priority 13'
   link: 'https://www.fdottampabay.com/project/445/416564-2-52-01'
+  phase: Design
 
 - id: lopp-2026-p14
   list: priority
@@ -428,6 +445,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 27, priority 14'
   link: 'https://www.fdottampabay.com/project/375/256422-2-52-02'
+  phase: Design
 
 - id: lopp-2026-p15
   list: priority
@@ -443,6 +461,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 27, priority 15'
   link: 'https://www.fdottampabay.com/project/1132/255796-3-52-01'
+  phase: Design
 
 - id: lopp-2026-p16
   list: priority
@@ -607,6 +626,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 28, priority 28'
   link: 'https://www.fdottampabay.com/project/380/408075-2-52-01'
+  phase: Design
 
 - id: lopp-2026-p29
   list: priority
@@ -688,6 +708,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 28, priority 34'
   link: 'https://www.fdottampabay.com/project/1183/454840-1-52-01'
+  phase: Design
 
 - id: lopp-2026-p35
   list: priority
@@ -701,3 +722,314 @@ projects:
   roads: [sr52]
   source: mpo-lopp-2026
   location: 'page 28, priority 35'
+
+# ---- FDOT District 7 Pasco "All Current Projects" (read 9 Oct 2026): the 28 not
+# on the MPO list above. Name as FDOT titles it; phase from its own phase lists.
+
+- id: fdot-449166-1-52-01
+  list: fdot
+  name: 'Alt US 19 (SR 595) Resurfacing from south of the Pinellas County Line to US 19'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '449166-1-52-01'
+  roads: [altus19]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1223/449166-1-52-01'
+
+- id: fdot-454110-1-12-01
+  list: fdot
+  name: 'Ayers Road Extension Feasibility Study'
+  agency: 'FDOT'
+  phase: Study
+  fpn: '454110-1-12-01'
+  roads: [ayers]
+  source: fdot-d7-pasco-current
+  location: 'Study list'
+  link: 'https://www.fdottampabay.com/project/1155/454110-1-12-01'
+
+- id: fdot-449400-1-52-01
+  list: fdot
+  name: 'CR 54 Resurfacing from CR 581 (Bruce B. Downs Boulevard) to east of Curley Road'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '449400-1-52-01'
+  roads: [cr54]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1018/449400-1-52-01'
+
+- id: fdot-257298-3-52-01
+  list: fdot
+  name: 'CR 578 (County Line Road) Reconstruction from east of East Road to Spring Time Street'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '257298-3-52-01'
+  roads: [cr578]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/377/257298-3-52-01'
+
+- id: fdot-257298-7-52-01
+  list: fdot
+  name: 'CR 578 (County Line Road) Reconstruction from east of Mariner Blvd to west of Suncoast Parkway'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '257298-7-52-01'
+  roads: [cr578]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/378/257298-7-52-01'
+
+- id: fdot-449142-1-52-01
+  list: fdot
+  name: 'I-275/I-75 Resurfacing from Hillsborough County Line to CR 54'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '449142-1-52-01'
+  roads: [i275, i75]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1111/449142-1-52-01'
+
+- id: fdot-453551-1-52-01
+  list: fdot
+  name: 'I-75 Florida Regional Advanced Mobility Elements (FRAME) from Hillsborough to Hernando counties'
+  agency: 'FDOT'
+  phase: Construction
+  fpn: '453551-1-52-01'
+  roads: [i75]
+  source: fdot-d7-pasco-current
+  location: 'Construction list'
+  link: 'https://www.fdottampabay.com/project/1138/453551-1-52-01'
+
+- id: fdot-455991-1-52-01
+  list: fdot
+  name: 'I-75 Interchange Improvement at CR 54'
+  agency: 'FDOT'
+  phase: Construction
+  fpn: '455991-1-52-01'
+  roads: [i75, cr54]
+  source: fdot-d7-pasco-current
+  location: 'Construction list'
+  link: 'https://www.fdottampabay.com/project/1137/455991-1-52-01'
+
+- id: fdot-454499-1-52-01
+  list: fdot
+  name: 'I-75 Resurfacing from north of S.R. 52 to Hernando County Line'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '454499-1-52-01'
+  roads: [i75]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1179/454499-1-52-01'
+
+- id: fdot-454668-1-52-01
+  list: fdot
+  name: 'I-75 at SR 52 Interchange Improvements'
+  agency: 'FDOT'
+  phase: Construction
+  fpn: '454668-1-52-01'
+  roads: [i75, sr52]
+  source: fdot-d7-pasco-current
+  location: 'Construction list'
+  link: 'https://www.fdottampabay.com/project/1094/454668-1-52-01'
+
+- id: fdot-445507-4-52-01
+  list: fdot
+  name: 'I-75, I-275, and I-4, Wrong-way Detection Installation in Hillsborough, Pasco and Pinellas counties'
+  agency: 'FDOT'
+  phase: Construction
+  fpn: '445507-4-52-01'
+  roads: [i75, i275]
+  source: fdot-d7-pasco-current
+  location: 'Construction list'
+  link: 'https://www.fdottampabay.com/project/1161/445507-4-52-01'
+
+- id: fdot-458389-1
+  list: fdot
+  name: 'Pasco Transportation Talks'
+  agency: 'FDOT'
+  phase: Study
+  fpn: '458389-1'
+  roads: []
+  source: fdot-d7-pasco-current
+  location: 'Study list'
+  link: 'https://www.fdottampabay.com/project/1232/458389-1'
+
+- id: fdot-447951-1-52-01
+  list: fdot
+  name: 'SR 39 Repaving from north of Central Avenue to US 301 (Gall Blvd.)'
+  agency: 'FDOT'
+  phase: Construction
+  fpn: '447951-1-52-01'
+  roads: [sr39]
+  source: fdot-d7-pasco-current
+  location: 'Construction list'
+  link: 'https://www.fdottampabay.com/project/996/447951-1-52-01'
+
+- id: fdot-449173-1-32-01
+  list: fdot
+  name: 'SR 52 Resurfacing From E. of Hicks Rd. to W. of Moon Lake Rd.'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '449173-1-32-01'
+  roads: [sr52]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1017/449173-1-32-01'
+
+- id: fdot-452004-1-52-01
+  list: fdot
+  name: 'SR 54 Paving from east of Crossing Boulevard to east of Aventura Boulevard'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '452004-1-52-01'
+  roads: [sr54]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1189/452004-1-52-01'
+
+- id: fdot-447953-2-32-01
+  list: fdot
+  name: 'SR 54 Sidewalk Improvements from east of Gunn Highway to east of Crossing Boulevard'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '447953-2-32-01'
+  roads: [sr54]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1255/447953-2-32-01'
+
+- id: fdot-443367-1-22-01
+  list: fdot
+  name: 'SR 56 Extension from US 301 to US 98'
+  agency: 'FDOT'
+  phase: Study
+  fpn: '443367-1-22-01'
+  roads: [sr56]
+  source: fdot-d7-pasco-current
+  location: 'Study list'
+  link: 'https://www.fdottampabay.com/project/502/443367-1-22-01'
+
+- id: fdot-443707-1-32-01
+  list: fdot
+  name: 'US 19 (SR 55) Drainage Repair from north of Flora Avenue to south of Fivay Road'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '443707-1-32-01'
+  roads: [us19]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1186/443707-1-32-01'
+
+- id: fdot-254677-2-52-94
+  list: fdot
+  name: 'US 19 (SR 55) Median Safety Improvements'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '254677-2-52-94'
+  roads: [us19]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1113/254677-2-52-94'
+
+- id: fdot-447522-2-52-01
+  list: fdot
+  name: 'US 19 (SR 55) Pedestrian Safety Improvement from south of Tudor Lane to north of Tudor Lane'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '447522-2-52-01'
+  roads: [us19]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1175/447522-2-52-01'
+
+- id: fdot-254677-6-23
+  list: fdot
+  name: 'US 19 Pedestrian Mid-Block Crosswalk at Louis Avenue in Pasco County'
+  agency: 'FDOT'
+  phase: Construction
+  fpn: '254677-6-23'
+  roads: [us19, louis]
+  source: fdot-d7-pasco-current
+  location: 'Construction list'
+  link: 'https://www.fdottampabay.com/project/1140/254677-6-23'
+
+- id: fdot-450970-2-52-01
+  list: fdot
+  name: 'US 301 & SR 54 Sidewalk Improvements'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '450970-2-52-01'
+  roads: [us301, sr54]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1211/450970-2-52-01'
+
+- id: fdot-447936-1-52-01
+  list: fdot
+  name: 'US 41 (Land O'' Lakes Boulevard) Resurfacing from Washington Lane to south of County Line Road'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '447936-1-52-01'
+  roads: [us41]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1242/447936-1-52-01'
+
+- id: fdot-254677-6-07
+  list: fdot
+  name: 'US 41 (Land O’ Lakes Boulevard) New Traffic Signal at Lake Patience Road'
+  agency: 'FDOT'
+  phase: Construction
+  fpn: '254677-6-07'
+  roads: [us41, lakepatience]
+  source: fdot-d7-pasco-current
+  location: 'Construction list'
+  link: 'https://www.fdottampabay.com/project/1062/254677-6-07'
+
+- id: fdot-458349-1-52-01
+  list: fdot
+  name: 'US 41 (SR 45) Intersection Improvements at SR 54'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '458349-1-52-01'
+  roads: [us41, sr54]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1231/458349-1-52-01'
+
+- id: fdot-419182-1
+  list: fdot
+  name: 'US 41 at SR 54 Project Development & Environment (PD&E) Study'
+  agency: 'FDOT'
+  phase: Study
+  fpn: '419182-1'
+  roads: [us41, sr54]
+  source: fdot-d7-pasco-current
+  location: 'Study list'
+  link: 'https://www.fdottampabay.com/project/1107/419182-1'
+
+- id: fdot-449168-1-52-01
+  list: fdot
+  name: 'US 98 Resurfacing from south of Prairie Drive to US 301'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '449168-1-52-01'
+  roads: [us98]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1238/449168-1-52-01'
+
+- id: fdot-451236-1-52-01
+  list: fdot
+  name: 'US 98/US 301 Repaving from Long Avenue to US 98'
+  agency: 'FDOT'
+  phase: Design
+  fpn: '451236-1-52-01'
+  roads: [us98, us301]
+  source: fdot-d7-pasco-current
+  location: 'Design list'
+  link: 'https://www.fdottampabay.com/project/1076/451236-1-52-01'

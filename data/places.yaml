@@ -34,7 +34,8 @@ roads:
   - { id: cattlegap,  name: Cattle Gap Trl }
   - { id: sunlake,    name: Sunlake Blvd }
   # Roads named only in listed projects (data/project-list.yaml), with no
-  # figures yet. Named as the MPO's 2026 priority list names them.
+  # figures yet. Named as the MPO's 2026 priority list or FDOT's project list
+  # names them.
   - { id: bbd,        name: Bruce B. Downs Blvd }
   - { id: collier,    name: Collier Pkwy }
   - { id: cr52,       name: CR 52 }
@@ -54,6 +55,11 @@ roads:
   - { id: us98,       name: US 98 }
   - { id: us301,      name: US 301 }
   - { id: wire,       name: Wire Rd }
+  - { id: altus19,    name: Alt US 19 }
+  - { id: ayers,      name: Ayers Rd }
+  - { id: lakepatience, name: Lake Patience Rd }
+  - { id: louis,      name: Louis Ave }
+  - { id: sr39,       name: SR 39 }
 
 places:
   # ---- Rangeland Blvd
