@@ -1121,6 +1121,7 @@
   .rck-f{display:grid;gap:3px;font-size:.85rem;color:var(--ink-2)}
   .rck-f input,.rck-f textarea{font:inherit;font-size:1rem;padding:8px 10px;border:1px solid var(--rule);border-radius:6px;
     background:var(--paper);color:var(--ink);width:100%;box-sizing:border-box}
+  .rck-f input[aria-invalid="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
   .rck-c{font-size:.85rem;color:var(--ink-2);display:flex;align-items:center;gap:6px}
   .rck-trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
   .rck-send{justify-self:start;min-height:44px;padding:8px 22px;font-family:Archivo,sans-serif;font-weight:700;font-size:.95rem;

@@ -59,6 +59,8 @@ function doPost(e) {
   let d;
   try { d = JSON.parse((e && e.postData && e.postData.contents) || "{}"); } catch (err) { return reply(false); }
   if (d.website) return reply(true);                        // hidden trap field: only bots fill it
+  const email = String(d.email || "").trim();               // optional, but if given it must look complete
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return reply(false);
   const isMessage = d.kind === "message";
   const verdict = d.verdict === "matches" ? "Matches" : d.verdict === "differs" ? "Doesn't match" : "";
   if (isMessage ? !String(d.message || "").trim() : (!verdict || !d.fact)) return reply(false);
@@ -78,10 +80,10 @@ function doPost(e) {
     const clip = (v, max) => String(v == null ? "" : v).slice(0, max).replace(/^[=+\-@]/, "'$&");
     if (isMessage) {
       tab(MESSAGES, MESSAGE_HEADINGS).appendRow([new Date(), clip(d.message, 3000), clip(d.name, 100),
-        clip(d.email, 200), clip(d.pageUrl, 300)]);
+        clip(email, 200), clip(d.pageUrl, 300)]);
     } else {
       tab(SHEET, HEADINGS).appendRow([new Date(), clip(d.fact, 120), clip(d.statement, 300), clip(d.value, 200), verdict,
-        clip(d.says, 1000), clip(d.page, 200), clip(d.name, 100), clip(d.email, 200),
+        clip(d.says, 1000), clip(d.page, 200), clip(d.name, 100), clip(email, 200),
         d.credit === true ? "Yes" : "No", clip(d.pageUrl, 300)]);
     }
   } finally { lock.releaseLock(); }

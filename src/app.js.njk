@@ -330,6 +330,11 @@ eleventyExcludeFromCollections: true
       a.target = "_blank";
       return a;
     }
+    /* An email address is optional on both forms; if one is given it must look
+       complete (something@something.something, no spaces) so a reply can reach
+       it. The contact form below has the same check. */
+    var EMAIL_MSG = "That email address doesn\u2019t look complete. Please check it, or leave it blank.";
+    function badEmail(v){ v = v.trim(); return v !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
     /* READER CHECKS: "I checked this against the document" - Matches / Doesn't
        match - sent straight to Patrick's Google Sheet through his Apps Script
        (data/site.yaml -> reader_checks). A plain POST: no Google code runs on
@@ -352,6 +357,8 @@ eleventyExcludeFromCollections: true
       var page = field("Which page or board?", "page");
       var name = field("Your name (optional)", "name");
       var email = field("Email, if you\u2019d like a reply (optional)", "email", "email");
+      email.autocomplete = "email";
+      email.addEventListener("input", function(){ email.removeAttribute("aria-invalid"); });
       var cl = el("label", "rck-c"), credit = el("input"); credit.type = "checkbox";
       cl.appendChild(credit); cl.appendChild(document.createTextNode(" You may credit me by name")); more.appendChild(cl);
       var trap = el("input"); trap.type = "text"; trap.name = "website"; trap.tabIndex = -1; trap.autocomplete = "off";
@@ -373,9 +380,10 @@ eleventyExcludeFromCollections: true
       more.addEventListener("submit", function(e){
         e.preventDefault();
         if (verdict === "differs" && !says.value.trim()) { status.textContent = "Please say what the document says."; says.focus(); return; }
+        if (badEmail(email.value)) { status.textContent = EMAIL_MSG; email.setAttribute("aria-invalid", "true"); email.focus(); return; }
         send.disabled = true; status.textContent = "Sending\u2026";
         var body = JSON.stringify({fact: id, statement: f.s, value: f.v, verdict: verdict,
-          says: says.value, page: page.value, name: name.value, email: email.value,
+          says: says.value, page: page.value, name: name.value, email: email.value.trim(),
           credit: credit.checked, website: trap.value, pageUrl: location.href.split("#")[0]});
         /* The script answers {"ok": true} once the row is in Patrick's Sheet, so
            "received" is only said when it really was. (A plain-text POST needs
@@ -644,12 +652,17 @@ eleventyExcludeFromCollections: true
     var url = form.getAttribute("data-url"), status = form.querySelector(".rck-status"), send = form.querySelector(".rck-send");
     form.hidden = false;
     function val(n){ return form.elements[n].value; }
+    var emailBox = form.elements.email;
+    /* the same check as the reader-check form's: blank, or a complete address */
+    function badEmail(v){ v = v.trim(); return v !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+    emailBox.addEventListener("input", function(){ emailBox.removeAttribute("aria-invalid"); });
     function failed(msg){ send.disabled = false; status.textContent = msg; }
     form.addEventListener("submit", function(e){
       e.preventDefault();
       if (!val("message").trim()) { status.textContent = "Please write a message."; form.elements.message.focus(); return; }
+      if (badEmail(val("email"))) { status.textContent = "That email address doesn\u2019t look complete. Please check it, or leave it blank."; emailBox.setAttribute("aria-invalid", "true"); emailBox.focus(); return; }
       send.disabled = true; status.textContent = "Sending\u2026";
-      var body = JSON.stringify({kind: "message", message: val("message"), name: val("name"), email: val("email"),
+      var body = JSON.stringify({kind: "message", message: val("message"), name: val("name"), email: val("email").trim(),
         website: val("website"), pageUrl: location.href.split("#")[0]});
       fetch(url, {method: "POST", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: body})
         .then(function(r){ return r.json(); })
