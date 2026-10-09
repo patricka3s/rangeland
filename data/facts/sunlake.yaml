@@ -7,8 +7,8 @@
 #   angeline  south of Appenzeller Blvd / the Angeline line to south of Wilton Way
 #   north     south of Wilton Way to Anchor Dune Dr
 #
-# Added 28 Sep 2026. Patrick is verifying these himself, so they have no
-# 'ai_checked' or 'verified' dates yet.
+# Added 28 Sep 2026. Every fact compared with its document by Claude on
+# 9 Oct 2026 ('ai_checked'); Patrick adds 'verified' as he checks them himself.
 
 # ---- The project
 
@@ -20,7 +20,9 @@
   location: 'Section 1, "which is an approximate length of 2.70 miles"'
   as_of: '2025-12-18'
   status: current
+  ai_checked: '2026-10-09'
   decimals: 2
+  verified: '2026-10-09'
 
 - id: sunlake.design.south.row-feet
   statement: 'Right-of-way the Bexley North MPUD (rezoning no. 7242) will dedicate for the Sunlake Blvd extension'
@@ -30,6 +32,8 @@
   location: 'Section 2.2 Background; Figures 2 and 3 ("166'' right-of-way")'
   as_of: '2025-12-18'
   status: current
+  ai_checked: '2026-10-09'
+  verified: '2026-10-09'
 
 - id: sunlake.design.south.lanes-ultimate
   statement: 'Travel lanes in the ultimate configuration of the Sunlake Blvd extension (11-foot lanes)'
@@ -39,6 +43,7 @@
   location: 'Section 2.2 Background; Figure 2, "Sunlake Boulevard (ultimate condition)"'
   as_of: '2025-12-18'
   status: current
+  ai_checked: '2026-10-09'
   note: 'With 7-foot bike lanes, a 5-foot sidewalk and a 12-foot meandering trail.'
 
 - id: sunlake.design.south.lanes-interim
@@ -49,6 +54,7 @@
   location: 'Section 2.2 Background; Figure 3, "Sunlake Boulevard (interim condition)"'
   as_of: '2025-12-18'
   status: current
+  ai_checked: '2026-10-09'
   note: 'Figure 3 shows one southbound lane, one northbound lane, and an 11-foot turn lane "when warranted" between them, plus a 7-foot bike lane and the 12-foot trail.'
 
 - id: sunlake.design.south.classification
@@ -59,6 +65,7 @@
   location: 'Figures 2 and 3 captions (ultimate and interim condition)'
   as_of: '2025-12-18'
   status: current
+  ai_checked: '2026-10-09'
 
 - id: sunlake.design.south.design-speed
   statement: 'Design speed on the typical sections of the Sunlake Blvd extension'
@@ -68,6 +75,8 @@
   location: 'Figures 2 and 3 captions'
   as_of: '2025-12-18'
   status: current
+  ai_checked: '2026-10-09'
+  verified: '2026-10-09'
 
 - id: sunlake.design.south.posted-speed
   statement: 'Posted speed on the typical sections of the Sunlake Blvd extension'
@@ -77,6 +86,8 @@
   location: 'Figures 2 and 3 captions'
   as_of: '2025-12-18'
   status: current
+  ai_checked: '2026-10-09'
+  verified: '2026-10-09'
 
 # ---- Schedule and process
 
@@ -88,6 +99,7 @@
   location: 'page 3, priority 11, "Funded Phase" and "Funded Year" columns; listed under "Construction unfunded"'
   as_of: '2026-06-11'
   status: current
+  ai_checked: '2026-10-09'
   note: 'The "2026 Status" column reads: "Design funded FY 2026 in CIP, ROW funded FY 2027 in CIP, CST Funded in FY 2028-2029 CIP". The request is PD&E, design and right-of-way.'
 
 - id: sunlake.schedule.south.design-shortlist
@@ -98,6 +110,7 @@
   location: 'consent item C18 (PU26-0018); minutes page 6, "Approved Staff''s recommendation"'
   as_of: '2026-06-02'
   status: current
+  ai_checked: '2026-10-09'
   note: 'Five firms applied. Per the memo, the agreement runs 540 calendar days once signed and is reported to the Board afterwards as a Noted Item.'
 
 # ---- Funding, county capital improvement plan (FY 2026 adopted budget)
@@ -110,6 +123,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2026 Adopted'"
   as_of: '2025-09-16'
   status: current
+  ai_checked: '2026-10-09'
   decimals: 1
 
 - id: sunlake.funding.south.fy2027
@@ -120,6 +134,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2027 Proposed'"
   as_of: '2025-09-16'
   status: current
+  ai_checked: '2026-10-09'
   decimals: 3
 
 - id: sunlake.funding.south.fy2028
@@ -130,6 +145,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2028 Proposed'"
   as_of: '2025-09-16'
   status: current
+  ai_checked: '2026-10-09'
   decimals: 3
 
 - id: sunlake.funding.south.fy2029
@@ -140,6 +156,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2029 Proposed'"
   as_of: '2025-09-16'
   status: current
+  ai_checked: '2026-10-09'
   decimals: 3
 
 - id: sunlake.funding.south.fy2030
@@ -150,6 +167,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'FY 2030 Proposed'"
   as_of: '2025-09-16'
   status: current
+  ai_checked: '2026-10-09'
   decimals: 1
 
 - id: sunlake.funding.south.future
@@ -160,6 +178,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(N Bud Bexley to S Angeli', column 'Future Funding'"
   as_of: '2025-09-16'
   status: current
+  ai_checked: '2026-10-09'
   decimals: 1
 
 - id: sunlake.funding.angeline.fy2026
@@ -170,6 +189,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(S Anglin to S Wilton Wy)', column 'FY 2026 Adopted'"
   as_of: '2025-09-16'
   status: current
+  ai_checked: '2026-10-09'
   decimals: 3
   note: 'The FY 2027-2030 and future-funding columns on this row are $0.'
 
@@ -181,6 +201,7 @@
   location: "FY 2026-2030 Capital Improvement Plan, Road Improvements table, printed page 124 (PDF page 129), row 'Sunlake Bl(S Wilt Wy to Anch Dn Dr)', column 'FY 2026 Adopted'"
   as_of: '2025-09-16'
   status: current
+  ai_checked: '2026-10-09'
   decimals: 1
   note: 'The FY 2027-2030 and future-funding columns on this row are $0.'
 
@@ -194,6 +215,7 @@
   location: 'priority 11 (454568-1), status column: "Design funded FY 2026 in CIP"'
   as_of: '2026-06-11'
   status: current
+  ai_checked: '2026-10-09'
 
 - id: sunlake.schedule.south.row-funded
   statement: 'Right-of-way: fiscal year funded in the county capital plan, per the MPO priority list'
@@ -203,6 +225,7 @@
   location: 'priority 11 (454568-1), status column: "ROW funded FY 2027 in CIP"'
   as_of: '2026-06-11'
   status: current
+  ai_checked: '2026-10-09'
 
 - id: sunlake.schedule.south.cst-funded
   statement: 'Construction: fiscal years funded in the county capital plan, per the MPO priority list'
@@ -212,3 +235,4 @@
   location: 'priority 11 (454568-1), status column: "CST Funded in FY 2028-2029 CIP"'
   as_of: '2026-06-11'
   status: current
+  ai_checked: '2026-10-09'

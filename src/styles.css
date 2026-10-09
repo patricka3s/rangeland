@@ -108,11 +108,9 @@
               line-height:1.12;letter-spacing:-.02em;margin-bottom:10px}
   .meeting .w{font-size:1rem;line-height:1.5;opacity:.95;margin:0}
   .meeting .dl{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.3);font-size:.96rem}
-  .meeting .post{display:none}
-  .meeting[data-phase="post"] .pre{display:none}
-  .meeting[data-phase="post"] .post{display:block}
   .meeting a{color:#fff;text-decoration:underline;text-underline-offset:2px}
   .meeting a:hover{text-decoration-thickness:2px}
+  .meeting .fact.srcmark{color:inherit}
   :root[data-theme="dark"] .meeting a{color:#12161D}
   @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .meeting a{color:#12161D}}
   :root[data-theme="dark"] .meeting{color:#12161D}
@@ -126,6 +124,7 @@
            font-size:1rem;color:var(--ink-2)}
   .callout strong{color:var(--ink)}
   .callout h3{margin:0 0 8px;font-size:1.02rem}
+  .callout a{color:var(--accent)}
 
   /* system-of-projects panel */
   .system{border:2px solid var(--accent);padding:0;margin:24px 0 20px;background:var(--surface)}

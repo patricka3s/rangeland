@@ -708,6 +708,16 @@
   ai_checked: '2026-09-29'
   verified: '2026-09-29'
 
+- id: rangeland.claim.study-complete
+  statement: 'When the route study is expected to be complete, according to the project schedule board'
+  value: 'Fall 2026 (anticipated)'
+  unit: statement
+  source: pasco-2026-09-schedule
+  location: 'last step of the timeline, "Study Complete"; notes: "Schedule is subject to change"'
+  as_of: '2026-09-24'
+  status: current
+  ai_checked: '2026-10-09'
+
 - id: rangeland.claim.regional-collector
   statement: 'What the county says connecting the corridor will make it'
   value: 'By connecting the existing and planned segments of Rangeland Blvd, Bud Bexley Parkway, and Tower Road together, the corridor will serve as a regional collector that enhances connectivity to the surrounding areas.'
