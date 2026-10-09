@@ -46,8 +46,8 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   change order**, plan document and deadline. Titles stay neutral ("completion
   extended", never "delayed again"); a moved completion date goes in
   `moved: {from, to}`, which the build adds to the title and the Timeline shows
-  with the old date struck through. The site rebuilds every morning so
-  "today" moves on by itself.
+  with the old date struck through. The site rebuilds once a day (scheduled for
+  6:23 a.m. Eastern, but GitHub often runs it hours later) so "today" moves on by itself.
 - `data/sources.yaml` — documents. `data/definitions.yaml` — glossary terms, listed
   under Definitions on Figures and sources; a page marks a term with
   `{% src "def.<id>" %}`, the same dagger (†) used for claims. `data/site.yaml` — the reader-check script's address.

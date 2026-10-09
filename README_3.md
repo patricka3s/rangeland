@@ -121,7 +121,7 @@ how to set it up again are in `docs/reader-checks.md`.
 
 Add an entry to `data/events.yaml` (the header explains each field). It appears on
 the Timeline page and, if it's one of the project's five latest, in the guide's
-"What's happened lately" box. The site rebuilds every morning, so upcoming items
+"What's happened lately" box. The site rebuilds once a day, so upcoming items
 move below the "today" line on their own.
 
 ## Changing the wording
