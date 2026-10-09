@@ -1191,8 +1191,16 @@
   .hlead a{color:var(--accent)}
   .plgroup{border-top:1px solid var(--rule)}
   .plgroup:last-of-type{border-bottom:1px solid var(--rule)}
-  .plgroup summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 0;cursor:pointer;
+  .plgroup summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 0;cursor:pointer;list-style:none;
     font-family:Archivo,sans-serif;font-weight:700;font-size:1rem;color:var(--ink)}
+  .plgroup summary::-webkit-details-marker{display:none}
+  /* a plus in a circle that turns to a minus when the group is open, so it's
+     plain the heading opens (a flex summary loses the browser's own triangle) */
+  .plgroup summary::after{content:"+";margin-left:auto;flex:none;width:24px;height:24px;border:1.5px solid var(--accent);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-family:Archivo,sans-serif;font-size:18px;font-weight:700;line-height:1;color:var(--accent)}
+  .plgroup[open] summary::after{content:"\2212"}
+  .plgroup summary:hover::after{background:var(--band)}
+  .plgroup summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .plcount{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;color:var(--ink-3);
     border:1px solid var(--rule);border-radius:3px;padding:0 5px;line-height:1.5}
   .plist{list-style:none;margin:0 0 10px;padding:0}
