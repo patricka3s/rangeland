@@ -2,20 +2,20 @@
 permalink: projects/index.html
 eleventyExcludeFromCollections: true
 ---
-{#- ALL PROJECTS (not copied into the built page)
-    Every project in data/project-list.yaml: the ones the site covers first, then
-    the rest, listed only, with filters. Built entirely from the data - nothing
+{#- OTHER PASCO ROAD PROJECTS (not copied into the built page)
+    The listed-only projects in data/project-list.yaml, with filters, after a
+    line pointing to the projects the site covers. Built entirely from the data - nothing
     here needs editing when the list changes. -#}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>All Projects in Pasco · Pasco Roadmap</title>
-<meta name="description" content="Every road project on the Pasco MPO's priority list and FDOT's current Pasco projects list: the ones this site covers in depth, and the rest listed with links to their official pages.">
+<title>Other Pasco Road Projects · Pasco Roadmap</title>
+<meta name="description" content="Road projects in Pasco County from the MPO's priority list and FDOT's current projects list, listed with links to their official pages. They are not covered or checked on this site.">
 <meta name="author" content="Patrick">
 <link rel="canonical" href="https://pascoroadmap.info/projects/">
-{% set ogTitle = "All Projects in Pasco · Pasco Roadmap" %}{% set ogDesc = "Every project on the MPO's priority list and FDOT's current Pasco list: covered in depth, or listed with links to the official pages." %}{% set ogPath = "projects/" %}{% include "social.njk" %}
+{% set ogTitle = "Other Pasco Road Projects · Pasco Roadmap" %}{% set ogDesc = "Road projects from the MPO's priority list and FDOT's current Pasco list, listed with links to their official pages." %}{% set ogPath = "projects/" %}{% include "social.njk" %}
 {% set root = "../" %}{% include "shared-head.njk" %}
 <script src="../app.js"></script>
 </head>
@@ -24,18 +24,13 @@ eleventyExcludeFromCollections: true
 {% set current = "projects" %}{% include "project-bar.njk" %}
 
 <header>
-  <h1>All Projects in Pasco</h1>
-  <p class="standfirst">Every project on the official lists this site follows, in two kinds. <strong>Covered</strong> projects have their own guide here: every figure is sourced and checked against its document, and I keep it up to date. <strong>Listed only</strong> projects are one line each, copied as written from the official list, with links to it; they aren&#8217;t checked or kept up to date here.</p>
+  <h1>Other Pasco Road Projects</h1>
+  <p class="standfirst">The other road projects on the official lists this site follows. They are <strong>listed only</strong>, not covered: one line each, copied as written from the official list, with links to it. They aren&#8217;t checked or kept up to date here, so follow the links for the latest.</p>
+  <p class="hlead">The projects this site covers, with their own guides, every figure sourced and checked and kept up to date, are {% for c in projectList.covered %}<a href="../{{ c.href }}">the {{ c.short }}</a>{% if not loop.last %} and {% endif %}{% endfor %}.</p>
 </header>
 
-<section id="covered" aria-labelledby="h-covered">
-  <h2 id="h-covered" class="hh">Covered on this site</h2>
-  <ul class="plist">{% for r in projectList.rows %}{% if r.cover %}{% include "listed-row.njk" %}{% endif %}{% endfor %}</ul>
-</section>
-
-<section id="listed" aria-labelledby="h-other">
-  <h2 id="h-other" class="hh">Listed only</h2>
-  <p class="hlead">These are <strong>listed only</strong>, not covered: {{ projectList.otherCount }} more projects, one line each, copied as written from {% for s in projectList.sources %}{{ s.title }}{% if s.dateText %} ({{ s.dateText }}){% endif %}{% if not loop.last %} and {% endif %}{% endfor %}, with links to the official pages. They aren&#8217;t checked or kept up to date here, so follow the links for the latest. <a href="../explore/">Explore by Road</a> shows them road by road.</p>
+<section id="listed" aria-label="Listed projects">
+    <p class="hlead">{{ projectList.otherCount }} projects, from {% for s in projectList.sources %}{{ s.title }}{% if s.dateText %} ({{ s.dateText }}){% endif %}{% if not loop.last %} and {% endif %}{% endfor %}. <a href="../explore/">Explore by Road</a> shows them road by road.</p>
   {%- set F = projectList.filters %}
   <div class="plfilters" id="plfilters" hidden>
     <label class="xp-sel"><span>Agency</span><select data-f="agency"><option value="">Any</option>{% for o in F.agencies %}<option value="{{ o.v }}">{{ o.v }} ({{ o.n }})</option>{% endfor %}</select></label>

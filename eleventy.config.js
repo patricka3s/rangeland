@@ -563,6 +563,7 @@ export default function (eleventyConfig) {
         roads: Object.keys(roadN).sort((a, b) => roadName[a].localeCompare(roadName[b])).map((id) => ({ v: id, name: roadName[id], n: roadN[id] })),
       },
       otherCount: other.length,
+      covered: rows.filter((r) => r.cover).map((r) => r.cover),
     };
   })();
   eleventyConfig.addGlobalData("projectList", projectList);
