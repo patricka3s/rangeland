@@ -57,9 +57,8 @@ eleventyExcludeFromCollections: true
 })();
 
 /* Rangeland guide - behaviour only. Three blocks:
-   - reading mode and meeting box: the Highlights/Full detail toggle, opening
-     the corrections from #notes links, and flipping the meeting box to the
-     comment deadline once the workshop is over;
+   - reading mode: the Highlights/Full detail toggle, and opening the
+     corrections from #notes links;
    - NETWORK MAP: the interactive map's tabs and colours;
    - FACT DETAILS: the box that opens when a figure is tapped.
    No page wording lives here except the two mode descriptions and the
@@ -100,13 +99,6 @@ eleventyExcludeFromCollections: true
     openNotes();
     window.addEventListener("hashchange", openNotes);
 
-    // Workshop #3 ended 24 Sep 2026, 7pm Eastern (23:00 UTC). After that the
-    // meeting box switches to the comment deadline. Without JS it stays on the
-    // workshop, which is the state that matters most before the night.
-    try {
-      var box = document.getElementById("meetingbox");
-      if (box && Date.now() > Date.UTC(2026, 8, 24, 23, 0)) box.setAttribute("data-phase", "post");
-    } catch (e) {}
     var seg = document.querySelector(".seg");
     if (!seg) return;
     seg.addEventListener("click", function(e){
