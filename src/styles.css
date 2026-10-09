@@ -200,6 +200,7 @@
   .src{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;line-height:1.9;color:var(--ink-2)}
   .src a{color:var(--accent)}
   footer{border-top:1px solid var(--rule);padding-top:22px;font-size:.9rem;color:var(--ink-3)}
+  footer a{color:var(--accent)}
   a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
   /* corridor + pipeline svg */
@@ -1120,6 +1121,7 @@
   .rck-f{display:grid;gap:3px;font-size:.85rem;color:var(--ink-2)}
   .rck-f input,.rck-f textarea{font:inherit;font-size:1rem;padding:8px 10px;border:1px solid var(--rule);border-radius:6px;
     background:var(--paper);color:var(--ink);width:100%;box-sizing:border-box}
+  .rck-f input[aria-invalid="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
   .rck-c{font-size:.85rem;color:var(--ink-2);display:flex;align-items:center;gap:6px}
   .rck-trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
   .rck-send{justify-self:start;min-height:44px;padding:8px 22px;font-family:Archivo,sans-serif;font-weight:700;font-size:.95rem;
@@ -1158,6 +1160,8 @@
   .homepage .pjtag{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
   .hmore{margin:10px 0 0;font-size:.92rem}
   .hmore a,#checks a,#involved a{color:var(--accent)}
+  /* How this site is built (src/about/index.njk) uses the home page's headings and check bar */
+  .aboutpage section a{color:var(--accent)}
   .hcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
   .hcard{display:flex;flex-direction:column;gap:8px;padding:18px 18px 16px;background:var(--surface);border:1px solid var(--rule);
     box-shadow:var(--shadow);color:inherit;text-decoration:none;transition:border-color .12s}

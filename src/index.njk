@@ -98,7 +98,7 @@ eleventyExcludeFromCollections: true
     <li><strong>{{ p.short }}, {{ e.shown }}:</strong> {{ e.title }}. <a href="{{ p.id }}/#s9">How to send a comment &#8594;</a></li>
     {% endif %}{% endfor %}{% endfor %}
     <li><strong>Any project:</strong> the Pasco County Commission takes public comment at its regular meetings. Its agendas, where contracts and change orders appear, are searchable at <strong>pascocofl.portal.civicclerk.com</strong>.</li>
-    <li><strong>A project you&#8217;d like covered?</strong> Message me on Facebook. I add projects as time allows, and only once I&#8217;ve verified at least {{ publishThreshold }}% of the figures in every project already here, so the site never runs ahead of its checking.{% if not nextProjectReady %} Where things stand: {% for p in projects %}{% if p.page %}{{ p.short }} {{ projectChecks[p.id].pct }}%{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}.{% endif %} Each gets the same sections and the same checks as the others.</li>
+    <li><strong>A project you&#8217;d like covered?</strong> <a href="about/#contact">Send me a message</a>. I add projects as time allows, and only once I&#8217;ve verified at least {{ publishThreshold }}% of the figures in every project already here, so the site never runs ahead of its checking.{% if not nextProjectReady %} Where things stand: {% for p in projects %}{% if p.page %}{{ p.short }} {{ projectChecks[p.id].pct }}%{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}.{% endif %} Each gets the same sections and the same checks as the others.</li>
   </ul>
 </section>
 
@@ -107,7 +107,7 @@ eleventyExcludeFromCollections: true
   <p style="margin:0 0 10px"><strong>How this is made.</strong> I use AI tools for the code behind this site, to help dig through the documents, and for first drafts of the writing. I read and check everything before it goes up, and every figure is sourced so you can check it without taking my word for it.</p>
   <p style="margin:0 0 10px"><strong>Visit counter.</strong> This site counts visits using GoatCounter. It sets no cookies, stores nothing on your device and does not identify you.</p>
   {% include "share.njk" %}
-  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }} &#183; <a href="{{ root }}about/">How this site is built</a></p>
 </footer>
 </div>
 <script data-goatcounter="https://patricka3s.goatcounter.com/count"

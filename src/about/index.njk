@@ -1,0 +1,116 @@
+---
+permalink: about/index.html
+eleventyExcludeFromCollections: true
+---
+{#- HOW THIS SITE IS BUILT (not copied into the built page)
+    How the figures get onto the site, how they are checked and corrected, how
+    the site keeps up, the part AI plays, and the technical side. Linked from
+    the version line at the foot of every page. The counts are built from
+    data/, so nothing here needs editing when a fact or document is added.
+    Written in Patrick's voice ("I"): ask before rewording. -#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How This Site Is Built · Pasco Roadmap</title>
+<meta name="description" content="How Pasco Roadmap is put together: where every figure comes from, how figures are checked and corrected, how the site keeps up with new documents, the part AI plays, and where to see the code.">
+<meta name="author" content="Patrick">
+<link rel="canonical" href="https://pascoroadmap.info/about/">
+{% set ogTitle = "How This Site Is Built · Pasco Roadmap" %}{% set ogDesc = "Where every figure comes from, how figures are checked and corrected, and how the site keeps up with new documents." %}{% set ogPath = "about/" %}{% include "social.njk" %}
+{% set root = "../" %}{% include "shared-head.njk" %}
+<script src="../app.js"></script>
+</head>
+<body class="aboutpage">
+<div class="wrap">
+{% set current = "about" %}{% include "project-bar.njk" %}
+
+<header>
+  <h1>How This Site Is Built</h1>
+  <p class="standfirst">Pasco Roadmap is built so that you don&#8217;t have to take my word for anything. This page explains where the figures come from, how they are checked and corrected, how the site keeps up with new documents, and what part AI plays.</p>
+</header>
+
+<section aria-labelledby="h-where">
+  <h2 id="h-where" class="hh">Where the figures come from</h2>
+  <p>Every figure on the site, and every statement marked &#8224;, comes from a public document: the county&#8217;s traffic boards, newsletters and budgets, Commission agendas and minutes, the MPO&#8217;s plans, FDOT&#8217;s traffic counts and the Turnpike&#8217;s studies. The site currently has <strong>{{ checkCounts.total }} figures</strong> from <strong>{{ sources.length }} documents</strong>.</p>
+  <p>Each figure is written down once, in a data file, together with the document it comes from, where in that document it appears, and the date of the document. The pages don&#8217;t contain the numbers themselves; they look each one up when the site is built. So a figure reads the same everywhere it appears, and fixing it in one place fixes it everywhere.</p>
+  <p>The site won&#8217;t build if a page asks for a figure that doesn&#8217;t exist, or a figure names a document that isn&#8217;t listed. Tap any underlined figure to see its document, and the exact page or board it comes from. All of them are listed on <a href="../facts/">All figures &amp; sources</a>.</p>
+</section>
+
+<section aria-labelledby="h-apart">
+  <h2 id="h-apart" class="hh">Facts and readings kept apart</h2>
+  <p>A fact is what a document says, such as a traffic count printed on one of the county&#8217;s boards. A reading is what someone makes of it. Where a project page gives a reading, it shows the figures it is built from, and differences and totals are worked out from those figures when the site is built rather than typed in by hand. Every project gets the same sections and the same questions, whether a lot or a little has been published about it.</p>
+</section>
+
+<section aria-labelledby="h-checks">
+  <h2 id="h-checks" class="hh">How the figures are checked</h2>
+  <div class="fkey">
+    {% include "checkbar.njk" %}
+  </div>
+  <ul>
+    <li><strong>Checked by AI</strong> means Claude, an AI assistant, has compared the figure with its document.</li>
+    <li><strong>Verified by a human</strong> means I have compared it with the document myself. Only I mark figures verified.</li>
+    <li><strong>You can check too.</strong> Each figure&#8217;s details box has a short form: compare the figure with its document and say whether it matches. Every answer is treated as a claim to check against the document, however many people send it.</li>
+    <li><strong>New projects wait for checking.</strong> A new project is added only once I have verified at least {{ publishThreshold }}% of the figures in every project already on the site, so the site never takes on figures faster than they can be checked.{% if not nextProjectReady %} Where things stand: {% for p in projects %}{% if p.page %}{{ p.short }} {{ projectChecks[p.id].pct }}%{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}.{% endif %}</li>
+  </ul>
+</section>
+
+<section aria-labelledby="h-corrections">
+  <h2 id="h-corrections" class="hh">How mistakes and changes are handled</h2>
+  <ul>
+    <li><strong>Mistakes are corrected in public.</strong> When a figure was wrong, the correction is listed on the project&#8217;s page, for example the <a href="../rangeland/#notes">corrections on the Rangeland guide</a>.</li>
+    <li><strong>Newer documents don&#8217;t erase older ones.</strong> When a newer document gives a different figure, the new one is added and the old one is kept, marked as replaced. <a href="../facts/">All figures &amp; sources</a> lists what has changed and when.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="h-current">
+  <h2 id="h-current" class="hh">How the site keeps up</h2>
+  <ul>
+    <li><strong>Once a day</strong> the site rebuilds itself from what has already been approved, with nothing new added, so &#8220;coming up&#8221; and the <a href="../timeline/">Timeline</a> move on by themselves as dates pass.</li>
+    <li><strong>Every week</strong> an automated check looks through the county&#8217;s Commission agendas, meeting packets and minutes, the county&#8217;s project pages and the MPO&#8217;s agendas for anything new about the projects here, and sends me a report. Nothing it finds goes on the site until I have read the document and decided to add it.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="h-ai">
+  <h2 id="h-ai" class="hh">The part AI plays</h2>
+  <p>I use Claude, an AI assistant, to write the code behind the site, to help find and read through the documents, to pull figures out of them, to make the first check of each figure, and for first drafts of the writing. I read and check everything before it goes up, decide what is published, and verify the figures myself. Because every figure is linked to its document, you can check any of it without trusting either of us.</p>
+</section>
+
+<section aria-labelledby="h-tech">
+  <h2 id="h-tech" class="hh">The technical side</h2>
+  <ul>
+    <li><strong>The code is public.</strong> Everything that makes the site, including every figure&#8217;s data file, is on GitHub at <a href="https://github.com/patricka3s/rangeland">github.com/patricka3s/rangeland</a>, with the full history of every change.</li>
+    <li><strong>Every change is reviewed before it goes live.</strong> Each change is made as a separate proposal (a &#8220;pull request&#8221;) that is built and checked automatically, and goes live only when I approve it. The version line at the foot of every page shows which change is live.</li>
+    <li><strong>Built from plain files.</strong> The site is assembled by a tool called Eleventy from data files and page templates, and hosted on GitHub Pages.</li>
+    <li><strong>No ads, no tracking.</strong> The only visit counter is GoatCounter, which sets no cookies, stores nothing on your device and does not identify you.</li>
+  </ul>
+</section>
+
+<section id="contact" aria-labelledby="h-contact">
+  <h2 id="h-contact" class="hh">Get in touch</h2>
+  <p>A question, a document I&#8217;ve missed, a project you&#8217;d like covered, or something that doesn&#8217;t look right: send me a message here. To say whether one particular figure matches its document, it&#8217;s quickest to tap the figure and use the form in its box.</p>
+  {% if readerChecks %}
+  <form class="rck-more contactform" data-url="{{ readerChecks }}" novalidate hidden>
+    <label class="rck-f"><span>Your message</span><textarea name="message" rows="6" maxlength="3000"></textarea></label>
+    <label class="rck-f"><span>Your name (optional)</span><input type="text" name="name" maxlength="100" autocomplete="name"></label>
+    <label class="rck-f"><span>Email, if you&#8217;d like a reply (optional)</span><input type="email" name="email" maxlength="200" autocomplete="email"></label>
+    <input class="rck-trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="rck-send" type="submit">Send</button>
+    <p class="rck-note">Goes to a private Google Sheet that only Patrick can see. Messages are never published, and your name and email are only used to reply to you.</p>
+    <p class="rck-status" role="status"></p>
+  </form>
+  <noscript><p>The message form needs JavaScript switched on in your browser.</p></noscript>
+  {% endif %}
+</section>
+
+<footer>
+  <p style="margin:0 0 10px">Questions about how the site works, or something here that doesn&#8217;t match what you see? <a href="#contact">Send me a message</a>.</p>
+  {% include "share.njk" %}
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }} &#183; <a href="{{ root }}about/">How this site is built</a></p>
+</footer>
+</div>
+
+<script data-goatcounter="https://patricka3s.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
