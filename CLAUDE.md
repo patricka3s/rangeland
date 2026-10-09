@@ -55,9 +55,11 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   from `projects.yaml`, checking progress, how to get involved; old `/#section`
   links are forwarded to `/rangeland/`). `src/rangeland/index.njk` — the Rangeland guide. `src/sunlake/index.njk` — the Sunlake corridor
   page (highlights only, "Full detail" disabled, until more is published). `src/_includes/project-bar.njk` — the
-  project links at the top of every page. `src/facts.njk` — Figures and sources page
+  project links at the top of every page. `src/about/index.njk` — How this site is built
+  (linked from the version line at the foot of every page; Patrick's voice; counts come from
+  the data). `src/facts.njk` — Figures and sources page
   (all projects, built entirely from data). `src/app.js.njk`, `src/styles.css`. Link previews (`src/_includes/social.njk`, and the Rangeland
-  guide's own tags): the site card `og-home.png` (home, Timeline, Figures and sources; a tag per
+  guide's own tags): the site card `og-home.png` (home, Timeline, Figures and sources, How this site is built; a tag per
   published project) and one card per project, `og-<id>.png`, worded from its `card:` in
   `projects.yaml` and shaded in its tag colour. All are drawn from `tools/og-card.html` by
   `node tools/og-card.mjs`; the build stops if a project is published, or its `card:` changed,

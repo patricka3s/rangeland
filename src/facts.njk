@@ -166,7 +166,7 @@ eleventyExcludeFromCollections: true
 <footer>
   <p style="margin:0 0 10px">This page is built from the same data files as the guide, so it always shows exactly the figures the guide uses. <a href="../rangeland/#notes">Corrections made so far</a> are listed in the guide.</p>
   {% include "share.njk" %}
-  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }} &#183; <a href="{{ root }}about/">How this site is built</a></p>
 </footer>
 
 </div>

@@ -1325,7 +1325,7 @@ trafficRows:
   <p style="margin:0 0 10px">Not sure whether something you have read about this project is right? <a href="#check">Here is where to look it up yourself.</a> Every figure on this page is also listed, with its source, on <a href="../facts/">Figures and sources</a>.</p>
   <p style="margin:0 0 10px"><strong>Visit counter.</strong> This page counts visits using GoatCounter. It sets no cookies, stores nothing on your device and does not identify you. I can see how many times a page was opened and which site a visit came from. That is all I collect and all I want.</p>
   {% include "share.njk" %}
-  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }}</p>
+  <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }} &#183; <a href="{{ root }}about/">How this site is built</a></p>
 </footer>
 
 </div>
