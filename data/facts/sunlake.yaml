@@ -21,6 +21,7 @@
   as_of: '2025-12-18'
   status: current
   decimals: 2
+  verified: '2026-10-09'
 
 - id: sunlake.design.south.row-feet
   statement: 'Right-of-way the Bexley North MPUD (rezoning no. 7242) will dedicate for the Sunlake Blvd extension'
@@ -30,6 +31,7 @@
   location: 'Section 2.2 Background; Figures 2 and 3 ("166'' right-of-way")'
   as_of: '2025-12-18'
   status: current
+  verified: '2026-10-09'
 
 - id: sunlake.design.south.lanes-ultimate
   statement: 'Travel lanes in the ultimate configuration of the Sunlake Blvd extension (11-foot lanes)'
@@ -68,6 +70,7 @@
   location: 'Figures 2 and 3 captions'
   as_of: '2025-12-18'
   status: current
+  verified: '2026-10-09'
 
 - id: sunlake.design.south.posted-speed
   statement: 'Posted speed on the typical sections of the Sunlake Blvd extension'
@@ -77,6 +80,7 @@
   location: 'Figures 2 and 3 captions'
   as_of: '2025-12-18'
   status: current
+  verified: '2026-10-09'
 
 # ---- Schedule and process
 

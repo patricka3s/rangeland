@@ -110,6 +110,7 @@
   .meeting .dl{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.3);font-size:.96rem}
   .meeting a{color:#fff;text-decoration:underline;text-underline-offset:2px}
   .meeting a:hover{text-decoration-thickness:2px}
+  .meeting .fact.srcmark{color:inherit}
   :root[data-theme="dark"] .meeting a{color:#12161D}
   @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .meeting a{color:#12161D}}
   :root[data-theme="dark"] .meeting{color:#12161D}
