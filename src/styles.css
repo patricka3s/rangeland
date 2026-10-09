@@ -627,6 +627,10 @@
     letter-spacing:.08em;text-transform:uppercase;color:var(--hot)}
   .fitem.is-superseded .fval{color:var(--ink-3)}
 
+  /* lists are grids (see ul above): keep the track to the page width and let a long
+     web address in a note break, or the whole page scrolls sideways on phones */
+  .slist,.plist{grid-template-columns:minmax(0,1fr)}
+  .slist li,.plist li{overflow-wrap:anywhere}
   .slist li{padding:10px 0;border-bottom:1px solid var(--rule-soft);font-size:.95rem;line-height:1.45}
   .slist a{color:var(--accent)}
   .smeta,.snote{display:block;font-size:.82rem;color:var(--ink-3)}
@@ -1223,6 +1227,7 @@
   .xp-listed{margin:0 0 22px}
   .xp-listed h3{font-family:Archivo,sans-serif;font-weight:800;font-size:1.05rem;margin:0 0 4px}
   .pl-note{font-size:.82rem;line-height:1.5;color:var(--ink-3);margin:8px 0 0}
+  .pl-note a{color:var(--accent)}
 
 /* Coming up: the project tag sits on the first line, level with the date, so
    readers can scan down the tags for the projects they follow. */

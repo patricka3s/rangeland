@@ -82,25 +82,7 @@ eleventyExcludeFromCollections: true
     </a>
   {% endif %}{% endfor %}
   </div>
-</section>
-
-<section id="other-projects" aria-labelledby="h-other">
-  <h2 id="h-other" class="hh">Other projects in Pasco</h2>
-  <p class="hlead">These are <strong>listed only</strong>, not covered: {{ projectList.otherCount }} more projects, one line each, copied as written from {% for s in projectList.sources %}{{ s.title }}{% if s.dateText %} ({{ s.dateText }}){% endif %}{% if not loop.last %} and {% endif %}{% endfor %}, with links to the official pages. They aren&#8217;t checked or kept up to date here, so follow the links for the latest. <a href="explore/">Explore by Road</a> shows them road by road.</p>
-  {%- set F = projectList.filters %}
-  <div class="plfilters" id="plfilters" hidden>
-    <label class="xp-sel"><span>Agency</span><select data-f="agency"><option value="">Any</option>{% for o in F.agencies %}<option value="{{ o.v }}">{{ o.v }} ({{ o.n }})</option>{% endfor %}</select></label>
-    <label class="xp-sel"><span>List</span><select data-f="list"><option value="">Any</option>{% for g in projectList.groups %}{% if g.rows.length %}<option value="{{ g.k }}">{{ g.label }} ({{ g.rows.length }})</option>{% endif %}{% endfor %}</select></label>
-    <label class="xp-sel"><span>FDOT phase</span><select data-f="phase"><option value="">Any</option>{% for o in F.phases %}<option value="{{ o.v }}">{{ o.v }} ({{ o.n }})</option>{% endfor %}<option value="-">Not on FDOT&#8217;s list</option></select></label>
-    <label class="xp-sel"><span>Road</span><select data-f="road"><option value="">Any</option>{% for o in F.roads %}<option value="{{ o.v }}">{{ o.name }} ({{ o.n }})</option>{% endfor %}<option value="-">No road named</option></select></label>
-  </div>
-  <p class="plshowing" id="plshowing" role="status" aria-live="polite" hidden></p>
-  {% for g in projectList.groups %}{% if g.rows.length %}
-  <details class="plgroup" data-group="{{ g.k }}">
-    <summary>{{ g.label }} <span class="plcount" data-total="{{ g.rows.length }}">{{ g.rows.length }}</span></summary>
-    <ul class="plist">{% for r in g.rows %}{% include "listed-row.njk" %}{% endfor %}</ul>
-  </details>
-  {% endif %}{% endfor %}
+  <p class="hmore"><a href="projects/">All projects in Pasco: these two and {{ projectList.otherCount }} more listed from official lists, with filters &#8594;</a></p>
 </section>
 
 <section id="checks" aria-labelledby="h-checks">
@@ -130,45 +112,6 @@ eleventyExcludeFromCollections: true
   <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }} &#183; <a href="{{ root }}about/">How this site is built</a></p>
 </footer>
 </div>
-<script>
-/* Other projects in Pasco: four filters - agency, list, FDOT phase, road - over
-   the listed rows (data- attributes from listed-row.njk). Choosing any opens the
-   groups that still have rows and shows "x of y" on each; groups with none are
-   hidden. Without JavaScript the filters stay hidden and every row shows. */
-(function(){
-  var box = document.getElementById("plfilters"); if (!box) return;
-  var sels = box.querySelectorAll("select"), groups = document.querySelectorAll("#other-projects .plgroup");
-  var showing = document.getElementById("plshowing");
-  box.hidden = false;
-  function match(li, f, v){
-    if (!v) return true;
-    if (f === "agency") return li.getAttribute("data-agencies").indexOf("|" + v + "|") >= 0;
-    if (f === "list") return li.getAttribute("data-list") === v;
-    if (f === "phase") return v === "-" ? !li.getAttribute("data-phase") : li.getAttribute("data-phase") === v;
-    if (f === "road") return v === "-" ? !li.getAttribute("data-roads").trim() : li.getAttribute("data-roads").indexOf(" " + v + " ") >= 0;
-    return true;
-  }
-  function apply(){
-    var active = false, total = 0, i, j;
-    for (i = 0; i < sels.length; i++) if (sels[i].value) active = true;
-    for (i = 0; i < groups.length; i++){
-      var rows = groups[i].querySelectorAll(".lrow"), n = 0, cnt = groups[i].querySelector(".plcount");
-      for (j = 0; j < rows.length; j++){
-        var ok = true;
-        for (var k = 0; k < sels.length; k++) if (!match(rows[j], sels[k].getAttribute("data-f"), sels[k].value)) ok = false;
-        rows[j].hidden = !ok; if (ok) n++;
-      }
-      total += n;
-      groups[i].hidden = active && !n;
-      cnt.textContent = active ? n + " of " + cnt.getAttribute("data-total") : cnt.getAttribute("data-total");
-      if (active) groups[i].open = n > 0;
-    }
-    showing.hidden = !active;
-    showing.textContent = active ? (total ? total + (total === 1 ? " listed project matches." : " listed projects match.") : "No listed projects match these choices.") : "";
-  }
-  for (var i = 0; i < sels.length; i++) sels[i].addEventListener("change", apply);
-})();
-</script>
 <script data-goatcounter="https://patricka3s.goatcounter.com/count"
         async src="https://gc.zgo.at/count.js"></script>
 </body>

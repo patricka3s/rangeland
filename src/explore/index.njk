@@ -59,7 +59,7 @@ eleventyExcludeFromCollections: true
   <div class="xp-listed" data-road-listed="{{ r.id }}" hidden>
     <h3>Projects on {{ r.name }}</h3>
     <ul class="plist">{% for row in r.listed %}{% set r = row %}{% include "listed-row.njk" %}{% endfor %}</ul>
-    <p class="pl-note"><b>Covered</b> projects have their own guide, with every figure sourced and checked. <b>Listed only</b> projects are copied as written from an official list and linked to it; they aren&#8217;t checked or kept up to date here.</p>
+    <p class="pl-note"><b>Covered</b> projects have their own guide, with every figure sourced and checked. <b>Listed only</b> projects are copied as written from an official list and linked to it; they aren&#8217;t checked or kept up to date here. <a href="../projects/">All projects in Pasco &#8594;</a></p>
   </div>
   {% endif %}{% endfor %}
 

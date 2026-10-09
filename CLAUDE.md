@@ -65,8 +65,10 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   `node tools/og-card.mjs`; the build stops if a project is published, or its `card:` changed,
   without redrawing. Keep dates off cards unless someone will change them when they pass.
 - **Project list** (`data/project-list.yaml`, 9 Oct 2026): every project on an
-  official list, covered or not - the home page's "Other projects in Pasco" and
-  Explore by Road's "Projects on this road" (`src/_includes/listed-row.njk`).
+  official list, covered or not - the All Projects page (`src/projects/index.njk`,
+  `/projects/`, linked as "All projects" in the projects row of the project bar and
+  under the home page's cards) and Explore by Road's "Projects on this road"
+  (`src/_includes/listed-row.njk`).
   Rows are copied from their source *as written* (like events: sourced records,
   not facts, never reworded or worked out) and labelled **Listed only**; the
   site's own projects are marked `covered:` and labelled **Covered**. A row's
@@ -77,7 +79,7 @@ Eleventy builds `src/` + `data/` into `_site/`. `npm ci` once, then `npm run bui
   District 7's Pasco "All Current Projects" page (the projects not on the MPO list;
   `phase` is FDOT's own Study / Design / Construction for every project on its list,
   matched only by project number). When a newer list replaces one, swap its rows
-  rather than editing them. The home page filters the list by agency (as the lists
+  rather than editing them. The All Projects page filters the list by agency (as the lists
   name it), list, FDOT phase and road - only things the documents state; no
   regions, communities, kinds or cost tiers of our own. Listed rows don't count
   toward the 90% publishing rule; they aren't checked or kept current, and the

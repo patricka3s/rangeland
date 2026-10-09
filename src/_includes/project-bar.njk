@@ -1,5 +1,6 @@
 {#- The navigation at the top of every page: the site's name (a link to the home
-    page), the projects (styled like the guide's reading-mode toggle), and the
+    page), the projects (styled like the guide's reading-mode toggle) ending with
+    All projects (the full list, projects/), and the
     site-wide pages on the right, then the light/dark switch (app.js). Set "root" ("" on the home page, "../" one
     folder down) and "current" (the page's id) before including. Add a project
     here when it gets a page. On phones the two groups are flattened (styles.css,
@@ -9,7 +10,7 @@
   <div class="pb-projects">
     <a class="pb-home" href="{{ root or './' }}"{% if current == "home" %} aria-current="page"{% endif %}>Pasco Roadmap</a>
     <span class="pb-seg" role="group" aria-label="Projects">
-      <a href="{{ root }}rangeland/"{% if current == "rangeland" %} aria-current="page"{% endif %}>Rangeland Blvd</a><a href="{{ root }}sunlake/"{% if current == "sunlake" %} aria-current="page"{% endif %}>Sunlake Blvd</a>
+      <a href="{{ root }}rangeland/"{% if current == "rangeland" %} aria-current="page"{% endif %}>Rangeland Blvd</a><a href="{{ root }}sunlake/"{% if current == "sunlake" %} aria-current="page"{% endif %}>Sunlake Blvd</a><a href="{{ root }}projects/"{% if current == "projects" %} aria-current="page"{% endif %}>All projects</a>
     </span>
   </div>
   <div class="pb-site">

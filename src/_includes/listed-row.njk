@@ -1,8 +1,7 @@
-{#- One project from data/project-list.yaml, as a list item - used on the home
-    page ("Other projects in Pasco") and on Explore by Road ("Projects on this
-    road"). Set "r" (the row) and "root" first. Covered projects link to their
+{#- One project from data/project-list.yaml, as a list item - used on the All
+    Projects page (projects/) and on Explore by Road ("Projects on this road"). Set "r" (the row) and "root" first. Covered projects link to their
     page; listed-only ones link to their official page, if any, and to the list
-    they're copied from. The data- attributes feed the home page's filters. -#}
+    they're copied from. The data- attributes feed the All Projects page's filters. -#}
 <li class="lrow{% if r.cover %} is-covered{% endif %}" data-list="{{ r.list }}" data-phase="{{ r.phase or '' }}" data-agencies="|{{ r.agencies | join('|') }}|" data-roads=" {{ (r.roads or []) | join(' ') }} ">
   <span class="lr-tag">{% if r.cover %}<span class="pjtag pj-{{ r.cover.id }}">Covered</span>{% else %}<span class="lr-only">Listed only</span>{% endif %}{% if r.phase %} <span class="lr-phase">FDOT phase: {{ r.phase }}</span>{% endif %}</span>
   <span class="lr-name">{{ r.name }}{% if r.where %} <span class="lr-where">{{ r.where }}</span>{% endif %}</span>
