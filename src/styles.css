@@ -123,6 +123,7 @@
            font-size:1rem;color:var(--ink-2)}
   .callout strong{color:var(--ink)}
   .callout h3{margin:0 0 8px;font-size:1.02rem}
+  .callout a{color:var(--accent)}
 
   /* system-of-projects panel */
   .system{border:2px solid var(--accent);padding:0;margin:24px 0 20px;background:var(--surface)}
