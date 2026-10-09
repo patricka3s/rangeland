@@ -86,8 +86,25 @@ eleventyExcludeFromCollections: true
   </ul>
 </section>
 
+<section id="contact" aria-labelledby="h-contact">
+  <h2 id="h-contact" class="hh">Get in touch</h2>
+  <p>A question, a document I&#8217;ve missed, a project you&#8217;d like covered, or something that doesn&#8217;t look right: send me a message here. To say whether one particular figure matches its document, it&#8217;s quickest to tap the figure and use the form in its box.</p>
+  {% if readerChecks %}
+  <form class="rck-more contactform" data-url="{{ readerChecks }}" novalidate hidden>
+    <label class="rck-f"><span>Your message</span><textarea name="message" rows="6" maxlength="3000"></textarea></label>
+    <label class="rck-f"><span>Your name (optional)</span><input type="text" name="name" maxlength="100" autocomplete="name"></label>
+    <label class="rck-f"><span>Email, if you&#8217;d like a reply (optional)</span><input type="email" name="email" maxlength="200" autocomplete="email"></label>
+    <input class="rck-trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="rck-send" type="submit">Send</button>
+    <p class="rck-note">Goes to a private Google Sheet that only Patrick can see. Messages are never published, and your name and email are only used to reply to you.</p>
+    <p class="rck-status" role="status"></p>
+  </form>
+  <noscript><p>The message form needs JavaScript switched on in your browser.</p></noscript>
+  {% endif %}
+</section>
+
 <footer>
-  <p style="margin:0 0 10px">Questions about how the site works, or something here that doesn&#8217;t match what you see? Message me on Facebook.</p>
+  <p style="margin:0 0 10px">Questions about how the site works, or something here that doesn&#8217;t match what you see? <a href="#contact">Send me a message</a>.</p>
   {% include "share.njk" %}
   <p class="buildstamp">Version {% if build.url %}<a href="{{ build.url }}">{{ build.version }}</a>{% else %}{{ build.version }}{% endif %}{% if build.pr %} &#183; <a href="{{ build.prUrl }}">pull request #{{ build.pr }}</a>{% endif %} &#183; published {{ build.when }} &#183; <a href="{{ root }}about/">How this site is built</a></p>
 </footer>

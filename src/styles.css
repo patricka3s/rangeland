@@ -200,6 +200,7 @@
   .src{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;line-height:1.9;color:var(--ink-2)}
   .src a{color:var(--accent)}
   footer{border-top:1px solid var(--rule);padding-top:22px;font-size:.9rem;color:var(--ink-3)}
+  footer a{color:var(--accent)}
   a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
   /* corridor + pipeline svg */

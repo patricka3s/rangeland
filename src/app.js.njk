@@ -389,7 +389,7 @@ eleventyExcludeFromCollections: true
             wrap.appendChild(el("p", "rck-done", "\u2713 Received \u2014 thank you. " + (verdict === "matches" ? "It helps to know a figure has been checked." : "Patrick will check it against the document.")));
           })
           .catch(function(){
-            failed("Couldn\u2019t confirm it arrived. Please check your connection and try again; if it keeps happening, message Patrick on Facebook.");
+            failed("Couldn\u2019t confirm it arrived. Please check your connection and try again in a few minutes.");
           });
       });
       return wrap;
@@ -628,6 +628,39 @@ eleventyExcludeFromCollections: true
       if (!c) return;
       var s = c.closest(".slide"), box = s && s.querySelector(".slsrc");
       if (box) { box.open = true; box.scrollIntoView({block: "nearest", behavior: "smooth"}); }
+    });
+  });
+})();
+/* CONTACT FORM (How this site is built, about/#contact): a message to Patrick,
+   sent to the same Apps Script as reader checks with kind "message", which
+   puts it in the "Messages" tab of his Sheet. A plain POST, as for reader
+   checks: no Google code runs on the page and nothing is stored in the
+   browser. "Received" is said only when the script answers {"ok": true}.
+   Script and set-up: docs/reader-checks.md. */
+(function(){
+  document.addEventListener("DOMContentLoaded", function(){
+    var form = document.querySelector("form.contactform");
+    if (!form || !window.fetch) return;
+    var url = form.getAttribute("data-url"), status = form.querySelector(".rck-status"), send = form.querySelector(".rck-send");
+    form.hidden = false;
+    function val(n){ return form.elements[n].value; }
+    function failed(msg){ send.disabled = false; status.textContent = msg; }
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      if (!val("message").trim()) { status.textContent = "Please write a message."; form.elements.message.focus(); return; }
+      send.disabled = true; status.textContent = "Sending\u2026";
+      var body = JSON.stringify({kind: "message", message: val("message"), name: val("name"), email: val("email"),
+        website: val("website"), pageUrl: location.href.split("#")[0]});
+      fetch(url, {method: "POST", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: body})
+        .then(function(r){ return r.json(); })
+        .then(function(res){
+          if (!res || res.ok !== true) { failed("It didn\u2019t go through \u2014 please try again in a minute."); return; }
+          var done = document.createElement("p");
+          done.className = "rck-done"; done.setAttribute("role", "status");
+          done.textContent = "\u2713 Received \u2014 thank you." + (val("email").trim() ? " Patrick will reply to the email you gave." : "");
+          form.parentNode.replaceChild(done, form);
+        })
+        .catch(function(){ failed("Couldn\u2019t confirm it arrived. Please check your connection and try again in a few minutes."); });
     });
   });
 })();
