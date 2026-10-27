@@ -186,8 +186,9 @@ trustworthy than one that never appears to err.
 ## Dates that will go stale
 
 - **Workshop #3, 24 September 2026** — has happened. The meeting box switches to
-  its post-workshop copy automatically, but some prose in sections 4, 5, 8 and 9
-  is still written in the future tense.
-- **Comment deadline, 8 October 2026** — after it passes, update the meeting box,
-  the "Still ahead" list and section 9, or add a note at the top.
+  its post-workshop copy automatically. One first-person sentence in the section on
+  the intersections ("They should be on a board at the workshop...") is still in
+  the future tense (section 5); it is Patrick's wording, so ask him before changing it.
+- **Comment deadline, 8 October 2026** — has passed; the meeting box, the "Still
+  ahead" list and section 9 already say so.
 - **"Updated" date** in the page header — bump it with each substantive change.
