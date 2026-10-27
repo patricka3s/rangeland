@@ -1,5 +1,6 @@
 {#- Share button for the footer of every page. Hidden until the script in
     app.js (SHARE) finds the phone's share menu or a way to copy the link;
-    without JavaScript it never shows. No third-party code. The coffee link
-    is a plain link to Patrick's Buy Me a Coffee page, not their widget. -#}
-<p class="sharerow"><button type="button" class="share" hidden>Share this page</button><span class="sharemsg" role="status" aria-live="polite"></span><a class="coffee" href="https://buymeacoffee.com/patrick23" target="_blank" rel="noopener">Buy me a coffee</a></p>
+    without JavaScript it never shows. No third-party code. The coffee button
+    is a link wrapping Buy Me a Coffee's image button (loaded from their server);
+    no script and no widget. -#}
+<p class="sharerow"><button type="button" class="share" hidden>Share this page</button><span class="sharemsg" role="status" aria-live="polite"></span><a class="coffee" href="https://www.buymeacoffee.com/patrick23" target="_blank" rel="noopener"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="217" height="60"></a></p>
