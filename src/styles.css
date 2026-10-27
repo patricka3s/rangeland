@@ -701,11 +701,12 @@
   .pb-seg a[aria-current="page"]{background:var(--accent);color:#fff}
   :root[data-theme="dark"] .pb-seg a[aria-current="page"]{color:#12161D}
   @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .pb-seg a[aria-current="page"]{color:#12161D} }
-  .pb-site{display:flex;align-items:center;gap:20px;padding-left:20px;border-left:1px solid var(--rule)}
+  .pb-site{display:flex;align-items:center;gap:16px;padding-left:20px;border-left:1px solid var(--rule)}
   .pb-site a{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-2);text-decoration:none;padding:5px 8px;margin:0 -8px;border:1px solid transparent}
+    text-transform:uppercase;color:var(--ink-2);text-decoration:none;padding:5px 8px;margin:0 -8px;border:1px solid transparent;white-space:nowrap}
   .pb-site a:hover{color:var(--accent)}
   .pb-short{display:none}
+  @media (max-width:740px){ .pb-long{display:none} .pb-short{display:inline} }   /* with About added, the short labels keep the bar on one row */
   /* You are here: the same fill for a project button and a site page */
   .pb-site a[aria-current="page"]{background:var(--accent);color:#fff}
   :root[data-theme="dark"] .pb-site a[aria-current="page"]{color:#12161D}
