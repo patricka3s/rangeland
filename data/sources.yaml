@@ -197,7 +197,7 @@
 - id: fdot-d7-pasco-current
   title: "FDOT District 7 - Pasco County: All Current Projects (with its Study, Design and Construction lists)"
   publisher: Florida Department of Transportation, District 7
-  date: '2026-10-09'
+  date: '2026-10-27'
   url: https://www.fdottampabay.com/projects/county/pasco/all
   note: A web page that changes as projects start and finish; the date is when it was read.
 
@@ -287,6 +287,38 @@
   publisher: Pasco County
   date: '2026-08-11'
   url: https://pascocofl.portal.civicclerk.com/event/1933/agenda
+
+- id: pasco-bcc-2026-09-22-minutes
+  title: 'Board of County Commissioners meeting, 22 September 2026: Public Comment, and discussion of "a future meeting on Rangeland" (annotated minutes, page 2)'
+  publisher: Pasco County
+  date: '2026-09-22'
+  url: https://pascocofl.portal.civicclerk.com/event/1936/agenda
+
+- id: pasco-bcc-2026-10-06-minutes
+  title: 'Board of County Commissioners meeting, 6 October 2026: Miscellaneous Business, Commissioners Starkey and Yeager on the Rangeland Boulevard workshop and study (annotated minutes, pages 11 and 12)'
+  publisher: Pasco County
+  date: '2026-10-06'
+  url: https://pascocofl.portal.civicclerk.com/event/2958/agenda
+
+# ---- Transportation Regional Incentive Program (TRIP) 2026 project priorities
+
+- id: mpo-cac-2026-08-05-minutes
+  title: 'MPO Citizens Advisory Committee, 5 August 2026: minutes, item IV.A, TRIP 2026 Project Priorities (as printed in the 30 September 2026 agenda packet, pages 9 and 10)'
+  publisher: Pasco Metropolitan Planning Organization
+  date: '2026-08-05'
+  url: https://pascocofl.portal.civicclerk.com/event/1825/agenda
+
+- id: mpo-tac-2026-08-05-minutes
+  title: 'MPO Technical Advisory Committee, 5 August 2026: minutes, TRIP 2026 Project Priorities (as printed in the 30 September 2026 agenda packet, pages 5 and 6)'
+  publisher: Pasco Metropolitan Planning Organization
+  date: '2026-08-05'
+  url: https://pascocofl.portal.civicclerk.com/event/1829/agenda
+
+- id: mpo-board-2026-09-01-trip
+  title: 'Special MPO Board meeting, 1 September 2026: agenda item 7, TRIP 2026 Project Priorities (MPO26-0179), with its agenda memorandum and the 2026 TRIP list (agenda packet pages 79 to 91)'
+  publisher: Pasco Metropolitan Planning Organization
+  date: '2026-09-01'
+  url: https://pascocofl.portal.civicclerk.com/event/2971/agenda
 
 # ---- FDOT traffic counts (state roads and some county roads)
 

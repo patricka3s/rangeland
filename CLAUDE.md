@@ -236,8 +236,10 @@ silently at Patrick's request, as barely anyone had seen them. Still open:
 - Figures written in words ("ten thousand", "six of the eleven"), the "10 / 11" and
   "6 → 3" stat tiles, and the LOS chart's aria-label are not linked to the facts
   (all checked correct on 28 Sep 2026).
-- The guide's prose still refers to Workshop #3 and the 8 October 2026 deadline
-  as upcoming in places.
+- The guide's meeting box, "Still ahead" list and section 9 now treat Workshop #3
+  and the 8 October 2026 deadline as past (checked 27 Oct 2026). One first-person
+  sentence in the intersection questions (section 5: "They should be on a board at
+  the workshop...") is still in the future tense - Patrick's wording, so ask him.
 
 Decided: the site shows evening-peak grades only, and says so where grades appear.
 

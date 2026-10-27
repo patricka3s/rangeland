@@ -25,7 +25,7 @@
 #   source, location   where it's listed (sources.yaml id; page and row)
 #   link      optional - the project's own official page. For FDOT projects, the
 #             fdottampabay.com page with the same project number (FPN), from
-#             FDOT District 7's Pasco "All Current Projects" list (checked 9 Oct 2026).
+#             FDOT District 7's Pasco "All Current Projects" list (checked 27 Oct 2026).
 #
 # Added 9 Oct 2026 from the MPO's 2026 List of Project Priorities (adopted
 # 11 June 2026), pages 26-28: every row. Its Request, Funded Phase and Funded
@@ -723,7 +723,7 @@ projects:
   source: mpo-lopp-2026
   location: 'page 28, priority 35'
 
-# ---- FDOT District 7 Pasco "All Current Projects" (read 9 Oct 2026): the 28 not
+# ---- FDOT District 7 Pasco "All Current Projects" (read 27 Oct 2026): the 27 not
 # on the MPO list above. Name as FDOT titles it; phase from its own phase lists.
 
 - id: fdot-449166-1-52-01
@@ -824,17 +824,6 @@ projects:
   source: fdot-d7-pasco-current
   location: 'Design list'
   link: 'https://www.fdottampabay.com/project/1179/454499-1-52-01'
-
-- id: fdot-454668-1-52-01
-  list: fdot
-  name: 'I-75 at SR 52 Interchange Improvements'
-  agency: 'FDOT'
-  phase: Construction
-  fpn: '454668-1-52-01'
-  roads: [i75, sr52]
-  source: fdot-d7-pasco-current
-  location: 'Construction list'
-  link: 'https://www.fdottampabay.com/project/1094/454668-1-52-01'
 
 - id: fdot-445507-4-52-01
   list: fdot
@@ -972,11 +961,11 @@ projects:
   list: fdot
   name: 'US 41 (Land O'' Lakes Boulevard) Resurfacing from Washington Lane to south of County Line Road'
   agency: 'FDOT'
-  phase: Design
+  phase: Construction
   fpn: '447936-1-52-01'
   roads: [us41]
   source: fdot-d7-pasco-current
-  location: 'Design list'
+  location: 'Construction list'
   link: 'https://www.fdottampabay.com/project/1242/447936-1-52-01'
 
 - id: fdot-254677-6-07
