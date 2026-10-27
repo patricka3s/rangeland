@@ -889,7 +889,8 @@
   .share:hover{background:var(--wash)}
   .share:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .sharemsg{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--ink-3)}
-  .coffee{font-family:Archivo,sans-serif;font-size:.92rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;min-height:44px;padding:0 4px}
+  .coffee{display:inline-block;line-height:0}
+  .coffee img{width:217px;height:60px;max-width:100%;object-fit:contain}
 
 /* --- Map: open-full-screen button, and the full-screen view itself --- */
   .netmap .nmopen{display:none}

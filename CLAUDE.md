@@ -203,7 +203,7 @@ Patrick decides. In short:
 - `src/app.js.njk` uses Windows (CRLF) line endings; keep them, or every line shows
   as changed.
 - Don't add third-party scripts, trackers or cookies. The footer promises GoatCounter
-  is the only one; a Buy Me a Coffee link, if added, is a plain link, not their widget.
+  is the only one; the Buy Me a Coffee button in the footer (27 Oct 2026 decision: Patrick chose their yellow image button) is a link around their image, loaded from their server - not their script or widget.
 
 ## Error reports
 
